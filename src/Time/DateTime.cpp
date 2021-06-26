@@ -2,13 +2,12 @@
 
 #include <iostream>
 
-DateTime::DateTime() : m_time(std::time(0))
-{
-}
+DateTime::DateTime() {}
 
 std::string DateTime::GetCurrentDate() const
 {
-    std::tm* now = std::localtime(&m_time);
+    std::time_t time = std::time(0);
+    std::tm* now = std::localtime(&time);
 
     std::string CurrentDate(
         std::to_string(now -> tm_year + 1900) + "-"
@@ -21,7 +20,8 @@ std::string DateTime::GetCurrentDate() const
 
 std::string DateTime::GetCurrentTime() const
 {
-    std::tm* now = std::localtime(&m_time);
+    std::time_t time = std::time(0);
+    std::tm* now = std::localtime(&time);
 
     std::string CurrentTime(
         std::to_string(now -> tm_hour) + ":"

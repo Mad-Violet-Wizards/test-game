@@ -347,8 +347,25 @@ CMakeFiles/onyx_engine.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
   ../src/Time/DateTime.hpp \
-  /usr/include/c++/9/ctime
+  /usr/include/c++/9/ctime \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
 
+
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
+/usr/include/unistd.h:
 
 ../src/main.cpp:
 
@@ -379,6 +396,8 @@ CMakeFiles/onyx_engine.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/c++/9/bits/memoryfwd.h:
+
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
 /usr/include/wchar.h:
 
@@ -567,6 +586,8 @@ CMakeFiles/onyx_engine.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/9/bits/nested_exception.h:
 
 /usr/include/c++/9/bits/localefwd.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
 
