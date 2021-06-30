@@ -35,11 +35,12 @@ providing a Game Engine experience.
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Onyx Engine is created for programmers, who love to don't waste their time,
+if you want to create a simple game or visualization - go ahead, use OnyxEngine! ;)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+**To be contininued after first release.**
 
 ### Prerequisites
 
