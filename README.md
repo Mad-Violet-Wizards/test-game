@@ -24,11 +24,9 @@ providing a Game Engine experience.
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
+- [Getting Started - for users](#getting_started_users)
+- [Getting Started - for programmers](#getting_started_programmers)
 - [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
@@ -38,79 +36,37 @@ providing a Game Engine experience.
 Onyx Engine is created for programmers, who love to don't waste their time,
 if you want to create a simple game or visualization - go ahead, use OnyxEngine! ;)
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## 🏁 Getting Started - For users <a name = "getting_started_users"></a>
 
 **To be contininued after first release.**
 
-### Prerequisites
+## 🏁 Getting Started - For users <a name = "getting_started_programmers"></a>
 
-What things you need to install the software and how to install them.
 
-```
-Give examples
-```
+1. If you want to participate in project you need to have a few things,
+- Linux OS (Ubuntu, Debian, w/e.)
+- CMake, version (3.20.5)
 
-### Installing
+2. Tasks
+- If you are a member of Pointer science club - use trello to see open tasks
+- If you are a outside contributor, look at Issues :)
 
-A step by step series of examples that tell you how to get a development env running.
+3. Code convenction
+- Look at the issue [Clickme](https://github.com/ppknUWr/onyx-engine/issues/1)
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
+4. How to contribute
+- Look at the issue [Clickme](https://github.com/ppknUWr/onyx-engine/issues/2)
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+To be continiued after creating test system.
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@HoopDead](https://github.com/HoopDead)
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ppknUWr/onyx-engine/contributors) who participated in this project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+To be continiued.
