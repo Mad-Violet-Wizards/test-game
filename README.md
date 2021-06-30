@@ -16,7 +16,8 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> Onyx Engine is tool created to help you create a visualizations and games in SFML libary,
+providing a Game Engine experience.
     <br> 
 </p>
 
