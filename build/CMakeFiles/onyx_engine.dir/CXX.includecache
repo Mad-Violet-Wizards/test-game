@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mateusz/Projects/onyx-engine/src/Logs/Logs.hpp
+
+/home/mateusz/Projects/onyx-engine/src/Time/DateTime.cpp
+DateTime.hpp
+/home/mateusz/Projects/onyx-engine/src/Time/DateTime.hpp
+iostream
+-
+
+/home/mateusz/Projects/onyx-engine/src/Time/DateTime.hpp
+ctime
+-
+string
+-
+
+/home/mateusz/Projects/onyx-engine/src/main.cpp
+iostream
+-
+string
+-
+Time/DateTime.hpp
+/home/mateusz/Projects/onyx-engine/src/Time/DateTime.hpp
+Logs/Logs.hpp
+/home/mateusz/Projects/onyx-engine/src/Logs/Logs.hpp
+unistd.h
+-
+

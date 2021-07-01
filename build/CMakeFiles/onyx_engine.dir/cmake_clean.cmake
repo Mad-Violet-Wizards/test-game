@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/onyx_engine.dir/src/Time/DateTime.cpp.o"
-  "CMakeFiles/onyx_engine.dir/src/Time/DateTime.cpp.o.d"
   "CMakeFiles/onyx_engine.dir/src/main.cpp.o"
-  "CMakeFiles/onyx_engine.dir/src/main.cpp.o.d"
   "onyx_engine"
   "onyx_engine.pdb"
 )
