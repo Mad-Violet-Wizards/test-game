@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/onyx_engine.dir/src/main.cpp.o CMakeFiles/onyx_engine.dir/src/Time/DateTime.cpp.o -o onyx_engine  -Wl,-rpath,/home/nomachine/Projects/onyx/lib ../lib/libsfml-graphics.so.2.5.1 ../lib/libsfml-audio.so.2.5.1 ../lib/libsfml-window.so.2.5.1 ../lib/libsfml-system.so.2.5.1 
