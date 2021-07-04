@@ -1,6 +1,7 @@
 #include "DateTime.hpp"
 
 #include <iostream>
+#include <chrono>
 
 DateTime::DateTime() {}
 
@@ -39,6 +40,13 @@ std::string DateTime::GetCurrentDateAndTime() const
     );
 
     return CurrentDateAndTime;
+}
+
+int DateTime::GetCurrentTimestamp() const
+{
+    const auto p1 = std::chrono::system_clock::now();
+    
+    return std::chrono::duration_cast<std::chrono::seconds>(p1.time_since_epoch()).count();
 }
 
 DateTime::~DateTime() {}

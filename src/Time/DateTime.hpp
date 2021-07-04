@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ctime>
 #include <string>
 
@@ -11,5 +13,7 @@ public:
     std::string GetCurrentDate() const;
     std::string GetCurrentTime() const;
     std::string GetCurrentDateAndTime() const;
+
+    int GetCurrentTimestamp() const;
 
 };
