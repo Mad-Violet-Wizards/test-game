@@ -2,17 +2,16 @@
 
 #include <iostream>
 #include <filesystem>
-#include <fstream>
 
-Logs::Logs() {}
+Logs::Logs() 
+{
+    Init();
+}
 
 Logs::~Logs() {}
 
 void Logs::Init()
-{
-    std::cout << "Init method\n";
-    m_timestamp = m_dt.GetCurrentTimestamp();
-    
+{    
     if (!std::filesystem::exists("../Log/"))
     {
         std::cout << "[Onyx Core] Didn't found Log directory. Creating\n";
@@ -23,9 +22,20 @@ void Logs::Init()
         std::cout << "[Onyx Core] Found Log directory.\n";
     }
 
-    m_currentLogFile = "../Log/Log_" + std::to_string(m_timestamp) + ".txt";
-    std::ofstream logFile(m_currentLogFile);
 
+    if (g_currentLogFileName.empty())
+    {
+        g_currentLogFileName = "../Log/Log_" + DateTime::GetCurrentDateAndTime() + ".txt";
+        m_logFile.open(g_currentLogFileName, std::ios_base::app);
+        m_logFile << DateTimePrefix()
+                  << "[Onyx Core] Initialized Logs class with .txt file.\n";
+    }
 
+    m_logFile.close();
+}
 
+std::string Logs::DateTimePrefix()
+{
+    std::string _temp = "[" + DateTime::GetCurrentDateAndTime() + "]";
+    return _temp;
 }

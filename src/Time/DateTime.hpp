@@ -3,17 +3,12 @@
 #include <ctime>
 #include <string>
 
-class DateTime
+namespace DateTime
 {
+    std::string GetCurrentDate();
+    std::string GetCurrentTime();
+    std::string GetCurrentDateAndTime();
 
-public:
-    DateTime();
-    ~DateTime();
-
-    std::string GetCurrentDate() const;
-    std::string GetCurrentTime() const;
-    std::string GetCurrentDateAndTime() const;
-
-    int GetCurrentTimestamp() const;
+    int GetCurrentTimestamp();
 
 };

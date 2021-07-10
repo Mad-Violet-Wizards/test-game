@@ -3,9 +3,8 @@
 #include <iostream>
 #include <chrono>
 
-DateTime::DateTime() {}
 
-std::string DateTime::GetCurrentDate() const
+std::string DateTime::GetCurrentDate() 
 {
     std::time_t time = std::time(0);
     std::tm* now = std::localtime(&time);
@@ -19,7 +18,7 @@ std::string DateTime::GetCurrentDate() const
     return CurrentDate;
 }
 
-std::string DateTime::GetCurrentTime() const
+std::string DateTime::GetCurrentTime() 
 {
     std::time_t time = std::time(0);
     std::tm* now = std::localtime(&time);
@@ -33,7 +32,7 @@ std::string DateTime::GetCurrentTime() const
     return CurrentTime;
 }
 
-std::string DateTime::GetCurrentDateAndTime() const
+std::string DateTime::GetCurrentDateAndTime() 
 {
     std::string CurrentDateAndTime(
         GetCurrentDate() + " " + GetCurrentTime()
@@ -42,12 +41,9 @@ std::string DateTime::GetCurrentDateAndTime() const
     return CurrentDateAndTime;
 }
 
-int DateTime::GetCurrentTimestamp() const
+int DateTime::GetCurrentTimestamp() 
 {
     const auto p1 = std::chrono::system_clock::now();
     
     return std::chrono::duration_cast<std::chrono::seconds>(p1.time_since_epoch()).count();
 }
-
-DateTime::~DateTime() {}
-

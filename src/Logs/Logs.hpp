@@ -1,6 +1,9 @@
 #pragma once
 
+#include <fstream>
 #include "../Time/DateTime.hpp"
+
+static std::string g_currentLogFileName = "";
 
 class Logs
 {
@@ -9,10 +12,11 @@ public:
     Logs();
     ~Logs();
     
-    void Init();
+    void WriteToFile(std::string t);
 
 private:
-    DateTime m_dt;
-    int m_timestamp;
-    std::string m_currentLogFile;
+    void Init();
+    std::string DateTimePrefix();
+
+    std::ofstream m_logFile;
 };
