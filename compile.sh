@@ -1,5 +1,5 @@
 #!/bin/bash
-# Test commit
+
 
 echo "[Build system] Starting building onyx-engine project."
 cd build
