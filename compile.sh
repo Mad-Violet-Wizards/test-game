@@ -3,7 +3,8 @@
 
 echo "[Build system] Starting building onyx-engine project."
 cd build
-cmake ..
+cmake ../src
 make
 echo "[Build system] Finished building onyx-engine project."
-./onyx_engine
+cd App
+./onyx_engine_app
