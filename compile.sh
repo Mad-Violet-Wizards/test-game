@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo "[Build system] Starting building onyx-engine project."
 cd build
 cmake ..

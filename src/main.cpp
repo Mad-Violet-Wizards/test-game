@@ -1,16 +1,12 @@
 #include <iostream>
-
 #include <string>
-
-#include "Time/DateTime.hpp"
 #include <unistd.h>
+
+#include "Logs/Logs.hpp"
+#include "Time/DateTime.hpp"
 
 int main()
 {
-    DateTime dt;
-    std::string test = dt.GetCurrentDateAndTime();
-    std::cout << test << "\n";
-    usleep(3000000);
-    test = dt.GetCurrentDateAndTime();
-    std::cout << test << "\n";
+  Logs l1;
+  l1.LogToConsoleNewLine("Test123", "123");
 }
