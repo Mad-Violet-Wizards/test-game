@@ -7,7 +7,4 @@
 
 int main()
 {
-    Logs l1;
-    usleep(1000000);
-    Logs l2;
 }
