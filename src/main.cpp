@@ -7,4 +7,6 @@
 
 int main()
 {
+  Logs l1;
+  l1.LogToConsoleNewLine("Test123", "123");
 }
