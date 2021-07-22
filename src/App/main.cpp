@@ -2,7 +2,9 @@
 #include <string>
 #include <unistd.h>
 
-#include "../Framework/Logs/Logs.hpp"
+#include "DateTime.hpp"
+#include "Logs.hpp"
+#include "Window.hpp"
 
 int main()
 {

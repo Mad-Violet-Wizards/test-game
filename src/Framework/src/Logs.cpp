@@ -24,7 +24,7 @@ void Logs::Init()
 
     if (g_currentLogFileName.empty())
     {
-        g_currentLogFileName = "../Log/Log_" + DateTime::GetCurrentDateAndTime() + ".txt";
+        g_currentLogFileName = "../../Log/Log_" + DateTime::GetCurrentDateAndTime() + ".txt";
         m_logFile.open(g_currentLogFileName, std::ios_base::app);
         m_logFile << DateTimePrefix()
                   << "[Onyx Core] Initialized Logs class with .txt file.\n";

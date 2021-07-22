@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-#include "../Time/DateTime.hpp"
+#include "DateTime.hpp"
 
 static std::string g_currentLogFileName = "";
 
