@@ -4,6 +4,7 @@ add_library(${PROJECT_NAME}
   src/DateTime.cpp
   src/Logs.cpp
   src/Window.cpp
+  src/Game.cpp
 )
 
 # Set SFML lib

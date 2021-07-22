@@ -5,6 +5,7 @@
 class Window
 {
   public:
+
       Window(const std::string& windowName);
       ~Window();
 
@@ -17,6 +18,7 @@ class Window
       void Exit();
 
   private:
+  
     sf::RenderWindow m_window;
 
 };

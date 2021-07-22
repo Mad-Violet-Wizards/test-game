@@ -2,10 +2,18 @@
 #include <string>
 #include <unistd.h>
 
-#include "DateTime.hpp"
-#include "Logs.hpp"
-#include "Window.hpp"
+#include "Game.hpp"
 
 int main()
 {
+  Game game;
+  sf::CircleShape shape(100.f);
+  shape.setFillColor(sf::Color::Green);
+
+  while (game.IsRunning()) 
+  {
+    game.Update();
+    game.Draw(shape);
+    game.CalculateDeltaTime();
+  }
 }
