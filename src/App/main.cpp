@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 #include "Game.hpp"
+#include "Logs.hpp"
 
 int main()
 {

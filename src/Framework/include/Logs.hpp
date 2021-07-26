@@ -44,7 +44,5 @@ class Logs
 
       void Init();
 
-      std::string DateTimePrefix();
-
       std::ofstream m_logFile;
 };

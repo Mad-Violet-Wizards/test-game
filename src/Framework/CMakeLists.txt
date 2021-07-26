@@ -3,6 +3,7 @@ project (onyx_engine_framework)
 add_library(${PROJECT_NAME}
   src/DateTime.cpp
   src/Logs.cpp
+  src/Prefixes.cpp
 )
 
 # Set SFML lib
