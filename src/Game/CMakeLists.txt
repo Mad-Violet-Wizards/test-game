@@ -15,4 +15,5 @@ add_library(onyx_engine::game ALIAS ${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
 target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/Scene
 )
