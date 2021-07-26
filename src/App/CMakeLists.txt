@@ -10,6 +10,7 @@ find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
   onyx_engine::framework
+  onyx_engine::game
 )
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
