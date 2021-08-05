@@ -11,6 +11,7 @@ class Game
       Game();
       ~Game();
 
+      void CaptureInput();
       void Update();
       void Draw();
       void CalculateDeltaTime();

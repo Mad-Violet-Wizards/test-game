@@ -3,6 +3,7 @@ project (onyx_engine_game)
 add_library(${PROJECT_NAME}
   src/Window.cpp
   src/Game.cpp
+  src/Input.cpp
   src/Scene/SceneStateMachine.cpp
   src/Scene/SceneGame.cpp
 )
@@ -12,6 +13,10 @@ set(SFML_DIR "../../lib/cmake/SFML/")
 
 # Find packages for SFML
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
+
+target_link_libraries(${PROJECT_NAME}
+  onyx_engine::framework
+)
 
 add_library(onyx_engine::game ALIAS ${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
