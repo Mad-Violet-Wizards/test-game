@@ -4,6 +4,7 @@ add_library(${PROJECT_NAME}
   src/DateTime.cpp
   src/Logs.cpp
   src/Prefixes.cpp
+  src/Bitmask.cpp
 )
 
 # Set SFML lib
