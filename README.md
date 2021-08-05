@@ -1,9 +1,4 @@
-<p align="center">
-  <a href="" rel="noopener">
-[(url) <img width=512px height=256px src="https://i.imgur.com/ATxIXGC.png" alt="Project logo"></a>]
-</p>
-
-<h3 align="center">Onyx Engine</h3>
+<h3 align="center">Test Game</h3>
 
 <div align="center">
 
@@ -16,8 +11,7 @@
 
 ---
 
-<p align="center"> Onyx Engine is tool created to help you create a visualizations and games in SFML libary,
-providing a Game Engine experience.
+<p align="center"> Description
     <br> 
 </p>
 
@@ -33,8 +27,7 @@ providing a Game Engine experience.
 
 ## 🧐 About <a name = "about"></a>
 
-Onyx Engine is created for programmers, who love to don't waste their time,
-if you want to create a simple game or visualization - go ahead, use OnyxEngine! ;)
+About
 
 ## 🏁 Getting Started - For users <a name = "getting_started_users"></a>
 
