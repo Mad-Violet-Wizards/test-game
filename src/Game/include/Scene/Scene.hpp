@@ -16,6 +16,6 @@ class Scene
 
       virtual void Update(float deltaTime) {};
 
-      virtual void Draw(Window& window);
+      virtual void Draw(Window& window) {};
 
 };

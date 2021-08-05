@@ -3,6 +3,8 @@ project (onyx_engine_game)
 add_library(${PROJECT_NAME}
   src/Window.cpp
   src/Game.cpp
+  src/Scene/SceneStateMachine.cpp
+  src/Scene/SceneGame.cpp
 )
 
 # Set SFML lib
