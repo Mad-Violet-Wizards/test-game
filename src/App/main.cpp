@@ -8,13 +8,11 @@
 int main()
 {
   Game game;
-  sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
 
   while (game.IsRunning()) 
   {
     game.Update();
-    game.Draw(shape);
+    game.Draw();
     game.CalculateDeltaTime();
   }
 }
