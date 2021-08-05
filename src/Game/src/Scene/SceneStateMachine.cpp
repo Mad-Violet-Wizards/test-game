@@ -4,6 +4,14 @@ SceneStateMachine::SceneStateMachine() : m_scenes(0), m_currentScene(nullptr) {}
 
 SceneStateMachine::~SceneStateMachine() {}
 
+void SceneStateMachine::ProcessInput()
+{
+  if (m_currentScene)
+  {
+    m_currentScene -> ProcessInput();
+  }
+}
+
 void SceneStateMachine::Update(float deltaTime)
 {
   if (m_currentScene)

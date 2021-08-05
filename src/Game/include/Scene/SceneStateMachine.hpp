@@ -13,7 +13,7 @@ class SceneStateMachine
     SceneStateMachine();
     ~SceneStateMachine();
 
-    // TOOD: Process Input.
+    void ProcessInput();
     void Update(float deltaTime);
     void Draw(Window& window);
 
