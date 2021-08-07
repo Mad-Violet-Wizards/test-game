@@ -4,8 +4,10 @@ add_library(${PROJECT_NAME}
   src/Window.cpp
   src/Game.cpp
   src/Input.cpp
+  src/Object.cpp
   src/Scene/SceneStateMachine.cpp
   src/Scene/SceneGame.cpp
+  src/Components/C_Sprite.cpp
 )
 
 # Set SFML lib
@@ -23,4 +25,5 @@ target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
 target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
   PUBLIC ${PROJECT_SOURCE_DIR}/include/Scene
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/Components
 )

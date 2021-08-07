@@ -4,6 +4,8 @@
 
 #include "Scene/Scene.hpp"
 #include "Input.hpp"
+#include "Object.hpp"
+#include "Components/C_Sprite.hpp"
 
 class SceneGame : public Scene
 {
@@ -20,6 +22,8 @@ class SceneGame : public Scene
     void Draw(Window& window) override;
 
   private:
+    std::shared_ptr<Object> m_player;
+
 
     Input m_input;
 
