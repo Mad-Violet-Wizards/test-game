@@ -8,6 +8,8 @@ add_library(${PROJECT_NAME}
   src/Scene/SceneStateMachine.cpp
   src/Scene/SceneGame.cpp
   src/Components/C_Sprite.cpp
+  src/Components/C_Transform.cpp
+  src/Components/C_KeyboardMovement.cpp
 )
 
 # Set SFML lib

@@ -6,6 +6,7 @@
 #include "Input.hpp"
 #include "Object.hpp"
 #include "Components/C_Sprite.hpp"
+#include "Components/C_KeyboardMovement.hpp"
 
 class SceneGame : public Scene
 {

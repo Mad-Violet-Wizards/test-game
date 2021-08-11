@@ -10,6 +10,10 @@ void SceneGame::OnCreate()
   auto sprite = m_player -> AddComponent<C_Sprite>();
   sprite -> Load("../../src/Assets/testsprite.png");
 
+  auto transform = m_player -> AddComponent<C_Transform>();
+
+  auto movement = m_player -> AddComponent<C_KeyboardMovement>();
+  movement -> SetInput(&m_input);
 }
 
 void SceneGame::OnDestroy() {}
@@ -21,7 +25,7 @@ void SceneGame::ProcessInput()
 
 void SceneGame::Update(float deltaTime) 
 {
-
+  m_player -> Update(deltaTime);
 }
 
 void SceneGame::Draw(Window& window) 
