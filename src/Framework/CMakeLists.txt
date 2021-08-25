@@ -8,7 +8,7 @@ add_library(${PROJECT_NAME}
 )
 
 # Set SFML lib
-set(SFML_DIR "../../lib/cmake/SFML/")
+set(SFML_DIR "../../lib/SFML/lib/cmake/SFML/")
 
 # Find packages for SFML
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
