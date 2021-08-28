@@ -1,5 +1,7 @@
-project (onyx_engine_game)
+project (onyx_engine_game) # Specify the name of project
 
+
+# Specify the whole game as a library and add source files. (cpp)
 add_library(${PROJECT_NAME}
   src/Window.cpp
   src/Game.cpp
@@ -12,11 +14,11 @@ add_library(${PROJECT_NAME}
   src/Components/C_KeyboardMovement.cpp
 )
 
-# Set SFML lib
+# Set SFML, TGUI lib
 set(SFML_DIR "../../lib/SFML/lib/cmake/SFML/")
 set(TGUI_DIR "../../lib/TGUI/")
 
-# Find packages for SFML
+# Find packages for SFML, TGUI
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 find_package(TGUI REQUIRED)
 

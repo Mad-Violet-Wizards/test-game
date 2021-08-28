@@ -7,11 +7,11 @@ add_library(${PROJECT_NAME}
   src/Bitmask.cpp
 )
 
-# Set SFML lib
+# Set SFML, TGUI lib
 set(SFML_DIR "../../lib/SFML/lib/cmake/SFML/")
 set(TGUI_DIR "../../lib/TGUI/")
 
-# Find packages for SFML
+# Find packages for SFML, TGUI
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 find_package(TGUI REQUIRED)
 
