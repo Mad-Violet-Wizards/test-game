@@ -12,12 +12,12 @@ Logs::~Logs() {}
 
 void Logs::Init()
 {    
-    if (!std::filesystem::exists("../Log/"))
+    if (!std::filesystem::exists("../../log/"))
     {
         std::cout << Prefixes::OnyxCorePrefix()
                   << "Didn't found Log directory. Creating\n";
 
-        std::filesystem::create_directory("../Log");
+        std::filesystem::create_directory("../../log");
     }
     else
     {
@@ -28,7 +28,7 @@ void Logs::Init()
 
     if (g_currentLogFileName.empty())
     {
-        g_currentLogFileName = "../../Log/Log_" + DateTime::GetCurrentDateAndTime() + ".txt";
+        g_currentLogFileName = "../../log/Log_" + DateTime::GetCurrentDateAndTime() + ".txt";
         m_logFile.open(g_currentLogFileName, std::ios_base::app);
         m_logFile << Prefixes::DateTimePrefix()
                   << Prefixes::OnyxCorePrefix()
