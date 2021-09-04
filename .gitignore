@@ -1,3 +1,5 @@
 .vscode/
 build/
 log/
+.vs/
+src/CMakeSettings.json

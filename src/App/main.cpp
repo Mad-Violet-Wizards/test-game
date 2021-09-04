@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <unistd.h>
+#include <SFML/Graphics.hpp>
 
 #include "Game.hpp"
 #include "Logs.hpp"
