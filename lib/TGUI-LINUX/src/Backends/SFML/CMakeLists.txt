@@ -1,6 +1,12 @@
 # Provided by: Mateusz.
 # Don't delete this line of code. It provides the SFML library included in our repo to be main backends lib for TGUI. :)
-set(SFML_DIR "${CMAKE_SOURCE_DIR}/../SFML-LINUX/lib/cmake/SFML/")
+if (WIN32)
+    set(SFML_DIR "${CMAKE_SOURCE_DIR}/../SFML-WINDOWS/lib/cmake/SFML/")
+endif(WIN32)
+
+if (UNIX)
+    set(SFML_DIR "${CMAKE_SOURCE_DIR}/../SFML-LINUX/lib/cmake/SFML/")
+endif(UNIX)
 
 # Link SFML in the same way as TGUI, unless SFML_STATIC_LIBRARIES is manually specified
 if(NOT DEFINED SFML_STATIC_LIBRARIES)
