@@ -14,3 +14,5 @@ src/CMakeSettings.json
 *.vs
 lib/TGUI-LINUX/CMakeCache.txt # Don't add local CMakeCache.
 lib/TGUI-WINDOWS/CMakeCache.txt # Don't add local CMakeCache.
+
+CMakeCache.txt
