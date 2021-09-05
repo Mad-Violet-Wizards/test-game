@@ -8,8 +8,17 @@ add_library(${PROJECT_NAME}
 )
 
 # Set SFML, TGUI lib
-set(SFML_DIR "../../lib/SFML/lib/cmake/SFML/")
-set(TGUI_DIR "../../lib/TGUI/")
+if(WIN32)
+	message("[Build System] Windows.")
+	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-WINDOWS/lib/cmake/SFML")
+	set(TGUI_DIR "${CMAKE_SOURCE_DIR}/../lib/TGUI-WINDOWS/lib/cmake/TGUI")
+endif(WIN32)
+
+if(UNIX)
+  message("[Build system] Unix")
+	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-LINUX/lib/cmake/SFML/")
+	set(TGUI_DIR "${CMAKE_SOURCE_DIR}/../lib/TGUI-LINUX/")
+endif(UNIX)
 
 # Find packages for SFML, TGUI
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)

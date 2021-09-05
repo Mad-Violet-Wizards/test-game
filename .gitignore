@@ -1,3 +1,18 @@
+# Don't add IDE files to the repo.
 .vscode/
+.vs/
+
+# Don't add build folder to the repo.
 build/
+
+# Don't add local logs to repo.
 log/
+
+# Windows gitignore - don't add local CMakeSettings
+src/.vs
+src/CMakeSettings.json
+*.vs
+lib/TGUI-LINUX/CMakeCache.txt # Don't add local CMakeCache.
+lib/TGUI-WINDOWS/CMakeCache.txt # Don't add local CMakeCache.
+
+CMakeCache.txt
