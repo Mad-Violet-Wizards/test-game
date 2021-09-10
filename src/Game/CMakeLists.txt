@@ -9,10 +9,11 @@ add_library(${PROJECT_NAME}
   src/Object.cpp
   src/Scene/SceneStateMachine.cpp
   src/Scene/SceneGame.cpp
+  src/Scene/SceneMenu.cpp
   src/Components/C_Sprite.cpp
   src/Components/C_Transform.cpp
   src/Components/C_KeyboardMovement.cpp
-)
+ )
 
 # Set SFML, TGUI lib
 if(WIN32)
