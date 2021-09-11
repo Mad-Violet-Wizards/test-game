@@ -3,6 +3,7 @@
 #include "Window.hpp"
 #include "Scene/SceneStateMachine.hpp"
 #include "Scene/SceneGame.hpp"
+#include "Scene/SceneMenu.hpp"
 
 class Game
 {

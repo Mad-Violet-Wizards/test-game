@@ -5,10 +5,12 @@ Game::Game() : m_window("Test-Game 1.0.0")
   m_deltaTime = m_clock.restart().asSeconds();
 
   std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>();
+  std::shared_ptr<SceneMenu> menuScene = std::make_shared<SceneMenu>();
 
   unsigned int gameSceneID = m_sceneManager.Add(gameScene);
+  unsigned int menuSceneID = m_sceneManager.Add(menuScene);
 
-  m_sceneManager.SwitchTo(gameSceneID);
+  m_sceneManager.SwitchTo(menuSceneID);
 
   m_deltaTime = m_clock.restart().asSeconds();
 
