@@ -33,6 +33,7 @@ find_package(TGUI REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
   onyx_engine::framework
+  onyx_engine::gui
 )
 
 add_library(onyx_engine::game ALIAS ${PROJECT_NAME})

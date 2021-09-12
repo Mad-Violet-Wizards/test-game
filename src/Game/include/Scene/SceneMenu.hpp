@@ -1,23 +1,22 @@
 #pragma once
 
-#include <TGUI/TGUI.hpp>
-
 #include "Scene/Scene.hpp"
+#include "MenuWidget.hpp"
 
 class SceneMenu : public Scene
 {
-  public:
+	public:
 
-	SceneMenu();
-	~SceneMenu();
+		SceneMenu();
+		~SceneMenu();
 
-	void OnCreate() override;
-	void OnDestroy() override;
+		void OnCreate() override;
+		void OnDestroy() override;
 
-	void Update(float deltaTime) override;
-	void Draw(Window& window) override;
+		void Update(float deltaTime) override;
+		void Draw(Window& window) override;
 
-  private:
+	private:
 
-	tgui::GuiSFML m_menuGui;
+		MenuWidget m_menuWidget;
 };
