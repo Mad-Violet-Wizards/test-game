@@ -1,7 +1,8 @@
 #include "Window.hpp"
 
 Window::Window(const std::string& windowName)
-	: m_window(sf::VideoMode(800, 600, 32), windowName) {}
+	: m_window(sf::VideoMode(800, 600, 32), windowName) 
+{}
 
 Window::~Window() {}
 

@@ -3,7 +3,9 @@ project (onyx_engine_gui) # Specify the name of project
 # Specify the whole gui as a library and add source files.
 
 add_library(${PROJECT_NAME}
-  src/MenuWidget.cpp
+  src/GuiManager.cpp
+  src/GuiLayout.cpp
+  src/Widgets/SampleWidget.cpp
 )
 
 # Set SFML, TGUI lib
@@ -31,4 +33,5 @@ add_library(onyx_engine::gui ALIAS ${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} tgui sfml-graphics sfml-audio)
 target_include_directories(${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/Widgets/
 )

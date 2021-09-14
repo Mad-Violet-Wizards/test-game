@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
 
 class Window
 {
@@ -20,5 +21,4 @@ class Window
   private:
   
     sf::RenderWindow m_window;
-
 };

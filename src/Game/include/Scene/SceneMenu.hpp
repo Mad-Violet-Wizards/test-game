@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Scene/Scene.hpp"
-#include "MenuWidget.hpp"
+#include "GuiManager.hpp"
 
 class SceneMenu : public Scene
 {
@@ -18,5 +18,7 @@ class SceneMenu : public Scene
 
 	private:
 
-		MenuWidget m_menuWidget;
+		GuiManager m_menuGuiManager;
+		GuiLayout m_menuLayout;
+		GuiLayout m_testLayout;
 };
