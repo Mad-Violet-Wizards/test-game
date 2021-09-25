@@ -9,8 +9,9 @@ SceneMenu::SceneMenu()
   m_menuLayout = std::make_shared<GuiLayout>();
   m_testLayout = std::make_shared<GuiLayout>();
   m_test1 = std::make_shared<GuiWidget>();
+  m_textWidget = std::make_shared<GuiTextWidget>();
   
-  m_menuLayout -> AddWidget(m_test1);
+  m_menuLayout -> AddWidget(m_textWidget);
 
   m_menuGuiManager.AddLayout(m_menuLayout);
 }
@@ -29,7 +30,7 @@ void SceneMenu::OnDestroy()
 
 void SceneMenu::Update(float deltaTime)
 {
-
+  m_menuGuiManager.Update();
 }
 
 void SceneMenu::Draw(Window& window)

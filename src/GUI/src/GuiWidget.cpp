@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "GuiWidget.hpp"
+#include "Window.hpp"
 
 GuiWidget::GuiWidget()
 {
@@ -12,6 +13,11 @@ GuiWidget::GuiWidget()
 GuiWidget::~GuiWidget()
 {
   std::cout << "[GuiWidget] Destroyed GuiWidget \n";
+}
+
+void GuiWidget::Update()
+{
+  // std::cout << "[GuiWidget] Update \n";
 }
 
 void GuiWidget::draw(sf::RenderTarget& target, sf::RenderStates states) const

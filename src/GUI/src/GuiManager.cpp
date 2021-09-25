@@ -19,6 +19,14 @@ void GuiManager::AddLayout(std::shared_ptr<GuiLayout> layout)
 
 void GuiManager::RemoveLayout() {}
 
+void GuiManager::Update()
+{
+  for (auto& layout : m_layouts)
+  {
+    layout -> Update();
+  }
+}
+
 void GuiManager::Draw(Window& window) 
 {
 	for (auto& layout : m_layouts)

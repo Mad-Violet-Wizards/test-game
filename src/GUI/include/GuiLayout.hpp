@@ -16,6 +16,7 @@ class GuiLayout
 		void AddWidget(std::shared_ptr<GuiWidget> widget);
 		void RemoveWidget();
 
+    void Update();
 		void Draw(Window& window);
 
 	private:

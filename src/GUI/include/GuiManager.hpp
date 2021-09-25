@@ -17,6 +17,7 @@ class GuiManager
 		void AddLayout(std::shared_ptr<GuiLayout> layout);
 		void RemoveLayout();
 
+    void Update();
 		void Draw(Window& window);
 
 	private:

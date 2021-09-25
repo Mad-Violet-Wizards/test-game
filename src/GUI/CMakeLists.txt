@@ -6,6 +6,7 @@ add_library(${PROJECT_NAME}
   src/GuiManager.cpp
   src/GuiLayout.cpp
   src/GuiWidget.cpp
+  src/GuiTextWidget.cpp
   src/Widgets/SampleWidget.cpp
 )
 

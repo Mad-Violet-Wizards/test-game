@@ -6,6 +6,7 @@
 #include "GuiManager.hpp"
 #include "GuiLayout.hpp"
 #include "GuiWidget.hpp"
+#include "GuiTextWidget.hpp"
 
 class SceneMenu : public Scene
 {
@@ -28,4 +29,5 @@ class SceneMenu : public Scene
 		std::shared_ptr<GuiLayout> m_testLayout;
 
     std::shared_ptr<GuiWidget> m_test1;
+    std::shared_ptr<GuiTextWidget> m_textWidget;
 };

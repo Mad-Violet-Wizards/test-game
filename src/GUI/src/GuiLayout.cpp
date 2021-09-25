@@ -22,6 +22,14 @@ void GuiLayout::RemoveWidget()
 
 }
 
+void GuiLayout::Update()
+{
+  for (auto& widget : m_widgets)
+  {
+    widget -> Update();
+  }
+}
+
 void GuiLayout::Draw(Window& window)
 {
 	for (auto& widget : m_widgets)
