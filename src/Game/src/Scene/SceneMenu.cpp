@@ -6,6 +6,9 @@
 
 SceneMenu::SceneMenu() 
 {
+  m_menuLayout = std::make_shared<GuiLayout>();
+  m_testLayout = std::make_shared<GuiLayout>();
+
 	sf::RectangleShape testWidget;
 	testWidget.setSize(sf::Vector2f(200, 200));
 	testWidget.setFillColor(sf::Color(255, 0, 0));
@@ -15,8 +18,8 @@ SceneMenu::SceneMenu()
 	testWidget2.setFillColor(sf::Color(0, 255, 255));
 	testWidget2.setPosition(300, 300);
 
-	m_menuLayout.AddWidget(testWidget);
-	m_testLayout.AddWidget(testWidget2);
+	m_menuLayout -> AddWidget(testWidget);
+	m_testLayout -> AddWidget(testWidget2);
 
 	m_menuGuiManager.AddLayout(m_menuLayout);
 	m_menuGuiManager.AddLayout(m_testLayout);

@@ -12,7 +12,7 @@ GuiLayout::~GuiLayout()
 	std::cout << "[Gui Layout] Destroyed Gui Layout\n";
 }
 
-void GuiLayout::AddWidget(sf::RectangleShape widget)
+void GuiLayout::AddWidget(const sf::RectangleShape& widget)
 {
 	m_widgets.push_back(widget);
 }

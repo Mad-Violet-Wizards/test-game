@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "Scene/Scene.hpp"
 #include "GuiManager.hpp"
 
@@ -19,6 +21,7 @@ class SceneMenu : public Scene
 	private:
 
 		GuiManager m_menuGuiManager;
-		GuiLayout m_menuLayout;
-		GuiLayout m_testLayout;
+    std::shared_ptr<GuiLayout> m_menuLayout;
+		// GuiLayout m_menuLayout;
+		std::shared_ptr<GuiLayout> m_testLayout;
 };

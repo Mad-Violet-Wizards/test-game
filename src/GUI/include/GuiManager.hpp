@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <memory>
 
 #include "GuiLayout.hpp"
 #include "Window.hpp"
@@ -13,12 +14,12 @@ class GuiManager
 		GuiManager();
 		~GuiManager();
 
-		void AddLayout(GuiLayout layout);
+		void AddLayout(std::shared_ptr<GuiLayout> layout);
 		void RemoveLayout();
 
 		void Draw(Window& window);
 
 	private:
 
-		std::vector<GuiLayout> m_layouts;
+		std::vector<std::shared_ptr<GuiLayout>> m_layouts;
 };

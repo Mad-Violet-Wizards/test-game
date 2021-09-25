@@ -11,7 +11,7 @@ class GuiLayout
 		GuiLayout();
 		~GuiLayout();
 
-		void AddWidget(sf::RectangleShape widget);
+		void AddWidget(const sf::RectangleShape& widget);
 		void RemoveWidget();
 
 		void Draw(Window& window);
