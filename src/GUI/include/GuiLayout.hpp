@@ -1,7 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
+#include "GuiWidget.hpp"
 #include "Window.hpp"
 
 class GuiLayout
@@ -11,12 +13,12 @@ class GuiLayout
 		GuiLayout();
 		~GuiLayout();
 
-		void AddWidget(const sf::RectangleShape& widget);
+		void AddWidget(std::shared_ptr<GuiWidget> widget);
 		void RemoveWidget();
 
 		void Draw(Window& window);
 
 	private:
 
-		std::vector<sf::RectangleShape> m_widgets;
+		std::vector<std::shared_ptr<GuiWidget>> m_widgets;
 };

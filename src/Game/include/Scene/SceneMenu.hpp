@@ -4,6 +4,8 @@
 
 #include "Scene/Scene.hpp"
 #include "GuiManager.hpp"
+#include "GuiLayout.hpp"
+#include "GuiWidget.hpp"
 
 class SceneMenu : public Scene
 {
@@ -20,8 +22,10 @@ class SceneMenu : public Scene
 
 	private:
 
-		GuiManager m_menuGuiManager;
+    GuiManager m_menuGuiManager;
+    
     std::shared_ptr<GuiLayout> m_menuLayout;
-		// GuiLayout m_menuLayout;
 		std::shared_ptr<GuiLayout> m_testLayout;
+
+    std::shared_ptr<GuiWidget> m_test1;
 };

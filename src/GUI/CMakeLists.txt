@@ -5,6 +5,7 @@ project (onyx_engine_gui) # Specify the name of project
 add_library(${PROJECT_NAME}
   src/GuiManager.cpp
   src/GuiLayout.cpp
+  src/GuiWidget.cpp
   src/Widgets/SampleWidget.cpp
 )
 
