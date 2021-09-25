@@ -11,7 +11,7 @@ class GuiWidget : public sf::Drawable, public sf::Transformable
     GuiWidget();
     ~GuiWidget();
 
-    void Update();
+    virtual void Update() {};
 
   private:
   

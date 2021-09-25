@@ -11,6 +11,8 @@ SceneMenu::SceneMenu()
   m_test1 = std::make_shared<GuiWidget>();
   m_textWidget = std::make_shared<GuiTextWidget>();
   
+  m_textWidget -> SetString(std::string{"New Game"});
+  m_textWidget -> SetPosition(50, 50);
   m_menuLayout -> AddWidget(m_textWidget);
 
   m_menuGuiManager.AddLayout(m_menuLayout);
