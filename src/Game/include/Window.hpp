@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Setup.hpp"
+
 class Window
 {
   public:
@@ -17,9 +19,11 @@ class Window
       bool IsOpen() const;
       void Exit();
 
-      static sf::Vector2u GetWindowSize();
+      sf::RenderWindow* GetWindow();
+      sf::Vector2u GetWindowSize() const;
 
   private:
-  
+
+    Setup m_setup;
     sf::RenderWindow m_window;
 };

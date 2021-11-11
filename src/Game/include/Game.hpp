@@ -4,7 +4,7 @@
 #include "Scene/SceneStateMachine.hpp"
 #include "Scene/SceneGame.hpp"
 #include "Scene/SceneMenu.hpp"
-#include "SampleWidget.hpp"
+#include "Setup.hpp"
 
 class Game
 {

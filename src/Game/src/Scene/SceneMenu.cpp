@@ -4,18 +4,21 @@
 #include "Scene/SceneMenu.hpp"
 
 
-SceneMenu::SceneMenu() 
+SceneMenu::SceneMenu(Window* window) : m_window(window)
 {
-  m_menuLayout = std::make_shared<GuiLayout>();
-  m_testLayout = std::make_shared<GuiLayout>();
-  m_test1 = std::make_shared<GuiWidget>();
-  m_textWidget = std::make_shared<GuiTextWidget>();
-  
-  m_textWidget -> SetString(std::string{"New Game"});
-  m_textWidget -> SetPosition(50, 50);
-  m_menuLayout -> AddWidget(m_textWidget);
+  m_menuLayout = std::make_shared<GuiLayout>(m_window);
+  m_ButtonNewGame = std::make_shared<Button_NewGame>(m_window);
+  m_ButtonLoadGame = std::make_shared<Button_LoadGame>(m_window);
+  m_ButtonOptions = std::make_shared<Button_Options>(m_window);
+  m_ButtonExit = std::make_shared<Button_Exit>(m_window);
+  m_test = std::make_shared<GuiTextWidget>(m_window);
 
-  m_menuGuiManager.AddLayout(m_menuLayout);
+  m_menuLayout -> AddWidget(m_ButtonNewGame);
+  m_menuLayout -> AddWidget(m_ButtonLoadGame);
+  m_menuLayout -> AddWidget(m_ButtonOptions);
+  m_menuLayout -> AddWidget(m_ButtonExit);
+
+  m_menuGuiManager.AddLayout(GuiManager::LayoutLevel::Level1, m_menuLayout);
 }
 
 SceneMenu::~SceneMenu() {}

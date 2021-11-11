@@ -11,16 +11,27 @@ class GuiManager
 {
 	public:
 
+    enum class LayoutFloor
+    {
+      Level1,
+      Level2,
+      Level3,
+      Level4,
+      Level5
+    };
+
+   using LayoutLevel = LayoutFloor;
+
 		GuiManager();
 		~GuiManager();
 
-		void AddLayout(std::shared_ptr<GuiLayout> layout);
+		void AddLayout(LayoutLevel level, std::shared_ptr<GuiLayout> layout);
 		void RemoveLayout();
 
-    void Update();
+  void Update();
 		void Draw(Window& window);
 
-	private:
+  private:
 
-		std::vector<std::shared_ptr<GuiLayout>> m_layouts;
+		  std::vector<std::pair<LayoutLevel, std::shared_ptr<GuiLayout>>> m_layouts;
 };

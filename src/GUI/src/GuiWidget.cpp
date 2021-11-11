@@ -3,7 +3,8 @@
 #include "GuiWidget.hpp"
 #include "Window.hpp"
 
-GuiWidget::GuiWidget()
+GuiWidget::GuiWidget(Window* window)
+  : m_window(window)
 {
   std::cout << "[GuiWidget] Created new GuiWidget \n";
   m_testRect.setSize(sf::Vector2f(200, 200));

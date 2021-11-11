@@ -5,7 +5,7 @@ add_library(${PROJECT_NAME}
   src/Logs.cpp
   src/Prefixes.cpp
   src/Bitmask.cpp
-)
+  src/Setup.cpp)
 
 # Set SFML, TGUI lib
 if(WIN32)

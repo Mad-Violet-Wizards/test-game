@@ -7,8 +7,10 @@ add_library(${PROJECT_NAME}
   src/GuiLayout.cpp
   src/GuiWidget.cpp
   src/GuiTextWidget.cpp
-  src/Widgets/SampleWidget.cpp
-)
+  src/Widgets/Button_NewGame.cpp
+  src/Widgets/Button_LoadGame.cpp
+  src/Widgets/Button_Options.cpp 
+  src/Widgets/Button_Exit.cpp)
 
 # Set SFML, TGUI lib
 if(WIN32)
