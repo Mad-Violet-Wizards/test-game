@@ -25,7 +25,6 @@ class SceneGame : public Scene
   private:
     std::shared_ptr<Object> m_player;
 
-
     Input m_input;
 
     sf::CircleShape m_testShape;

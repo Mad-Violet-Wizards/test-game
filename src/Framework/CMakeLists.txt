@@ -5,7 +5,7 @@ add_library(${PROJECT_NAME}
   src/Logs.cpp
   src/Prefixes.cpp
   src/Bitmask.cpp
-)
+  src/Setup.cpp)
 
 # Set SFML, TGUI lib
 if(WIN32)
@@ -17,15 +17,13 @@ endif(WIN32)
 if(UNIX)
   message("[Build system] Unix")
 	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-LINUX/lib/cmake/SFML/")
-	set(TGUI_DIR "${CMAKE_SOURCE_DIR}/../lib/TGUI-LINUX/")
 endif(UNIX)
 
 # Find packages for SFML, TGUI
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
-find_package(TGUI REQUIRED)
 
 add_library(onyx_engine::framework ALIAS ${PROJECT_NAME})
-target_link_libraries(${PROJECT_NAME} tgui sfml-graphics sfml-audio)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
 target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
 )
