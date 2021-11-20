@@ -1,17 +1,14 @@
 project (onyx_engine_framework)
 
-add_library(${PROJECT_NAME}
-  src/DateTime.cpp
-  src/Logs.cpp
-  src/Prefixes.cpp
-  src/Bitmask.cpp
-  src/Setup.cpp)
+file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
-# Set SFML, TGUI lib
+add_library(${PROJECT_NAME} ${SRC_FILES}
+)
+
+# Set SFML
 if(WIN32)
 	message("[Build System] Windows.")
 	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-WINDOWS/lib/cmake/SFML")
-	set(TGUI_DIR "${CMAKE_SOURCE_DIR}/../lib/TGUI-WINDOWS/lib/cmake/TGUI")
 endif(WIN32)
 
 if(UNIX)
@@ -19,7 +16,7 @@ if(UNIX)
 	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-LINUX/lib/cmake/SFML/")
 endif(UNIX)
 
-# Find packages for SFML, TGUI
+# Find packages for SFML
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 
 add_library(onyx_engine::framework ALIAS ${PROJECT_NAME})

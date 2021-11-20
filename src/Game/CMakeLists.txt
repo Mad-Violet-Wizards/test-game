@@ -1,32 +1,24 @@
 project (onyx_engine_game) # Specify the name of project
 
+file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB SCENE_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/*.cpp)
+file(GLOB COMPONENT_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Components/*.cpp)
 
 # Specify the whole game as a library and add source files. (cpp)
-add_library(${PROJECT_NAME}
-  src/Window.cpp
-  src/Game.cpp
-  src/Input.cpp
-  src/Object.cpp
-  src/Scene/SceneStateMachine.cpp
-  src/Scene/SceneGame.cpp
-  src/Scene/SceneMenu.cpp
-  src/Components/C_Sprite.cpp
-  src/Components/C_Transform.cpp
-  src/Components/C_KeyboardMovement.cpp
+add_library(${PROJECT_NAME} ${SRC_FILES} ${SCENE_SRC_FILES} ${COMPONENT_SRC_FILES}
  )
 
-# Set SFML, TGUI lib
+# Set SFML
 if(WIN32)
 	message("[Build System] Windows.")
 	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-WINDOWS/lib/cmake/SFML")
-	set(TGUI_DIR "${CMAKE_SOURCE_DIR}/../lib/TGUI-WINDOWS/lib/cmake/TGUI")
 endif(WIN32)
 
 if(UNIX)
 	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-LINUX/lib/cmake/SFML/")
 endif(UNIX)
 
-# Find packages for SFML, TGUI
+# Find packages for SFML
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
