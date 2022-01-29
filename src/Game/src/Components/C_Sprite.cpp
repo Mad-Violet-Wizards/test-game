@@ -11,7 +11,7 @@ void C_Sprite::Load(const std::string& filePath)
 
 void C_Sprite::Update(float deltaTime)
 {
-  m_sprite.setPosition(m_owner -> GetComponent<C_Transform>() -> GetPosition());
+  m_sprite.setPosition(m_owner->GetComponent<C_Transform>()->GetPosition());
 }
 
 void C_Sprite::Draw(Window& window)

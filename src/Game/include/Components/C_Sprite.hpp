@@ -6,18 +6,18 @@
 
 class C_Sprite : public Component
 {
-  public:
+public:
 
-    C_Sprite(Object* owner);
+  C_Sprite(Object* owner);
 
-    void Load(const std::string& filePath);
+  void Load(const std::string& filePath);
 
-    void Update(float deltaTime) override;
+  void Update(float deltaTime) override;
 
-    void Draw(Window& window) override;
+  void Draw(Window& window) override;
 
-  private:
+private:
 
-    sf::Texture m_texture;
-    sf::Sprite m_sprite;
+  sf::Texture m_texture;
+  sf::Sprite m_sprite;
 };

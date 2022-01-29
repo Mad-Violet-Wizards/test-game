@@ -4,23 +4,23 @@
 
 class Bitmask
 {
-  public:
+public:
 
-    Bitmask();
-    ~Bitmask();
+  Bitmask();
+  ~Bitmask();
 
-    void SetMask(Bitmask& other);
-    uint32_t GetMask() const;
+  void SetMask(Bitmask& other);
+  uint32_t GetMask() const;
 
-    bool GetBit(int pos) const;
-    void SetBit(int pos, bool on);
+  bool GetBit(int pos) const;
+  void SetBit(int pos, bool on);
 
-    void SetBit(int pos);
-    void ClearBit(int pos);
+  void SetBit(int pos);
+  void ClearBit(int pos);
 
-    void Clear();
+  void Clear();
 
-  private:
+private:
 
-    uint32_t m_bits;
+  uint32_t m_bits;
 };

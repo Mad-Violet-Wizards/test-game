@@ -3,36 +3,32 @@
 #include <SFML/Graphics.hpp>
 
 #include "Window.hpp"
-#include "GuiWidget.hpp"
+#include "GuiObject.hpp"
 
-class GuiTextWidget : public GuiWidget
+class GuiTextWidget : public GuiObject
 {
-  public:
+public:
 
-    GuiTextWidget(Window* window);
-    ~GuiTextWidget();
+  GuiTextWidget(Window* window);
+  ~GuiTextWidget();
 
-    void Update();
+  void Update() override;
+  sf::FloatRect GetSize() override;
 
-  protected:
+  void SetPosition(const float x, const float y) override;
+  void SetPosition(const sf::Vector2f &position) override;
 
-    void SetCharacterSize(const int size);
-    void SetString(const std::string& string);
+  void SetCharacterSize(const int size);
+  void SetText(const std::string &text);
+  void SetText(const char *text);
 
-    void SetColor(const int r, const int g, const int b);
-    void SetColor(const sf::Color& color);
+  void SetColor(const int r, const int g, const int b);
+  void SetColor(const sf::Color &color);
 
-    void SetAbsolutePosition(const sf::Vector2f& position);
-    void SetAbsolutePosition(float x, float y);
+private:
 
-    void SetRelativePosition(const std::string &x, const std::string &y) override;
-    void SetRelativePosition(const char *x, const char *y) override;
-    void SetRelativePosition(const int x, const int y) override;
+  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-  private:
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-    sf::Font m_font;
-    sf::Text m_text;
+  sf::Font m_font;
+  sf::Text m_text;
 };

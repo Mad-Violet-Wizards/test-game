@@ -9,7 +9,7 @@ int main()
 {
   Game game;
 
-  while (game.IsRunning()) 
+  while (game.IsRunning())
   {
     game.CaptureInput();
     game.Update();

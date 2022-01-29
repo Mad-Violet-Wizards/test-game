@@ -5,16 +5,16 @@
 
 class C_KeyboardMovement : public Component
 {
-  public:
+public:
 
-    C_KeyboardMovement(Object* owner);
+  C_KeyboardMovement(Object* owner);
 
-    void SetInput(Input* input);
-    void SetMovementSpeed(int moveSpeed);
-    void Update(float deltaTime) override;
+  void SetInput(Input* input);
+  void SetMovementSpeed(int moveSpeed);
+  void Update(float deltaTime) override;
 
-  private:
+private:
 
-    int m_moveSpeed;
-    Input* m_input;
+  int m_moveSpeed;
+  Input* m_input;
 };

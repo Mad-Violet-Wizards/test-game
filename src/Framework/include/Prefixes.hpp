@@ -4,7 +4,7 @@
 
 #include "DateTime.hpp"
 
-namespace Prefixes 
+namespace Prefixes
 {
 
   const std::string OnyxCorePrefix();
@@ -12,5 +12,5 @@ namespace Prefixes
   const std::string OnyxGamePrefix();
 
   const std::string DateTimePrefix();
-  
+
 }

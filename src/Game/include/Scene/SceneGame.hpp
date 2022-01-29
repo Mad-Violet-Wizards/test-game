@@ -10,22 +10,22 @@
 
 class SceneGame : public Scene
 {
-  public:
+public:
 
-    SceneGame();
-    ~SceneGame();
+  SceneGame();
+  ~SceneGame();
 
-    void OnCreate() override;
-    void OnDestroy() override;
+  void OnCreate() override;
+  void OnDestroy() override;
 
-    void ProcessInput() override;
-    void Update(float deltaTime) override;
-    void Draw(Window& window) override;
+  void ProcessInput() override;
+  void Update(float deltaTime) override;
+  void Draw(Window& window) override;
 
-  private:
-    std::shared_ptr<Object> m_player;
+private:
+  std::shared_ptr<Object> m_player;
 
-    Input m_input;
+  Input m_input;
 
-    sf::CircleShape m_testShape;
+  sf::CircleShape m_testShape;
 };
