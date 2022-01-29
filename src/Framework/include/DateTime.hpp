@@ -5,10 +5,10 @@
 
 namespace DateTime
 {
-    std::string GetCurrentDate();
-    std::string GetCurrentTime();
-    std::string GetCurrentDateAndTime();
+  std::string GetCurrentDate();
+  std::string GetCurrentTime();
+  std::string GetCurrentDateAndTime();
 
-    int GetCurrentTimestamp();
+  int GetCurrentTimestamp();
 
 };

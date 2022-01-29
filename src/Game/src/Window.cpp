@@ -15,7 +15,7 @@ void Window::Update()
 
   if (m_window.pollEvent(event))
   {
-    if  (event.type == sf::Event::Closed)
+    if (event.type == sf::Event::Closed)
     {
       m_window.close();
     }

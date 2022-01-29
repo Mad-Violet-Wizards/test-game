@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include <list>
 #include <memory>
 
 #include "GuiLayout.hpp"
@@ -9,29 +9,29 @@
 
 class GuiManager
 {
-	public:
+public:
 
-    enum class LayoutFloor
-    {
-      Level1,
-      Level2,
-      Level3,
-      Level4,
-      Level5
-    };
+  enum class LayoutLevel
+  {
+    Level1,
+    Level2,
+    Level3,
+    Level4,
+    Level5
+  };
 
-   using LayoutLevel = LayoutFloor;
+  GuiManager();
+  ~GuiManager();
 
-		GuiManager();
-		~GuiManager();
+  void AddLayout(LayoutLevel level, std::shared_ptr<GuiLayout> layout);
+  void RemoveLayout(std::shared_ptr<GuiLayout> layout);
 
-		void AddLayout(LayoutLevel level, std::shared_ptr<GuiLayout> layout);
-		void RemoveLayout();
+  void UpdateLayoutLevel(LayoutLevel level, std::shared_ptr<GuiLayout> layout);
 
   void Update();
-		void Draw(Window& window);
+  void Draw(Window& window);
 
-  private:
+private:
 
-		  std::vector<std::pair<LayoutLevel, std::shared_ptr<GuiLayout>>> m_layouts;
+  std::list<std::pair<LayoutLevel, std::shared_ptr<GuiLayout>>> m_layouts;
 };

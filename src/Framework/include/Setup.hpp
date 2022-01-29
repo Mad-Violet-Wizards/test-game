@@ -4,19 +4,19 @@
 
 class Setup
 {
-  public:
+public:
 
-    Setup();
-    ~Setup();
+  Setup();
+  ~Setup();
 
-    sf::VideoMode GetBestWindowSetup();
-    sf::VideoMode GetCurrentMode();
+  sf::VideoMode GetBestWindowSetup();
+  sf::VideoMode GetCurrentMode();
 
-    void IncreaseMode();
-    void DecreaseMode();
+  void IncreaseMode();
+  void DecreaseMode();
 
-  private:
-     
-    int m_currentMode;
-    std::vector<sf::VideoMode> m_videoModes;
+private:
+
+  int m_currentMode;
+  std::vector<sf::VideoMode> m_videoModes;
 };

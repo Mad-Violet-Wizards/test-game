@@ -8,23 +8,23 @@
 
 class Game
 {
-  public:
+public:
 
-      Game();
-      ~Game();
+  Game();
+  ~Game();
 
-      void CaptureInput();
-      void Update();
-      void Draw();
-      void CalculateDeltaTime();
-      bool IsRunning() const;
+  void CaptureInput();
+  void Update();
+  void Draw();
+  void CalculateDeltaTime();
+  bool IsRunning() const;
 
-  private:
+private:
 
-      Window m_window;
-      SceneStateMachine m_sceneManager;
+  Window m_window;
+  SceneStateMachine m_sceneManager;
 
-      sf::Clock m_clock;
-      float m_deltaTime;
+  sf::Clock m_clock;
+  float m_deltaTime;
 
 };

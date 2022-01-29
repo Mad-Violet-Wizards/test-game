@@ -1,0 +1,21 @@
+Gui:
+
+Fixed is visible for GuiLayout to don't iterate, when layout shouldn't be visible.
+Created functions to set relative position and size.
+Renamed GuiWidget to GuiObject.
+Created interface to setup and get basic aligns and margins to widget.
+Renamed GuiTextWidget::SetString method to SetText.
+Extended GuiTextWidget::SetText to accept const char *.
+Added SetPosition interface to GuiObject and GuiTextWidget.
+Completed GuiLayoutVertical.
+Added functionality to remove widget from GuiLayout.
+Added functionality to remove layout from GuiManager.
+GuiLayoutVertical will now resize depending on size of widgets inside.
+
+Game:
+
+Framework:
+
+App:
+
+Assets:
