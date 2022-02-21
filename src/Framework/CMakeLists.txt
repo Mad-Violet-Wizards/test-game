@@ -1,26 +1,23 @@
-project (onyx_engine_framework)
+project (onyx_engine_framework) # Specify the name of project
 
+# List the source files for all folders.
 file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
-add_library(${PROJECT_NAME} ${SRC_FILES}
-)
+# Specify the whole framework as a library and add source files. (cpp)
+add_library(${PROJECT_NAME} ${SRC_FILES})
 
-# Set SFML
-if(WIN32)
-	message("[Build System] Windows.")
-	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-WINDOWS/lib/cmake/SFML")
-endif(WIN32)
-
-if(UNIX)
-  message("[Build system] Unix")
-	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-LINUX/lib/cmake/SFML/")
-endif(UNIX)
-
-# Find packages for SFML
-find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
+# Include Conan.
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 add_library(onyx_engine::framework ALIAS ${PROJECT_NAME})
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
+
+# Include all needed libraries.
+target_link_libraries(${PROJECT_NAME} 
+  ${CONAN_LIBS_SFML}
+)
+
+# Include all header files.
 target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
 )

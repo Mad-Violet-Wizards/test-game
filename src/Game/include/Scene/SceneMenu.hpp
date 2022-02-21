@@ -30,15 +30,10 @@ private:
 
   std::shared_ptr<GuiLayout> m_menuLayout;
   std::shared_ptr<GuiLayoutVertical> m_testVerticalLayout;
-  std::shared_ptr<GuiTextWidget> m_test;
-  std::shared_ptr<GuiTextWidget> m_test1;
-  std::shared_ptr<GuiTextWidget> m_test2;
-  std::shared_ptr<GuiTextWidget> m_test3;
+  std::shared_ptr<GuiTextWidget> m_buttonNewGame;
+  std::shared_ptr<GuiTextWidget> m_buttonLoadGame;
+  std::shared_ptr<GuiTextWidget> m_buttonOptions;
+  std::shared_ptr<GuiTextWidget> m_buttonExit;
 
-  std::shared_ptr<GuiLayoutHorizontal> m_testHorizontalLayout;
-  std::shared_ptr<GuiTextWidget> m_testH;
-  std::shared_ptr<GuiTextWidget> m_testH1;
-  std::shared_ptr<GuiTextWidget> m_testH2;
-  std::shared_ptr<GuiTextWidget> m_testH3;
   Window* m_window;
 };
