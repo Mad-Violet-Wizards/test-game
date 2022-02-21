@@ -1,23 +1,14 @@
-project (onyx_engine_app)
+project (onyx_engine_app)  # Specify the name of project
+
+# Include Conan.
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-# Set SFML
-if(WIN32)
-	message("[Build System] Windows.")
-	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-WINDOWS/lib/cmake/SFML")
-endif(WIN32)
-
-if(UNIX)
-	set(SFML_DIR "${CMAKE_SOURCE_DIR}/../lib/SFML-LINUX/lib/cmake/SFML/")
-endif(UNIX)
-
-# Find packages for SFML
-find_package(SFML 2.5.1 COMPONENTS system window graphics audio network REQUIRED)
-
-target_link_libraries(${PROJECT_NAME}
+# Include all needed libraries.
+target_link_libraries(${PROJECT_NAME} 
+  ${CONAN_LIBS_SFML}
   onyx_engine::framework
   onyx_engine::game
 )
-
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
