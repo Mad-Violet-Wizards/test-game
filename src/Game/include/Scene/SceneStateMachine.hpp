@@ -15,7 +15,7 @@ public:
 
   void ProcessInput();
   void Update(float deltaTime);
-  void Draw(Window& window);
+  void Draw(Window &window);
 
   unsigned int Add(std::shared_ptr<Scene> scene);
   void SwitchTo(unsigned int id);
