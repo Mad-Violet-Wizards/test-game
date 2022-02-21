@@ -15,14 +15,14 @@ class SceneMenu : public Scene
 {
 public:
 
-  SceneMenu(Window* window);
+  SceneMenu(Window *window);
   ~SceneMenu();
 
   void OnCreate() override;
   void OnDestroy() override;
 
   void Update(float deltaTime) override;
-  void Draw(Window& window) override;
+  void Draw(Window &window) override;
 
 private:
 
@@ -35,5 +35,5 @@ private:
   std::shared_ptr<GuiTextWidget> m_buttonOptions;
   std::shared_ptr<GuiTextWidget> m_buttonExit;
 
-  Window* m_window;
+  Window *m_window;
 };

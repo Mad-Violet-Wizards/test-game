@@ -31,12 +31,12 @@ SceneMenu::SceneMenu(Window* window) : m_window(window)
   m_buttonExit -> SetText("Exit");
   m_buttonExit -> SetAlign(GuiObject::GuiAlign::AlignCenter);
 
-  m_testVerticalLayout->SetRelativeSize(100, 0);
-  m_testVerticalLayout->SetRelativePosition(0, 25);
-  m_testVerticalLayout->AddWidget(m_buttonNewGame);
-  m_testVerticalLayout->AddWidget(m_buttonLoadGame);
-  m_testVerticalLayout->AddWidget(m_buttonOptions);
-  m_testVerticalLayout->AddWidget(m_buttonExit);
+  m_testVerticalLayout -> SetRelativeSize(100, 0);
+  m_testVerticalLayout -> SetRelativePosition(0, 25);
+  m_testVerticalLayout -> AddWidget(m_buttonNewGame);
+  m_testVerticalLayout -> AddWidget(m_buttonLoadGame);
+  m_testVerticalLayout -> AddWidget(m_buttonOptions);
+  m_testVerticalLayout -> AddWidget(m_buttonExit);
 
   m_menuGuiManager.AddLayout(GuiManager::LayoutLevel::Level1, m_testVerticalLayout);
 }
