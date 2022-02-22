@@ -14,7 +14,7 @@ public:
 
   void Update(float deltaTime);
   void LateUpdate(float deltaTime);
-  void Draw(Window& window);
+  void Draw(Window &window);
 
   template <typename T> std::shared_ptr<T> AddComponent()
   {

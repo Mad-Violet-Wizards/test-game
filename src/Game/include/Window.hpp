@@ -8,18 +8,18 @@ class Window
 {
 public:
 
-  Window(const std::string& windowName);
+  Window(const std::string &windowName);
   ~Window();
 
   void Update();
   void BeginDraw();
-  void Draw(const sf::Drawable& drawable);
+  void Draw(const sf::Drawable &drawable);
   void EndDraw();
 
   bool IsOpen() const;
   void Exit();
 
-  sf::RenderWindow* GetWindow();
+  sf::RenderWindow *GetWindow();
   sf::Vector2u GetWindowSize() const;
 
 private:

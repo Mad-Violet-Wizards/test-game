@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Window::Window(const std::string& windowName)
+Window::Window(const std::string &windowName)
   : m_window(sf::VideoMode(800, 600, 32), windowName, sf::Style::Titlebar)
 {
 }
@@ -27,7 +27,7 @@ void Window::BeginDraw()
   m_window.clear(sf::Color::Black);
 }
 
-void Window::Draw(const sf::Drawable& drawable)
+void Window::Draw(const sf::Drawable &drawable)
 {
   m_window.draw(drawable);
 }

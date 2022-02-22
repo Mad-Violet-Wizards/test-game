@@ -99,7 +99,7 @@ void GuiTextWidget::SetColor(const sf::Color &color)
   m_text.setFillColor(color);
 }
 
-void GuiTextWidget::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void GuiTextWidget::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
   states.transform *= getTransform();
   target.draw(m_text, states);

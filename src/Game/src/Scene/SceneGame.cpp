@@ -8,7 +8,7 @@ void SceneGame::OnCreate()
 {
   m_player = std::make_shared<Object>();
   auto sprite = m_player -> AddComponent<C_Sprite>();
-  sprite->Load("../../src/Assets/testsprite.png");
+  sprite -> Load("../../src/Assets/testsprite.png");
 
   auto transform = m_player -> AddComponent<C_Transform>();
 

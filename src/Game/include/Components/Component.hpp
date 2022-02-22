@@ -8,15 +8,15 @@ class Component
 {
 public:
 
-  Component(Object* owner) : m_owner(owner) {}
+  Component(Object *owner) : m_owner(owner) {}
 
   virtual void Awake() {};
   virtual void Start() {};
 
   virtual void Update(float deltaTime) {};
-  virtual void Draw(Window& window) {};
+  virtual void Draw(Window &window) {};
 
 protected:
 
-  Object* m_owner;
+  Object *m_owner;
 };

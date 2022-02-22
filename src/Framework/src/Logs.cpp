@@ -38,7 +38,7 @@ void Logs::Init()
   m_logFile.close();
 }
 
-Logs& Logs::operator<<(const char* value)
+Logs &Logs::operator<<(const char* value)
 {
   m_logFile.open(g_currentLogFileName, std::ios_base::app);
 
@@ -49,7 +49,7 @@ Logs& Logs::operator<<(const char* value)
   return *this;
 }
 
-Logs& Logs::operator<<(const std::string& value)
+Logs &Logs::operator<<(const std::string& value)
 {
   m_logFile.open(g_currentLogFileName, std::ios_base::app);
 
@@ -60,7 +60,7 @@ Logs& Logs::operator<<(const std::string& value)
   return *this;
 }
 
-Logs& Logs::operator<<(const int value)
+Logs &Logs::operator<<(const int value)
 {
   m_logFile.open(g_currentLogFileName, std::ios_base::app);
 
@@ -71,7 +71,7 @@ Logs& Logs::operator<<(const int value)
   return *this;
 }
 
-Logs& Logs::operator<<(const double value)
+Logs &Logs::operator<<(const double value)
 {
   m_logFile.open(g_currentLogFileName, std::ios_base::app);
 

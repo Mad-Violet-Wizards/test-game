@@ -5,7 +5,7 @@
 #include "Scene/SceneMenu.hpp"
 
 
-SceneMenu::SceneMenu(Window* window) : m_window(window)
+SceneMenu::SceneMenu(Window *window) : m_window(window)
 {
   m_menuLayout = std::make_shared<GuiLayout>(m_window);
   m_testVerticalLayout = std::make_shared<GuiLayoutVertical>(m_window);
@@ -70,7 +70,7 @@ void SceneMenu::Update(float deltaTime)
   m_menuGuiManager.Update();
 }
 
-void SceneMenu::Draw(Window& window)
+void SceneMenu::Draw(Window &window)
 {
   m_menuGuiManager.Draw(window);
 }

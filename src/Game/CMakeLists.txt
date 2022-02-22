@@ -11,10 +11,9 @@ add_library(${PROJECT_NAME} ${SRC_FILES} ${SCENE_SRC_FILES} ${COMPONENT_SRC_FILE
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
- 
+
 # Include all needed libraries.
 target_link_libraries(${PROJECT_NAME}
-  ${CONAN_LIBS_SFML}
   onyx_engine::framework
   onyx_engine::gui
 )

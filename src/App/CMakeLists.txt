@@ -8,7 +8,6 @@ add_executable(${PROJECT_NAME} main.cpp)
 
 # Include all needed libraries.
 target_link_libraries(${PROJECT_NAME} 
-  ${CONAN_LIBS_SFML}
   onyx_engine::framework
   onyx_engine::game
 )
