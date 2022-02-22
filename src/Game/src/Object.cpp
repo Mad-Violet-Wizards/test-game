@@ -2,32 +2,32 @@
 
 void Object::Awake()
 {
-  for (const auto& c : m_components)
+  for (const auto &c : m_components)
   {
-    c->Awake();
+    c -> Awake();
   }
 }
 
 void Object::Start()
 {
-  for (const auto& c : m_components)
+  for (const auto &c : m_components)
   {
-    c->Start();
+    c -> Start();
   }
 }
 
 void Object::Update(float deltaTime)
 {
-  for (const auto& c : m_components)
+  for (const auto &c : m_components)
   {
-    c->Update(deltaTime);
+    c -> Update(deltaTime);
   }
 }
 
-void Object::Draw(Window& window)
+void Object::Draw(Window &window)
 {
-  for (const auto& c : m_components)
+  for (const auto &c : m_components)
   {
-    c->Draw(window);
+    c -> Draw(window);
   }
 }

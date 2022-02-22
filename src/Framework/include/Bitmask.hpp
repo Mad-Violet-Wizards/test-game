@@ -9,7 +9,7 @@ public:
   Bitmask();
   ~Bitmask();
 
-  void SetMask(Bitmask& other);
+  void SetMask(Bitmask &other);
   uint32_t GetMask() const;
 
   bool GetBit(int pos) const;

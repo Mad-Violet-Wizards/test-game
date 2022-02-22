@@ -115,7 +115,7 @@ void GuiObject::SetInput(Input *input)
 }
 
 
-void GuiObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void GuiObject::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
   states.transform *= getTransform();
   target.draw(m_testRect, states);

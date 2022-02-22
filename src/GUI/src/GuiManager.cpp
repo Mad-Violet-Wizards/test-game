@@ -54,7 +54,7 @@ void GuiManager::UpdateLayoutLevel(LayoutLevel level, std::shared_ptr<GuiLayout>
 
 void GuiManager::Update()
 {
-  for (auto& layout : m_layouts)
+  for (auto &layout : m_layouts)
   {
     layout.second -> Update();
   }
@@ -62,7 +62,7 @@ void GuiManager::Update()
 
 void GuiManager::Draw(Window &window)
 {
-  for (auto& layout : m_layouts)
+  for (auto &layout : m_layouts)
   {
     layout.second -> Draw(window);
   }

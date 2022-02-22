@@ -11,7 +11,7 @@ class GuiTextWidget : public GuiObject
 {
 public:
 
-  GuiTextWidget(Window* window);
+  GuiTextWidget(Window *window);
   ~GuiTextWidget();
 
   void Update() override;
@@ -35,7 +35,7 @@ public:
 
 private:
 
-  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
   sf::Font m_font;
   sf::Text m_text;

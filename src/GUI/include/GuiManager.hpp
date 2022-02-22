@@ -29,7 +29,7 @@ public:
   void UpdateLayoutLevel(LayoutLevel level, std::shared_ptr<GuiLayout> layout);
 
   void Update();
-  void Draw(Window& window);
+  void Draw(Window &window);
 
 private:
 

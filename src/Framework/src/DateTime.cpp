@@ -6,12 +6,12 @@
 std::string DateTime::GetCurrentDate()
 {
   std::time_t time = std::time(0);
-  std::tm* now = std::localtime(&time);
+  std::tm *now = std::localtime(&time);
 
   std::string CurrentDate(
-    std::to_string(now->tm_year + 1900) + "-"
-    + std::to_string(now->tm_mon + 1) + "-"
-    + std::to_string(now->tm_mday)
+    std::to_string(now -> tm_year + 1900) + "-"
+    + std::to_string(now -> tm_mon + 1) + "-"
+    + std::to_string(now -> tm_mday)
   );
 
   return CurrentDate;
@@ -20,12 +20,12 @@ std::string DateTime::GetCurrentDate()
 std::string DateTime::GetCurrentTime()
 {
   std::time_t time = std::time(0);
-  std::tm* now = std::localtime(&time);
+  std::tm *now = std::localtime(&time);
 
   std::string CurrentTime(
-    std::to_string(now->tm_hour) + ":"
-    + std::to_string(now->tm_min) + ":"
-    + std::to_string(now->tm_sec)
+    std::to_string(now -> tm_hour) + ":"
+    + std::to_string(now -> tm_min) + ":"
+    + std::to_string(now -> tm_sec)
   );
 
   return CurrentTime;

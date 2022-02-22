@@ -19,8 +19,8 @@ public:
   /*
   * INTERFACE TO LOG INTO .TXT FILE
   */
-  Logs& operator<<(const char* value);
-  Logs& operator<<(const std::string& value);
+  Logs& operator<<(const char *value);
+  Logs& operator<<(const std::string &value);
   Logs& operator<<(const int value);
   Logs& operator<<(const double value);
 
