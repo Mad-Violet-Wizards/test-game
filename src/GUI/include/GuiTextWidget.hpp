@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <boost/signals2.hpp>
 
 #include "Window.hpp"
 #include "GuiObject.hpp"
@@ -26,13 +27,15 @@ public:
   void SetColor(const int r, const int g, const int b);
   void SetColor(const sf::Color &color);
 
-  bool Clicked() const;
+  //
+  // Signal & Slots
+  //
+
+  boost::signals2::signal<void()> Clicked;
 
 private:
 
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-  Input m_input;
 
   sf::Font m_font;
   sf::Text m_text;

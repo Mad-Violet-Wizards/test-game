@@ -25,6 +25,12 @@ public:
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
 
+  void Test();
+
+private:
+
+  void InitConnections();
+
 private:
 
   GuiManager m_menuGuiManager;

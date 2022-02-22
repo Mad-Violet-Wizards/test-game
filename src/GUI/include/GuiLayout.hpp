@@ -21,6 +21,7 @@ public:
   /*
   * TODO: Think, if those are really important here, GuiLayout is only a base class containg basic informations.
   */
+
   virtual void AddWidget(std::shared_ptr<GuiObject> widget);
   virtual void RemoveWidget(std::shared_ptr<GuiObject> widget); // Made this method virtual only for some unknown time.
 
@@ -52,5 +53,6 @@ protected:
   const sf::Vector2u ScaleWindowAbsoluteToRelative(const sf::Vector2f &values);
 
 private:
+
   Window *m_window;
 };

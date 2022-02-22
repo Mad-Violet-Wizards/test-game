@@ -29,6 +29,14 @@ GuiTextWidget::~GuiTextWidget()
 
 void GuiTextWidget::Update()
 {
+  if (m_input == nullptr)
+  {
+    return;
+  }
+
+  //
+  // Check if there's anything to update about input.
+  //
   const sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window->GetWindow()));
 
   //
@@ -37,12 +45,14 @@ void GuiTextWidget::Update()
 
   if (m_text.getGlobalBounds().contains(mousePosition))
   {
-  }
-}
+    
+    if (m_input -> IsKeyUp(Input::Key::MouseLeft))
+    {
+      Clicked();
+      std::cout << "[INFO] Clicked.\n";
+    }
 
-bool GuiTextWidget::Clicked() const
-{
-  return m_clicked;
+  }
 }
 
 sf::FloatRect GuiTextWidget::GetSize()
