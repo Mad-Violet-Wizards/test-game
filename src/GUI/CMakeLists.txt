@@ -13,7 +13,6 @@ conan_basic_setup()
 
 # Include all needed libraries.
 target_link_libraries(${PROJECT_NAME}
-  ${CONAN_LIBS_SFML}
   onyx_engine::framework
   onyx_engine::game
 )

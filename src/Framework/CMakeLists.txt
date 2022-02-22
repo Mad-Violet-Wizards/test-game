@@ -12,11 +12,6 @@ conan_basic_setup()
 
 add_library(onyx_engine::framework ALIAS ${PROJECT_NAME})
 
-# Include all needed libraries.
-target_link_libraries(${PROJECT_NAME} 
-  ${CONAN_LIBS_SFML}
-)
-
 # Include all header files.
 target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
