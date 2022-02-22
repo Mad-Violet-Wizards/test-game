@@ -25,7 +25,17 @@ public:
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
 
-  void Test();
+  //
+  // Signal & Slots
+  //
+
+  void StartNewGame();
+  void CloseGame();
+  void EmptySlot();
+
+  //
+  // End of signal & slots section.
+  //
 
 private:
 

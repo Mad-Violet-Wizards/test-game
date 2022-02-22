@@ -75,12 +75,25 @@ void SceneMenu::Draw(Window &window)
   m_menuGuiManager.Draw(window);
 }
 
-void SceneMenu::Test()
+void SceneMenu::StartNewGame()
 {
-  std::cout << "Recived event from some button.\n";
+
+}
+
+void SceneMenu::CloseGame()
+{
+  m_window -> Exit();
+}
+
+void SceneMenu::EmptySlot()
+{
+  // Nothing here.
 }
 
 void SceneMenu::InitConnections()
 {
-  m_buttonNewGame -> Clicked.connect(boost::bind(&SceneMenu::Test, this));
+  m_buttonNewGame  -> Clicked.connect(boost::bind(&SceneMenu::StartNewGame, this));
+  m_buttonLoadGame -> Clicked.connect(boost::bind(&SceneMenu::EmptySlot, this));
+  m_buttonOptions  -> Clicked.connect(boost::bind(&SceneMenu::EmptySlot, this));
+  m_buttonExit     -> Clicked.connect(boost::bind(&SceneMenu::CloseGame, this));
 }
