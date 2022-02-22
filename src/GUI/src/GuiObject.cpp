@@ -15,6 +15,8 @@ GuiObject::GuiObject(Window* window)
   m_align = GuiAlign::AlignCenter;
   //m_testRect.setSize(sf::Vector2f(200, 200));
   //m_testRect.setFillColor(sf::Color::Green);
+
+  m_input = nullptr;
 }
 
 GuiObject::~GuiObject()
@@ -98,6 +100,18 @@ void GuiObject::SetAlign(GuiAlign align)
 GuiObject::GuiAlign GuiObject::GetAlign()
 {
   return m_align;
+}
+
+void GuiObject::SetInput(Input *input)
+{
+  if (input != nullptr)
+  {
+    m_input = input;
+  }
+  else
+  {
+    throw std::logic_error("[Error][GuiObject][SetInput] Passed input is nullptr.");
+  }
 }
 
 

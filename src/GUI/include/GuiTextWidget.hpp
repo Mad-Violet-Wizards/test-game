@@ -1,9 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <boost/signals2.hpp>
 
 #include "Window.hpp"
 #include "GuiObject.hpp"
+#include "Input.hpp"
 
 class GuiTextWidget : public GuiObject
 {
@@ -25,10 +27,18 @@ public:
   void SetColor(const int r, const int g, const int b);
   void SetColor(const sf::Color &color);
 
+  //
+  // Signal & Slots
+  //
+
+  boost::signals2::signal<void()> Clicked;
+
 private:
 
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
   sf::Font m_font;
   sf::Text m_text;
+
+  bool m_clicked;
 };

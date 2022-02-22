@@ -20,9 +20,10 @@ public:
 
   void ProcessInput() override;
   void Update(float deltaTime) override;
-  void Draw(Window& window) override;
+  void Draw(Window &window) override;
 
 private:
+
   std::shared_ptr<Object> m_player;
 
   Input m_input;

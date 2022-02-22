@@ -18,6 +18,8 @@ GuiTextWidget::GuiTextWidget(Window* window)
   m_margins.bottom = 12.f;
   m_margins.left = 12.f;
   m_margins.right = 12.f;
+
+  m_clicked = false;
 }
 
 GuiTextWidget::~GuiTextWidget()
@@ -27,10 +29,29 @@ GuiTextWidget::~GuiTextWidget()
 
 void GuiTextWidget::Update()
 {
+  if (m_input == nullptr)
+  {
+    return;
+  }
+
+  //
+  // Check if there's anything to update about input.
+  //
   const sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window->GetWindow()));
+
+  //
+  // User hovering over the text.
+  //
+
   if (m_text.getGlobalBounds().contains(mousePosition))
   {
-    // Invoke action here.
+    
+    if (m_input -> IsKeyUp(Input::Key::MouseLeft))
+    {
+      Clicked();
+      std::cout << "[INFO] Clicked.\n";
+    }
+
   }
 }
 
