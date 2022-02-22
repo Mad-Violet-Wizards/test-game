@@ -11,6 +11,7 @@ Completed GuiLayoutVertical.
 Added functionality to remove widget from GuiLayout.
 Added functionality to remove layout from GuiManager.
 GuiLayoutVertical will now resize depending on size of widgets inside.
+Added fundamental connection between GuiTextWidget & SceneMenu via boost signals.
 
 Game:
 
@@ -26,3 +27,4 @@ Added script for compilation under Windows OS.
 Projects:
 Added conan as a package manager.
 Added boost library.
+Quick code cleanup to adjust to code convention.
