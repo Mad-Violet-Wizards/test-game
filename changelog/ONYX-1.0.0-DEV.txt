@@ -19,3 +19,10 @@ Framework:
 App:
 
 Assets:
+
+Scripts:
+Added script for compilation under Windows OS.
+
+Projects:
+Added conan as a package manager.
+Added boost library.

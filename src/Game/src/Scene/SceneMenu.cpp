@@ -53,6 +53,11 @@ void SceneMenu::OnDestroy()
 
 }
 
+void SceneMenu::ProcessInput()
+{
+  m_input.Update();
+}
+
 void SceneMenu::Update(float deltaTime)
 {
   m_menuGuiManager.Update();

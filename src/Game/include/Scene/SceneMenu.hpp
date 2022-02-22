@@ -21,6 +21,7 @@ public:
   void OnCreate() override;
   void OnDestroy() override;
 
+  void ProcessInput() override;
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
 
@@ -34,6 +35,8 @@ private:
   std::shared_ptr<GuiTextWidget> m_buttonLoadGame;
   std::shared_ptr<GuiTextWidget> m_buttonOptions;
   std::shared_ptr<GuiTextWidget> m_buttonExit;
+
+  Input m_input;
 
   Window *m_window;
 };

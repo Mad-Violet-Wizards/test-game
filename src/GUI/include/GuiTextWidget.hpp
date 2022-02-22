@@ -4,6 +4,7 @@
 
 #include "Window.hpp"
 #include "GuiObject.hpp"
+#include "Input.hpp"
 
 class GuiTextWidget : public GuiObject
 {
@@ -25,10 +26,16 @@ public:
   void SetColor(const int r, const int g, const int b);
   void SetColor(const sf::Color &color);
 
+  bool Clicked() const;
+
 private:
 
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+  Input m_input;
+
   sf::Font m_font;
   sf::Text m_text;
+
+  bool m_clicked;
 };

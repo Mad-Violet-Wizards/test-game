@@ -18,6 +18,8 @@ GuiTextWidget::GuiTextWidget(Window* window)
   m_margins.bottom = 12.f;
   m_margins.left = 12.f;
   m_margins.right = 12.f;
+
+  m_clicked = false;
 }
 
 GuiTextWidget::~GuiTextWidget()
@@ -28,10 +30,19 @@ GuiTextWidget::~GuiTextWidget()
 void GuiTextWidget::Update()
 {
   const sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window->GetWindow()));
+
+  //
+  // User hovering over the text.
+  //
+
   if (m_text.getGlobalBounds().contains(mousePosition))
   {
-    // Invoke action here.
   }
+}
+
+bool GuiTextWidget::Clicked() const
+{
+  return m_clicked;
 }
 
 sf::FloatRect GuiTextWidget::GetSize()
