@@ -2,6 +2,8 @@
 
 #include "GuiTextWidget.hpp"
 #include "Window.hpp"
+#include "MouseInput.hpp"
+
 
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
@@ -29,29 +31,20 @@ GuiTextWidget::~GuiTextWidget()
 
 void GuiTextWidget::Update()
 {
-  if (m_input == nullptr)
+  if (m_mouseTracking == false)
   {
     return;
   }
 
-  //
-  // Check if there's anything to update about input.
-  //
   const sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window->GetWindow()));
-
-  //
-  // User hovering over the text.
-  //
 
   if (m_text.getGlobalBounds().contains(mousePosition))
   {
-    
-    if (m_input -> IsKeyUp(Input::Key::MouseLeft))
+    if (MouseInput::GetInstance().MouseReleasedEvent(MouseInput::MouseButton::Left))
     {
       Clicked();
-      std::cout << "[INFO] Clicked.\n";
+      MouseInput::GetInstance().SetMouseReleasedEvent(MouseInput::MouseButton::Left, false);
     }
-
   }
 }
 

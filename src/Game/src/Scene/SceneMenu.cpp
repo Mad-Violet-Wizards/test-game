@@ -3,48 +3,13 @@
 #include <boost/bind/bind.hpp>
 
 #include "Scene/SceneMenu.hpp"
+#include "MouseInput.hpp"
 
-
-SceneMenu::SceneMenu(Window *window) : m_window(window)
+SceneMenu::SceneMenu(Window *window, SceneStateMachine *sceneManager)
+  : m_window(window),
+    m_sceneManager(sceneManager)
 {
-  m_menuLayout = std::make_shared<GuiLayout>(m_window);
-  m_testVerticalLayout = std::make_shared<GuiLayoutVertical>(m_window);
-  m_buttonNewGame = std::make_shared<GuiTextWidget>(m_window);
-  m_buttonNewGame -> SetColor(sf::Color::White);
-  m_buttonNewGame -> SetCharacterSize(24);
-  m_buttonNewGame -> SetText("New Game");
-  m_buttonNewGame -> SetInput(&m_input);
-
-  m_buttonLoadGame = std::make_shared<GuiTextWidget>(m_window);
-  m_buttonLoadGame -> SetColor(sf::Color::White);
-  m_buttonLoadGame -> SetCharacterSize(24);
-  m_buttonLoadGame -> SetText("Load Game");
-  m_buttonLoadGame -> SetAlign(GuiObject::GuiAlign::AlignCenter);
-  m_buttonLoadGame -> SetInput(&m_input);
-
-  m_buttonOptions = std::make_shared<GuiTextWidget>(m_window);
-  m_buttonOptions -> SetColor(sf::Color::White);
-  m_buttonOptions -> SetCharacterSize(24);
-  m_buttonOptions -> SetText("Options");
-  m_buttonOptions -> SetAlign(GuiObject::GuiAlign::AlignCenter);
-  m_buttonOptions -> SetInput(&m_input);
-
-  m_buttonExit = std::make_shared<GuiTextWidget>(m_window);
-  m_buttonExit -> SetColor(sf::Color::White);
-  m_buttonExit -> SetCharacterSize(24);
-  m_buttonExit -> SetText("Exit");
-  m_buttonExit -> SetAlign(GuiObject::GuiAlign::AlignCenter);
-  m_buttonExit -> SetInput(&m_input);
-
-  m_testVerticalLayout -> SetRelativeSize(100, 0);
-  m_testVerticalLayout -> SetRelativePosition(0, 25);
-  m_testVerticalLayout -> AddWidget(m_buttonNewGame);
-  m_testVerticalLayout -> AddWidget(m_buttonLoadGame);
-  m_testVerticalLayout -> AddWidget(m_buttonOptions);
-  m_testVerticalLayout -> AddWidget(m_buttonExit);
-
-  m_menuGuiManager.AddLayout(GuiManager::LayoutLevel::Level1, m_testVerticalLayout);
-
+  CreateGUI();
   InitConnections();
 }
 
@@ -60,14 +25,10 @@ void SceneMenu::OnDestroy()
 
 }
 
-void SceneMenu::ProcessInput()
-{
-  m_input.Update();
-}
-
 void SceneMenu::Update(float deltaTime)
 {
   m_menuGuiManager.Update();
+  MouseInput::GetInstance().ResetEvents();
 }
 
 void SceneMenu::Draw(Window &window)
@@ -77,10 +38,16 @@ void SceneMenu::Draw(Window &window)
 
 void SceneMenu::StartNewGame()
 {
-
+  m_sceneManager -> SwitchTo(0);
 }
 
-void SceneMenu::CloseGame()
+void SceneMenu::OpenOptions()
+{
+  m_mainMenuLayout    -> SetVisible(false);
+  m_optionsMenuLayout -> SetVisible(true);
+}
+
+void SceneMenu::ExitGame()
 {
   m_window -> Exit();
 }
@@ -90,10 +57,85 @@ void SceneMenu::EmptySlot()
   // Nothing here.
 }
 
+void SceneMenu::CloseOptions()
+{
+  m_optionsMenuLayout -> SetVisible(false);
+  m_mainMenuLayout    -> SetVisible(true);
+}
+
+void SceneMenu::CreateGUI()
+{
+  m_mainMenuLayout = std::make_shared<GuiLayoutVertical>(m_window);
+  m_buttonNewGame = std::make_shared<GuiTextWidget>(m_window);
+  m_buttonNewGame -> SetColor(sf::Color::White);
+  m_buttonNewGame -> SetCharacterSize(24);
+  m_buttonNewGame -> SetText("New Game");
+  m_buttonNewGame -> SetMouseTracking(true);
+
+  m_buttonLoadGame = std::make_shared<GuiTextWidget>(m_window);
+  m_buttonLoadGame -> SetColor(sf::Color::White);
+  m_buttonLoadGame -> SetCharacterSize(24);
+  m_buttonLoadGame -> SetText("Load Game");
+  m_buttonLoadGame -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+
+  m_buttonOptions = std::make_shared<GuiTextWidget>(m_window);
+  m_buttonOptions -> SetColor(sf::Color::White);
+  m_buttonOptions -> SetCharacterSize(24);
+  m_buttonOptions -> SetText("Options");
+  m_buttonOptions -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonOptions -> SetMouseTracking(true);
+
+  m_buttonExit = std::make_shared<GuiTextWidget>(m_window);
+  m_buttonExit -> SetColor(sf::Color::White);
+  m_buttonExit -> SetCharacterSize(24);
+  m_buttonExit -> SetText("Exit");
+  m_buttonExit -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonExit -> SetMouseTracking(true);
+
+  m_mainMenuLayout -> SetRelativeSize(100, 0);
+  m_mainMenuLayout -> SetRelativePosition(0, 25);
+  m_mainMenuLayout -> AddWidget(m_buttonNewGame);
+  m_mainMenuLayout -> AddWidget(m_buttonLoadGame);
+  m_mainMenuLayout -> AddWidget(m_buttonOptions);
+  m_mainMenuLayout -> AddWidget(m_buttonExit);
+
+  m_optionsMenuLayout = std::make_shared<GuiLayoutVertical>(m_window);
+  m_resolutionInfo = std::make_shared<GuiTextWidget>(m_window);
+  m_resolutionInfo -> SetColor(sf::Color::White);
+  m_resolutionInfo -> SetCharacterSize(24);
+  m_resolutionInfo -> SetText("Current Resolution:");
+  m_resolutionInfo -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+
+  m_buttonResolution = std::make_shared<GuiTextWidget>(m_window);
+  m_buttonResolution -> SetColor(sf::Color::White);
+  m_buttonResolution -> SetCharacterSize(24);
+  m_buttonResolution -> SetText("Blabla");
+  m_buttonResolution -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+
+  m_buttonCloseOptions = std::make_shared<GuiTextWidget>(m_window);
+  m_buttonCloseOptions -> SetColor(sf::Color::White);
+  m_buttonCloseOptions -> SetCharacterSize(24);
+  m_buttonCloseOptions -> SetText("Close Options");
+  m_buttonCloseOptions -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonCloseOptions -> SetMouseTracking(true);
+
+  m_optionsMenuLayout -> SetRelativeSize(100, 0);
+  m_optionsMenuLayout -> SetRelativePosition(0, 25);
+  m_optionsMenuLayout -> AddWidget(m_resolutionInfo);
+  m_optionsMenuLayout -> AddWidget(m_buttonResolution);
+  m_optionsMenuLayout -> AddWidget(m_buttonCloseOptions);
+  m_optionsMenuLayout -> SetVisible(false);
+
+  m_menuGuiManager.AddLayout(GuiManager::LayoutLevel::Level1, m_mainMenuLayout);
+  m_menuGuiManager.AddLayout(GuiManager::LayoutLevel::Level2, m_optionsMenuLayout);
+}
+
 void SceneMenu::InitConnections()
 {
   m_buttonNewGame  -> Clicked.connect(boost::bind(&SceneMenu::StartNewGame, this));
   m_buttonLoadGame -> Clicked.connect(boost::bind(&SceneMenu::EmptySlot, this));
-  m_buttonOptions  -> Clicked.connect(boost::bind(&SceneMenu::EmptySlot, this));
-  m_buttonExit     -> Clicked.connect(boost::bind(&SceneMenu::CloseGame, this));
+  m_buttonOptions  -> Clicked.connect(boost::bind(&SceneMenu::OpenOptions, this));
+  m_buttonExit     -> Clicked.connect(boost::bind(&SceneMenu::ExitGame, this));
+
+  m_buttonCloseOptions -> Clicked.connect(boost::bind(&SceneMenu::CloseOptions, this));
 }

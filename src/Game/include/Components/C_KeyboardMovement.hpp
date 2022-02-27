@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Components/Component.hpp"
-#include "Input.hpp"
+#include "KeyboardInput.hpp"
 
 class C_KeyboardMovement : public Component
 {
@@ -9,12 +9,12 @@ public:
 
   C_KeyboardMovement(Object *owner);
 
-  void SetInput(Input *input);
+  void SetInput(KeyboardInput *KeyboardInput);
   void SetMovementSpeed(int moveSpeed);
   void Update(float deltaTime) override;
 
 private:
 
   int m_moveSpeed;
-  Input *m_input;
+  KeyboardInput *m_keyboardInput;
 };

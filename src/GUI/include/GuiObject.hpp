@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Window.hpp"
-#include "Input.hpp"
 
 class GuiObject : public sf::Drawable, public sf::Transformable
 {
@@ -58,17 +57,21 @@ public:
   // End of align section.
   //
 
-  void SetInput(Input *input);
+  void SetVisible(bool visible);
 
+  void SetMouseTracking(bool mouseTracking);
 
 protected:
 
   Window *m_window;
-  Input *m_input;
 
   GuiMargins m_margins;
   GuiAlign m_align;
+
   sf::Vector2f m_position;
+
+  bool m_visible;
+  bool m_mouseTracking;
 
 private:
 

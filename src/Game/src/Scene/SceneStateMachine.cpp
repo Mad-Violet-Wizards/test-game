@@ -1,6 +1,9 @@
 #include "Scene/SceneStateMachine.hpp"
 
-SceneStateMachine::SceneStateMachine() : m_scenes(0), m_currentScene(nullptr) {}
+SceneStateMachine::SceneStateMachine()
+  : m_scenes(0),
+  m_currentScene(nullptr),
+  insertedSceneID(0) {}
 
 SceneStateMachine::~SceneStateMachine() {}
 
