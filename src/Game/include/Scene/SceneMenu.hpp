@@ -5,13 +5,13 @@
 #include "Scene/Scene.hpp"
 #include "Window.hpp"
 #include "SceneStateMachine.hpp"
-#include "Setup.hpp"
 #include "GuiManager.hpp"
 #include "GuiLayout.hpp"
 #include "GuiLayoutVertical.hpp"
 #include "GuiLayoutHorizontal.hpp"
 #include "GuiObject.hpp"
 #include "GuiTextWidget.hpp"
+#include "WindowResolution.hpp"
 
 class SceneMenu : public Scene
 {
@@ -35,6 +35,7 @@ public:
   void ExitGame();
   void EmptySlot();
 
+  void ChangeWindowResolution();
   void CloseOptions();
 
   //
@@ -50,7 +51,7 @@ private:
 
   Window *m_window;
   SceneStateMachine *m_sceneManager;
-  Setup m_setup;
+  WindowResolution m_windowResolutionInformations;
 
   GuiManager m_menuGuiManager;
 

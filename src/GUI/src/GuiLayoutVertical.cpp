@@ -106,6 +106,13 @@ void GuiLayoutVertical::CheckToUpdateSize()
   }
 }
 
+void GuiLayoutVertical::RefreshSize()
+{
+  std::cout << "[INFO] Window resized, updating layout.\n";
+  SetRelativeSize(m_relativeSize);
+  SetRelativePosition(m_relativePosition);
+}
+
 void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget)
 {
   GuiObject::GuiAlign align = widget -> GetAlign();

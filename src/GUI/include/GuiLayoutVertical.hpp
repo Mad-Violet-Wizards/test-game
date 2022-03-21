@@ -26,6 +26,8 @@ public:
   */
   void CheckToUpdateSize();
 
+  void RefreshSize() override;
+
 private:
 
   void UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget);

@@ -57,6 +57,23 @@ void SceneMenu::EmptySlot()
   // Nothing here.
 }
 
+void SceneMenu::ChangeWindowResolution()
+{
+  m_windowResolutionInformations.IncreaseMode();
+  m_window -> GetWindow() -> create(m_windowResolutionInformations.GetCurrentResolution(),
+                                    "Test-Game 1.0.0",
+                                    sf::Style::Fullscreen);
+
+  m_buttonResolution -> SetText(m_windowResolutionInformations.GetCurrentResolutionString());
+  
+  //
+  // Call layout to refresh size.
+  //
+
+  m_optionsMenuLayout -> RefreshSize();
+  m_mainMenuLayout    -> RefreshSize();
+}
+
 void SceneMenu::CloseOptions()
 {
   m_optionsMenuLayout -> SetVisible(false);
@@ -109,8 +126,10 @@ void SceneMenu::CreateGUI()
   m_buttonResolution = std::make_shared<GuiTextWidget>(m_window);
   m_buttonResolution -> SetColor(sf::Color::White);
   m_buttonResolution -> SetCharacterSize(24);
-  m_buttonResolution -> SetText("Blabla");
+
+  m_buttonResolution -> SetText(m_windowResolutionInformations.GetCurrentResolutionString());
   m_buttonResolution -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonResolution -> SetMouseTracking(true);
 
   m_buttonCloseOptions = std::make_shared<GuiTextWidget>(m_window);
   m_buttonCloseOptions -> SetColor(sf::Color::White);
@@ -137,5 +156,6 @@ void SceneMenu::InitConnections()
   m_buttonOptions  -> Clicked.connect(boost::bind(&SceneMenu::OpenOptions, this));
   m_buttonExit     -> Clicked.connect(boost::bind(&SceneMenu::ExitGame, this));
 
+  m_buttonResolution   -> Clicked.connect(boost::bind(&SceneMenu::ChangeWindowResolution, this));
   m_buttonCloseOptions -> Clicked.connect(boost::bind(&SceneMenu::CloseOptions, this));
 }

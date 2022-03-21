@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Setup.hpp"
+#include "WindowResolution.hpp"
 
 class Window
 {
@@ -16,8 +16,6 @@ public:
   void Draw(const sf::Drawable &drawable);
   void EndDraw();
 
-  void ProcessEvent(sf::Event &event);
-
   bool IsOpen() const;
   void Exit();
 
@@ -28,5 +26,6 @@ public:
 
 private:
 
-  Setup m_setup;
+  WindowResolution m_windowResolutionInfo;
+
 };

@@ -34,6 +34,8 @@ public:
   virtual void SetRelativePosition(const unsigned int x, const unsigned int y);
   virtual void SetRelativePosition(const sf::Vector2u &position);
 
+  virtual void RefreshSize() {};
+
   std::shared_ptr<GuiObject> FindWidgetWithSmallestWidth();
   std::shared_ptr<GuiObject> FindWidgetWithHighestWidth();
   std::shared_ptr<GuiObject> FindWidgetWithSmallestHeight();

@@ -4,7 +4,7 @@
 #include "MouseInput.hpp"
 
 Window::Window(const std::string &windowName)
-  : m_window(sf::VideoMode(800, 600, 32), windowName, sf::Style::Titlebar)
+  : m_window(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Fullscreen)
 {
 }
 
@@ -45,10 +45,6 @@ void Window::Draw(const sf::Drawable &drawable)
 void Window::EndDraw()
 {
   m_window.display();
-}
-
-void Window::ProcessEvent(sf::Event &event)
-{
 }
 
 bool Window::IsOpen() const
