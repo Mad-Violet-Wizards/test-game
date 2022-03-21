@@ -3,16 +3,13 @@
 #include "GuiLayout.hpp"
 #include "Window.hpp"
 
-class GuiLayoutVertical : public GuiLayout
+
+class GuiLayoutHorizontal : public GuiLayout
 {
 public:
 
-  /*
-  TODO: Add flag Flag::Expanding that will allow to expand depending on size of widgets inside.
-  */
-
-  GuiLayoutVertical(Window *window);
-  ~GuiLayoutVertical();
+  GuiLayoutHorizontal(Window *window);
+  ~GuiLayoutHorizontal();
 
   void AddWidget(std::shared_ptr<GuiObject> widget) override;
 
@@ -25,8 +22,6 @@ public:
   TODO: Consider moving it to private member.
   */
   void CheckToUpdateSize();
-
-  void RefreshSize() override;
 
 private:
 

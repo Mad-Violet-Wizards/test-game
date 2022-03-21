@@ -16,7 +16,9 @@ GuiObject::GuiObject(Window* window)
   //m_testRect.setSize(sf::Vector2f(200, 200));
   //m_testRect.setFillColor(sf::Color::Green);
 
-  m_input = nullptr;
+  m_visible = true;
+
+  m_mouseTracking = false;
 }
 
 GuiObject::~GuiObject()
@@ -102,18 +104,15 @@ GuiObject::GuiAlign GuiObject::GetAlign()
   return m_align;
 }
 
-void GuiObject::SetInput(Input *input)
+void GuiObject::SetVisible(bool visible)
 {
-  if (input != nullptr)
-  {
-    m_input = input;
-  }
-  else
-  {
-    throw std::logic_error("[Error][GuiObject][SetInput] Passed input is nullptr.");
-  }
+  m_visible = visible;
 }
 
+void GuiObject::SetMouseTracking(bool mouseTracking)
+{
+  m_mouseTracking = mouseTracking;
+}
 
 void GuiObject::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {

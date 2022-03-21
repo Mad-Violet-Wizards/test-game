@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Setup.hpp"
+#include "WindowResolution.hpp"
 
 class Window
 {
@@ -22,8 +22,10 @@ public:
   sf::RenderWindow *GetWindow();
   sf::Vector2u GetWindowSize() const;
 
+  sf::RenderWindow m_window;
+
 private:
 
-  Setup m_setup;
-  sf::RenderWindow m_window;
+  WindowResolution m_windowResolutionInfo;
+
 };

@@ -4,34 +4,34 @@
 
 C_KeyboardMovement::C_KeyboardMovement(Object *owner) : Component(owner), m_moveSpeed(100) {}
 
-void C_KeyboardMovement::SetInput(Input *input)
+void C_KeyboardMovement::SetInput(KeyboardInput *keyboardInput)
 {
-  m_input = input;
+  m_keyboardInput = keyboardInput;
 }
 
 void C_KeyboardMovement::Update(float deltaTime)
 {
-  if (m_input == nullptr)
+  if (m_keyboardInput == nullptr)
   {
     return;
   }
 
   int xMove = 0;
-  if (m_input -> IsKeyPressed(Input::Key::Left))
+  if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Left))
   {
     xMove = -m_moveSpeed;
   }
-  else if (m_input -> IsKeyPressed(Input::Key::Right))
+  else if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Right))
   {
     xMove = m_moveSpeed;
   }
 
   int yMove = 0;
-  if (m_input -> IsKeyPressed(Input::Key::Up))
+  if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Up))
   {
     yMove = -m_moveSpeed;
   }
-  else if (m_input -> IsKeyPressed(Input::Key::Down))
+  else if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Down))
   {
     yMove = m_moveSpeed;
   }

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "GuiLayout.hpp"
+#include "MouseInput.hpp"
 
 GuiLayout::GuiLayout(Window *window)
   : m_window(window),
@@ -22,8 +23,9 @@ void GuiLayout::Update()
   {
     for (auto &widget : m_widgets)
     {
-      widget->Update();
+      widget -> Update();
     }
+    // MouseInput::GetInstance().ResetEvents();
   }
 }
 
@@ -56,9 +58,9 @@ void GuiLayout::RemoveWidget(std::shared_ptr<GuiObject> widget)
   }
 }
 
-void GuiLayout::SetVisible(bool state)
+void GuiLayout::SetVisible(bool visible)
 {
-  m_isVisible = state;
+  m_isVisible = visible;
 }
 
 void GuiLayout::SetRelativeSize(const unsigned int x, const unsigned int y)

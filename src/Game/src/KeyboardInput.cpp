@@ -1,6 +1,6 @@
-#include "Input.hpp"
+#include "KeyboardInput.hpp"
 
-void Input::Update()
+void KeyboardInput::Update()
 {
   m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
@@ -27,22 +27,14 @@ void Input::Update()
   m_currentFrameKeys.SetBit(
     (int)Key::Esc,
     (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)));
-
-  m_currentFrameKeys.SetBit(
-    (int)Key::MouseLeft,
-    (sf::Mouse::isButtonPressed(sf::Mouse::Left)));
-
-  m_currentFrameKeys.SetBit(
-    (int)Key::MouseRight,
-    (sf::Mouse::isButtonPressed(sf::Mouse::Right)));
 }
 
-bool Input::IsKeyPressed(Key keycode)
+bool KeyboardInput::IsKeyPressed(Key keycode)
 {
   return m_currentFrameKeys.GetBit((int)keycode);
 }
 
-bool Input::IsKeyDown(Key keycode)
+bool KeyboardInput::IsKeyDown(Key keycode)
 {
   bool lastFrame = m_lastFrameKeys.GetBit((int)keycode);
   bool currentFrame = m_currentFrameKeys.GetBit((int)keycode);
@@ -50,7 +42,7 @@ bool Input::IsKeyDown(Key keycode)
   return currentFrame && !lastFrame;
 }
 
-bool Input::IsKeyUp(Key keycode)
+bool KeyboardInput::IsKeyUp(Key keycode)
 {
   bool lastFrame = m_lastFrameKeys.GetBit((int)keycode);
   bool currentFrame = m_currentFrameKeys.GetBit((int)keycode);

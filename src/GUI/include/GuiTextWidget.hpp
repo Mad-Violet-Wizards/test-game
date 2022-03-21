@@ -5,7 +5,6 @@
 
 #include "Window.hpp"
 #include "GuiObject.hpp"
-#include "Input.hpp"
 
 class GuiTextWidget : public GuiObject
 {

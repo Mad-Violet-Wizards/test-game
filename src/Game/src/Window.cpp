@@ -1,9 +1,10 @@
-#include "Window.hpp"
-
 #include <iostream>
 
+#include "Window.hpp"
+#include "MouseInput.hpp"
+
 Window::Window(const std::string &windowName)
-  : m_window(sf::VideoMode(800, 600, 32), windowName, sf::Style::Titlebar)
+  : m_window(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Fullscreen)
 {
 }
 
@@ -18,6 +19,14 @@ void Window::Update()
     if (event.type == sf::Event::Closed)
     {
       m_window.close();
+    }
+
+    if (event.type == sf::Event::MouseButtonReleased)
+    {
+      if (event.key.code == sf::Mouse::Left)
+      {
+        MouseInput::GetInstance().SetMouseReleasedEvent(MouseInput::MouseButton::Left, true);
+      }
     }
   }
 }

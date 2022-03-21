@@ -64,8 +64,6 @@ void GuiLayoutVertical::SetRelativePosition(const sf::Vector2u &position)
 
 void GuiLayoutVertical::CheckToUpdateSize()
 {
-  std::cout << "[Info][GuiLayoutVertical]: CheckToUpdateSize\n";
-
   float height = 0;
 
   // Acumulate the height of widgets.
@@ -104,6 +102,12 @@ void GuiLayoutVertical::CheckToUpdateSize()
 
     SetRelativeSize(ScaleWindowAbsoluteToRelative(m_size));
   }
+}
+
+void GuiLayoutVertical::RefreshSize()
+{
+  SetRelativeSize(m_relativeSize);
+  SetRelativePosition(m_relativePosition);
 }
 
 void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget)

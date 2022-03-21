@@ -4,7 +4,7 @@
 
 #include "Bitmask.hpp"
 
-class Input
+class KeyboardInput
 {
 public:
 
@@ -16,8 +16,6 @@ public:
     Up = 3,
     Down = 4,
     Esc = 5,
-    MouseLeft = 6,
-    MouseRight = 7
   };
 
   void Update();

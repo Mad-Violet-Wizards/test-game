@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Scene/Scene.hpp"
-#include "Input.hpp"
+#include "KeyboardInput.hpp"
 #include "Object.hpp"
 #include "Components/C_Sprite.hpp"
 #include "Components/C_KeyboardMovement.hpp"
@@ -26,7 +26,7 @@ private:
 
   std::shared_ptr<Object> m_player;
 
-  Input m_input;
+  KeyboardInput m_keyboardInput;
 
   sf::CircleShape m_testShape;
 };

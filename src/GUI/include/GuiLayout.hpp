@@ -25,7 +25,7 @@ public:
   virtual void AddWidget(std::shared_ptr<GuiObject> widget);
   virtual void RemoveWidget(std::shared_ptr<GuiObject> widget); // Made this method virtual only for some unknown time.
 
-  void SetVisible(bool state);
+  void SetVisible(bool visible);
   /*
   * FIXME: Those four methods are using the same code, maybe move it to one mehtod "CountRelative"?
   */
@@ -33,6 +33,8 @@ public:
   virtual void SetRelativeSize(const sf::Vector2u &size);
   virtual void SetRelativePosition(const unsigned int x, const unsigned int y);
   virtual void SetRelativePosition(const sf::Vector2u &position);
+
+  virtual void RefreshSize() {};
 
   std::shared_ptr<GuiObject> FindWidgetWithSmallestWidth();
   std::shared_ptr<GuiObject> FindWidgetWithHighestWidth();

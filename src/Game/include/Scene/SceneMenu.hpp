@@ -4,45 +4,65 @@
 
 #include "Scene/Scene.hpp"
 #include "Window.hpp"
+#include "SceneStateMachine.hpp"
 #include "GuiManager.hpp"
 #include "GuiLayout.hpp"
 #include "GuiLayoutVertical.hpp"
 #include "GuiLayoutHorizontal.hpp"
 #include "GuiObject.hpp"
 #include "GuiTextWidget.hpp"
+#include "WindowResolution.hpp"
 
 class SceneMenu : public Scene
 {
 public:
 
-  SceneMenu(Window *window);
+  SceneMenu(Window *window, SceneStateMachine *sceneManager);
   ~SceneMenu();
 
   void OnCreate() override;
   void OnDestroy() override;
 
-  void ProcessInput() override;
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
 
-  void Test();
+  //
+  // Signal & Slots
+  //
+
+  void StartNewGame();
+  void OpenOptions();
+  void ExitGame();
+  void EmptySlot();
+
+  void ChangeWindowResolution();
+  void CloseOptions();
+
+  //
+  // End of signal & slots section.
+  //
 
 private:
 
+  void CreateGUI();
   void InitConnections();
 
 private:
 
+  Window *m_window;
+  SceneStateMachine *m_sceneManager;
+  WindowResolution m_windowResolutionInformations;
+
   GuiManager m_menuGuiManager;
 
-  std::shared_ptr<GuiLayout> m_menuLayout;
-  std::shared_ptr<GuiLayoutVertical> m_testVerticalLayout;
+  std::shared_ptr<GuiLayoutVertical> m_mainMenuLayout;
   std::shared_ptr<GuiTextWidget> m_buttonNewGame;
   std::shared_ptr<GuiTextWidget> m_buttonLoadGame;
   std::shared_ptr<GuiTextWidget> m_buttonOptions;
   std::shared_ptr<GuiTextWidget> m_buttonExit;
 
-  Input m_input;
-
-  Window *m_window;
+  std::shared_ptr<GuiLayoutVertical> m_optionsMenuLayout;
+  std::shared_ptr<GuiTextWidget> m_resolutionInfo;
+  std::shared_ptr<GuiTextWidget> m_buttonResolution;
+  std::shared_ptr<GuiTextWidget> m_buttonCloseOptions;
 };
