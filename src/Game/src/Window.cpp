@@ -25,7 +25,6 @@ void Window::Update()
     {
       if (event.key.code == sf::Mouse::Left)
       {
-        std::cout << "[INFO] Left was released.\n";
         MouseInput::GetInstance().SetMouseReleasedEvent(MouseInput::MouseButton::Left, true);
       }
     }
