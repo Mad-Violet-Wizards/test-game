@@ -7,6 +7,7 @@
 
 class Game
 {
+
 public:
 
   Game();

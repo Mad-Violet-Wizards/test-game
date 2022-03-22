@@ -10,6 +10,7 @@
 
 class SceneGame : public Scene
 {
+
 public:
 
   SceneGame();
@@ -29,4 +30,5 @@ private:
   KeyboardInput m_keyboardInput;
 
   sf::CircleShape m_testShape;
+
 };

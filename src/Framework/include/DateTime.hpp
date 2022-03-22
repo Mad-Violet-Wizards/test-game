@@ -5,6 +5,7 @@
 
 namespace DateTime
 {
+
   std::string GetCurrentDate();
   std::string GetCurrentTime();
   std::string GetCurrentDateAndTime();

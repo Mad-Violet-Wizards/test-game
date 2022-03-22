@@ -9,6 +9,7 @@
 
 class GuiLayout
 {
+
 public:
 
   GuiLayout(Window *window);
@@ -57,4 +58,5 @@ protected:
 private:
 
   Window *m_window;
+
 };

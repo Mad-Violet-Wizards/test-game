@@ -4,6 +4,7 @@
 
 class WindowResolution
 {
+
 public:
 
   WindowResolution();
@@ -21,4 +22,5 @@ private:
 
   size_t m_currentMode;
   std::vector<sf::VideoMode> m_videoModes;
+
 };

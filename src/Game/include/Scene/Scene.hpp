@@ -4,6 +4,7 @@
 
 class Scene
 {
+
 public:
 
   virtual void OnCreate() = 0;

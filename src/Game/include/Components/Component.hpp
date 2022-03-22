@@ -6,6 +6,7 @@ class Object;
 
 class Component
 {
+
 public:
 
   Component(Object *owner) : m_owner(owner) {}
@@ -19,4 +20,5 @@ public:
 protected:
 
   Object *m_owner;
+
 };

@@ -4,6 +4,7 @@
 
 class Bitmask
 {
+
 public:
 
   Bitmask();
@@ -23,4 +24,5 @@ public:
 private:
 
   uint32_t m_bits;
+
 };

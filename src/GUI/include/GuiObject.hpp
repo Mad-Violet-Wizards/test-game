@@ -6,6 +6,7 @@
 
 class GuiObject : public sf::Drawable, public sf::Transformable
 {
+
 public:
 
   typedef struct
@@ -77,4 +78,5 @@ private:
 
   virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
   sf::RectangleShape m_testRect;
+
 };

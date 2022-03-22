@@ -6,6 +6,7 @@
 
 class KeyboardInput
 {
+
 public:
 
   enum class Key
@@ -25,6 +26,8 @@ public:
   bool IsKeyUp(Key keycode);
 
 private:
+
   Bitmask m_currentFrameKeys;
   Bitmask m_lastFrameKeys;
+
 };

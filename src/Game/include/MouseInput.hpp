@@ -10,34 +10,37 @@
 
 class MouseInput
 {
-  public:
 
-    typedef enum
-    {
-      Left,
-      Right
-    } MouseButton;
+public:
 
-    typedef struct
-    {
-      bool MouseLeftReleased;
-      bool MouseRightReleased;
-    } MouseEvent;
+  typedef enum
+  {
+    Left,
+    Right
+  } MouseButton;
 
-    ~MouseInput();
-    static MouseInput &GetInstance();
+  typedef struct
+  {
+    bool MouseLeftReleased;
+    bool MouseRightReleased;
+  } MouseEvent;
 
-    void SetMouseReleasedEvent(MouseInput::MouseButton button, bool released);
-    bool MouseReleasedEvent(MouseInput::MouseButton button) const;
+  ~MouseInput();
+  static MouseInput &GetInstance();
 
-    void ResetEvents();
+  void SetMouseReleasedEvent(MouseInput::MouseButton button, bool released);
+  bool MouseReleasedEvent(MouseInput::MouseButton button) const;
 
-  private:
+  void ResetEvents();
 
-    MouseInput();
+private:
 
-  private:
-    static std::unique_ptr<MouseInput> s_instance;
+  MouseInput();
 
-    MouseEvent m_mouseEvent;
+private:
+
+  static std::unique_ptr<MouseInput> s_instance;
+
+  MouseEvent m_mouseEvent;
+
 };

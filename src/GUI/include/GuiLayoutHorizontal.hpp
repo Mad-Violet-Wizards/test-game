@@ -5,6 +5,7 @@
 
 class GuiLayoutHorizontal : public GuiLayout
 {
+
 public:
 
   GuiLayoutHorizontal(Window *window);
@@ -26,4 +27,5 @@ private:
 
   void UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget);
   sf::Vector2f m_cursor;
+
 };

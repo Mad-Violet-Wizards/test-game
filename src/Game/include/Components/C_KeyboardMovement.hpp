@@ -5,6 +5,7 @@
 
 class C_KeyboardMovement : public Component
 {
+
 public:
 
   C_KeyboardMovement(Object *owner);
@@ -17,4 +18,5 @@ private:
 
   int m_moveSpeed;
   KeyboardInput *m_keyboardInput;
+
 };

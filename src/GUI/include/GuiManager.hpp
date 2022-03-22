@@ -9,6 +9,7 @@
 
 class GuiManager
 {
+
 public:
 
   enum class LayoutLevel
@@ -34,4 +35,5 @@ public:
 private:
 
   std::list<std::pair<LayoutLevel, std::shared_ptr<GuiLayout>>> m_layouts;
+
 };
