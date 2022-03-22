@@ -20,8 +20,6 @@
 - [About](#about)
 - [Getting Started - for users](#getting_started_users)
 - [Getting Started - for developers](#getting_started_programmers)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -37,18 +35,18 @@ About
 
 
 1. If you want to participate in project you need to have a few things,
-- Setup for Linux OS [Clickme]()
-- Setup for Windows OS [Clickme]()
+- Setup for Linux OS [Setup for developers - Linux]()
+- Setup for Windows OS [Setup for developers - Windows]()
 
 2. Tasks
 - If you are a member of Pointer science club - use trello to see open tasks.
 - If you are a outside contributor, look at Issues.
-- 
+
 3. How to contribute
-- Look at the issue [Clickme](https://github.com/ppknUWr/test-game/blob/main/docs/how_to_contribute.md)
+- Look at the document [How to Contribute](https://github.com/ppknUWr/test-game/blob/main/docs/how_to_contribute.md)
 
 4. Code convenction
-- Look at the issue [Clickme](https://github.com/ppknUWr/test-game/blob/main/docs/code_convention.md)
+- Look at the issue [Code convention](https://github.com/ppknUWr/test-game/blob/main/docs/code_convention.md)
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
