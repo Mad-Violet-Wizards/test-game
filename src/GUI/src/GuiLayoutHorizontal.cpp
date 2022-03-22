@@ -1,7 +1,6 @@
-#include "GuiLayoutHorizontal.hpp"
-
 #include <iostream>
 
+#include "GuiLayoutHorizontal.hpp"
 
 GuiLayoutHorizontal::GuiLayoutHorizontal(Window *window)
   : GuiLayout(window)
