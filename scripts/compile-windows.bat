@@ -12,8 +12,9 @@ if exist ..\build\ (
   cmake --build . --config Release
 ) else (
   echo Compile-Windows: Build folder not found.
+  cd ..
   mkdir build
-  cd ../build
+  cd ./build
   conan install ..
   cmake -G "Visual Studio 16 2019" ../src 
   cmake --build . --config Release
