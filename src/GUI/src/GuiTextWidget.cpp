@@ -4,7 +4,6 @@
 #include "Window.hpp"
 #include "MouseInput.hpp"
 
-
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
 {

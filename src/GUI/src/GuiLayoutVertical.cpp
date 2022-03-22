@@ -1,6 +1,6 @@
-#include "GuiLayoutVertical.hpp"
-
 #include <iostream>
+
+#include "GuiLayoutVertical.hpp"
 
 GuiLayoutVertical::GuiLayoutVertical(Window *window)
   : GuiLayout(window)
