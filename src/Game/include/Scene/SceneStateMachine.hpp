@@ -8,6 +8,7 @@
 
 class SceneStateMachine
 {
+
 public:
 
   SceneStateMachine();
@@ -26,4 +27,5 @@ private:
   std::unordered_map<unsigned int, std::shared_ptr<Scene>> m_scenes;
   std::shared_ptr<Scene> m_currentScene;
   unsigned int insertedSceneID;
+
 };

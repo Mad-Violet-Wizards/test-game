@@ -15,6 +15,7 @@
 
 class SceneMenu : public Scene
 {
+
 public:
 
   SceneMenu(Window *window, SceneStateMachine *sceneManager);
@@ -65,4 +66,5 @@ private:
   std::shared_ptr<GuiTextWidget> m_resolutionInfo;
   std::shared_ptr<GuiTextWidget> m_buttonResolution;
   std::shared_ptr<GuiTextWidget> m_buttonCloseOptions;
+
 };

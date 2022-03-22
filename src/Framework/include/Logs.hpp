@@ -45,4 +45,5 @@ private:
   void Init();
 
   std::ofstream m_logFile;
+
 };

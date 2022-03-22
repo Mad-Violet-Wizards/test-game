@@ -8,6 +8,7 @@
 
 class GuiTextWidget : public GuiObject
 {
+
 public:
 
   GuiTextWidget(Window *window);
@@ -40,4 +41,5 @@ private:
   sf::Text m_text;
 
   bool m_clicked;
+
 };

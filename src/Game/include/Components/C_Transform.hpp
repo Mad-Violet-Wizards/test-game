@@ -4,6 +4,7 @@
 
 class C_Transform : public Component
 {
+
 public:
 
   C_Transform(Object *owner);
@@ -25,4 +26,5 @@ public:
 private:
 
   sf::Vector2f m_position;
+
 };

@@ -6,6 +6,7 @@
 
 class C_Sprite : public Component
 {
+
 public:
 
   C_Sprite(Object *owner);
@@ -19,4 +20,5 @@ private:
 
   sf::Texture m_texture;
   sf::Sprite m_sprite;
+
 };

@@ -8,7 +8,9 @@
 
 class Object
 {
+
 public:
+
   void Awake(); // Called when object created. Use to ensure required components are present.
   void Start(); // Called after Awake method. Use to initialise variables.
 
@@ -50,5 +52,7 @@ public:
   };
 
 private:
+
   std::vector<std::shared_ptr<Component>> m_components;
+
 };
