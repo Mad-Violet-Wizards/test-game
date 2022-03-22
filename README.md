@@ -19,7 +19,7 @@
 
 - [About](#about)
 - [Getting Started - for users](#getting_started_users)
-- [Getting Started - for programmers](#getting_started_programmers)
+- [Getting Started - for developers](#getting_started_programmers)
 - [Usage](#usage)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
@@ -33,22 +33,22 @@ About
 
 **To be contininued after first release.**
 
-## 🏁 Getting Started - For users <a name = "getting_started_programmers"></a>
+## 🏁 Getting Started - For developers <a name = "getting_started_programmers"></a>
 
 
 1. If you want to participate in project you need to have a few things,
-- Linux OS (Ubuntu, Debian, w/e.)
-- CMake, version (3.20.5)
+- Setup for Linux OS [Clickme]()
+- Setup for Windows OS [Clickme]()
 
 2. Tasks
-- If you are a member of Pointer science club - use trello to see open tasks
-- If you are a outside contributor, look at Issues :)
+- If you are a member of Pointer science club - use trello to see open tasks.
+- If you are a outside contributor, look at Issues.
+- 
+3. How to contribute
+- Look at the issue [Clickme](https://github.com/ppknUWr/test-game/blob/main/docs/how_to_contribute.md)
 
-3. Code convenction
-- Look at the issue [Clickme](https://github.com/ppknUWr/onyx-engine/issues/1)
-
-4. How to contribute
-- Look at the issue [Clickme](https://github.com/ppknUWr/onyx-engine/issues/2)
+4. Code convenction
+- Look at the issue [Clickme](https://github.com/ppknUWr/test-game/blob/main/docs/code_convention.md)
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
@@ -59,7 +59,3 @@ To be continiued after creating test system.
 - [@HoopDead](https://github.com/HoopDead)
 
 See also the list of [contributors](https://github.com/ppknUWr/onyx-engine/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-To be continiued.
