@@ -8,6 +8,5 @@ add_executable(${PROJECT_NAME} main.cpp)
 
 # Include all needed libraries.
 target_link_libraries(${PROJECT_NAME} 
-  onyx_engine::framework
   onyx_engine::game
 )
