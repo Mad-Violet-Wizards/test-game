@@ -6,10 +6,9 @@ boost/1.77.0
 cmake
 
 [options]
-sfml:shared=True
 boost:shared=True
 
 [imports]
-bin, *.dll -> ./App/bin
+bin, *.dll -> ./App/lib
 
 # TODO: Add the same for Linux in the future.
