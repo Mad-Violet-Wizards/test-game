@@ -9,7 +9,7 @@ GuiTextWidget::GuiTextWidget(Window* window)
 {
   std::cout << "[Info][GuiTextWidget]: Creating new GuiTextWidget \n";
 
-  if (!m_font.loadFromFile("../../../src/Assets/Roboto-Black.ttf"))
+  if (!m_font.loadFromFile("../Assets/Roboto-Black.ttf"))
   {
     std::cout << "[Error][GuiTextWidget]: Error while loading font.\n";
   }
