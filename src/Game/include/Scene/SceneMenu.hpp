@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "Scene/Scene.hpp"
+#include "Scene.hpp"
 #include "Window.hpp"
 #include "SceneStateMachine.hpp"
 #include "GuiManager.hpp"

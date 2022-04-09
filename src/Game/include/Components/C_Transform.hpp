@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Components/Component.hpp"
+#include "Component.hpp"
 
 class C_Transform : public Component
 {

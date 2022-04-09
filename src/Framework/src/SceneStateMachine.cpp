@@ -1,4 +1,4 @@
-#include "Scene/SceneStateMachine.hpp"
+#include "SceneStateMachine.hpp"
 
 SceneStateMachine::SceneStateMachine()
   : m_scenes(0),
