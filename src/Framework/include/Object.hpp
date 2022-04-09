@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "Window.hpp"
-#include "Components/Component.hpp"
+#include "Component.hpp"
 
 class Object
 {

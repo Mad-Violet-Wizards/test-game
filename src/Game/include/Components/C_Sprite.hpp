@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.hpp"
-#include "Components/Component.hpp"
+#include "Component.hpp"
 #include "Components/C_Transform.hpp"
 
 class C_Sprite : public Component

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <boost/bind/bind.hpp>
 
-#include "Scene/SceneMenu.hpp"
+#include "SceneMenu.hpp"
 #include "MouseInput.hpp"
 
 SceneMenu::SceneMenu(Window *window, SceneStateMachine *sceneManager)

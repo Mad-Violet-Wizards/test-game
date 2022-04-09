@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Window.hpp"
-#include "Scene/SceneStateMachine.hpp"
-#include "Scene/SceneGame.hpp"
-#include "Scene/SceneMenu.hpp"
+#include "SceneStateMachine.hpp"
+#include "SceneGame.hpp"
+#include "SceneMenu.hpp"
 
 class Game
 {

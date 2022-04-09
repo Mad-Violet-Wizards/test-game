@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Components/Component.hpp"
+#include "Component.hpp"
 #include "KeyboardInput.hpp"
 
 class C_KeyboardMovement : public Component

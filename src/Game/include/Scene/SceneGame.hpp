@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Scene/Scene.hpp"
+#include "Scene.hpp"
 #include "KeyboardInput.hpp"
 #include "Object.hpp"
 #include "Components/C_Sprite.hpp"
