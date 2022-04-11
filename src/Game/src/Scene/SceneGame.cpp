@@ -1,7 +1,4 @@
-#include <iostream>
-
 #include "SceneGame.hpp"
-#include "EventHandler.hpp"
 
 SceneGame::SceneGame() {}
 
