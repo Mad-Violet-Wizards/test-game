@@ -18,11 +18,6 @@ Game::Game() : m_window("Test-Game 1.0.0")
 
 Game::~Game() {}
 
-void Game::CaptureInput()
-{
-  m_sceneManager.ProcessInput();
-}
-
 void Game::Update()
 {
   m_window.Update();

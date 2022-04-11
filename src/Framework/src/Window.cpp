@@ -1,11 +1,11 @@
 #include <iostream>
 
 #include "Window.hpp"
-#include "MouseInput.hpp"
 
 Window::Window(const std::string &windowName)
-  : m_window(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Fullscreen)
+  : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Fullscreen)
 {
+  std::cout << "[Window] Created new Window.\n";
 }
 
 Window::~Window() {}
@@ -14,54 +14,48 @@ void Window::Update()
 {
   sf::Event event;
 
-  if (m_window.pollEvent(event))
+  if (m_renderWindow.pollEvent(event))
   {
+    EventHandler::GetInstance().ProcessEvent(event);
+
     if (event.type == sf::Event::Closed)
     {
-      m_window.close();
-    }
-
-    if (event.type == sf::Event::MouseButtonReleased)
-    {
-      if (event.key.code == sf::Mouse::Left)
-      {
-        MouseInput::GetInstance().SetMouseReleasedEvent(MouseInput::MouseButton::Left, true);
-      }
+      m_renderWindow.close();
     }
   }
 }
 
 void Window::BeginDraw()
 {
-  m_window.clear(sf::Color::Black);
+  m_renderWindow.clear(sf::Color::Black);
 }
 
 void Window::Draw(const sf::Drawable &drawable)
 {
-  m_window.draw(drawable);
+  m_renderWindow.draw(drawable);
 }
 
 void Window::EndDraw()
 {
-  m_window.display();
+  m_renderWindow.display();
 }
 
 bool Window::IsOpen() const
 {
-  return m_window.isOpen();
+  return m_renderWindow.isOpen();
 }
 
 sf::RenderWindow* Window::GetWindow()
 {
-  return &m_window;
+  return &m_renderWindow;
 }
 
 sf::Vector2u Window::GetWindowSize() const
 {
-  return m_window.getSize();
+  return m_renderWindow.getSize();
 }
 
 void Window::Exit()
 {
-  m_window.close();
+  m_renderWindow.close();
 }

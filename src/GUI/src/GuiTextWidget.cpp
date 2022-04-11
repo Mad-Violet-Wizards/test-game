@@ -2,7 +2,7 @@
 
 #include "GuiTextWidget.hpp"
 #include "Window.hpp"
-#include "MouseInput.hpp"
+#include "EventHandler.hpp"
 
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
@@ -39,10 +39,9 @@ void GuiTextWidget::Update()
 
   if (m_text.getGlobalBounds().contains(mousePosition))
   {
-    if (MouseInput::GetInstance().MouseReleasedEvent(MouseInput::MouseButton::Left))
+    if (EventHandler::GetInstance().GetMouseInput().IsMouseKeyReleased(MouseInput::MouseKey::Left))
     {
       Clicked();
-      MouseInput::GetInstance().SetMouseReleasedEvent(MouseInput::MouseButton::Left, false);
     }
   }
 }

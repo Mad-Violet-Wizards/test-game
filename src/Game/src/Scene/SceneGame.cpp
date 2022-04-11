@@ -1,4 +1,7 @@
+#include <iostream>
+
 #include "SceneGame.hpp"
+#include "EventHandler.hpp"
 
 SceneGame::SceneGame() {}
 
@@ -13,15 +16,9 @@ void SceneGame::OnCreate()
   auto transform = m_player -> AddComponent<C_Transform>();
 
   auto movement = m_player -> AddComponent<C_KeyboardMovement>();
-  movement -> SetInput(&m_keyboardInput);
 }
 
 void SceneGame::OnDestroy() {}
-
-void SceneGame::ProcessInput()
-{
-  m_keyboardInput.Update();
-}
 
 void SceneGame::Update(float deltaTime)
 {

@@ -1,37 +1,30 @@
+#include <iostream>
+
 #include "Components/C_KeyboardMovement.hpp"
 #include "Components/C_Transform.hpp"
 #include "Object.hpp"
+#include "EventHandler.hpp"
 
 C_KeyboardMovement::C_KeyboardMovement(Object *owner) : Component(owner), m_moveSpeed(100) {}
 
-void C_KeyboardMovement::SetInput(KeyboardInput *keyboardInput)
-{
-  m_keyboardInput = keyboardInput;
-}
-
 void C_KeyboardMovement::Update(float deltaTime)
 {
-  if (m_keyboardInput == nullptr)
-  {
-    return;
-  }
-
   int xMove = 0;
-  if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Left))
+  if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Left))
   {
     xMove = -m_moveSpeed;
   }
-  else if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Right))
+  else if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Right))
   {
     xMove = m_moveSpeed;
   }
 
   int yMove = 0;
-  if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Up))
+  if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Up))
   {
     yMove = -m_moveSpeed;
   }
-  else if (m_keyboardInput -> IsKeyPressed(KeyboardInput::Key::Down))
+  else if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Down))
   {
     yMove = m_moveSpeed;
   }

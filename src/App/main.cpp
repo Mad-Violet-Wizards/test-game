@@ -11,7 +11,6 @@ int main()
 
   while (game.IsRunning())
   {
-    game.CaptureInput();
     game.Update();
     game.Draw();
     game.CalculateDeltaTime();

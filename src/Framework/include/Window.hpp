@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "WindowResolution.hpp"
+#include "EventHandler.hpp"
 
 class Window
 {
@@ -23,10 +24,11 @@ public:
   sf::RenderWindow *GetWindow();
   sf::Vector2u GetWindowSize() const;
 
-  sf::RenderWindow m_window;
-
 private:
 
   WindowResolution m_windowResolutionInfo;
+
+  // Issue with public member because of ambigous name.
+  sf::RenderWindow m_renderWindow;
 
 };

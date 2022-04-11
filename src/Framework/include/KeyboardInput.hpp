@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <map>
 
 #include "Bitmask.hpp"
 
@@ -19,7 +20,13 @@ public:
     Esc = 5,
   };
 
-  void Update();
+  KeyboardInput();
+  ~KeyboardInput();
+
+  void InitializeAssociatedKeys();
+
+  void UpdateKeyPressed(int keyCode);
+  void UpdateKeyReleased(int keyCode);
 
   bool IsKeyPressed(Key keycode);
   bool IsKeyDown(Key keycode);
@@ -29,5 +36,7 @@ private:
 
   Bitmask m_currentFrameKeys;
   Bitmask m_lastFrameKeys;
+
+  std::map<sf::Keyboard::Key, Key> m_associatedKeys;
 
 };

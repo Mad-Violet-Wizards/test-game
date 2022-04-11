@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "GuiLayout.hpp"
-#include "MouseInput.hpp"
 
 GuiLayout::GuiLayout(Window *window)
   : m_window(window),
@@ -25,7 +24,6 @@ void GuiLayout::Update()
     {
       widget -> Update();
     }
-    // MouseInput::GetInstance().ResetEvents();
   }
 }
 

@@ -2,8 +2,8 @@
 
 #include "Window.hpp"
 #include "SceneStateMachine.hpp"
-#include "SceneGame.hpp"
-#include "SceneMenu.hpp"
+#include "Scene/SceneGame.hpp"
+#include "Scene/SceneMenu.hpp"
 
 class Game
 {
@@ -13,7 +13,6 @@ public:
   Game();
   ~Game();
 
-  void CaptureInput();
   void Update();
   void Draw();
   void CalculateDeltaTime();

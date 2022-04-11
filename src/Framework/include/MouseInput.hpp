@@ -1,46 +1,39 @@
 #pragma once
 
-#include <memory>
+#include <SFML/Graphics.hpp>
+#include <map>
 
-/*
-  This class contains operations provided by Mouse.
-  It will get extended when we'll need new operations 
-  (such like WheelEvent, or Pressed Mouse Button).
-*/
+#include "Bitmask.hpp"
 
 class MouseInput
 {
 
 public:
 
-  typedef enum
+  enum class MouseKey
   {
-    Left,
-    Right
-  } MouseButton;
-
-  typedef struct
-  {
-    bool MouseLeftReleased;
-    bool MouseRightReleased;
-  } MouseEvent;
-
-  ~MouseInput();
-  static MouseInput &GetInstance();
-
-  void SetMouseReleasedEvent(MouseInput::MouseButton button, bool released);
-  bool MouseReleasedEvent(MouseInput::MouseButton button) const;
-
-  void ResetEvents();
-
-private:
+    None = 0,
+    Left = 1,
+    Right = 2,
+    Middle = 3
+  };
 
   MouseInput();
+  ~MouseInput();
+
+  void InitializeAssociatedKeys();
+
+  void UpdateKeyPressed(int mouseKeyCode);
+  void UpdateKeyReleased(int mouseKeyCode);
+
+  bool IsMouseKeyPressed(MouseKey key);
+  bool IsMouseKeyReleased(MouseKey key);
 
 private:
 
-  static std::unique_ptr<MouseInput> s_instance;
+  Bitmask m_currentFrameKeys;
+  Bitmask m_lastFrameKeys;
 
-  MouseEvent m_mouseEvent;
+  std::map<sf::Mouse::Button, MouseKey> m_associatedKeys;
 
 };

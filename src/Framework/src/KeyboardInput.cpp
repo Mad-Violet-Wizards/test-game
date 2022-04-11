@@ -1,32 +1,48 @@
+#include <iostream>
+
 #include "KeyboardInput.hpp"
 
-void KeyboardInput::Update()
+KeyboardInput::KeyboardInput()
+{
+  std::cout << "[KeyboardInput] Created new instance of Keyboard input.\n";
+  InitializeAssociatedKeys();
+}
+
+KeyboardInput::~KeyboardInput()
+{
+  std::cout << "[KeyboardInput] Deleted instance of Keyboard input.\n";
+}
+
+void KeyboardInput::InitializeAssociatedKeys()
+{
+  m_associatedKeys.insert({ sf::Keyboard::W, Key::Up});
+  m_associatedKeys.insert({ sf::Keyboard::A, Key::Left });
+  m_associatedKeys.insert({ sf::Keyboard::S, Key::Down });
+  m_associatedKeys.insert({ sf::Keyboard::D, Key::Right });
+}
+
+void KeyboardInput::UpdateKeyPressed(int keyCode)
 {
   m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
-  m_currentFrameKeys.SetBit(
-    (int)Key::Left,
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) ||
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::A)));
+  auto associatedPair = m_associatedKeys.find((sf::Keyboard::Key) keyCode);
 
-  m_currentFrameKeys.SetBit(
-    (int)Key::Right,
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) ||
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::D)));
+  if (associatedPair != m_associatedKeys.end())
+  {
+    m_currentFrameKeys.SetBit((int) associatedPair -> second, 1);
+  }
+}
 
-  m_currentFrameKeys.SetBit(
-    (int)Key::Up,
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) ||
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::W)));
+void KeyboardInput::UpdateKeyReleased(int keyCode)
+{
+  m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
-  m_currentFrameKeys.SetBit(
-    (int)Key::Down,
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) ||
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::S)));
+  auto associatedPair = m_associatedKeys.find((sf::Keyboard::Key) keyCode);
 
-  m_currentFrameKeys.SetBit(
-    (int)Key::Esc,
-    (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)));
+  if (associatedPair != m_associatedKeys.end())
+  {
+    m_currentFrameKeys.SetBit((int) associatedPair -> second, 0);
+  }
 }
 
 bool KeyboardInput::IsKeyPressed(Key keycode)
