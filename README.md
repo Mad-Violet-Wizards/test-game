@@ -40,7 +40,6 @@ About
 
 2. Tasks
 - If you are a member of Pointer science club - use trello to see open tasks.
-- If you are a outside contributor, look at Issues.
 
 3. How to contribute
 - Look at the document [How to Contribute](https://github.com/ppknUWr/test-game/blob/main/docs/how_to_contribute.md)
