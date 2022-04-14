@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Game.hpp"
-#include "Logs.hpp"
 
 int main()
 {
