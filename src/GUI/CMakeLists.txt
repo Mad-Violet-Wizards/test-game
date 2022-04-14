@@ -1,11 +1,11 @@
 project (onyx_engine_gui) # Specify the name of project
 
 # List the source files for all folders.
-file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-file(GLOB WIDGETS_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/*.cpp)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/ CORE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Scene WIDGETS)
 
 # Specify the whole game as a library and add source files. (cpp)
-add_library(${PROJECT_NAME} ${SRC_FILES} ${WIDGETS_SRC_FILES})
+add_library(${PROJECT_NAME} ${CORE} ${WIDGETS})
 
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)

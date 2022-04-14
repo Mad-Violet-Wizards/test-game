@@ -1,12 +1,12 @@
 project (onyx_engine_game) # Specify the name of project
 
 # List the source files for all folders.
-file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-file(GLOB SCENE_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/*.cpp)
-file(GLOB COMPONENT_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Components/*.cpp)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/ CORE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Scene SCENE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Components COMPONENTS)
 
 # Specify the whole game as a library and add source files. (cpp)
-add_library(${PROJECT_NAME} ${SRC_FILES} ${SCENE_SRC_FILES} ${COMPONENT_SRC_FILES})
+add_library(${PROJECT_NAME} ${CORE} ${SCENE} ${COMPONENTS})
 
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
