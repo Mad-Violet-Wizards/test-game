@@ -24,11 +24,11 @@ void MouseInput::UpdateKeyPressed(int mouseKeyCode)
 {
   m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
-  auto associatedPair = m_associatedKeys.find((sf::Mouse::Button) mouseKeyCode);
+  auto associatedPair = m_associatedKeys.find(static_cast<sf::Mouse::Button>(mouseKeyCode));
 
   if (associatedPair != m_associatedKeys.end())
   {
-    m_currentFrameKeys.SetBit((int) associatedPair -> second, 1);
+    m_currentFrameKeys.SetBit(static_cast<int>(associatedPair -> second), 1);
   }
 }
 
@@ -36,23 +36,23 @@ void MouseInput::UpdateKeyReleased(int mouseKeyCode)
 {
   m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
-  auto associatedPair = m_associatedKeys.find((sf::Mouse::Button) mouseKeyCode);
+  auto associatedPair = m_associatedKeys.find(static_cast<sf::Mouse::Button>(mouseKeyCode));
 
   if (associatedPair != m_associatedKeys.end())
   {
-    m_currentFrameKeys.SetBit((int) associatedPair -> second, 0);
+    m_currentFrameKeys.SetBit(static_cast<int>(associatedPair -> second), 0);
   }
 }
 
-bool MouseInput::IsMouseKeyPressed(MouseKey key)
+bool MouseInput::IsMouseKeyPressed(MouseKey mouseKeyCode)
 {
-  return m_currentFrameKeys.GetBit((int)key);
+  return m_currentFrameKeys.GetBit(static_cast<int>(mouseKeyCode));
 }
 
-bool MouseInput::IsMouseKeyReleased(MouseKey key)
+bool MouseInput::IsMouseKeyReleased(MouseKey mouseKeyCode)
 {
-  bool lastFrame = m_lastFrameKeys.GetBit((int)key);
-  bool currentFrame = m_currentFrameKeys.GetBit((int)key);
+  bool lastFrame    = m_lastFrameKeys.GetBit(static_cast<int>(mouseKeyCode));
+  bool currentFrame = m_currentFrameKeys.GetBit(static_cast<int>(mouseKeyCode));
 
   //
   // Reset of the bits is required because the Mouse Event
@@ -62,8 +62,8 @@ bool MouseInput::IsMouseKeyReleased(MouseKey key)
   // and first one is supposed to show the second one.
   //
 
-  m_lastFrameKeys.SetBit((int) key, 0);
-  m_currentFrameKeys.SetBit((int) key, 0);
+  m_lastFrameKeys.SetBit(static_cast<int>(mouseKeyCode), 0);
+  m_currentFrameKeys.SetBit(static_cast<int>(mouseKeyCode), 0);
 
   return currentFrame && !lastFrame;
 }

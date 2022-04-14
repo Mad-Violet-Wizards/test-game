@@ -28,9 +28,9 @@ public:
   void UpdateKeyPressed(int keyCode);
   void UpdateKeyReleased(int keyCode);
 
-  bool IsKeyPressed(Key keycode);
-  bool IsKeyDown(Key keycode);
-  bool IsKeyUp(Key keycode);
+  bool IsKeyPressed(Key keyCode);
+  bool IsKeyDown(Key keyCode);
+  bool IsKeyUp(Key keyCode);
 
 private:
 

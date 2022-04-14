@@ -25,11 +25,11 @@ void KeyboardInput::UpdateKeyPressed(int keyCode)
 {
   m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
-  auto associatedPair = m_associatedKeys.find((sf::Keyboard::Key) keyCode);
+  auto associatedPair = m_associatedKeys.find(static_cast<sf::Keyboard::Key>(keyCode));
 
   if (associatedPair != m_associatedKeys.end())
   {
-    m_currentFrameKeys.SetBit((int) associatedPair -> second, 1);
+    m_currentFrameKeys.SetBit(static_cast<int>(associatedPair -> second), 1);
   }
 }
 
@@ -37,31 +37,31 @@ void KeyboardInput::UpdateKeyReleased(int keyCode)
 {
   m_lastFrameKeys.SetMask(m_currentFrameKeys);
 
-  auto associatedPair = m_associatedKeys.find((sf::Keyboard::Key) keyCode);
+  auto associatedPair = m_associatedKeys.find(static_cast<sf::Keyboard::Key>(keyCode));
 
   if (associatedPair != m_associatedKeys.end())
   {
-    m_currentFrameKeys.SetBit((int) associatedPair -> second, 0);
+    m_currentFrameKeys.SetBit(static_cast<int>(associatedPair -> second), 0);
   }
 }
 
-bool KeyboardInput::IsKeyPressed(Key keycode)
+bool KeyboardInput::IsKeyPressed(Key keyCode)
 {
-  return m_currentFrameKeys.GetBit((int)keycode);
+  return m_currentFrameKeys.GetBit(static_cast<int>(keyCode));
 }
 
-bool KeyboardInput::IsKeyDown(Key keycode)
+bool KeyboardInput::IsKeyDown(Key keyCode)
 {
-  bool lastFrame = m_lastFrameKeys.GetBit((int)keycode);
-  bool currentFrame = m_currentFrameKeys.GetBit((int)keycode);
+  bool lastFrame    = m_lastFrameKeys.GetBit(static_cast<int>(keyCode));
+  bool currentFrame = m_currentFrameKeys.GetBit(static_cast<int>(keyCode));
 
   return currentFrame && !lastFrame;
 }
 
-bool KeyboardInput::IsKeyUp(Key keycode)
+bool KeyboardInput::IsKeyUp(Key keyCode)
 {
-  bool lastFrame = m_lastFrameKeys.GetBit((int)keycode);
-  bool currentFrame = m_currentFrameKeys.GetBit((int)keycode);
+  bool lastFrame    = m_lastFrameKeys.GetBit(static_cast<int>(keyCode));
+  bool currentFrame = m_currentFrameKeys.GetBit(static_cast<int>(keyCode));
 
   return !currentFrame && lastFrame;
 }

@@ -26,8 +26,8 @@ public:
   void UpdateKeyPressed(int mouseKeyCode);
   void UpdateKeyReleased(int mouseKeyCode);
 
-  bool IsMouseKeyPressed(MouseKey key);
-  bool IsMouseKeyReleased(MouseKey key);
+  bool IsMouseKeyPressed(MouseKey mouseKeyCode);
+  bool IsMouseKeyReleased(MouseKey mouseKeyCode);
 
 private:
 

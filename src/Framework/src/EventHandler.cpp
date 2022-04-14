@@ -26,12 +26,26 @@ EventHandler &EventHandler::GetInstance()
 
 KeyboardInput &EventHandler::GetKeyboardInput()
 {
-  return m_keyboardInput;
+  if (s_instance == nullptr)
+  {
+    throw std::logic_error("[Error] You've to use it on a instance of EventHandler.");
+  }
+  else
+  {
+    return m_keyboardInput;
+  }
 }
 
 MouseInput &EventHandler::GetMouseInput()
 {
-  return m_mouseInput;
+  if (s_instance == nullptr)
+  {
+    throw std::logic_error("[Error] You've to use it on a instance of EventHandler.");
+  }
+  else
+  {
+    return m_mouseInput;
+  }
 }
 
 void EventHandler::ProcessEvent(const sf::Event &event)
