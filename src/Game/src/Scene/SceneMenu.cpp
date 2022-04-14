@@ -3,7 +3,7 @@
 #include <boost/bind/bind.hpp>
 
 #include "SceneMenu.hpp"
-#include "MouseInput.hpp"
+#include "EventHandler.hpp"
 
 SceneMenu::SceneMenu(Window *window, SceneStateMachine *sceneManager)
   : m_window(window),
@@ -28,7 +28,6 @@ void SceneMenu::OnDestroy()
 void SceneMenu::Update(float deltaTime)
 {
   m_menuGuiManager.Update();
-  MouseInput::GetInstance().ResetEvents();
 }
 
 void SceneMenu::Draw(Window &window)

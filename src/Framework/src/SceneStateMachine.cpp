@@ -7,14 +7,6 @@ SceneStateMachine::SceneStateMachine()
 
 SceneStateMachine::~SceneStateMachine() {}
 
-void SceneStateMachine::ProcessInput()
-{
-  if (m_currentScene)
-  {
-    m_currentScene -> ProcessInput();
-  }
-}
-
 void SceneStateMachine::Update(float deltaTime)
 {
   if (m_currentScene)

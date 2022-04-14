@@ -2,68 +2,68 @@
 
 #include "MouseInput.hpp"
 
-std::unique_ptr<MouseInput> MouseInput::s_instance = nullptr;
-
 MouseInput::MouseInput()
 {
-  m_mouseEvent.MouseLeftReleased = false;
-  m_mouseEvent.MouseRightReleased = false;
+  std::cout << "[MouseInput] Created new instance of Mouse input.\n";
+  InitializeAssociatedKeys();
 }
 
 MouseInput::~MouseInput()
 {
-
+  std::cout << "[MouseInput] Deleted instance of Mouse input.\n";
 }
 
-MouseInput &MouseInput::GetInstance()
+void MouseInput::InitializeAssociatedKeys()
 {
-
-  if (MouseInput::s_instance == nullptr)
-  {
-    MouseInput::s_instance = std::unique_ptr<MouseInput>(new MouseInput);
-  }
-
-  return *s_instance;
+  m_associatedKeys.insert({ sf::Mouse::Left, MouseKey::Left });
+  m_associatedKeys.insert({ sf::Mouse::Right, MouseKey::Right });
+  m_associatedKeys.insert({ sf::Mouse::Middle, MouseKey::Middle });
 }
 
-void MouseInput::SetMouseReleasedEvent(MouseInput::MouseButton button, bool released)
+void MouseInput::UpdateKeyPressed(int mouseKeyCode)
 {
-  switch (button)
+  m_lastFrameKeys.SetMask(m_currentFrameKeys);
+
+  auto associatedPair = m_associatedKeys.find(static_cast<sf::Mouse::Button>(mouseKeyCode));
+
+  if (associatedPair != m_associatedKeys.end())
   {
-    case MouseInput::MouseButton::Left:
-    {
-      m_mouseEvent.MouseLeftReleased = released;
-      break;
-    }
-    case MouseInput::MouseButton::Right:
-    {
-      m_mouseEvent.MouseRightReleased = released;
-      break;
-    }
+    m_currentFrameKeys.SetBit(static_cast<int>(associatedPair -> second), 1);
   }
 }
 
-bool MouseInput::MouseReleasedEvent(MouseInput::MouseButton button) const
+void MouseInput::UpdateKeyReleased(int mouseKeyCode)
 {
-  switch (button)
+  m_lastFrameKeys.SetMask(m_currentFrameKeys);
+
+  auto associatedPair = m_associatedKeys.find(static_cast<sf::Mouse::Button>(mouseKeyCode));
+
+  if (associatedPair != m_associatedKeys.end())
   {
-    case MouseInput::MouseButton::Left:
-    {
-      return m_mouseEvent.MouseLeftReleased;
-    }
-    case MouseInput::MouseButton::Right:
-    {
-      return m_mouseEvent.MouseRightReleased;
-    }
-    default:
-    {
-      return false;
-    }
+    m_currentFrameKeys.SetBit(static_cast<int>(associatedPair -> second), 0);
   }
 }
 
-void MouseInput::ResetEvents()
+bool MouseInput::IsMouseKeyPressed(MouseKey mouseKeyCode)
 {
-  m_mouseEvent.MouseLeftReleased = false;
-  m_mouseEvent.MouseRightReleased = false;
+  return m_currentFrameKeys.GetBit(static_cast<int>(mouseKeyCode));
+}
+
+bool MouseInput::IsMouseKeyReleased(MouseKey mouseKeyCode)
+{
+  bool lastFrame    = m_lastFrameKeys.GetBit(static_cast<int>(mouseKeyCode));
+  bool currentFrame = m_currentFrameKeys.GetBit(static_cast<int>(mouseKeyCode));
+
+  //
+  // Reset of the bits is required because the Mouse Event
+  // is something that actually should be reported only once
+  // so we're preventing from having the issue with immadietly
+  // clicking the two buttons when they're on the same position
+  // and first one is supposed to show the second one.
+  //
+
+  m_lastFrameKeys.SetBit(static_cast<int>(mouseKeyCode), 0);
+  m_currentFrameKeys.SetBit(static_cast<int>(mouseKeyCode), 0);
+
+  return currentFrame && !lastFrame;
 }

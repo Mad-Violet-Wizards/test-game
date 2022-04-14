@@ -19,7 +19,6 @@ public:
   void OnCreate() override;
   void OnDestroy() override;
 
-  void ProcessInput() override;
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
 

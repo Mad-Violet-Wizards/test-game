@@ -13,8 +13,6 @@ public:
   virtual void OnActivate() {};
   virtual void OnDeactivate() {};
 
-  virtual void ProcessInput() {};
-
   virtual void Update(float deltaTime) {};
 
   virtual void Draw(Window &window) {};

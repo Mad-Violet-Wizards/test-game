@@ -14,7 +14,6 @@ public:
   SceneStateMachine();
   ~SceneStateMachine();
 
-  void ProcessInput();
   void Update(float deltaTime);
   void Draw(Window &window);
 
