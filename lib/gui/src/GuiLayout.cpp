@@ -87,116 +87,70 @@ void GuiLayout::SetRelativePosition(const sf::Vector2u& position)
 
 std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithSmallestWidth()
 {
-  // if (m_widgets.size() > 0)
-  // {
-  //   auto max = std::max_element( m_widgets.begin(), m_widgets.end(),
-  //                            []( std::shared_ptr<GuiObject> a, std::shared_ptr<GuiObject> b )
-  //                            {
-  //                                return a -> GetSize().width < b -> GetSize().width;
-  //                            } ); 
+  if (m_widgets.size() == 0)
+  {
+    std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
+    return nullptr;
+  }
 
-  //   return m_widgets[std::distance(v.begin(), max)];
-  // }
-  // else
-  // {
-  //   std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
-  //   return nullptr; 
-  // }
-  // if (m_widgets.size() != 0)
-  // {
-  //   float smallest = m_widgets.front() -> GetSize().width;
+  auto smallestWidthWidget = std::max_element(m_widgets.begin(), m_widgets.end(),
+                             [](const auto &lhs, const auto &rhs)
+                             {
+                                return lhs -> GetSize().width > rhs -> GetSize().width;
+                             });
 
-  //   for (const auto &widget : m_widgets)
-  //   {
-  //     smallest = widget -> GetSize().width < smallest ? widget -> GetSize().width : smallest;
-  //     return widget;
-  //   }
-
-  //   return nullptr;
-  // }
-  // else
-  // {
-  //   std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
-  //   return nullptr;
-  // }
-
-  return nullptr;
+  return *smallestWidthWidget;
 }
 
 std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithHighestWidth()
 {
-  // if (m_widgets.size() > 0)
-  // {
-  //   auto max = std::max_element( m_widgets.begin(), m_widgets.end(),
-  //                            []( std::shared_ptr<GuiObject> a, std::shared_ptr<GuiObject> b )
-  //                            {
-  //                                return a -> GetSize().width < b -> GetSize().width;
-  //                            } ); 
+  if (m_widgets.size() == 0)
+  {
+    std::cout << "[Warning][GuiLayout][FindWidgetWithHighestWidth]: Couldn't find any widget.";
+    return nullptr;
+  }
 
-  //   return max;
-  //   // float highest = m_widgets.front() -> GetSize().width;
-  //   // std::shared_ptr<GuiObject> widestWidget;
+  auto highetWidthWidget = std::max_element(m_widgets.begin(), m_widgets.end(),
+                           [](const auto &lhs, const auto &rhs)
+                           {
+                            return lhs -> GetSize().width < rhs -> GetSize().width;
+                           });
 
-  //   // for (auto widget : m_widgets)
-  //   // {
-  //   //   if (widget -> GetSize().width > highest)
-  //   //   {
-  //   //     highest = widget -> GetSize().width;
-  //   //     widestWidget = widget;
-  //   //   }
-  //   // }
-
-  //   // return widestWidget;
-  // }
-  // else
-  // {
-  //   std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
-  //   return nullptr;
-  // }
-
-  return nullptr;
+  return *highetWidthWidget;
 }
 
 std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithSmallestHeight()
 {
-  if (m_widgets.size() != 0)
+  if (m_widgets.size() == 0)
   {
-    float smallest = m_widgets.front() -> GetSize().height;
-
-    for (const auto &widget : m_widgets)
-    {
-      smallest = widget -> GetSize().width < smallest ? widget -> GetSize().width : smallest;
-      return widget;
-    }
-
+    std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestHeight]: Couldn't find any widget.";
     return nullptr;
   }
-  else
-  {
-    std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
-    return nullptr;
-  }
+
+  auto smallestHeightWidget = std::max_element(m_widgets.begin(), m_widgets.end(),
+                              [](const auto &lhs, const auto &rhs)
+                             {
+                                return lhs -> GetSize().height > rhs -> GetSize().height;
+                             });
+
+  return *smallestHeightWidget;
 }
 
 std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithHighestHeight()
 {
-  if (m_widgets.size() != 0)
+  if (m_widgets.size() == 0)
   {
-    float highest = m_widgets.front() -> GetSize().height;
-
-    for (const auto &widget : m_widgets)
-    {
-      highest = widget -> GetSize().width > highest ? widget -> GetSize().width : highest;
-      return widget;
-    }
-
+    std::cout << "[Warning][GuiLayout][FindWidgetWithHighestHeight]: Couldn't find any widget.";
     return nullptr;
   }
-  else
-  {
-    std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
-    return nullptr;
-  }
+
+  auto highestHeightWidget = std::max_element(m_widgets.begin(), m_widgets.end(),
+                             [](const auto &lhs, const auto &rhs)
+                             {
+                                return lhs -> GetSize().height < rhs -> GetSize().height;
+                             });
+
+  return *highestHeightWidget;
 }
 
 const sf::Vector2f GuiLayout::ScaleRelativeToWindowAbsolute(const sf::Vector2u &proportions)
