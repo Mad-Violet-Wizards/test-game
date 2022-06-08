@@ -4,10 +4,10 @@ In our project we've some subdirectories that **names** are specified as a name 
 
 If you want to create a new branch, use one of those names:
 
-* **game** - if you're creating a new feature/fix in "Game/" folder,
-* **framework** - if you're creating a new feature/fix in "Framework/" folder,
-* **app** - if you're creating a new feature/fix in "App/" folder,
-* **gui** - if you're creating a new feature/fix in "GUI/" folder,
+* **game** - if you're creating a new feature/fix in "game/" folder,
+* **core** - if you're creating a new feature/fix in "core/" folder,
+* **app** - if you're creating a new feature/fix in "app/" folder,
+* **gui** - if you're creating a new feature/fix in "gui/" folder,
 * **lib** - if you're adding new library/refactoring code one of them,
 * **assets** - if you have modifed something in "Assets/" folder,
 * **scripts** - if you're adding a new script, f.e. for compilation,
