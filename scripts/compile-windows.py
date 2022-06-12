@@ -14,8 +14,8 @@ exportProjectlist  = ["all", "core", "gui", "game"]
 def run():
   parser = argparse.ArgumentParser(description='Compilation script for test-game.')
   group = parser.add_mutually_exclusive_group()
-  group.add_argument('--build', type=str, help='Which project to build: all, core, gui, game, app')
   group.add_argument('--install', type=str, help='Which project to install: all, core, gui, game, app')
+  group.add_argument('--build', type=str, help='Which project to build: all, core, gui, game, app')
   group.add_argument('--exportlib', type=str, help='Which project to export: all, core, gui, game')
   group.add_argument('--release', type=str, help='Create new folder with release version of game.')
   
@@ -130,7 +130,7 @@ def run():
       shutil.rmtree("test-game")
 
     os.mkdir("test-game")
-    copy = shutil.copytree("app/build/assets", "test-game/assets")
+    copy = shutil.copytree("./assets", "test-game/assets")
     copy = shutil.copytree("app/build/bin", "test-game/bin")
     copy = shutil.copytree("app/build/lib", "test-game/lib")
     print("[Compile-Windows] Release build done.")

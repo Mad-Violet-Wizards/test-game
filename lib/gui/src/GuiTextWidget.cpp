@@ -9,11 +9,14 @@ GuiTextWidget::GuiTextWidget(Window* window)
 {
   std::cout << "[Info][GuiTextWidget]: Creating new GuiTextWidget \n";
 
-  if (!m_font.loadFromFile("../Assets/Roboto-Black.ttf"))
+  try
   {
-    std::cout << "[Error][GuiTextWidget]: Error while loading font.\n";
+    m_text.setFont(m_fontManager.GetFont("GoudyBookletter"));
   }
-  m_text.setFont(m_font);
+  catch (const std::runtime_error &exception)
+  {
+    std::cout << exception.what() << "\n";
+  }
 
   m_margins.top = 12.f;
   m_margins.bottom = 12.f;
