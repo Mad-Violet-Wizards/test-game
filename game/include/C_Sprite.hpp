@@ -11,14 +11,13 @@ public:
 
   C_Sprite(Object *owner);
 
-  void Load(const std::string &filePath);
+  void Load(const sf::Texture &texture);
 
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
 
 private:
 
-  sf::Texture m_texture;
   sf::Sprite m_sprite;
 
 };
