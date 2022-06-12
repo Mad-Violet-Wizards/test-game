@@ -4,7 +4,7 @@ from conans import ConanFile, CMake, tools
 class GameConan(ConanFile):
     name = "game"
     version = "1.0"
-    requires = [ ("sfml/2.5.1"), "core/1.0", "gui/1.0"]
+    requires = [ ("sfml/2.5.1"), ("core/1.0"), ("gui/1.0") ]
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
