@@ -5,7 +5,6 @@
 
 #include "Window.hpp"
 #include "GuiObject.hpp"
-#include "FontManager.hpp"
 
 class GuiTextWidget : public GuiObject
 {
@@ -37,8 +36,6 @@ public:
 private:
 
   virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-
-  FontManager m_fontManager;
 
   sf::Font m_font;
   sf::Text m_text;

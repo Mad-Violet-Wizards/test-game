@@ -3,6 +3,7 @@
 #include "GuiTextWidget.hpp"
 #include "Window.hpp"
 #include "EventHandler.hpp"
+#include "AssetsManager.hpp"
 
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
@@ -11,7 +12,11 @@ GuiTextWidget::GuiTextWidget(Window* window)
 
   try
   {
-    m_text.setFont(m_fontManager.GetFont("GoudyBookletter"));
+    m_text.setFont(AssetsManager::GetInstance().GetFontManager().GetFont("GoudyBookletter"));
+  }
+  catch (const std::logic_error &exception)
+  {
+    std::cout << exception.what() << "\n";
   }
   catch (const std::runtime_error &exception)
   {
