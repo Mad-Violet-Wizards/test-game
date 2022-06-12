@@ -1,4 +1,8 @@
+#include <iostream>
+
 #include "SceneGame.hpp"
+
+#include "AssetsManager.hpp"
 
 SceneGame::SceneGame() {}
 
@@ -8,7 +12,19 @@ void SceneGame::OnCreate()
 {
   m_player = std::make_shared<Object>();
   auto sprite = m_player -> AddComponent<C_Sprite>();
-  sprite -> Load("../Assets/testsprite.png");
+
+  try
+  {
+    sprite -> Load(AssetsManager::GetInstance().GetTextureManager().GetTexture("testsprite"));
+  }
+  catch (const std::logic_error &exception)
+  {
+    std::cout << exception.what() << "\n";
+  }
+  catch (const std::runtime_error &exception)
+  {
+    std::cout << exception.what() << "\n";
+  }
 
   auto transform = m_player -> AddComponent<C_Transform>();
 

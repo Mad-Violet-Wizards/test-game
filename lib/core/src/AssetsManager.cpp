@@ -39,3 +39,15 @@ FontManager &AssetsManager::GetFontManager()
     return m_fontManager;
   }
 }
+
+TextureManager &AssetsManager::GetTextureManager()
+{
+  if (s_instance == nullptr)
+  {
+    throw std::logic_error("[Error] You've to use it on a instance of AssetsManager.");
+  }
+  else
+  {
+    return m_textureManager;
+  }
+}

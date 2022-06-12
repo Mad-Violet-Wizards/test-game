@@ -2,10 +2,9 @@
 
 C_Sprite::C_Sprite(Object *owner) : Component(owner) {}
 
-void C_Sprite::Load(const std::string &filePath)
+void C_Sprite::Load(const sf::Texture &texture)
 {
-  m_texture.loadFromFile(filePath);
-  m_sprite.setTexture(m_texture);
+  m_sprite.setTexture(texture);
 }
 
 void C_Sprite::Update(float deltaTime)

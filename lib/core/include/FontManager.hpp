@@ -20,4 +20,5 @@ private:
 
   std::string m_fontsDir;
   std::map< std::string, std::shared_ptr<sf::Font> > m_fonts;
+
 };
