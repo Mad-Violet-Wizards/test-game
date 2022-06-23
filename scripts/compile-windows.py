@@ -82,6 +82,10 @@ def buildChainGui():
   buildApp()
 
 def buildChainGame():
+  buildCore()
+  exportCore()
+  buildGui()
+  exportGui()
   buildGame()
   exportGame()
   buildApp()

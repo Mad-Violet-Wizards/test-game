@@ -1,12 +1,33 @@
+#include <iostream>
+
+#include <utility>
+
 #include "Bitmask.hpp"
 
 Bitmask::Bitmask() : m_bits(0) {}
 
+Bitmask::Bitmask(uint32_t bits) : m_bits(bits) {}
+
 Bitmask::~Bitmask() {}
 
-void Bitmask::SetMask(Bitmask& other)
+Bitmask::Bitmask(const Bitmask &other)
+  : Bitmask(other.m_bits) {}
+
+Bitmask::Bitmask(Bitmask &&other) noexcept
+  : m_bits(std::exchange(other.m_bits, 0)) {}
+
+Bitmask &Bitmask::operator=(const Bitmask &other)
 {
-  m_bits = other.GetMask();
+  m_bits = other.m_bits;
+
+  return *this;
+}
+
+Bitmask &Bitmask::operator=(Bitmask &&other) noexcept
+{
+  m_bits = std::exchange(other.m_bits, 0);
+
+  return *this;
 }
 
 uint32_t Bitmask::GetMask() const
