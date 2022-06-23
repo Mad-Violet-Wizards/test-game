@@ -28,7 +28,10 @@ GuiTextWidget::GuiTextWidget(Window* window)
   m_margins.left = 12.f;
   m_margins.right = 12.f;
 
-  m_clicked = false;
+  m_color = sf::Color(255, 255, 255);
+  m_hoverColor = sf::Color(230, 230, 230);
+
+  m_hoverEffect = false;
 }
 
 GuiTextWidget::~GuiTextWidget()
@@ -47,10 +50,19 @@ void GuiTextWidget::Update()
 
   if (m_text.getGlobalBounds().contains(mousePosition))
   {
+    if (m_hoverEffect)
+    {
+      m_text.setFillColor(m_hoverColor);
+    }
+
     if (EventHandler::GetInstance().GetMouseInput().IsMouseKeyReleased(MouseInput::MouseKey::Left))
     {
       Clicked();
     }
+  }
+  else
+  {
+    m_text.setFillColor(m_color);
   }
 }
 
@@ -90,12 +102,29 @@ void GuiTextWidget::SetText(const char *text)
 
 void GuiTextWidget::SetColor(const int r, const int g, const int b)
 {
-  m_text.setFillColor(sf::Color(r, g, b));
+  m_color = sf::Color(r, g, b);
+  m_text.setFillColor(m_color);
 }
 
 void GuiTextWidget::SetColor(const sf::Color &color)
 {
+  m_color = color;
   m_text.setFillColor(color);
+}
+
+void GuiTextWidget::SetHoverCapture(bool enabled)
+{
+  m_hoverEffect = enabled;
+}
+
+void GuiTextWidget::SetHoverColor(const int r, const int g, const int b)
+{
+  m_hoverColor = sf::Color(r, g, b);
+}
+
+void GuiTextWidget::SetHoverColor(const sf::Color &color)
+{
+  m_hoverColor = color;
 }
 
 void GuiTextWidget::draw(sf::RenderTarget &target, sf::RenderStates states) const
