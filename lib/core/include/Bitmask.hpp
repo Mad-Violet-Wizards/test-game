@@ -8,9 +8,15 @@ class Bitmask
 public:
 
   Bitmask();
+  Bitmask(uint32_t bits);
   ~Bitmask();
 
-  void SetMask(Bitmask &other);
+  Bitmask(const Bitmask &other);
+  Bitmask(Bitmask &&other) noexcept;
+
+  Bitmask &operator=(const Bitmask &other);
+  Bitmask &operator=(Bitmask &&other) noexcept;
+
   uint32_t GetMask() const;
 
   bool GetBit(int pos) const;

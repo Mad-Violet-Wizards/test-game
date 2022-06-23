@@ -23,7 +23,7 @@ void KeyboardInput::InitializeAssociatedKeys()
 
 void KeyboardInput::UpdateKeyPressed(int keyCode)
 {
-  m_lastFrameKeys.SetMask(m_currentFrameKeys);
+  m_lastFrameKeys = m_currentFrameKeys;
 
   auto associatedPair = m_associatedKeys.find(static_cast<sf::Keyboard::Key>(keyCode));
 
@@ -35,7 +35,7 @@ void KeyboardInput::UpdateKeyPressed(int keyCode)
 
 void KeyboardInput::UpdateKeyReleased(int keyCode)
 {
-  m_lastFrameKeys.SetMask(m_currentFrameKeys);
+  m_lastFrameKeys = m_currentFrameKeys;
 
   auto associatedPair = m_associatedKeys.find(static_cast<sf::Keyboard::Key>(keyCode));
 

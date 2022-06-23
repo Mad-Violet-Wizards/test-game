@@ -22,7 +22,7 @@ void MouseInput::InitializeAssociatedKeys()
 
 void MouseInput::UpdateKeyPressed(int mouseKeyCode)
 {
-  m_lastFrameKeys.SetMask(m_currentFrameKeys);
+  m_lastFrameKeys = m_currentFrameKeys;
 
   auto associatedPair = m_associatedKeys.find(static_cast<sf::Mouse::Button>(mouseKeyCode));
 
@@ -34,7 +34,7 @@ void MouseInput::UpdateKeyPressed(int mouseKeyCode)
 
 void MouseInput::UpdateKeyReleased(int mouseKeyCode)
 {
-  m_lastFrameKeys.SetMask(m_currentFrameKeys);
+  m_lastFrameKeys = m_currentFrameKeys;
 
   auto associatedPair = m_associatedKeys.find(static_cast<sf::Mouse::Button>(mouseKeyCode));
 
