@@ -27,6 +27,11 @@ public:
   void SetColor(const int r, const int g, const int b);
   void SetColor(const sf::Color &color);
 
+  void SetHoverCapture(bool enabled);
+
+  void SetHoverColor(const int r, const int g, const int b);
+  void SetHoverColor(const sf::Color &color);
+
   //
   // Signal & Slots
   //
@@ -40,6 +45,9 @@ private:
   sf::Font m_font;
   sf::Text m_text;
 
-  bool m_clicked;
+  sf::Color m_color;
+  sf::Color m_hoverColor;
+
+  bool m_hoverEffect;
 
 };
