@@ -6,11 +6,12 @@ import shutil
 
 print("[Compile-Windows] Working.")
 
-installProjectList    = ["all", "core", "gui", "game", "app"]
-buildProjectList      = ["all", "core", "gui", "game", "app"]
-buildChainProjectList = ["core", "gui", "game"]
-exportProjectList     = ["all", "core", "gui", "game"]
-testProjectList       = ["all", "core", "gui", "game"]
+installProjectList           = ["all", "core", "gui", "game", "app"]
+buildProjectList             = ["all", "core", "gui", "game", "app"]
+buildChainProjectList        = ["core", "gui", "game"]
+exportProjectList            = ["all", "core", "gui", "game"]
+buildChainAndTestProjectList = ["core", "gui", "game"]
+testProjectList              = ["core", "gui", "game"]
 
 # ==============================================================
 
@@ -103,12 +104,7 @@ def exportGame():
 
 # ==============================================================
 
-def testAll():
-  testCore()
-  testGui()
-  testGame()
-
-def testCore():
+def buildChainAndTestCore():
   # Always make sure we've the newest package compiled.
   buildCore()
   exportCore()
@@ -120,7 +116,7 @@ def testCore():
   subprocess.call(f"{os.getcwd()}/bin/coreTest.exe")
   os.chdir('../../..') # Go back to main directory.
 
-def testGui():
+def buildChainAndTestGui():
   # Always make sure we've the newest package compiled.
   buildCore()
   exportCore()
@@ -134,7 +130,7 @@ def testGui():
   subprocess.call(f"{os.getcwd()}/bin/guiTest.exe")
   os.chdir('../../..') # Go back to main directory.
 
-def testGame():
+def buildChainAndTestGame():
   # Always make sure we've the newest package compiled.
   buildCore()
   exportCore()
@@ -143,12 +139,41 @@ def testGame():
   buildGame()
   exportGame()
   os.system('cmd /c conan install ../test/game/ -if ../test/game/build')
-  os.chdir('../test/game/build/') # Enter test gui build directory.
+  os.chdir('../test/game/build/') # Enter test game build directory.
   os.system('cmd /c cmake -G "Visual Studio 16 2019" ..')
   os.system('cmd /c cmake --build . --config Release')
   os.system('cmd /c conan imports ..')
   subprocess.call(f"{os.getcwd()}/bin/gameTest.exe")
   os.chdir('../../..') # Go back to main directory.
+
+# ==============================================================
+
+def testCore():
+  os.system('cmd /c conan install ../test/core/ -if ../test/core/build')
+  os.chdir('../test/core/build/') # Enter test core build directory.
+  os.system('cmd /c cmake -G "Visual Studio 16 2019" ..')
+  os.system('cmd /c cmake --build . --config Release')
+  os.system('cmd /c conan imports ..')
+  subprocess.call(f"{os.getcwd()}/bin/coreTest.exe")
+  os.chdir('../../..') # Go back to main directory.
+
+def testGui():
+  os.system('cmd /c conan install ../test/gui/ -if ../test/gui/build')
+  os.chdir('../test/gui/build/') # Enter test gui build directory.
+  os.system('cmd /c cmake -G "Visual Studio 16 2019" ..')
+  os.system('cmd /c cmake --build . --config Release')
+  os.system('cmd /c conan imports ..')
+  subprocess.call(f"{os.getcwd()}/bin/guiTest.exe")
+  os.chdir('../../..') # Go back to main directory.
+
+def testGame():
+  os.system('cmd /c conan install ../test/game/ -if ../test/game/build')
+  os.chdir('../test/game/build/') # Enter test game build directory.
+  os.system('cmd /c cmake -G "Visual Studio 16 2019" ..')
+  os.system('cmd /c cmake --build . --config Release')
+  os.system('cmd /c conan imports ..')
+  subprocess.call(f"{os.getcwd()}/bin/gameTest.exe")
+  os.chdir('../../..')
 
 # ==============================================================
 
@@ -173,7 +198,8 @@ def run():
   group.add_argument('--build', type=str, help='Which project to build: all, core, gui, game, app')
   group.add_argument('--buildChain', type=str, help='Chain build of library and all of its childrens.')
   group.add_argument('--exportlib', type=str, help='Which project to export: all, core, gui, game')
-  group.add_argument('--test', type=str, help='Run tests for selected project.')
+  group.add_argument('--buildChainAndTest', type=str, help='Build chain for selected project, build test and run test.')
+  group.add_argument('--test', type=str, help='Build test project and run tests.')
   group.add_argument('--release', type=str, help='Create new folder with release version of game.')
   
   parser = parser.parse_args()
@@ -250,7 +276,7 @@ def run():
 
   if (parser.exportlib):
 
-    if (parser.exportlib in exportProjectlist):
+    if (parser.exportlib in exportProjectList):
 
       if (parser.exportlib == "all"):
         exportAll()
@@ -269,14 +295,24 @@ def run():
     else:
       print("[Compile-Windows] Provide valid argument.")
 
+  if (parser.buildChainAndTest):
+
+    if (parser.buildChainAndTest in buildChainAndTestProjectList):
+
+      if(parser.buildChainAndTest == "core"):
+        buildChainAndTestCore()
+
+      elif(parser.buildChainAndTest == "gui"):
+        buildChainAndTestGui()
+
+      elif(parser.buildChainAndTest == "game"):
+        buildChainAndTestGame()
+
   if (parser.test):
 
     if (parser.test in testProjectList):
 
-      if (parser.test == "all"):
-        testAll()
-
-      elif(parser.test == "core"):
+      if(parser.test == "core"):
         testCore()
 
       elif(parser.test == "gui"):

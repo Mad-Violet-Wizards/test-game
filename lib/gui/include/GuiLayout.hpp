@@ -15,7 +15,6 @@ public:
   GuiLayout(Window *window);
   ~GuiLayout();
 
-
   void Update();
   void Draw(Window &window);
 
@@ -34,6 +33,12 @@ public:
   virtual void SetRelativeSize(const sf::Vector2u &size);
   virtual void SetRelativePosition(const unsigned int x, const unsigned int y);
   virtual void SetRelativePosition(const sf::Vector2u &position);
+
+  const sf::Vector2f GetSize()             const { return m_size; }
+  const sf::Vector2u GetRelativeSize()     const { return m_relativeSize; }
+  const sf::Vector2f GetPosition()         const { return m_position; }
+  const sf::Vector2u GetRelativePosition() const { return m_relativePosition; }
+
 
   virtual void RefreshSize() {};
 
