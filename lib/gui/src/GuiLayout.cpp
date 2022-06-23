@@ -45,15 +45,7 @@ void GuiLayout::AddWidget(std::shared_ptr<GuiObject> widget)
 
 void GuiLayout::RemoveWidget(std::shared_ptr<GuiObject> widget)
 {
-  // TODO: Simple, but works, maybe evalute it to something better?
-  for (auto w : m_widgets)
-  {
-    if (w == widget)
-    {
-      m_widgets.remove(widget);
-      break;
-    }
-  }
+  m_widgets.remove(widget);
 }
 
 void GuiLayout::SetVisible(bool visible)
