@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "SceneGame.hpp"
-
 #include "AssetsManager.hpp"
 
 SceneGame::SceneGame() {}

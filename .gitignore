@@ -5,6 +5,7 @@
 # Don't add build folder to the repo.
 build/
 test-game/
+logs/
 
 # Don't add local logs to repo.
 log/
