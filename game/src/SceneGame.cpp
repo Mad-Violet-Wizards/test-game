@@ -15,7 +15,7 @@ void SceneGame::OnCreate()
 
   try
   {
-    sprite -> Load(AssetsManager::GetInstance().GetTextureManager().GetTexture("testsprite"));
+    sprite -> Load(AssetsManager::GetInstance().GetTexture("testsprite"));
   }
   catch (const std::logic_error &exception)
   {

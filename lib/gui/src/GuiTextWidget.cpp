@@ -12,7 +12,7 @@ GuiTextWidget::GuiTextWidget(Window* window)
 
   try
   {
-    m_text.setFont(AssetsManager::GetInstance().GetFontManager().GetFont("GoudyBookletter"));
+    m_text.setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter"));
   }
   catch (const std::logic_error &exception)
   {
