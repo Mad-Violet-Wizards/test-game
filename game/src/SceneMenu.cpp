@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <boost/bind/bind.hpp>
 
+#include "GuiLayout.hpp"
 #include "SceneMenu.hpp"
 #include "EventHandler.hpp"
 
@@ -59,18 +60,8 @@ void SceneMenu::EmptySlot()
 void SceneMenu::ChangeWindowResolution()
 {
   m_windowResolutionInformations.IncreaseMode();
-  m_window -> GetWindow() -> create(m_windowResolutionInformations.GetCurrentResolution(),
-                                    "Test-Game 1.0.0",
-                                    sf::Style::Fullscreen);
-
+  m_window -> UpdateResolution(m_windowResolutionInformations.GetCurrentResolution());
   m_buttonResolution -> SetText(m_windowResolutionInformations.GetCurrentResolutionString());
-  
-  //
-  // Call layout to refresh size.
-  //
-
-  m_optionsMenuLayout -> RefreshSize();
-  m_mainMenuLayout    -> RefreshSize();
 }
 
 void SceneMenu::CloseOptions()
@@ -157,4 +148,7 @@ void SceneMenu::InitConnections()
 
   m_buttonResolution   -> Clicked.connect(boost::bind(&SceneMenu::ChangeWindowResolution, this));
   m_buttonCloseOptions -> Clicked.connect(boost::bind(&SceneMenu::CloseOptions, this));
+
+  m_window -> ResolutionChanged.connect(boost::bind(&GuiLayoutVertical::RefreshSize, m_mainMenuLayout));
+  m_window -> ResolutionChanged.connect(boost::bind(&GuiLayoutVertical::RefreshSize, m_optionsMenuLayout));
 }

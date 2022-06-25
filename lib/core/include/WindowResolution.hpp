@@ -10,8 +10,8 @@ public:
   WindowResolution();
   ~WindowResolution();
 
-  sf::VideoMode GetDefaultResolution();
-  sf::VideoMode GetCurrentResolution();
+  const sf::VideoMode &GetDefaultResolution();
+  const sf::VideoMode &GetCurrentResolution();
 
   const std::string GetCurrentResolutionString();
 
