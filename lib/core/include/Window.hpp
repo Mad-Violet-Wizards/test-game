@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <boost/signals2.hpp>
 
 #include "WindowResolution.hpp"
 #include "EventHandler.hpp"
@@ -23,6 +24,13 @@ public:
 
   sf::RenderWindow *GetWindow();
   sf::Vector2u GetWindowSize() const;
+  void UpdateResolution(const sf::VideoMode &videMode);
+
+  //
+  // Signal & Slots
+  //
+
+  boost::signals2::signal<void()> ResolutionChanged;
 
 private:
 

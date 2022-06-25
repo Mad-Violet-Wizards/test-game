@@ -14,12 +14,12 @@ WindowResolution::~WindowResolution()
 
 }
 
-sf::VideoMode WindowResolution::GetDefaultResolution()
+const sf::VideoMode &WindowResolution::GetDefaultResolution()
 {
   return m_videoModes[0];
 }
 
-sf::VideoMode WindowResolution::GetCurrentResolution()
+const sf::VideoMode &WindowResolution::GetCurrentResolution()
 {
   return m_videoModes[m_currentMode];
 }
