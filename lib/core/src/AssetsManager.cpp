@@ -1,22 +1,41 @@
 #include <iostream>
 
 #include "AssetsManager.hpp"
+#include "FileManager.hpp"
 
 std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
 
 AssetsManager::AssetsManager()
 {
-  std::cout << "[AssetsManager] Created new instance of EventHandler.\n";
+  std::cout << "[AssetsManager] Created new instance of AssetsManager.\n";
+
+  CreateFilesMap< sf::Texture >(std::string { "../assets/textures/" },
+                                std::string { ".png" },
+                                m_textures );
+
+  CreateFilesMap< sf::Font >(std::string { "../assets/fonts/"},
+                             std::string { ".ttf" },
+                             m_fonts );
 }
 
 AssetsManager::~AssetsManager()
 {
-  std::cout << "[AssetsManager] Deleted instance of EventHandler.\n";
+  std::cout << "[AssetsManager] Deleted instance of AssetsManager.\n";
 }
 
 //
 // TODO: Add check if assets dir even exists.
 //
+
+sf::Texture &AssetsManager::GetTexture(const std::string &textureName) const
+{
+  return FindInFilesMap< sf::Texture >(textureName, m_textures);
+}
+
+sf::Font &AssetsManager::GetFont(const std::string &fontName) const
+{
+  return FindInFilesMap< sf::Font >(fontName, m_fonts);
+}
 
 AssetsManager &AssetsManager::GetInstance()
 {
@@ -26,28 +45,4 @@ AssetsManager &AssetsManager::GetInstance()
   }
 
   return *s_instance;
-}
-
-FontManager &AssetsManager::GetFontManager()
-{
-  if (s_instance == nullptr)
-  {
-    throw std::logic_error("[Error] You've to use it on a instance of AssetsManager.");
-  }
-  else
-  {
-    return m_fontManager;
-  }
-}
-
-TextureManager &AssetsManager::GetTextureManager()
-{
-  if (s_instance == nullptr)
-  {
-    throw std::logic_error("[Error] You've to use it on a instance of AssetsManager.");
-  }
-  else
-  {
-    return m_textureManager;
-  }
 }

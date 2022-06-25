@@ -1,7 +1,10 @@
 #pragma once
 
-#include "FontManager.hpp"
-#include "TextureManager.hpp"
+#include <SFML/Graphics.hpp>
+
+#include <string>
+#include <memory>
+#include <map>
 
 class AssetsManager
 {
@@ -11,8 +14,9 @@ public:
   ~AssetsManager();
 
   static AssetsManager &GetInstance();
-  FontManager &GetFontManager();
-  TextureManager &GetTextureManager();
+
+  sf::Texture &GetTexture(const std::string &textureName) const;
+  sf::Font    &GetFont(const std::string &fontName) const;
 
 private:
 
@@ -20,9 +24,8 @@ private:
 
 private:
 
-  FontManager m_fontManager;
-  TextureManager m_textureManager;
-
   static std::unique_ptr<AssetsManager> s_instance;
 
+  std::map< std::string, std::shared_ptr<sf::Texture> > m_textures;
+  std::map< std::string, std::shared_ptr<sf::Font> > m_fonts;
 };
