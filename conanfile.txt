@@ -1,7 +1,6 @@
 [requires]
 boost/1.77.0
 sfml/2.5.1
-game/1.0
 
 [generators]
 cmake
