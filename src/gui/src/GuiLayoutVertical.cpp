@@ -69,7 +69,9 @@ void GuiLayoutVertical::CheckToUpdateSize()
   // Acumulate the height of widgets.
   for (auto &widget : m_widgets)
   {
-    height += widget -> GetSize().height + widget -> GetBottomMargin() + widget -> GetTopMargin();
+    height += widget -> GetSize().height +
+              widget -> GetMargin().GetBottomMargin() +
+              widget -> GetMargin().GetTopMargin();
   }
   
   // If accumulated height of widgets is higher than actual layout height, resize.
@@ -86,7 +88,9 @@ void GuiLayoutVertical::CheckToUpdateSize()
   // If the layout size is not correct, then resize it correctly to according data.
   if (w != nullptr && w -> GetSize().width > m_size.x)
   {
-    m_size.x = w -> GetSize().width + w -> GetLeftMargin() + w -> GetRightMargin();
+    m_size.x = w -> GetSize().width +
+               w -> GetMargin().GetLeftMargin() +
+               w -> GetMargin().GetRightMargin();
 
     // We've to restart cursor, 
     // because new size have to 
@@ -128,14 +132,15 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
       sf::FloatRect widgetSize = widget -> GetSize();
 
       // Increase current currsor y position to include top margin.
-      m_cursor.y += widget -> GetTopMargin();
+      m_cursor.y += widget -> GetMargin().GetTopMargin();
       sf::Vector2f right = { m_position.x + m_size.x, m_cursor.y };
 
       sf::Vector2f position = { right.x - widgetSize.width, right.y };
       widget -> SetPosition(position);
 
       // Move cursor to the next row.
-      m_cursor.y += widget -> GetSize().height + widget -> GetBottomMargin();
+      m_cursor.y += widget -> GetSize().height +
+                    widget -> GetMargin().GetBottomMargin();
       break;
     }
     case GuiObject::GuiAlign::AlignCenter:
@@ -147,14 +152,15 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
       widgetSize.width /= 2;
 
       // Increase current currsor y position to include top margin.
-      m_cursor.y += widget -> GetTopMargin();
+      m_cursor.y += widget -> GetMargin().GetTopMargin();
       sf::Vector2f center = { m_position.x + m_size.x / 2, m_cursor.y };
 
       sf::Vector2f position = { center.x - widgetSize.width, center.y };
       widget -> SetPosition(position);
 
       // Move cursor to the next row.
-      m_cursor.y += widget -> GetSize().height + widget -> GetBottomMargin();
+      m_cursor.y += widget -> GetSize().height +
+                    widget -> GetMargin().GetBottomMargin();
       break;
     }
     case GuiObject::GuiAlign::AlignBottom:
@@ -167,14 +173,15 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
     {
       std::cout << "[Info][GuiLayoutVertical][UpdatePositionOfWidget] Detected AlignLeft.\n";
       // Increase current currsor y position to include top margin.
-      m_cursor.y += widget -> GetTopMargin();
+      m_cursor.y += widget -> GetMargin().GetTopMargin();
       sf::Vector2f left = { m_position.x, m_cursor.y };
 
       sf::Vector2f position = { left.x, left.y };
       widget -> SetPosition(position);
 
       // Move cursor to the next row.
-      m_cursor.y += widget -> GetSize().height + widget -> GetBottomMargin();
+      m_cursor.y += widget -> GetSize().height +
+                    widget -> GetMargin().GetBottomMargin();
       break;
     }
     default:
