@@ -23,10 +23,7 @@ GuiTextWidget::GuiTextWidget(Window* window)
     std::cout << exception.what() << "\n";
   }
 
-  m_margins.top = 12.f;
-  m_margins.bottom = 12.f;
-  m_margins.left = 12.f;
-  m_margins.right = 12.f;
+  m_margins.SetMargins(12.f, 12.f, 12.f, 12.f);
 
   m_color = sf::Color(255, 255, 255);
   m_hoverColor = sf::Color(230, 230, 230);

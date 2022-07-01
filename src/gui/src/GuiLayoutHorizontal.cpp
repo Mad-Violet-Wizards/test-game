@@ -78,7 +78,9 @@ void GuiLayoutHorizontal::CheckToUpdateSize()
   // Acumulate the height of widgets.
   for (auto &widget : m_widgets)
   {
-    height += widget -> GetSize().height + widget -> GetBottomMargin() + widget -> GetTopMargin();
+    height += widget -> GetSize().height +
+              widget -> GetMargin().GetBottomMargin() +
+              widget -> GetMargin().GetTopMargin();
   }
   
   // If accumulated height of widgets is higher than actual layout height, resize.
@@ -95,7 +97,9 @@ void GuiLayoutHorizontal::CheckToUpdateSize()
   // If the layout size is not correct, then resize it correctly to according data.
   if (w != nullptr && w -> GetSize().width > m_size.x)
   {
-    m_size.x = w -> GetSize().width + w -> GetLeftMargin() + w -> GetRightMargin();
+    m_size.x = w -> GetSize().width +
+               w -> GetMargin().GetLeftMargin() +
+               w -> GetMargin().GetRightMargin();
 
     // We've to restart cursor, 
     // because new size have to 
@@ -124,13 +128,14 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
       std::cout << "[Info][GuiLayoutHorizontal][AddWidget] Detected AlignTop.\n";
       sf::FloatRect widgetSize = widget -> GetSize();
 
-      m_cursor.x += widget -> GetLeftMargin();
+      m_cursor.x += widget -> GetMargin().GetLeftMargin();
       sf::Vector2f top = { m_position.x + m_cursor.x, m_position.y };
 
       sf::Vector2f position = { top.x, top.y };
       widget -> SetPosition(position);
 
-      m_cursor.x += widget -> GetSize().width + widget -> GetRightMargin();
+      m_cursor.x += widget -> GetSize().width +
+                    widget -> GetMargin().GetRightMargin();
       break;
     }
     case GuiObject::GuiAlign::AlignRight:
@@ -150,13 +155,14 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
 
         widgetSize.height /= 2;
 
-        m_cursor.x += widget -> GetLeftMargin();
+        m_cursor.x += widget -> GetMargin().GetLeftMargin();
         sf::Vector2f center = { m_cursor.x, m_position.y + m_size.y / 2 };
 
         sf::Vector2f position = { center.x, center.y - widgetSize.height };
         widget -> SetPosition(position);
 
-        m_cursor.x += widget -> GetSize().width + widget -> GetRightMargin();
+        m_cursor.x += widget -> GetSize().width +
+                      widget -> GetMargin().GetRightMargin();
       }
       else
       {
@@ -174,13 +180,14 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
       {
         sf::FloatRect widgetSize = w -> GetSize();
 
-        m_cursor.x += widget -> GetLeftMargin();
+        m_cursor.x += widget -> GetMargin().GetLeftMargin();
         sf::Vector2f bottom = { m_position.x + m_cursor.x, m_position.y + m_size.y };
 
         sf::Vector2f position = { bottom.x, bottom.y - widgetSize.height / 2 };
         widget -> SetPosition(position);
 
-        m_cursor.x += widget -> GetSize().width + widget -> GetRightMargin();
+        m_cursor.x += widget -> GetSize().width +
+                      widget -> GetMargin().GetRightMargin();
       }
       else
       {

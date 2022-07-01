@@ -5,6 +5,7 @@
 
 #include "Window.hpp"
 #include "GuiObject.hpp"
+#include "GuiMargin.hpp"
 
 class GuiTextWidget : public GuiObject
 {
@@ -41,6 +42,8 @@ public:
 private:
 
   virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+  GuiMargin m_margins;
 
   sf::Font m_font;
   sf::Text m_text;
