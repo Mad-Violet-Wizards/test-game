@@ -23,7 +23,7 @@ void GuiLayoutVertical::AddWidget(std::shared_ptr<GuiObject> widget)
   CheckToUpdateSize();
 }
 
-void GuiLayoutVertical::SetRelativeSize(const unsigned int x, const unsigned int y)
+void GuiLayoutVertical::SetRelativeSize(unsigned int x, unsigned int y)
 {
   GuiLayout::SetRelativeSize(x, y);
 }
@@ -33,7 +33,7 @@ void GuiLayoutVertical::SetRelativeSize(const sf::Vector2u &size)
   GuiLayout::SetRelativeSize(size);
 }
 
-void GuiLayoutVertical::SetRelativePosition(const unsigned int x, const unsigned int y)
+void GuiLayoutVertical::SetRelativePosition(unsigned int x, unsigned int y)
 {
   GuiLayout::SetRelativePosition(x, y);
   m_cursor = m_position;

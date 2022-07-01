@@ -149,6 +149,9 @@ void SceneMenu::InitConnections()
   m_buttonResolution   -> Clicked.connect(boost::bind(&SceneMenu::ChangeWindowResolution, this));
   m_buttonCloseOptions -> Clicked.connect(boost::bind(&SceneMenu::CloseOptions, this));
 
-  m_window -> ResolutionChanged.connect(boost::bind(&GuiLayoutVertical::RefreshSize, m_mainMenuLayout));
-  m_window -> ResolutionChanged.connect(boost::bind(&GuiLayoutVertical::RefreshSize, m_optionsMenuLayout));
+  m_window -> ResolutionChanged.connect(boost::bind(&GuiLayoutVertical::RefreshSize,
+                                                    m_mainMenuLayout));
+
+  m_window -> ResolutionChanged.connect(boost::bind(&GuiLayoutVertical::RefreshSize,
+                                                    m_optionsMenuLayout));
 }
