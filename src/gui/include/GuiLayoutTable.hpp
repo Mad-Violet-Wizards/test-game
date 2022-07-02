@@ -22,6 +22,7 @@ public:
   void Draw(Window &window) override;
 
   void AddWidget(std::shared_ptr<GuiObject> widget, int row, int column);
+  void RemoveWidget(std::shared_ptr<GuiObject>);
 
   void SetRelativeSize(unsigned int x, unsigned int y) override;
   void SetRelativeSize(const sf::Vector2u &size) override;

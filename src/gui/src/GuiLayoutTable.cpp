@@ -78,6 +78,52 @@ void GuiLayoutTable::AddWidget(std::shared_ptr<GuiObject> widget, int row, int c
   UpdatePositionOfWidget(widget, row, column);
 }
 
+void GuiLayoutTable::RemoveWidget(std::shared_ptr<GuiObject> widget)
+{
+
+  // Find widget and remove it.
+
+ for (auto it = m_widgets.begin(); it != m_widgets.end(); ++it)
+  {
+    if (it -> second == widget)
+    {
+      m_widgets.erase(it -> first);
+    }
+  }
+
+  // There might be a chance that removed widget was setup to be scaling factor.
+  // If it was - update scalingFactor.
+
+  if (m_widgets.size() > 1)
+  {
+    for (auto it = m_widgets.cbegin(); it != m_widgets.cend(); ++it)
+    {
+      if (it -> second -> GetSize().width > m_scalingFactor.x)
+      {
+        m_scalingFactor.x = it -> second -> GetSize().width;
+      }
+
+      if (it -> second -> GetSize().height > m_scalingFactor.y)
+      {
+        m_scalingFactor.y = it -> second -> GetSize().height;
+      }
+    }
+  }
+
+  // Update position of layout according to new scaling factor.
+
+  if (m_widgets.size() > 1)
+  {
+    for (auto it = m_widgets.cbegin(); it != m_widgets.cend(); ++it)
+    {
+      int row, count;
+      std::tie(row, count) = it -> first;
+
+      UpdatePositionOfWidget(it -> second, row, count);
+    }
+  }
+}
+
 void GuiLayoutTable::SetRelativeSize(unsigned int x, unsigned int y)
 {
   GuiLayout::SetRelativeSize(x, y);

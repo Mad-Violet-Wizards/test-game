@@ -21,7 +21,28 @@ void GuiLayoutHorizontal::AddWidget(std::shared_ptr<GuiObject> widget)
   /*
   FIXME: This is defienietly not the best way to do it.
   */
+
   m_cursor = m_position;
+  for (auto widget : m_widgets)
+  {
+    UpdatePositionOfWidget(widget);
+  }
+
+  CheckToUpdateSize();
+}
+
+void GuiLayoutHorizontal::RemoveWidget(std::shared_ptr<GuiObject> widget)
+{
+  std::cout << "[Info][GuiLayoutHorizontal] Remove widget from GuiLayoutHorizontal.\n";
+
+  m_widgets.remove(widget);
+
+  /*
+  FIXME: This is defienietly not the best way to do it.
+  */
+
+  m_cursor = m_position;
+
   for (auto widget : m_widgets)
   {
     UpdatePositionOfWidget(widget);
