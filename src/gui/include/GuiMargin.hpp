@@ -21,7 +21,7 @@ public:
     top = topMargin;
     right = rightMargin;
     bottom = bottomMargin;
-    leftMargin = leftMargin;
+    left = leftMargin;
   }
 
   void SetTopMargin(float topMargin)       { top = topMargin; }

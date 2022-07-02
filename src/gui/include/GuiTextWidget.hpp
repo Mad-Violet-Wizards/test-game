@@ -43,8 +43,6 @@ private:
 
   virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-  GuiMargin m_margins;
-
   sf::Font m_font;
   sf::Text m_text;
 

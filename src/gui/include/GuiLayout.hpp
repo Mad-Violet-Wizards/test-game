@@ -15,23 +15,16 @@ public:
   GuiLayout(Window *window);
   ~GuiLayout();
 
-  void Update();
-  void Draw(Window &window);
-
-  /*
-  * TODO: Think, if those are really important here, GuiLayout is only a base class containg basic informations.
-  */
-
-  virtual void AddWidget(std::shared_ptr<GuiObject> widget);
-  virtual void RemoveWidget(std::shared_ptr<GuiObject> widget); // Made this method virtual only for some unknown time.
+  virtual void Update();
+  virtual void Draw(Window &window);
 
   void SetVisible(bool visible);
   /*
   * FIXME: Those four methods are using the same code, maybe move it to one mehtod "CountRelative"?
   */
-  virtual void SetRelativeSize(const unsigned int x, const unsigned int y);
+  virtual void SetRelativeSize(unsigned int x, unsigned int y);
   virtual void SetRelativeSize(const sf::Vector2u &size);
-  virtual void SetRelativePosition(const unsigned int x, const unsigned int y);
+  virtual void SetRelativePosition(unsigned int x, unsigned int y);
   virtual void SetRelativePosition(const sf::Vector2u &position);
 
   const sf::Vector2f GetSize()             const { return m_size; }

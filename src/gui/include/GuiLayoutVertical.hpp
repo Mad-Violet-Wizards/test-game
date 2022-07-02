@@ -15,23 +15,25 @@ public:
   GuiLayoutVertical(Window *window);
   ~GuiLayoutVertical();
 
-  void AddWidget(std::shared_ptr<GuiObject> widget) override;
+  void AddWidget(std::shared_ptr<GuiObject> widget);
 
-  void SetRelativeSize(const unsigned int x, const unsigned int y) override;
+  void SetRelativeSize(unsigned int x, unsigned int y) override;
   void SetRelativeSize(const sf::Vector2u &size) override;
-  void SetRelativePosition(const unsigned int x, const unsigned int y) override;
+  void SetRelativePosition(unsigned int x, unsigned int y) override;
   void SetRelativePosition(const sf::Vector2u &position) override;
 
-  /*
-  TODO: Consider moving it to private member.
-  */
-  void CheckToUpdateSize();
+  //
+  // Signal & slots.
+  //
 
   void RefreshSize() override;
 
 private:
 
   void UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget);
+
+  void CheckToUpdateSize();
+
   sf::Vector2f m_cursor;
 
 };

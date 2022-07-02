@@ -38,22 +38,12 @@ void GuiLayout::Draw(Window &window)
   }
 }
 
-void GuiLayout::AddWidget(std::shared_ptr<GuiObject> widget)
-{
-  m_widgets.push_back(widget);
-}
-
-void GuiLayout::RemoveWidget(std::shared_ptr<GuiObject> widget)
-{
-  m_widgets.remove(widget);
-}
-
 void GuiLayout::SetVisible(bool visible)
 {
   m_isVisible = visible;
 }
 
-void GuiLayout::SetRelativeSize(const unsigned int x, const unsigned int y)
+void GuiLayout::SetRelativeSize(unsigned int x, unsigned int y)
 {
   m_size = ScaleRelativeToWindowAbsolute(sf::Vector2u {x, y} );
   m_relativeSize = sf::Vector2u{ x, y };
@@ -65,7 +55,7 @@ void GuiLayout::SetRelativeSize(const sf::Vector2u &size)
   m_relativeSize = size;
 }
 
-void GuiLayout::SetRelativePosition(const unsigned int x, const unsigned int y)
+void GuiLayout::SetRelativePosition(unsigned int x, unsigned int y)
 {
   m_position = ScaleRelativeToWindowAbsolute(sf::Vector2u{x, y});
   m_relativePosition = sf::Vector2u { x, y };
