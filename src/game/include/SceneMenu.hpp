@@ -8,7 +8,6 @@
 #include "GuiManager.hpp"
 #include "GuiLayout.hpp"
 #include "GuiLayoutVertical.hpp"
-#include "GuiLayoutHorizontal.hpp"
 #include "GuiObject.hpp"
 #include "GuiTextWidget.hpp"
 #include "WindowResolution.hpp"

@@ -23,6 +23,26 @@ void GuiLayoutVertical::AddWidget(std::shared_ptr<GuiObject> widget)
   CheckToUpdateSize();
 }
 
+void GuiLayoutVertical::RemoveWidget(std::shared_ptr<GuiObject> widget)
+{
+  std::cout << "[Info][GuiLayoutHorizontal] Remove widget from GuiLayoutVertical.\n";
+
+  m_widgets.remove(widget);
+
+  /*
+  FIXME: This is defienietly not the best way to do it.
+  */
+
+  m_cursor = m_position;
+
+  for (auto widget : m_widgets)
+  {
+    UpdatePositionOfWidget(widget);
+  }
+
+  CheckToUpdateSize();
+}
+
 void GuiLayoutVertical::SetRelativeSize(unsigned int x, unsigned int y)
 {
   GuiLayout::SetRelativeSize(x, y);

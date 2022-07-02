@@ -13,6 +13,7 @@ public:
   ~GuiLayoutHorizontal();
 
   void AddWidget(std::shared_ptr<GuiObject> widget);
+  void RemoveWidget(std::shared_ptr<GuiObject> widget);
 
   void SetRelativeSize(unsigned int x, unsigned int y) override;
   void SetRelativeSize(const sf::Vector2u &size) override;
