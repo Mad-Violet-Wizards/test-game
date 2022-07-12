@@ -7,7 +7,7 @@
 
 C_KeyboardMovement::C_KeyboardMovement(Object *owner)
   : Component(owner),
-  m_moveSpeed(100) {}
+  m_moveSpeed(100.f) {}
 
 void C_KeyboardMovement::Awake()
 {

@@ -16,7 +16,7 @@ public:
 
 private:
 
-  int m_moveSpeed;
+  float m_moveSpeed;
 
   std::shared_ptr<C_Velocity> m_velocity;
 
