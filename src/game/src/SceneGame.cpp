@@ -10,24 +10,22 @@ SceneGame::~SceneGame() {}
 void SceneGame::OnCreate()
 {
   m_player = std::make_shared<Object>();
-  auto sprite = m_player -> AddComponent<C_Sprite>();
 
-  try
-  {
-    sprite -> Load(AssetsManager::GetInstance().GetTexture("testsprite"));
-  }
-  catch (const std::logic_error &exception)
-  {
-    std::cout << exception.what() << "\n";
-  }
-  catch (const std::runtime_error &exception)
-  {
-    std::cout << exception.what() << "\n";
-  }
+  auto sprite = m_player -> AddComponent<C_Sprite>();
 
   auto transform = m_player -> AddComponent<C_Transform>();
 
+  auto velocity = m_player -> AddComponent<C_Velocity>();
+
   auto movement = m_player -> AddComponent<C_KeyboardMovement>();
+  movement -> Awake();
+
+  auto animation = m_player -> AddComponent<C_Animation>();
+  animation -> Awake();
+  animation -> SetAnimationFile("../assets/animations/AnimationPlayer.json");
+
+  auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
+  movementAnimation -> Awake();
 }
 
 void SceneGame::OnDestroy() {}

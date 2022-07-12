@@ -5,11 +5,18 @@
 #include "Object.hpp"
 #include "EventHandler.hpp"
 
-C_KeyboardMovement::C_KeyboardMovement(Object *owner) : Component(owner), m_moveSpeed(100) {}
+C_KeyboardMovement::C_KeyboardMovement(Object *owner)
+  : Component(owner),
+  m_moveSpeed(100) {}
+
+void C_KeyboardMovement::Awake()
+{
+  m_velocity = m_owner -> GetComponent<C_Velocity>();
+}
 
 void C_KeyboardMovement::Update(float deltaTime)
 {
-  int xMove = 0;
+  float xMove = 0.f;
   if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Left))
   {
     xMove = -m_moveSpeed;
@@ -19,7 +26,7 @@ void C_KeyboardMovement::Update(float deltaTime)
     xMove = m_moveSpeed;
   }
 
-  int yMove = 0;
+  float yMove = 0.f;
   if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Up))
   {
     yMove = -m_moveSpeed;
@@ -29,7 +36,5 @@ void C_KeyboardMovement::Update(float deltaTime)
     yMove = m_moveSpeed;
   }
 
-  float xMoveFrame = xMove * deltaTime;
-  float yMoveFrame = yMove * deltaTime;
-  m_owner -> GetComponent<C_Transform>() -> AddPosition(xMoveFrame, yMoveFrame);
+  m_velocity -> Set(xMove, yMove);
 }

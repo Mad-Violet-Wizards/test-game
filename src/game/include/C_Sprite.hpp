@@ -12,9 +12,12 @@ public:
   C_Sprite(Object *owner);
 
   void Load(const sf::Texture &texture);
+  void Load(std::shared_ptr<sf::Texture> texture);
 
   void Update(float deltaTime) override;
   void Draw(Window &window) override;
+
+  void SetScale(float x, float y);
 
 private:
 
