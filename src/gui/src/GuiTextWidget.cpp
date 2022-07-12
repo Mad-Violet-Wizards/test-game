@@ -10,18 +10,7 @@ GuiTextWidget::GuiTextWidget(Window* window)
 {
   std::cout << "[Info][GuiTextWidget]: Creating new GuiTextWidget \n";
 
-  try
-  {
-    m_text.setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter"));
-  }
-  catch (const std::logic_error &exception)
-  {
-    std::cout << exception.what() << "\n";
-  }
-  catch (const std::runtime_error &exception)
-  {
-    std::cout << exception.what() << "\n";
-  }
+  m_text.setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter"));
 
   m_margins.SetMargins(12.f, 12.f, 12.f, 12.f);
 

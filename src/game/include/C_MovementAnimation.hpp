@@ -2,22 +2,22 @@
 
 #include "Component.hpp"
 #include "C_Velocity.hpp"
+#include "C_Animation.hpp"
 
-class C_KeyboardMovement : public Component
+class C_MovementAnimation : public Component
 {
 
 public:
 
-  C_KeyboardMovement(Object *owner);
+  C_MovementAnimation(Object *owner);
 
   void Awake() override;
-  void SetMovementSpeed(int moveSpeed);
+
   void Update(float deltaTime) override;
 
 private:
 
-  int m_moveSpeed;
-
   std::shared_ptr<C_Velocity> m_velocity;
+  std::shared_ptr<C_Animation> m_animation;
 
 };

@@ -7,6 +7,9 @@
 #include "Object.hpp"
 #include "C_Sprite.hpp"
 #include "C_KeyboardMovement.hpp"
+#include "C_Animation.hpp"
+#include "C_Velocity.hpp"
+#include "C_MovementAnimation.hpp"
 
 class SceneGame : public Scene
 {
