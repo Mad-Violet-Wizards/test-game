@@ -13,9 +13,9 @@ class GuiLayout
 public:
 
   GuiLayout(Window *window);
-  ~GuiLayout();
+  virtual ~GuiLayout();
 
-  virtual void Update();
+  virtual void Update(float deltaTime);
   virtual void Draw(Window &window);
 
   void SetVisible(bool visible);

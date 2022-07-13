@@ -18,7 +18,7 @@ public:
   GuiLayoutTable(Window *window);
   ~GuiLayoutTable();
 
-  void Update() override;
+  void Update(float deltaTime) override;
   void Draw(Window &window) override;
 
   void AddWidget(std::shared_ptr<GuiObject> widget, int row, int column);

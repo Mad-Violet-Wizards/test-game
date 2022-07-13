@@ -20,9 +20,9 @@ public:
   };
 
   GuiObject(Window* window);
-  ~GuiObject();
+  virtual ~GuiObject();
 
-  virtual void Update() {}
+  virtual void Update(float deltaTime) {}
   virtual sf::FloatRect GetSize() { return sf::FloatRect{}; }
 
   virtual void SetPosition(const float x, const float y);

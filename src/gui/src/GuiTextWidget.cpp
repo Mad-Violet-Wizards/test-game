@@ -25,7 +25,7 @@ GuiTextWidget::~GuiTextWidget()
   std::cout << "[Info][GuiTextWidget]: Destroyed GuiTextWidget \n";
 }
 
-void GuiTextWidget::Update()
+void GuiTextWidget::Update(float deltaTime)
 {
   if (m_mouseTracking == false)
   {

@@ -15,7 +15,7 @@ public:
   GuiTextWidget(Window *window);
   ~GuiTextWidget();
 
-  void Update() override;
+  void Update(float deltaTime) override;
   sf::FloatRect GetSize() override;
 
   void SetPosition(const float x, const float y) override;

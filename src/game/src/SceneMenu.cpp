@@ -28,7 +28,7 @@ void SceneMenu::OnDestroy()
 
 void SceneMenu::Update(float deltaTime)
 {
-  m_menuGuiManager.Update();
+  m_menuGuiManager.Update(deltaTime);
 }
 
 void SceneMenu::Draw(Window &window)

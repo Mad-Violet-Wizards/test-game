@@ -16,13 +16,13 @@ GuiLayout::~GuiLayout()
   std::cout << "[Info][GuiLayout] Destroyed Gui Layout\n";
 }
 
-void GuiLayout::Update()
+void GuiLayout::Update(float deltaTime)
 {
   if (m_isVisible)
   {
     for (auto &widget : m_widgets)
     {
-      widget -> Update();
+      widget -> Update(deltaTime);
     }
   }
 }

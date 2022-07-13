@@ -29,7 +29,7 @@ public:
 
   void UpdateLayoutLevel(LayoutLevel level, std::shared_ptr<GuiLayout> layout);
 
-  void Update();
+  void Update(float deltaTime);
   void Draw(Window &window);
 
 private:
