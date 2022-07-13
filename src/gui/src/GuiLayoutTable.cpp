@@ -13,13 +13,13 @@ GuiLayoutTable::~GuiLayoutTable()
   std::cout << "[Info][GuiLayoutTable] Destroyed GuiLayoutTable.\n";
 }
 
-void GuiLayoutTable::Update()
+void GuiLayoutTable::Update(float deltaTime)
 {
   if (m_isVisible)
   {
     for (auto it = m_widgets.cbegin(); it != m_widgets.cend(); ++it)
     {
-      it -> second -> Update();
+      it -> second -> Update(deltaTime);
     }
   }
 }
