@@ -1,47 +1,50 @@
 #pragma once
 
-#include <iostream>
 #include <fstream>
-#include <filesystem>
 
-static std::string s_logFile;
+#include "LogFileManager.hpp"
 
-class Log : private std::streambuf, public std::ostream
+template <typename T>
+constexpr void LOG(const T &msg)
 {
+  LogFileManager::GetInstance().CreateLogDirectory();
+  LogFileManager::GetInstance().CreateLogFile();
 
-public:
+  std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(), std::ios_base::app);
 
-  Log() : std::ostream(this) {}
+  auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
 
-private:
+  const auto formattedMsg = std::format("[{:%Y/%m/%d %H:%M:%S}]{}",
+                                        std::chrono::floor<std::chrono::milliseconds>(time),
+                                        msg);
 
-  int overflow(int c) override
-  {
-    SaveToFile(c);
-    return 0;
-  }
+	logFile << formattedMsg
+          << "\n"
+          << std::flush;
 
-  void SaveToFile(char txt)
-  {
-    if (s_logFile.empty())
-    {
-      GenerateLogDirectoryWithFile();
-    }
+  logFile.close();
+}
 
-    std::ofstream ofs;
-    ofs.open(s_logFile, std::ios_base::app);
-    ofs << txt; 
-    ofs.close();
-  }
+template <typename ...Args>
+constexpr void LOG(const std::string &prefix, Args &&... args)
+{
+  LogFileManager::GetInstance().CreateLogDirectory();
+  LogFileManager::GetInstance().CreateLogFile();
 
-  void GenerateLogDirectoryWithFile()
-  {
-    std::filesystem::path path{ "../../logs" };
+  std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(), std::ios_base::app);
 
-    path /= "log.txt";
+  auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
 
-    std::filesystem::create_directories(path.parent_path());
+  logFile << std::format("[{:%Y/%m/%d %H:%M:%S}]", std::chrono::floor<std::chrono::milliseconds>(time)) << prefix;
 
-    s_logFile = path.string();
-  }
-};
+	((logFile << std::forward<Args>(args) << " "), ...);
+
+  logFile << "\n" << std::flush;
+
+  logFile.close();
+}
+
+#define LOG_INFO(...)    LOG("[Info] ",    __VA_ARGS__);
+#define LOG_WARNING(...) LOG("[Warning] ", __VA_ARGS__);
+#define LOG_ERROR(...)   LOG("[Error] ",   __VA_ARGS__);
+#define LOG_DEBUG(...)   LOG("[Debug] ",   __VA_ARGS__);

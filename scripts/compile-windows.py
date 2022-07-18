@@ -120,9 +120,17 @@ def release():
   os.chdir('..')
 
   if (os.path.exists("test-game")):
-    shutil.rmtree("test-game")
+    os.chdir('./test-game')
 
-  os.mkdir("test-game")
+    if (os.path.exists("bin")):
+      shutil.rmtree("bin")
+    if (os.path.exists("assets")):
+      shutil.rmtree("assets")
+    if (os.path.exists("lib")):
+      shutil.rmtree("lib")
+
+    os.chdir("..")
+
   copy = shutil.copytree("./assets", "test-game/assets")
   copy = shutil.copytree("build/app/bin", "test-game/bin")
   copy = shutil.copytree("build/app/lib", "test-game/lib")
