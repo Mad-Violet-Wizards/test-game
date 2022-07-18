@@ -19,7 +19,7 @@ LogFileManager &LogFileManager::GetInstance()
   return *s_instance;
 }
 
-void LogFileManager::GenerateLogDirectory()
+void LogFileManager::CreateLogDirectory()
 {
   if (s_instance == nullptr)
   {
@@ -43,7 +43,7 @@ void LogFileManager::GenerateLogDirectory()
   }
 }
 
-void LogFileManager::GenerateLogFile()
+void LogFileManager::CreateLogFile()
 {
   if (s_instance == nullptr)
   {
@@ -65,5 +65,10 @@ void LogFileManager::GenerateLogFile()
   std::ofstream timeFile(timeFilePath);
   timeFile.close();
 
-  std::cout << timeFilePath << "\n";
+  LogFileManager::m_pathToLogFile = std::move(timeFilePath);
+}
+
+const std::string &LogFileManager::GetLogFilePath() const
+{
+  return m_pathToLogFile;
 }

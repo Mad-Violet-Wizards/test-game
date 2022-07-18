@@ -12,8 +12,10 @@ public:
 
   static LogFileManager &GetInstance();
 
-  void GenerateLogDirectory();
-  void GenerateLogFile();
+  void CreateLogDirectory();
+  void CreateLogFile();
+
+  const std::string &GetLogFilePath() const;
 
 private:
 

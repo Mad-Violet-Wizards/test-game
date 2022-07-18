@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include <boost/bind/bind.hpp>
 
-#include "LogFileManager.hpp"
 #include "GuiLayout.hpp"
 #include "SceneMenu.hpp"
 #include "EventHandler.hpp"
@@ -19,8 +18,6 @@ SceneMenu::~SceneMenu() {}
 
 void SceneMenu::OnCreate()
 {
-  LogFileManager::GetInstance().GenerateLogDirectory();
-  LogFileManager::GetInstance().GenerateLogFile();
 }
 
 void SceneMenu::OnDestroy()
