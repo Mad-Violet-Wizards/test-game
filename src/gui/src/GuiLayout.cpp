@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Log.hpp"
 #include "GuiLayout.hpp"
 
 GuiLayout::GuiLayout(Window *window)
@@ -8,12 +9,10 @@ GuiLayout::GuiLayout(Window *window)
   m_size(sf::Vector2f{ 100, 100 }),
   m_position(sf::Vector2f{ 0, 0 })
 {
-  std::cout << "[Info][GuiLayout] Created new Gui Layout\n";
 }
 
 GuiLayout::~GuiLayout()
 {
-  std::cout << "[Info][GuiLayout] Destroyed Gui Layout\n";
 }
 
 void GuiLayout::Update(float deltaTime)
@@ -71,7 +70,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithSmallestWidth()
 {
   if (m_widgets.size() == 0)
   {
-    std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.";
+    LOG_WARNING("[GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -88,7 +87,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithHighestWidth()
 {
   if (m_widgets.size() == 0)
   {
-    std::cout << "[Warning][GuiLayout][FindWidgetWithHighestWidth]: Couldn't find any widget.";
+    LOG_WARNING("[GuiLayout][FindWidgetWithHighestWidth]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -105,7 +104,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithSmallestHeight()
 {
   if (m_widgets.size() == 0)
   {
-    std::cout << "[Warning][GuiLayout][FindWidgetWithSmallestHeight]: Couldn't find any widget.";
+    LOG_WARNING("[GuiLayout][FindWidgetWithSmallestHeight]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -122,7 +121,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithHighestHeight()
 {
   if (m_widgets.size() == 0)
   {
-    std::cout << "[Warning][GuiLayout][FindWidgetWithHighestHeight]: Couldn't find any widget.";
+    LOG_WARNING("[GuiLayout][FindWidgetWithHighestHeight]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -139,6 +138,8 @@ const sf::Vector2f GuiLayout::ScaleRelativeToWindowAbsolute(const sf::Vector2u &
 {
   if (m_window == nullptr)
   {
+    LOG_WARNING("[GuiLayout][ScaleRelativeToWindowAbsolute]: Window is nullptr.");
+
     throw std::logic_error("[Error][GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
   }
 

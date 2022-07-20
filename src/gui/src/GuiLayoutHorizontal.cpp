@@ -1,21 +1,19 @@
 #include <iostream>
 
+#include "Log.hpp"
 #include "GuiLayoutHorizontal.hpp"
 
 GuiLayoutHorizontal::GuiLayoutHorizontal(Window *window)
   : GuiLayout(window)
 {
-  std::cout << "[Info][GuiLayoutHorizontal] Created GuiLayoutHorizontal.\n";
 }
 
 GuiLayoutHorizontal::~GuiLayoutHorizontal()
 {
-  std::cout << "[Info][GuiLayoutHorizontal] Destroyed GuiLayoutHorizontal\n";
 }
 
 void GuiLayoutHorizontal::AddWidget(std::shared_ptr<GuiObject> widget)
 {
-  std::cout << "[Info][GuiLayoutHorizontal] Added new widget to GuiLayoutHorizontal.\n";
   m_widgets.push_back(widget);
 
   /*
@@ -33,8 +31,6 @@ void GuiLayoutHorizontal::AddWidget(std::shared_ptr<GuiObject> widget)
 
 void GuiLayoutHorizontal::RemoveWidget(std::shared_ptr<GuiObject> widget)
 {
-  std::cout << "[Info][GuiLayoutHorizontal] Remove widget from GuiLayoutHorizontal.\n";
-
   m_widgets.remove(widget);
 
   /*
@@ -92,8 +88,6 @@ void GuiLayoutHorizontal::SetRelativePosition(const sf::Vector2u &position)
 
 void GuiLayoutHorizontal::CheckToUpdateSize()
 {
-  std::cout << "[Info][GuiLayoutHorizontal]: CheckToUpdateSize\n";
-
   float height = 0;
 
   // Acumulate the height of widgets.
@@ -146,7 +140,6 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
   {
     case GuiObject::GuiAlign::AlignTop:
     {
-      std::cout << "[Info][GuiLayoutHorizontal][AddWidget] Detected AlignTop.\n";
       sf::FloatRect widgetSize = widget -> GetSize();
 
       m_cursor.x += widget -> GetMargin().GetLeftMargin();
@@ -161,13 +154,13 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
     }
     case GuiObject::GuiAlign::AlignRight:
     {
-      std::cout << "[Info][GuiLayoutHorizontal][AddWidget] Detected AlignRight.\n";
+      LOG_WARNING("[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignRight is not supported in this layout.");
+
       throw std::logic_error("[Error][GuiLayoutHorizontal][UpdatePositionOfWidget] AlignRight is not supported. Maybe you want to use GuiLayoutVertical instead?\n");
       break;
     }
     case GuiObject::GuiAlign::AlignCenter:
     {
-      std::cout << "[Info][GuiLayoutHorizontal][AddWidget] Detected AlignCenter.\n";
       auto w = FindWidgetWithHighestHeight();
 
       if (w != nullptr)
@@ -194,7 +187,6 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
     }
     case GuiObject::GuiAlign::AlignBottom:
     {
-      std::cout << "[Info][GuiLayoutHorizontal][AddWidget] Detected AlignBottom.\n";
       auto w = FindWidgetWithHighestHeight();
 
       if (w != nullptr)
@@ -218,7 +210,8 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
     }
     case GuiObject::GuiAlign::AlignLeft:
     {
-      std::cout << "[Info][GuiLayoutHorizontal][AddWidget] Detected AlignLeft.\n";
+      LOG_WARNING("[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignLeft is not supported in this layout.");
+
       throw std::logic_error("[Error][GuiLayoutHorizontal][UpdatePositionOfWidget] AlignLeft is not supported. Maybe you want to use GuiLayoutVertical instead?\n");
       break;
     }

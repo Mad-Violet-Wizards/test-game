@@ -5,11 +5,8 @@
 GuiObject::GuiObject(Window* window)
   : m_window(window)
 {
-  std::cout << "[Info][GuiWidget]: Created new GuiWidget \n";
   m_position = sf::Vector2f{ 0.f, 0.f };
   m_align = GuiAlign::AlignCenter;
-  //m_testRect.setSize(sf::Vector2f(200, 200));
-  //m_testRect.setFillColor(sf::Color::Green);
 
   m_visible = true;
 
@@ -18,7 +15,6 @@ GuiObject::GuiObject(Window* window)
 
 GuiObject::~GuiObject()
 {
-  std::cout << "[Info][GuiWidget]: Destroyed GuiWidget \n";
 }
 
 void GuiObject::SetPosition(const float x, const float y)

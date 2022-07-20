@@ -1,21 +1,19 @@
 #include <iostream>
 
+#include "Log.hpp"
 #include "GuiLayoutVertical.hpp"
 
 GuiLayoutVertical::GuiLayoutVertical(Window *window)
   : GuiLayout(window)
 {
-  std::cout << "[Info][GuiLayoutVertical] Created GuiLayoutVertical.\n";
 }
 
 GuiLayoutVertical::~GuiLayoutVertical()
 {
-  std::cout << "[Info][GuiLayoutVertical] Destroyed GuiLayoutVertical.\n";
 }
 
 void GuiLayoutVertical::AddWidget(std::shared_ptr<GuiObject> widget)
 {
-  std::cout << "[Info][GuiLayoutVertical] Added new widget to GuiLayoutVertical.\n";
   m_widgets.push_back(widget);
 
   UpdatePositionOfWidget(widget);
@@ -25,8 +23,6 @@ void GuiLayoutVertical::AddWidget(std::shared_ptr<GuiObject> widget)
 
 void GuiLayoutVertical::RemoveWidget(std::shared_ptr<GuiObject> widget)
 {
-  std::cout << "[Info][GuiLayoutHorizontal] Remove widget from GuiLayoutVertical.\n";
-
   m_widgets.remove(widget);
 
   /*
@@ -142,13 +138,12 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
   {
     case GuiObject::GuiAlign::AlignTop:
     {
-      std::cout << "[Info][GuiLayoutVertical][UpdatePositionOfWidget] Detected AlignTop.\n";
+      LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported in this layout.");
       throw std::logic_error("[Error][GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported. Maybe you want to use GuiLayoutHorizontal instead?\n");
       break;
     }
     case GuiObject::GuiAlign::AlignRight:
     {
-      std::cout << "[Info][GuiLayoutVertical][UpdatePositionOfWidget] Detected AlignRight.\n";
       sf::FloatRect widgetSize = widget -> GetSize();
 
       // Increase current currsor y position to include top margin.
@@ -165,7 +160,6 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
     }
     case GuiObject::GuiAlign::AlignCenter:
     {
-      std::cout << "[Info][GuiLayoutVertical][UpdatePositionOfWidget] Detected AlignCenter.\n";
       sf::FloatRect widgetSize = widget -> GetSize();
 
       // We got center pixel.
@@ -185,13 +179,12 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
     }
     case GuiObject::GuiAlign::AlignBottom:
     {
-      std::cout << "[Info][GuiLayoutVertical][UpdatePositionOfWidget] Detected AlignBottom.\n";
+      LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported in this layout.");
       throw std::logic_error("[Error][GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported. Maybe you want to use GuiLayoutHorizontal instead?\n");
       break;
     }
     case GuiObject::GuiAlign::AlignLeft:
     {
-      std::cout << "[Info][GuiLayoutVertical][UpdatePositionOfWidget] Detected AlignLeft.\n";
       // Increase current currsor y position to include top margin.
       m_cursor.y += widget -> GetMargin().GetTopMargin();
       sf::Vector2f left = { m_position.x, m_cursor.y };

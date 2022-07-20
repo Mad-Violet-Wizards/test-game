@@ -39,7 +39,7 @@ void LogFileManager::CreateLogDirectory()
     bool success = std::filesystem::create_directories(logsDirectory);
 
     if (success) { std::cout << "[LogFileManager][Info] Created logs directory.\n"; }
-    else          { std::cout << "[LogFileManager][Error] Cannot create logs directory.\n"; }
+    else         { std::cout << "[LogFileManager][Error] Cannot create logs directory.\n"; }
   }
 }
 

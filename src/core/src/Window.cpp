@@ -5,7 +5,6 @@
 Window::Window(const std::string &windowName)
   : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Fullscreen)
 {
-  std::cout << "[Window] Created new Window.\n";
 }
 
 Window::~Window() {}

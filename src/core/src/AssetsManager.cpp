@@ -7,8 +7,6 @@ std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
 
 AssetsManager::AssetsManager()
 {
-  std::cout << "[AssetsManager] Created new instance of AssetsManager.\n";
-
   CreateFilesMap< sf::Texture >(std::string { "../assets/textures/" },
                                 std::string { ".png" },
                                 m_textures );
@@ -20,7 +18,6 @@ AssetsManager::AssetsManager()
 
 AssetsManager::~AssetsManager()
 {
-  std::cout << "[AssetsManager] Deleted instance of AssetsManager.\n";
 }
 
 //

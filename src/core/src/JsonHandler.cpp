@@ -17,7 +17,6 @@ void JsonHandler::LoadFile(const std::string &filePath)
 {
   if (m_jsonFileContent != nullptr)
   {
-    std::cout << "[JsonHandler] File already lodaded.\n";
     return;
   }
 

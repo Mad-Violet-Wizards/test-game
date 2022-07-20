@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 
+#include "Log.hpp"
 #include "JsonHandler.hpp"
 #include "Animation.hpp"
 
@@ -25,7 +26,7 @@ void Animation::LoadMovementAnimation(const std::string &filePath,
 {
   using namespace rapidjson;
 
-  std::cout << "[Animation][Info] Loading Animations for: " << filePath << "\n";
+  LOG_INFO("[Animation] Loading animations for: ", filePath);
 
   static JsonHandler jsonHandler;
   jsonHandler.LoadFile(filePath);
@@ -60,7 +61,7 @@ void Animation::LoadMovementAnimation(const std::string &filePath,
 
     if (!texture -> loadFromFile(animationAssetsFilePath + textureFile.GetString()))
     {
-      std::cout << "[Animation] Could not load the file.\n";
+      LOG_WARNING("[Animation] Could not load the file.")
     }
 
     if (state == AnimationState::Idle)

@@ -4,13 +4,11 @@
 
 MouseInput::MouseInput()
 {
-  std::cout << "[MouseInput] Created new instance of Mouse input.\n";
   InitializeAssociatedKeys();
 }
 
 MouseInput::~MouseInput()
 {
-  std::cout << "[MouseInput] Deleted instance of Mouse input.\n";
 }
 
 void MouseInput::InitializeAssociatedKeys()

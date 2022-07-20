@@ -8,8 +8,6 @@
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
 {
-  std::cout << "[Info][GuiTextWidget]: Creating new GuiTextWidget \n";
-
   m_text.setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter"));
 
   m_margins.SetMargins(12.f, 12.f, 12.f, 12.f);
@@ -22,7 +20,6 @@ GuiTextWidget::GuiTextWidget(Window* window)
 
 GuiTextWidget::~GuiTextWidget()
 {
-  std::cout << "[Info][GuiTextWidget]: Destroyed GuiTextWidget \n";
 }
 
 void GuiTextWidget::Update(float deltaTime)
@@ -59,14 +56,12 @@ sf::FloatRect GuiTextWidget::GetSize()
 
 void GuiTextWidget::SetPosition(const float x, const float y)
 {
-  std::cout << "[Info][GuiTextWidget][SetPosition] Called SetPosition method.\n";
   GuiObject::SetPosition(x, y);
   m_text.setPosition(m_position);
 }
   
 void GuiTextWidget::SetPosition(const sf::Vector2f &position)
 {
-  std::cout << "[Info][GuiTextWidget][SetPosition] Called SetPosition method.\n";
   GuiObject::SetPosition(position);
   m_text.setPosition(m_position);
 }
