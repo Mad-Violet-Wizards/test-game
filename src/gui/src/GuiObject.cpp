@@ -42,7 +42,7 @@ void GuiObject::SetAlign(GuiAlign align)
   m_align = align;
 }
 
-GuiObject::GuiAlign GuiObject::GetAlign()
+GuiAlign GuiObject::GetAlign()
 {
   return m_align;
 }

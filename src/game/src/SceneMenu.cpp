@@ -3,6 +3,7 @@
 #include <boost/bind/bind.hpp>
 
 #include "GuiLayout.hpp"
+#include "GuiAlign.hpp"
 #include "SceneMenu.hpp"
 #include "EventHandler.hpp"
 
@@ -82,20 +83,20 @@ void SceneMenu::CreateGUI()
   m_buttonLoadGame -> SetColor(sf::Color::White);
   m_buttonLoadGame -> SetCharacterSize(24);
   m_buttonLoadGame -> SetText("Load Game");
-  m_buttonLoadGame -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonLoadGame -> SetAlign(GuiAlign::AlignCenter);
 
   m_buttonOptions = std::make_shared<GuiTextWidget>(m_window);
   m_buttonOptions -> SetColor(sf::Color::White);
   m_buttonOptions -> SetCharacterSize(24);
   m_buttonOptions -> SetText("Options");
-  m_buttonOptions -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonOptions -> SetAlign(GuiAlign::AlignCenter);
   m_buttonOptions -> SetMouseTracking(true);
 
   m_buttonExit = std::make_shared<GuiTextWidget>(m_window);
   m_buttonExit -> SetColor(sf::Color::White);
   m_buttonExit -> SetCharacterSize(24);
   m_buttonExit -> SetText("Exit");
-  m_buttonExit -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonExit -> SetAlign(GuiAlign::AlignCenter);
   m_buttonExit -> SetMouseTracking(true);
 
   m_mainMenuLayout -> SetRelativeSize(100, 0);
@@ -110,21 +111,21 @@ void SceneMenu::CreateGUI()
   m_resolutionInfo -> SetColor(sf::Color::White);
   m_resolutionInfo -> SetCharacterSize(24);
   m_resolutionInfo -> SetText("Current Resolution:");
-  m_resolutionInfo -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_resolutionInfo -> SetAlign(GuiAlign::AlignCenter);
 
   m_buttonResolution = std::make_shared<GuiTextWidget>(m_window);
   m_buttonResolution -> SetColor(sf::Color::White);
   m_buttonResolution -> SetCharacterSize(24);
 
   m_buttonResolution -> SetText(m_windowResolutionInformations.GetCurrentResolutionString());
-  m_buttonResolution -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonResolution -> SetAlign(GuiAlign::AlignCenter);
   m_buttonResolution -> SetMouseTracking(true);
 
   m_buttonCloseOptions = std::make_shared<GuiTextWidget>(m_window);
   m_buttonCloseOptions -> SetColor(sf::Color::White);
   m_buttonCloseOptions -> SetCharacterSize(24);
   m_buttonCloseOptions -> SetText("Close Options");
-  m_buttonCloseOptions -> SetAlign(GuiObject::GuiAlign::AlignCenter);
+  m_buttonCloseOptions -> SetAlign(GuiAlign::AlignCenter);
   m_buttonCloseOptions -> SetMouseTracking(true);
 
   m_optionsMenuLayout -> SetRelativeSize(100, 0);

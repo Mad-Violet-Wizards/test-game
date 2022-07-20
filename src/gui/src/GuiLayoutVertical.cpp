@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Log.hpp"
+#include "GuiAlign.hpp"
 #include "GuiLayoutVertical.hpp"
 
 GuiLayoutVertical::GuiLayoutVertical(Window *window)
@@ -132,17 +133,17 @@ void GuiLayoutVertical::RefreshSize()
 
 void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget)
 {
-  GuiObject::GuiAlign align = widget -> GetAlign();
+  GuiAlign align = widget -> GetAlign();
 
   switch (align)
   {
-    case GuiObject::GuiAlign::AlignTop:
+    case GuiAlign::AlignTop:
     {
       LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported in this layout.");
       throw std::logic_error("[Error][GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported. Maybe you want to use GuiLayoutHorizontal instead?\n");
       break;
     }
-    case GuiObject::GuiAlign::AlignRight:
+    case GuiAlign::AlignRight:
     {
       sf::FloatRect widgetSize = widget -> GetSize();
 
@@ -158,7 +159,7 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
                     widget -> GetMargin().GetBottomMargin();
       break;
     }
-    case GuiObject::GuiAlign::AlignCenter:
+    case GuiAlign::AlignCenter:
     {
       sf::FloatRect widgetSize = widget -> GetSize();
 
@@ -177,13 +178,13 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
                     widget -> GetMargin().GetBottomMargin();
       break;
     }
-    case GuiObject::GuiAlign::AlignBottom:
+    case GuiAlign::AlignBottom:
     {
       LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported in this layout.");
       throw std::logic_error("[Error][GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported. Maybe you want to use GuiLayoutHorizontal instead?\n");
       break;
     }
-    case GuiObject::GuiAlign::AlignLeft:
+    case GuiAlign::AlignLeft:
     {
       // Increase current currsor y position to include top margin.
       m_cursor.y += widget -> GetMargin().GetTopMargin();
