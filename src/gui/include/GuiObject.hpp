@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "GuiAlign.hpp"
 #include "Window.hpp"
 #include "GuiMargin.hpp"
 
@@ -9,15 +10,6 @@ class GuiObject : public sf::Drawable, public sf::Transformable
 {
 
 public:
-
-  enum class GuiAlign
-  {
-    AlignTop,
-    AlignRight,
-    AlignCenter,
-    AlignBottom,
-    AlignLeft
-  };
 
   GuiObject(Window* window);
   virtual ~GuiObject();
