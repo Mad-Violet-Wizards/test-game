@@ -4,13 +4,11 @@
 
 KeyboardInput::KeyboardInput()
 {
-  std::cout << "[KeyboardInput] Created new instance of Keyboard input.\n";
   InitializeAssociatedKeys();
 }
 
 KeyboardInput::~KeyboardInput()
 {
-  std::cout << "[KeyboardInput] Deleted instance of Keyboard input.\n";
 }
 
 void KeyboardInput::InitializeAssociatedKeys()

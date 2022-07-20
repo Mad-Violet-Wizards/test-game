@@ -5,12 +5,10 @@
 GuiLayoutTable::GuiLayoutTable(Window *window) 
   : GuiLayout(window)
 {
-  std::cout << "[Info][GuiLayoutTable] Created GuiLayoutTable.\n";
 }
 
 GuiLayoutTable::~GuiLayoutTable()
 {
-  std::cout << "[Info][GuiLayoutTable] Destroyed GuiLayoutTable.\n";
 }
 
 void GuiLayoutTable::Update(float deltaTime)
@@ -37,8 +35,6 @@ void GuiLayoutTable::Draw(Window &window)
 
 void GuiLayoutTable::AddWidget(std::shared_ptr<GuiObject> widget, int row, int column)
 {
-  std::cout << "[Info][GuiLayoutTable] Added new widget to GuiLayoutTable.\n";
-
   Key k = { row, column };
 
   m_widgets.insert( { k, widget } );

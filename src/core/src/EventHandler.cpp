@@ -1,17 +1,16 @@
 #include <iostream>
 
+#include "Log.hpp"
 #include "EventHandler.hpp"
 
 std::unique_ptr<EventHandler> EventHandler::s_instance = nullptr;
 
 EventHandler::EventHandler()
 {
-  std::cout << "[EventHandler] Created new instance of EventHandler.\n";
 }
 
 EventHandler::~EventHandler()
 {
-  std::cout << "[EventHandler] Deleted instance of EventHandler.\n";
 }
 
 EventHandler &EventHandler::GetInstance()
@@ -28,6 +27,8 @@ KeyboardInput &EventHandler::GetKeyboardInput()
 {
   if (s_instance == nullptr)
   {
+    LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
+
     throw std::logic_error("[Error] You've to use it on a instance of EventHandler.");
   }
   else
@@ -40,6 +41,8 @@ MouseInput &EventHandler::GetMouseInput()
 {
   if (s_instance == nullptr)
   {
+    LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
+
     throw std::logic_error("[Error] You've to use it on a instance of EventHandler.");
   }
   else

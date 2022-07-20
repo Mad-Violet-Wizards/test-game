@@ -1,15 +1,14 @@
 #include <iostream>
 
 #include "GuiManager.hpp"
+#include "Log.hpp"
 
 GuiManager::GuiManager()
 {
-  std::cout << "[Info][GuiManager]: Created new Gui Manager\n";
 }
 
 GuiManager::~GuiManager()
 {
-  std::cout << "[Info][GuiManager]: Destroyed Gui Manager \n";
 }
 
 void GuiManager::AddLayout(LayoutLevel level, std::shared_ptr<GuiLayout> layout)
@@ -44,7 +43,7 @@ void GuiManager::UpdateLayoutLevel(LayoutLevel level, std::shared_ptr<GuiLayout>
   {
     if (l.first == level)
     {
-      std::cout << "[Info][GuiManager][UpdateLayoutLevel] This layout level is already occupied, removing.\n";
+      LOG_INFO("[GuiManager][UpdateLayoutLevel] Layout level is already occupied, removing.");
       RemoveLayout(l.second);
 
       AddLayout(level, layout);
