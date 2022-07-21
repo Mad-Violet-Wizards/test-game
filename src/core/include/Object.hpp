@@ -5,6 +5,7 @@
 
 #include "Window.hpp"
 #include "Component.hpp"
+#include "Log.hpp"
 
 class Object
 {
@@ -47,6 +48,8 @@ public:
         return std::dynamic_pointer_cast<T>(exisitingComponent);
       }
     }
+
+    LOG_WARNING("[Object][GetComponent] Returned nullptr.");
 
     return nullptr;
   };

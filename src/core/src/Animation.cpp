@@ -81,7 +81,8 @@ const FrameData *Animation::GetCurrentFrame() const
   { 
     return &m_frames[m_currentFrameIndex]; 
   }
-  
+
+  LOG_WARNING("[Animation][GetCurrentFrame] Returned nullptr.");
   return nullptr;
 }
 
