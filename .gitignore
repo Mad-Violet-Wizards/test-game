@@ -10,6 +10,9 @@ logs/
 # Don't add local logs to repo.
 log/
 
+# Don't add local python env to repo.
+env/
+
 # Windows gitignore - don't add local CMakeSettings
 src/.vs
 src/CMakeSettings.json
