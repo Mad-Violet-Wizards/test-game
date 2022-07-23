@@ -18,7 +18,7 @@ def install():
     os.mkdir('build')
 
   os.chdir('./build')
-  os.system('cmd /c conan install ..')
+  os.system('cmd /c conan install .. --build=missing')
 
 # ==============================================================
 
