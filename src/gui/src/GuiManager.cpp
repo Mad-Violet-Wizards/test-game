@@ -17,7 +17,7 @@ void GuiManager::AddLayout(LayoutLevel level, std::shared_ptr<GuiLayout> layout)
   {
     if (layout.first == level)
     {
-      throw std::logic_error("[Error][GuiManager]: Layout Level is already occupied.\n");
+      LOG_ERROR("[GuiManager][AddLayout] Layout Level is already occupied.\n");
     }
   }
   m_layouts.push_back(std::make_pair(level, layout));

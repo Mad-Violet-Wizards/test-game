@@ -157,7 +157,6 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
     {
       LOG_WARNING("[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignRight is not supported in this layout.");
 
-      throw std::logic_error("[Error][GuiLayoutHorizontal][UpdatePositionOfWidget] AlignRight is not supported. Maybe you want to use GuiLayoutVertical instead?\n");
       break;
     }
     case GuiAlign::AlignCenter:
@@ -181,7 +180,7 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
       }
       else
       {
-        throw std::logic_error("[Error][GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
+        LOG_ERROR("[GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
       }
 
       break;
@@ -205,7 +204,7 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
       }
       else
       {
-        throw std::logic_error("[Error][GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
+        LOG_ERROR("[GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
       }
       break;
     }
@@ -213,7 +212,6 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
     {
       LOG_WARNING("[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignLeft is not supported in this layout.");
 
-      throw std::logic_error("[Error][GuiLayoutHorizontal][UpdatePositionOfWidget] AlignLeft is not supported. Maybe you want to use GuiLayoutVertical instead?\n");
       break;
     }
     default:

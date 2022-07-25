@@ -6,6 +6,7 @@
 #include "GuiAlign.hpp"
 #include "SceneMenu.hpp"
 #include "EventHandler.hpp"
+#include "GuiImage.hpp"
 
 SceneMenu::SceneMenu(Window *window, SceneStateMachine *sceneManager)
   : m_window(window),

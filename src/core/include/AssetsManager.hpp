@@ -17,6 +17,7 @@ public:
 
   sf::Texture &GetTexture(const std::string &textureName) const;
   sf::Font    &GetFont(const std::string &fontName) const;
+  sf::Image   &GetImage(const std::string &imageName) const;
 
 private:
 
@@ -27,5 +28,6 @@ private:
   static std::unique_ptr<AssetsManager> s_instance;
 
   std::map< std::string, std::shared_ptr<sf::Texture> > m_textures;
-  std::map< std::string, std::shared_ptr<sf::Font> > m_fonts;
+  std::map< std::string, std::shared_ptr<sf::Font> >    m_fonts;
+  std::map< std::string, std::shared_ptr<sf::Image> >   m_images;
 };
