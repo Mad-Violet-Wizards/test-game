@@ -29,7 +29,7 @@ def build():
     os.mkdir('build')
 
   os.chdir('./build')
-  os.system('cmd /c conan install ..')
+  os.system('cmd /c conan install .. --build=missing')
   os.system('cmd /c cmake -G "Visual Studio 16 2019" ../src')
   os.system('cmd /c cmake --build . --config Release')
   os.system('cmd /c conan imports ..')

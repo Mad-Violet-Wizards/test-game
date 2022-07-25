@@ -14,6 +14,10 @@ AssetsManager::AssetsManager()
   CreateFilesMap< sf::Font >(std::string { "../assets/fonts/"},
                              std::string { ".ttf" },
                              m_fonts );
+
+  CreateFilesMap< sf::Image >(std::string {"../assets/images/" },
+                              std::string { ".jpg" },
+                              m_images );
 }
 
 AssetsManager::~AssetsManager()
@@ -32,6 +36,11 @@ sf::Texture &AssetsManager::GetTexture(const std::string &textureName) const
 sf::Font &AssetsManager::GetFont(const std::string &fontName) const
 {
   return FindInFilesMap< sf::Font >(fontName, m_fonts);
+}
+
+sf::Image &AssetsManager::GetImage(const std::string &imageName) const
+{
+  return FindInFilesMap< sf::Image >(imageName, m_images);
 }
 
 AssetsManager &AssetsManager::GetInstance()

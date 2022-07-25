@@ -3,7 +3,7 @@
 #include "Window.hpp"
 
 Window::Window(const std::string &windowName)
-  : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Fullscreen)
+  : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Titlebar)
 {
 }
 

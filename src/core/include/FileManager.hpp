@@ -4,6 +4,8 @@
 #include <filesystem>
 #include <map>
 
+#include "Log.hpp"
+
 // TODO: Think of the better name for this file.
 // TODO: Think of the better name for this function.
 
@@ -12,45 +14,34 @@ constexpr void CreateFilesMap(const S &directory,
                               const S &supportedFileFormat,
                               std::map < std::string, std::shared_ptr<T> > &map)
 {
- try
+  if (std::filesystem::exists(directory))
   {
-    if (std::filesystem::exists(directory))
+    for (auto &entry : std::filesystem::directory_iterator(directory))
     {
-      for (auto &entry : std::filesystem::directory_iterator(directory))
+      std::filesystem::path file(entry);
+
+      if (file.extension() == supportedFileFormat)
       {
-        std::filesystem::path file(entry);
+        std::shared_ptr<T> SFML_OBJECT(new T);
 
-        if (file.extension() == supportedFileFormat)
+        if (!SFML_OBJECT -> loadFromFile(entry.path().string()))
         {
-          std::shared_ptr<T> SFML_OBJECT(new T);
-
-          if (!SFML_OBJECT -> loadFromFile(entry.path().string()))
-          {
-            std::cout << "[FileLoader] Couldn't load the file.\n";
-          }
-
-          const std::string name = file.replace_extension().filename().string();
-
-          map.insert(std::pair< std::string, std::shared_ptr<T> >(name, SFML_OBJECT));
+          std::cout << "[FileLoader] Couldn't load the file.\n";
         }
-        else
-        {
-          throw std::runtime_error("[FileLoader][Error] File format is not supported.\n");
-        }
+
+        const std::string name = file.replace_extension().filename().string();
+
+        map.insert(std::pair< std::string, std::shared_ptr<T> >(name, SFML_OBJECT));
+      }
+      else
+      {
+        LOG_ERROR("[FileLoader][Error] File format is not supported.");
       }
     }
-    else
-    {
-      std::cout << "[FileLoader][Warning] Directory is empty.\n";
-    }
   }
-  catch (const std::filesystem::filesystem_error &exception)
+  else
   {
-    std::cout << exception.what() << "\n";
-  }
-  catch (const std::runtime_error &exception)
-  {
-    std::cout << exception.what() << "\n";
+    LOG_WARNING("[FileLoader][Warning] Directory does not exists.");
   }
 }
 
@@ -65,7 +56,7 @@ constexpr T &FindInFilesMap(const Key &name, const std::map< Key, std::shared_pt
   }
   else
   {
-    throw std::runtime_error("[FileManager][Error] Couldn't find the object associated with this name.");
+    LOG_ERROR("[FileManager][Error] Couldn't find the object associated with this name.");
   }
 }
 

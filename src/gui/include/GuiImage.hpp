@@ -16,6 +16,7 @@ public:
   void Update(float deltaTime) override;
 
   void LoadImage(const std::string &name);
+  void LoadImageFromFilePath(const std::string &filePath);
 
   sf::FloatRect GetSize() override;
 
@@ -33,7 +34,9 @@ private:
   // Maybe move to struct?
   //
 
-  sf::Sprite  m_sprite;
   sf::Image   m_image;
+
+  sf::Sprite  m_sprite;
+  sf::Texture m_texture;
 
 };

@@ -140,12 +140,12 @@ const sf::Vector2f GuiLayout::ScaleRelativeToWindowAbsolute(const sf::Vector2u &
   {
     LOG_WARNING("[GuiLayout][ScaleRelativeToWindowAbsolute]: Window is nullptr.");
 
-    throw std::logic_error("[Error][GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
+    LOG_ERROR("[GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
   }
 
   if (proportions.x < 0 || proportions.x > 100 || proportions.y < 0 || proportions.y > 100)
   {
-    throw std::logic_error("[Error][GuiLayout][ScaleRelativeToWindowAbsolute] x & y must be values between 0 and 100.");
+    LOG_ERROR("[GuiLayout][ScaleRelativeToWindowAbsolute] x & y must be values between 0 and 100.");
   }
   
   const sf::Vector2f result = { (m_window -> GetWindowSize().x * static_cast<float>(proportions.x)) / 100, 
@@ -158,7 +158,7 @@ const sf::Vector2u GuiLayout::ScaleWindowAbsoluteToRelative(const sf::Vector2f &
 {
   if (m_window == nullptr)
   {
-    throw std::logic_error("[Error][GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
+    LOG_ERROR("[GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
   }
 
   const sf::Vector2u result = { (100 * static_cast<unsigned int>(values.x) / m_window -> GetWindowSize().x), 

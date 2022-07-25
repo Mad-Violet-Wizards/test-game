@@ -140,7 +140,7 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
     case GuiAlign::AlignTop:
     {
       LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported in this layout.");
-      throw std::logic_error("[Error][GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported. Maybe you want to use GuiLayoutHorizontal instead?\n");
+
       break;
     }
     case GuiAlign::AlignRight:
@@ -181,7 +181,7 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
     case GuiAlign::AlignBottom:
     {
       LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported in this layout.");
-      throw std::logic_error("[Error][GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported. Maybe you want to use GuiLayoutHorizontal instead?\n");
+
       break;
     }
     case GuiAlign::AlignLeft:
