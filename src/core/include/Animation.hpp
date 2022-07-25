@@ -31,7 +31,7 @@ struct FrameData
   int width;
   int height;
 
-  float displayTime;
+  double displayTime;
 };
 
 class Animation

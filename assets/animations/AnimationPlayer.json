@@ -1,62 +1,62 @@
 {
   "walking-north": 
   [
-    "Maletraditionalwalkingnorth1.png",
-    "Maletraditionalwalkingnorth2.png",
-    "Maletraditionalwalkingnorth3.png",
-    "Maletraditionalwalkingnorth4.png",
-    "Maletraditionalwalkingnorth5.png",
-    "Maletraditionalwalkingnorth6.png",
-    "Maletraditionalwalkingnorth7.png",
-    "Maletraditionalwalkingnorth8.png"
+    { "fileName": "Maletraditionalwalkingnorth1.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth2.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth3.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth4.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth5.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth6.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth7.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingnorth8.png", "frameDuration": 0.2 }
   ],
   "walking-east": 
   [
-    "Maletraditionalwalkingeast1.png",
-    "Maletraditionalwalkingeast2.png",
-    "Maletraditionalwalkingeast3.png",
-    "Maletraditionalwalkingeast4.png",
-    "Maletraditionalwalkingeast5.png",
-    "Maletraditionalwalkingeast6.png",
-    "Maletraditionalwalkingeast7.png",
-    "Maletraditionalwalkingeast8.png"
+    { "fileName": "Maletraditionalwalkingeast1.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast2.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast3.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast4.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast5.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast6.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast7.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingeast8.png", "frameDuration": 0.2 }
   ],
   "walking-south":
   [
-    "Maletraditionalwalkingsouth1.png",
-    "Maletraditionalwalkingsouth2.png",
-    "Maletraditionalwalkingsouth3.png",
-    "Maletraditionalwalkingsouth4.png",
-    "Maletraditionalwalkingsouth5.png",
-    "Maletraditionalwalkingsouth6.png",
-    "Maletraditionalwalkingsouth7.png",
-    "Maletraditionalwalkingsouth8.png"
+    { "fileName": "Maletraditionalwalkingsouth1.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth2.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth3.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth4.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth5.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth6.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth7.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingsouth8.png", "frameDuration": 0.2 }
   ],
   "walking-west": 
   [
-    "Maletraditionalwalkingwest1.png",
-    "Maletraditionalwalkingwest2.png",
-    "Maletraditionalwalkingwest3.png",
-    "Maletraditionalwalkingwest4.png",
-    "Maletraditionalwalkingwest5.png",
-    "Maletraditionalwalkingwest6.png",
-    "Maletraditionalwalkingwest7.png",
-    "Maletraditionalwalkingwest8.png"
+    { "fileName": "Maletraditionalwalkingwest1.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest2.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest3.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest4.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest5.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest6.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest7.png", "frameDuration": 0.2 },
+    { "fileName": "Maletraditionalwalkingwest8.png", "frameDuration": 0.2 }
   ],
   "idle-north":
   [
-    "Maletraditionalidlenorth.png"
+    { "fileName": "Maletraditionalidlenorth.png", "frameDuration": 0.0 }
   ],
   "idle-east":
   [
-    "Maletraditionalidleeast.png"
+    { "fileName": "Maletraditionalidleeast.png", "frameDuration": 0.0 }
   ],
   "idle-south":
   [
-    "Maletraditionalidlesouth.png"
+    { "fileName": "Maletraditionalidlesouth.png", "frameDuration": 0.0 }
   ],
   "idle-west":
   [
-    "Maletraditionalidlewest.png"
+    { "fileName": "Maletraditionalidlewest.png", "frameDuration": 0.0 }
   ]
 }

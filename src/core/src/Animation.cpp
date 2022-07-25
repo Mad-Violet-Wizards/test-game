@@ -55,23 +55,16 @@ void Animation::LoadMovementAnimation(const std::string &filePath,
 
   assert(animationFilesArray.IsArray());
 
-  for (auto &textureFile : animationFilesArray.GetArray())
+  for (auto &textureJsonObject : animationFilesArray.GetArray())
   {
-    std::shared_ptr<sf::Texture> texture(new sf::Texture);
+    std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
 
-    if (!texture -> loadFromFile(animationAssetsFilePath + textureFile.GetString()))
+    if (!texture -> loadFromFile(animationAssetsFilePath + textureJsonObject["fileName"].GetString()))
     {
       LOG_WARNING("[Animation] Could not load the file.")
     }
 
-    if (state == AnimationState::Idle)
-    {
-      m_frames.emplace_back(texture, 0, 0, 0.f);
-    }
-    else
-    {
-      m_frames.emplace_back(texture, 0, 0, 0.2f);
-    }
+    m_frames.emplace_back(texture, 0, 0, textureJsonObject["frameDuration"].GetDouble());
   }
 }
 
