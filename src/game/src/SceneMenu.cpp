@@ -106,7 +106,6 @@ void SceneMenu::CreateGUI()
   m_mainMenuLayout -> AddWidget(m_buttonLoadGame);
   m_mainMenuLayout -> AddWidget(m_buttonOptions);
   m_mainMenuLayout -> AddWidget(m_buttonExit);
-  m_mainMenuLayout -> AddWidget(m_imageTest);
 
   m_optionsMenuLayout = std::make_shared<GuiLayoutVertical>(m_window);
   m_resolutionInfo = std::make_shared<GuiTextWidget>(m_window);
