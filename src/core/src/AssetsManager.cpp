@@ -8,15 +8,15 @@ std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
 AssetsManager::AssetsManager()
 {
   CreateFilesMap< sf::Texture >(std::string { "../assets/textures/" },
-                                std::string { ".png" },
+                                { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
                                 m_textures );
 
   CreateFilesMap< sf::Font >(std::string { "../assets/fonts/"},
-                             std::string { ".ttf" },
+                             { ".ttf" },
                              m_fonts );
 
   CreateFilesMap< sf::Image >(std::string {"../assets/images/" },
-                              std::string { ".jpg" },
+                              { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
                               m_images );
 }
 

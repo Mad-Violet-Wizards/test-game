@@ -28,6 +28,6 @@ private:
   static std::unique_ptr<AssetsManager> s_instance;
 
   std::map< std::string, std::shared_ptr<sf::Texture> > m_textures;
-  std::map< std::string, std::shared_ptr<sf::Font> > m_fonts;
-  std::map< std::string, std::shared_ptr<sf::Image> > m_images;
+  std::map< std::string, std::shared_ptr<sf::Font> >    m_fonts;
+  std::map< std::string, std::shared_ptr<sf::Image> >   m_images;
 };

@@ -3,16 +3,17 @@
 #include <memory>
 #include <filesystem>
 #include <map>
+#include <initializer_list>
 
 #include "Log.hpp"
 
 // TODO: Think of the better name for this file.
 // TODO: Think of the better name for this function.
 
-template <typename T, typename S>
-constexpr void CreateFilesMap(const S &directory, 
-                              const S &supportedFileFormat,
-                              std::map < std::string, std::shared_ptr<T> > &map)
+template <typename T, typename Key = std::string>
+constexpr void CreateFilesMap(const Key &directory,
+                              const std::initializer_list<const char*> &supportedFileFormats,
+                              std::map < Key, std::shared_ptr<T> > &map)
 {
   if (std::filesystem::exists(directory))
   {
@@ -20,18 +21,28 @@ constexpr void CreateFilesMap(const S &directory,
     {
       std::filesystem::path file(entry);
 
-      if (file.extension() == supportedFileFormat)
+      bool fileFormatSupported = false;
+
+      for (const Key &supportedFileFormat : supportedFileFormats)
       {
-        std::shared_ptr<T> SFML_OBJECT(new T);
+        if (file.extension() == supportedFileFormat)
+        {
+          fileFormatSupported = true;
+        }
+      }
+
+      if (fileFormatSupported)
+      {
+        std::shared_ptr<T> SFML_OBJECT = std::make_shared<T>();
 
         if (!SFML_OBJECT -> loadFromFile(entry.path().string()))
         {
           std::cout << "[FileLoader] Couldn't load the file.\n";
         }
 
-        const std::string name = file.replace_extension().filename().string();
+        const Key name = file.replace_extension().filename().string();
 
-        map.insert(std::pair< std::string, std::shared_ptr<T> >(name, SFML_OBJECT));
+        map.insert(std::pair< Key, std::shared_ptr<T> >(name, SFML_OBJECT));
       }
       else
       {
@@ -45,7 +56,7 @@ constexpr void CreateFilesMap(const S &directory,
   }
 }
 
-template<typename T, typename Key>
+template<typename T, typename Key = std::string>
 constexpr T &FindInFilesMap(const Key &name, const std::map< Key, std::shared_ptr<T> > &map)
 {
   auto SFML_OBJECT = map.find(name);
@@ -57,6 +68,10 @@ constexpr T &FindInFilesMap(const Key &name, const std::map< Key, std::shared_pt
   else
   {
     LOG_ERROR("[FileManager][Error] Couldn't find the object associated with this name.");
+
+    std::shared_ptr<T> EMPTY_SFML_OBJECT = std::make_shared<T>();
+
+    return *(EMPTY_SFML_OBJECT);
   }
 }
 
