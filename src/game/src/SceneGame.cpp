@@ -26,16 +26,21 @@ void SceneGame::OnCreate()
 
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();
+
+  m_objects.Add(m_player);
 }
 
 void SceneGame::OnDestroy() {}
 
 void SceneGame::Update(float deltaTime)
 {
-  m_player -> Update(deltaTime);
+  m_objects.ProcessRemovedObjects();
+  m_objects.ProcessNewObjects();
+
+  m_objects.Update(deltaTime);
 }
 
 void SceneGame::Draw(Window& window)
 {
-  m_player -> Draw(window);
+  m_objects.Draw(window);
 }

@@ -5,6 +5,7 @@
 #include "Scene.hpp"
 #include "KeyboardInput.hpp"
 #include "Object.hpp"
+#include "ObjectCollection.hpp"
 #include "C_Sprite.hpp"
 #include "C_KeyboardMovement.hpp"
 #include "C_Animation.hpp"
@@ -26,6 +27,8 @@ public:
   void Draw(Window &window) override;
 
 private:
+
+  ObjectCollection m_objects;
 
   std::shared_ptr<Object> m_player;
 

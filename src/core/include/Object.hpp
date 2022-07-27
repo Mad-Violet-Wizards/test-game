@@ -12,12 +12,18 @@ class Object
 
 public:
 
+  Object();
+  ~Object();
+
   void Awake(); // Called when object created. Use to ensure required components are present.
   void Start(); // Called after Awake method. Use to initialise variables.
 
   void Update(float deltaTime);
   void LateUpdate(float deltaTime);
   void Draw(Window &window);
+
+  bool QueuedForRemoval() const;
+  void QueueForRemoval();
 
   template <typename T> std::shared_ptr<T> AddComponent()
   {
@@ -57,5 +63,6 @@ public:
 private:
 
   std::vector<std::shared_ptr<Component>> m_components;
+  bool m_queuedForRemoval;
 
 };
