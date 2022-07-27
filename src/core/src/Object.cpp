@@ -1,5 +1,10 @@
 #include "Object.hpp"
 
+Object::Object()
+  : m_queuedForRemoval(false) { }
+
+Object::~Object() { }
+
 void Object::Awake()
 {
   for (const auto &c : m_components)
@@ -30,4 +35,14 @@ void Object::Draw(Window &window)
   {
     c -> Draw(window);
   }
+}
+
+bool Object::QueuedForRemoval() const
+{
+  return m_queuedForRemoval;
+}
+
+void Object::QueueForRemoval()
+{
+  m_queuedForRemoval = true;
 }
