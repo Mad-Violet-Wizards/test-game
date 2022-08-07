@@ -3,10 +3,6 @@
 #include "MapRenderer.hpp"
 #include "Log.hpp"
 
-//
-// TODO: How to draw a player on good layer?
-//
-
 void MapRenderer::PrepareLocation(const std::string &locationName)
 {
   m_map = m_tiledMapParser.ParseMap(locationName);
