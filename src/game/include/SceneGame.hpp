@@ -6,6 +6,8 @@
 #include "KeyboardInput.hpp"
 #include "Object.hpp"
 #include "ObjectCollection.hpp"
+#include "GameRenderer.hpp"
+#include "MapRenderer.hpp"
 #include "C_Sprite.hpp"
 #include "C_KeyboardMovement.hpp"
 #include "C_Animation.hpp"
@@ -33,7 +35,7 @@ private:
   std::shared_ptr<Object> m_player;
 
   KeyboardInput m_keyboardInput;
-
-  sf::CircleShape m_testShape;
+  MapRenderer m_mapRenderer;
+  GameRenderer m_gameRenderer;
 
 };

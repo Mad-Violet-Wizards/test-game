@@ -1,0 +1,15 @@
+{ "columns":31,
+ "image":"Japanese_Osaka.png",
+ "imageheight":672,
+ "imagewidth":992,
+ "margin":0,
+ "name":"Japanese_Osaka",
+ "spacing":0,
+ "tilecount":651,
+ "tiledversion":"1.4.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#6f6f6f",
+ "type":"tileset",
+ "version":1.4
+}

@@ -20,6 +20,7 @@ SceneMenu::~SceneMenu() {}
 
 void SceneMenu::OnCreate()
 {
+
 }
 
 void SceneMenu::OnDestroy()

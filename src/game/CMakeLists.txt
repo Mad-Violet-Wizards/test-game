@@ -20,4 +20,4 @@ target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include/Components
 )
 
-target_link_libraries(${PROJECT_NAME} core gui)
+target_link_libraries(${PROJECT_NAME} external core gui)
