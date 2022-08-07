@@ -2,20 +2,21 @@
 
 #include "AssetsManager.hpp"
 #include "FileManager.hpp"
+#include "Directory.hpp"
 
 std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
 
 AssetsManager::AssetsManager()
 {
-  CreateFilesMap< sf::Texture >(std::string { "../assets/textures/" },
+  CreateFilesMap< sf::Texture >( Directory::TEXTURES_DIRECTORY,
                                 { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
                                 m_textures );
 
-  CreateFilesMap< sf::Font >(std::string { "../assets/fonts/"},
+  CreateFilesMap< sf::Font >( Directory::FONTS_DIRECTORY,
                              { ".ttf" },
                              m_fonts );
 
-  CreateFilesMap< sf::Image >(std::string {"../assets/images/" },
+  CreateFilesMap< sf::Image >( Directory::IMAGES_DIRECTORY,
                               { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
                               m_images );
 }

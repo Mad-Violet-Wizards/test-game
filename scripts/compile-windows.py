@@ -30,7 +30,7 @@ def build():
 
   os.chdir('./build')
   os.system('cmd /c conan install .. --build=missing')
-  os.system('cmd /c cmake -G "Visual Studio 16 2019" ../src')
+  os.system('cmd /c cmake -G "Visual Studio 16 2019" ..')
   os.system('cmd /c cmake --build . --config Release')
   os.system('cmd /c conan imports ..')
 
@@ -132,8 +132,7 @@ def release():
     os.chdir("..")
 
   copy = shutil.copytree("./assets", "test-game/assets")
-  copy = shutil.copytree("build/app/bin", "test-game/bin")
-  copy = shutil.copytree("build/app/lib", "test-game/lib")
+  copy = shutil.copytree("build/src/app/bin", "test-game/bin")
 
   for file in os.listdir("build/bin"):
     shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")

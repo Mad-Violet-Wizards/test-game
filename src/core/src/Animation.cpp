@@ -4,6 +4,7 @@
 #include "Log.hpp"
 #include "JsonHandler.hpp"
 #include "Animation.hpp"
+#include "Directory.hpp"
 
 #include "rapidjson/document.h"
 
@@ -59,7 +60,7 @@ void Animation::LoadMovementAnimation(const std::string &filePath,
   {
     std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
 
-    if (!texture -> loadFromFile(animationAssetsFilePath + textureJsonObject["fileName"].GetString()))
+    if (!texture -> loadFromFile(Directory::ANIMATIONS_DIRECTORY + textureJsonObject["fileName"].GetString()))
     {
       LOG_WARNING("[Animation] Could not load the file.")
     }

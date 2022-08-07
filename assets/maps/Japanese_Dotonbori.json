@@ -1,0 +1,15 @@
+{ "columns":73,
+ "image":"Japanese_Dotonbori.png",
+ "imageheight":672,
+ "imagewidth":2336,
+ "margin":0,
+ "name":"Japanese_Dotonbori",
+ "spacing":0,
+ "tilecount":1533,
+ "tiledversion":"1.4.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#6f6f6f",
+ "type":"tileset",
+ "version":1.4
+}

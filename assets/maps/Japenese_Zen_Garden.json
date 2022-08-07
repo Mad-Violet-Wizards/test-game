@@ -1,0 +1,15 @@
+{ "columns":56,
+ "image":"Japenese_Zen_Garden.png",
+ "imageheight":512,
+ "imagewidth":1792,
+ "margin":0,
+ "name":"Japenese_Zen_Garden",
+ "spacing":0,
+ "tilecount":896,
+ "tiledversion":"1.4.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#6f6f6f",
+ "type":"tileset",
+ "version":1.4
+}

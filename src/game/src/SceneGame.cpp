@@ -2,6 +2,8 @@
 
 #include "SceneGame.hpp"
 #include "AssetsManager.hpp"
+#include "Directory.hpp"
+#include "tileson.hpp"
 
 SceneGame::SceneGame() {}
 
@@ -22,12 +24,17 @@ void SceneGame::OnCreate()
 
   auto animation = m_player -> AddComponent<C_Animation>();
   animation -> Awake();
-  animation -> SetAnimationFile("../assets/animations/AnimationPlayer.json");
+  animation -> SetAnimationFile(Directory::ANIMATIONS_DIRECTORY + "AnimationPlayer.json");
 
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();
 
   m_objects.Add(m_player);
+
+  m_mapRenderer.PrepareLocation(Directory::MAPS_DIRECTORY + "TestMap.json");
+
+  m_gameRenderer.AssignObjects(&m_objects);
+  m_gameRenderer.AssignMapRenderer(&m_mapRenderer);
 }
 
 void SceneGame::OnDestroy() {}
@@ -38,9 +45,10 @@ void SceneGame::Update(float deltaTime)
   m_objects.ProcessNewObjects();
 
   m_objects.Update(deltaTime);
+  m_mapRenderer.Update(deltaTime);
 }
 
 void SceneGame::Draw(Window& window)
 {
-  m_objects.Draw(window);
+  m_gameRenderer.Draw(window);
 }

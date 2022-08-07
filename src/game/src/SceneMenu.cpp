@@ -7,6 +7,7 @@
 #include "SceneMenu.hpp"
 #include "EventHandler.hpp"
 #include "GuiImage.hpp"
+#include "MapRenderer.hpp"
 
 SceneMenu::SceneMenu(Window *window, SceneStateMachine *sceneManager)
   : m_window(window),
@@ -20,6 +21,7 @@ SceneMenu::~SceneMenu() {}
 
 void SceneMenu::OnCreate()
 {
+
 }
 
 void SceneMenu::OnDestroy()
