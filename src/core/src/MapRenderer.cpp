@@ -1,45 +1,10 @@
 #include <memory>
 
 #include "MapRenderer.hpp"
-#include "Log.hpp"
-
-void MapRenderer::PrepareLocation(const std::string &locationName)
-{
-  m_map = m_tiledMapParser.ParseMap(locationName);
-
-  if (PrepareLayers())
-  {
-    LOG_INFO("[MapRenderer][PrepareLocation] Layers loaded succsesfully.");
-  }
-}
 
 void MapRenderer::Update(float deltaTime)
 {
 
-}
-
-void MapRenderer::DrawLayersAbovePlayer(Window &window)
-{
-  for (auto &layer : m_layersAbovePlayer)
-  {
-    DrawLayer(window, layer);
-  }
-}
-
-void MapRenderer::DrawLayerPlayerLevel(Window &window)
-{
-  for (auto &layer : m_layerPlayerLevel)
-  {
-    DrawLayer(window, layer);
-  }
-}
-
-void MapRenderer::DrawLayersBelowPlayer(Window &window)
-{
-  for (auto &layer : m_layersBelowPlayer)
-  {
-    DrawLayer(window, layer);
-  }
 }
 
 void MapRenderer::DrawLayer(Window &window, tson::Layer &layer)
@@ -142,25 +107,4 @@ void MapRenderer::DrawObjectGroup(Window &window, tson::Layer &layer)
 void MapRenderer::DrawImageLayer(Window &window, tson::Layer &layer)
 {
   // TODO: Implement.
-}
-
-bool MapRenderer::PrepareLayers()
-{
-  for (auto &layer : m_map -> getLayers())
-  {
-    if (layer.getProperties().getValue<int>("level") > 0)
-    {
-      m_layersAbovePlayer.push_back(layer);
-    }
-    else if (layer.getProperties().getValue<int>("level") < 0)
-    {
-      m_layersBelowPlayer.push_back(layer);
-    }
-    else
-    {
-      m_layerPlayerLevel.push_back(layer);
-    }
-  }
-
-  return true;
 }

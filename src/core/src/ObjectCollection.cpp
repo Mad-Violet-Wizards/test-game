@@ -10,7 +10,7 @@ ObjectCollection::~ObjectCollection()
 
 }
 
-void ObjectCollection::Add(std::shared_ptr<Object> object)
+void ObjectCollection::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> object)
 {
   m_newObjects.push(object);
 }
@@ -25,22 +25,37 @@ void ObjectCollection::Update(float deltaTime)
 
 void ObjectCollection::Draw(Window &window)
 {
-  for (auto &object : m_objects)
-  {
-    object -> Draw(window);
-  }
+  m_drawableObjects.Draw(window);
 }
 
 void ObjectCollection::ProcessNewObjects()
 {
   while (!m_newObjects.empty())
   {
-    std::shared_ptr<Object> object = m_newObjects.top();
+    auto VariantObject = m_newObjects.front();
 
-    object -> Awake();
-    object -> Start();
+    if (std::holds_alternative<std::shared_ptr<Object>>(VariantObject))
+    { 
+      std::shared_ptr<Object> object = std::get<std::shared_ptr<Object>>(VariantObject);
 
-    m_objects.push_back(object);
+      object -> Awake();
+      object -> Start();
+
+      m_drawableObjects.Add(object);
+
+      m_objects.push_back(object);
+    }
+    else if (std::holds_alternative<std::shared_ptr<tson::Map>>(VariantObject))
+    {
+      std::shared_ptr<tson::Map> map = std::get<std::shared_ptr<tson::Map>>(VariantObject);
+
+      m_drawableObjects.Add(map); 
+    }
+    else
+    {
+      LOG_ERROR("[ObjectCollection][ProcessNewObjects] Unknown object type");
+    }
+
     m_newObjects.pop();
   }
 }
