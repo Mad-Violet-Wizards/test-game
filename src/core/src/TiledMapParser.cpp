@@ -3,7 +3,7 @@
 #include "Directory.hpp"
 #include "Log.hpp"
 
-std::unique_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationName)
+std::shared_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationName)
 {
   tson::Tileson t;
 
@@ -20,7 +20,9 @@ std::unique_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationN
 
     LOG_INFO("[TiledMapParser][ParseMap] Map parsed successfully.");
 
-    return std::move(map);
+    m_map = std::move(map);
+
+    return m_map;
   }
   else
   {

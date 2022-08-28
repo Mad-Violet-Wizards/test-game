@@ -29,7 +29,7 @@ KeyboardInput &EventHandler::GetKeyboardInput()
   {
     LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
 
-    throw std::logic_error("[Error] You've to use it on a instance of EventHandler.");
+    return nullptr;
   }
   else
   {
@@ -43,7 +43,7 @@ MouseInput &EventHandler::GetMouseInput()
   {
     LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
 
-    throw std::logic_error("[Error] You've to use it on a instance of EventHandler.");
+    return nullptr;
   }
   else
   {
