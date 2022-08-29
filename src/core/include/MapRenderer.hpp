@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include <map>
 
 #include "tileson.hpp"
 #include "Window.hpp"
@@ -27,5 +28,7 @@ class MapRenderer
   private:
 
     TiledMapParser m_tiledMapParser;
+
+    std::map<uint32_t, tson::Animation *> m_animationUpdateQueue;
 
 };

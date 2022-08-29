@@ -5,6 +5,7 @@
 Window::Window(const std::string &windowName)
   : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Titlebar)
 {
+  m_renderWindow.setFramerateLimit(60);
 }
 
 Window::~Window() {}

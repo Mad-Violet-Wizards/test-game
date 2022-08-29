@@ -21,6 +21,8 @@ void ObjectCollection::Update(float deltaTime)
   {
     object -> Update(deltaTime);
   }
+
+  m_drawableObjects.Update(deltaTime);
 }
 
 void ObjectCollection::Draw(Window &window)
