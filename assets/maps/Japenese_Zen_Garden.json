@@ -6,10 +6,27 @@
  "name":"Japenese_Zen_Garden",
  "spacing":0,
  "tilecount":896,
- "tiledversion":"1.4.2",
+ "tiledversion":"1.9.1",
  "tileheight":32,
+ "tiles":[
+        {
+         "animation":[
+                {
+                 "duration":100,
+                 "tileid":282
+                }, 
+                {
+                 "duration":100,
+                 "tileid":283
+                }, 
+                {
+                 "duration":100,
+                 "tileid":284
+                }],
+         "id":282
+        }],
  "tilewidth":32,
  "transparentcolor":"#6f6f6f",
  "type":"tileset",
- "version":1.4
+ "version":"1.8"
 }

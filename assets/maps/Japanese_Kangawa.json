@@ -6,10 +6,27 @@
  "name":"Japanese_Kangawa",
  "spacing":0,
  "tilecount":1482,
- "tiledversion":"1.4.2",
+ "tiledversion":"1.9.1",
  "tileheight":32,
+ "tiles":[
+        {
+         "animation":[
+                {
+                 "duration":100,
+                 "tileid":3
+                }, 
+                {
+                 "duration":100,
+                 "tileid":4
+                }, 
+                {
+                 "duration":100,
+                 "tileid":43
+                }],
+         "id":3
+        }],
  "tilewidth":32,
  "transparentcolor":"#6f6f6f",
  "type":"tileset",
- "version":1.4
+ "version":"1.8"
 }

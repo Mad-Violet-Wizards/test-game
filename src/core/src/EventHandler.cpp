@@ -28,8 +28,6 @@ KeyboardInput &EventHandler::GetKeyboardInput()
   if (s_instance == nullptr)
   {
     LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
-
-    return nullptr;
   }
   else
   {
@@ -42,8 +40,6 @@ MouseInput &EventHandler::GetMouseInput()
   if (s_instance == nullptr)
   {
     LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
-
-    return nullptr;
   }
   else
   {

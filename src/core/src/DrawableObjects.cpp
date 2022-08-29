@@ -75,7 +75,10 @@ void DrawableObjects::Draw(Window &window)
     {
       tson::Layer layer = std::get<tson::Layer>(object.second);
 
-      m_mapRenderer.DrawLayer(window, layer);
+      if (layer.getProperties().getValue<bool>("drawable") == true)
+      {
+        m_mapRenderer.DrawLayer(window, layer);
+      }
     }
     else
     {
