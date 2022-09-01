@@ -24,7 +24,7 @@ void SceneGame::OnCreate()
 
   auto animation = m_player -> AddComponent<C_Animation>();
   animation -> Awake();
-  animation -> SetAnimationFile(Directory::ANIMATIONS_DIRECTORY + "AnimationPlayer.json");
+  animation -> SetAnimationFile(Directory::ANIMATIONS_DIRECTORY + "AnimationPlayerTest.json");
 
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();
