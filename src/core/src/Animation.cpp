@@ -13,12 +13,6 @@ Animation::Animation()
 
 Animation::~Animation() {}
 
-//
-// FIXME: Problem here is that we're loading JSON 4 times
-// for every sprite that requires to allocate 
-// animation textures and informations.
-//
-
 void Animation::LoadMovementAnimationMultipleFile(rapidjson::Document &animationDocument, 
                                                   AnimationState state, 
                                                   FacingDirection direction)
