@@ -6,8 +6,6 @@
 #include "Animation.hpp"
 #include "Directory.hpp"
 
-#include "rapidjson/document.h"
-
 Animation::Animation() 
   : m_currentFrameIndex(0),
   m_currentFrameTime(0.f),
@@ -21,21 +19,11 @@ Animation::~Animation() {}
 // animation textures and informations.
 //
 
-void Animation::LoadMovementAnimation(const std::string &filePath, 
-                                      AnimationState state, 
-                                      FacingDirection direction)
+void Animation::LoadMovementAnimationMultipleFile(rapidjson::Document &animationDocument, 
+                                                  AnimationState state, 
+                                                  FacingDirection direction)
 {
   using namespace rapidjson;
-
-  LOG_INFO("[Animation] Loading animations for: ", filePath);
-
-  static JsonHandler jsonHandler;
-  jsonHandler.LoadFile(filePath);
-
-  static Document animationDocument;
-  animationDocument.Parse(jsonHandler.GetJsonContent());
-
-  const std::string animationAssetsFilePath = "../assets/animations/";
 
   Value animationFilesArray;
 
@@ -65,13 +53,74 @@ void Animation::LoadMovementAnimation(const std::string &filePath,
       LOG_WARNING("[Animation] Could not load the file.")
     }
 
-    m_frames.emplace_back(texture, 0, 0, textureJsonObject["frameDuration"].GetDouble());
+    FrameData frameData;
+    
+    frameData.texture = texture;
+    frameData.width = 0;
+    frameData.height = 0;
+    frameData.displayTime = textureJsonObject["frameDuration"].GetDouble();
+
+    m_frames.push_back(frameData);
+  }
+}
+
+void Animation::LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
+                                                AnimationState state,
+                                                FacingDirection direction)
+{
+  using namespace rapidjson;
+
+  Value animationDetails;
+
+  if (state == AnimationState::Walk)
+  {
+    if (direction == FacingDirection::North)      { animationDetails = animationDocument["walking-north"]; }
+    else if (direction == FacingDirection::East)  { animationDetails = animationDocument["walking-east"]; }
+    else if (direction == FacingDirection::South) { animationDetails = animationDocument["walking-south"]; }
+    else if (direction == FacingDirection::West)  { animationDetails = animationDocument["walking-west"]; }
+  }
+  else if (state == AnimationState::Idle)
+  {
+    if (direction == FacingDirection::North)      { animationDetails = animationDocument["idle-north"]; }
+    else if (direction == FacingDirection::East)  { animationDetails = animationDocument["idle-east"]; }
+    else if (direction == FacingDirection::South) { animationDetails = animationDocument["idle-south"]; }
+    else if (direction == FacingDirection::West)  { animationDetails = animationDocument["idle-west"]; }
+  }
+
+  int tileRow = animationDetails["tileRow"].GetInt();
+  int tileWidth = 32;
+  int tileHeight = 32;
+  int frameCount = animationDetails["frameCount"].GetInt();
+  float frameDuration = animationDetails["frameDuration"].GetDouble();
+
+  int x = 0;
+  int y = tileRow * tileHeight;
+
+  LOG_INFO(tileHeight);
+
+  for (int i = 0; i < frameCount; i++)
+  {
+    LOG_INFO("Frame data added: ", tileRow);
+
+    FrameData frameData;
+
+    frameData.x = x;
+    frameData.y = y;
+
+    frameData.width = tileWidth;
+    frameData.height = tileHeight;
+
+    frameData.displayTime = animationDetails["frameDuration"].GetDouble();
+
+    m_frames.push_back(frameData);
+
+    x += tileWidth;
   }
 }
 
 const FrameData *Animation::GetCurrentFrame() const
 {
-  if (m_frames.size()  > 0) 
+  if (m_frames.size() > 0) 
   { 
     return &m_frames[m_currentFrameIndex]; 
   }

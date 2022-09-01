@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-#include "JsonHandler.hpp"
+#include "rapidjson/document.h"
 
 enum class FacingDirection
 {
@@ -28,6 +28,9 @@ struct FrameData
 {
   std::shared_ptr<sf::Texture> texture;
 
+  int x;
+  int y;
+
   int width;
   int height;
 
@@ -42,9 +45,13 @@ public:
   Animation();
   ~Animation();
 
-  void LoadMovementAnimation(const std::string &filePath, 
-                             AnimationState state, 
-                             FacingDirection direction);
+  void LoadMovementAnimationMultipleFile(rapidjson::Document &animationDocument,
+                                         AnimationState state, 
+                                         FacingDirection direction);
+
+  void LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
+                                       AnimationState state, 
+                                       FacingDirection direction);
 
   const FrameData *GetCurrentFrame() const;
 

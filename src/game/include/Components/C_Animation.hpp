@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include <map>
 #include <memory>
 
@@ -29,6 +31,12 @@ public:
 
 
 private:
+
+  void LoadSingleFileAnimation(rapidjson::Document &animationDocument);
+  void LoadMultipleFileAnimation(rapidjson::Document &animationDocument);
+
+  bool m_singleFile;
+  std::shared_ptr<sf::Texture> m_texture;
 
   std::shared_ptr<C_Sprite> m_animationOwner;
 
