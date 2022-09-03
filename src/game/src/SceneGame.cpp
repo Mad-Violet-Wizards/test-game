@@ -5,6 +5,10 @@
 #include "Directory.hpp"
 #include "tileson.hpp"
 
+#ifdef DEBUG
+#include "Debug.hpp"
+#endif
+
 SceneGame::SceneGame() {}
 
 SceneGame::~SceneGame() {}
@@ -12,6 +16,8 @@ SceneGame::~SceneGame() {}
 void SceneGame::OnCreate()
 {
   m_player = std::make_shared<Object>();
+  m_player -> SetDrawable(true);
+  m_player -> SetCollidable(true);
 
   auto sprite = m_player -> AddComponent<C_Sprite>();
 
@@ -28,6 +34,9 @@ void SceneGame::OnCreate()
 
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();
+
+  auto collider = m_player -> AddComponent<C_ColliderBox>();
+  collider -> SetSize(32.f, 32.f);
 
   m_objects.Add(m_mapParser.ParseMap(Directory::MAPS_DIRECTORY + "TestMap.json"));
   m_objects.Add(m_player);
@@ -46,4 +55,8 @@ void SceneGame::Update(float deltaTime)
 void SceneGame::Draw(Window& window)
 {
   m_objects.Draw(window);
+
+  #ifdef DEBUG
+  Debug::Draw(window);
+  #endif
 }

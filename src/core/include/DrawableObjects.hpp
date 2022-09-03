@@ -6,14 +6,7 @@
 #include "tileson.hpp"
 #include "Object.hpp"
 #include "MapRenderer.hpp"
-
-enum class LayerLevel
-{
-  BelowLayer,
-  StanardLayer,
-  PlayerLayer,
-  AboveLayer
-};
+#include "LayerLevel.hpp"
 
 class DrawableObjects
 {
@@ -23,7 +16,7 @@ class DrawableObjects
     DrawableObjects() = default;
     ~DrawableObjects() = default;
 
-    void Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> object);
+    void Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant);
     void ClearLayers();
     void ClearObjects();
 

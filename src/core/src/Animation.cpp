@@ -90,12 +90,8 @@ void Animation::LoadMovementAnimationSingleFile(rapidjson::Document &animationDo
   int x = 0;
   int y = tileRow * tileHeight;
 
-  LOG_INFO(tileHeight);
-
   for (int i = 0; i < frameCount; i++)
   {
-    LOG_INFO("Frame data added: ", tileRow);
-
     FrameData frameData;
 
     frameData.x = x;

@@ -1,7 +1,9 @@
 #include "Object.hpp"
 
 Object::Object()
-  : m_queuedForRemoval(false) { }
+  : m_queuedForRemoval(false),
+    m_drawable(false),
+    m_collidable(false) { }
 
 Object::~Object() { }
 
@@ -45,4 +47,24 @@ bool Object::QueuedForRemoval() const
 void Object::QueueForRemoval()
 {
   m_queuedForRemoval = true;
+}
+
+void Object::SetDrawable(bool drawable)
+{
+  m_drawable = drawable;
+}
+
+void Object::SetCollidable(bool collidable)
+{
+  m_collidable = collidable;
+}
+
+bool Object::Drawable() const
+{
+  return m_drawable;
+}
+
+bool Object::Collidable() const
+{
+  return m_collidable;
 }

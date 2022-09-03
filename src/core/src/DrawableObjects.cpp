@@ -2,17 +2,17 @@
 
 #include "Log.hpp"
 
-void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> object)
+void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {
-  if (std::holds_alternative<std::shared_ptr<Object>>(object))
+  if (std::holds_alternative<std::shared_ptr<Object>>(variant))
   {
-    std::shared_ptr<Object> obj = std::get<std::shared_ptr<Object>>(object);
+    std::shared_ptr<Object> obj = std::get<std::shared_ptr<Object>>(variant);
 
     m_drawableObjects.insert(std::make_pair(LayerLevel::PlayerLayer, obj));
   }
-  else if (std::holds_alternative<std::shared_ptr<tson::Map>>(object))
+  else if (std::holds_alternative<std::shared_ptr<tson::Map>>(variant))
   {
-    std::shared_ptr<tson::Map> map = std::get<std::shared_ptr<tson::Map>>(object);
+    std::shared_ptr<tson::Map> map = std::get<std::shared_ptr<tson::Map>>(variant);
 
     for (auto &layer : map -> getLayers())
     {

@@ -12,6 +12,7 @@
 #include "C_Animation.hpp"
 #include "C_Velocity.hpp"
 #include "C_MovementAnimation.hpp"
+#include "C_ColliderBox.hpp"
 
 class SceneGame : public Scene
 {

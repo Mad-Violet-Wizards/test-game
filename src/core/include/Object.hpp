@@ -25,6 +25,12 @@ public:
   bool QueuedForRemoval() const;
   void QueueForRemoval();
 
+  void SetDrawable(bool drawable);
+  void SetCollidable(bool collidable);
+
+  bool Drawable() const;
+  bool Collidable() const;
+
   template <typename T> std::shared_ptr<T> AddComponent()
   {
     static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
@@ -64,5 +70,8 @@ private:
 
   std::vector<std::shared_ptr<Component>> m_components;
   bool m_queuedForRemoval;
+
+  bool m_drawable;
+  bool m_collidable;
 
 };
