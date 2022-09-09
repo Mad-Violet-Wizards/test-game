@@ -6,7 +6,6 @@
 #include "tileson.hpp"
 #include "Object.hpp"
 #include "MapRenderer.hpp"
-#include "LayerLevel.hpp"
 
 class DrawableObjects
 {
@@ -25,7 +24,7 @@ class DrawableObjects
 
   private:
 
-    std::multimap<LayerLevel, std::variant<std::shared_ptr<Object>, tson::Layer>> m_drawableObjects;
+    std::multimap<int, std::variant<std::shared_ptr<Object>, tson::Layer>> m_drawableObjects;
 
     MapRenderer m_mapRenderer;
 

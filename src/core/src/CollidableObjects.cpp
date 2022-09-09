@@ -14,7 +14,9 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
   {
     std::shared_ptr<Object> gameObject = std::get<std::shared_ptr<Object>>(variant);
 
-    m_collidableObjects.insert({ LayerLevel::PlayerLayer, gameObject });
+    int layerLevel = gameObject -> GetComponent<C_ColliderBox>() -> GetLayer();
+
+    m_collidableObjects.insert({ layerLevel, gameObject });
   }
   else if (std::holds_alternative<std::shared_ptr<tson::Map>>(variant))
   {
@@ -32,14 +34,17 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
             {
               std::shared_ptr<Object> gameObject = std::make_shared<Object>();
 
+              int collidableObjectLayerlevel = collidableObject.getProperties().getValue<int>("level");
+
               auto colliderBox = gameObject -> AddComponent<C_ColliderBox>();
+              colliderBox -> SetLayer(collidableObjectLayerlevel);
 
               colliderBox -> SetCollidable({ static_cast<float>(collidableObject.getPosition().x),
                                              static_cast<float>(collidableObject.getPosition().y),
                                              static_cast<float>(collidableObject.getSize().x),
                                              static_cast<float>(collidableObject.getSize().y) });
 
-              m_collidableObjects.insert({ LayerLevel::PlayerLayer, gameObject });
+              m_collidableObjects.insert({ collidableObjectLayerlevel, gameObject });
             }
             LOG_INFO("[CollidableObjects][Add] Detected new collidable object");
           }

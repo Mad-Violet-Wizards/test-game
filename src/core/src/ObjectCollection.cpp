@@ -1,5 +1,8 @@
 #include "ObjectCollection.hpp"
 
+#include "C_ColliderBox.hpp"
+#include "C_Drawable.hpp"
+
 ObjectCollection::ObjectCollection()
 {
 
@@ -45,12 +48,12 @@ void ObjectCollection::ProcessNewObjects()
       object -> Awake();
       object -> Start();
 
-      if (object -> Drawable())
+      if (object -> HasComponent<C_Drawable>())
       {
         m_drawableObjects.Add(object);
       }
 
-      if (object -> Collidable())
+      if (object -> HasComponent<C_ColliderBox>())
       {
         m_collidableObjects.Add(object);
       }

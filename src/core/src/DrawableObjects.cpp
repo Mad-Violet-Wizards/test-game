@@ -1,5 +1,6 @@
 #include "DrawableObjects.hpp"
 
+#include "C_Drawable.hpp"
 #include "Log.hpp"
 
 void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
@@ -8,7 +9,9 @@ void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<
   {
     std::shared_ptr<Object> obj = std::get<std::shared_ptr<Object>>(variant);
 
-    m_drawableObjects.insert(std::make_pair(LayerLevel::PlayerLayer, obj));
+    int layerLevel = obj -> GetComponent<C_Drawable>() -> GetLayer();
+
+    m_drawableObjects.insert({ layerLevel, obj });
   }
   else if (std::holds_alternative<std::shared_ptr<tson::Map>>(variant))
   {
@@ -16,20 +19,9 @@ void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<
 
     for (auto &layer : map -> getLayers())
     {
-      int level = layer.getProperties().getValue<int>("level");
+      int layerLevel = layer.getProperties().getValue<int>("level");
 
-      if (level < 0)
-      {
-        m_drawableObjects.insert(std::make_pair(LayerLevel::BelowLayer, layer));
-      }
-      else if (level > 0)
-      {
-        m_drawableObjects.insert(std::make_pair(LayerLevel::AboveLayer, layer));
-      }
-      else
-      {
-        m_drawableObjects.insert(std::make_pair(LayerLevel::StanardLayer, layer));
-      }
+      m_drawableObjects.insert({ layerLevel, layer });
     }
   }
 }

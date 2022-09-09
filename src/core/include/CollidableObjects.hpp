@@ -5,7 +5,6 @@
 
 #include "tileson.hpp"
 #include "Object.hpp"
-#include "LayerLevel.hpp"
 
 class CollidableObjects
 {
@@ -23,5 +22,5 @@ class CollidableObjects
   
     private:
 
-    std::multimap<LayerLevel, std::shared_ptr<Object>> m_collidableObjects;
+    std::multimap<int, std::shared_ptr<Object>> m_collidableObjects;
 };

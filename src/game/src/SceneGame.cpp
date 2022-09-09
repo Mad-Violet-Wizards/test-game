@@ -35,7 +35,11 @@ void SceneGame::OnCreate()
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();
 
+  auto drawable = m_player -> AddComponent<C_Drawable>();
+  drawable -> SetLayer(0);
+
   auto collider = m_player -> AddComponent<C_ColliderBox>();
+  collider -> SetLayer(0);
   collider -> SetSize(32.f, 32.f);
 
   m_objects.Add(m_mapParser.ParseMap(Directory::MAPS_DIRECTORY + "TestMap.json"));

@@ -31,7 +31,8 @@ public:
   bool Drawable() const;
   bool Collidable() const;
 
-  template <typename T> std::shared_ptr<T> AddComponent()
+  template <typename T>
+  std::shared_ptr<T> AddComponent()
   {
     static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
@@ -50,7 +51,8 @@ public:
     return newComponent;
   };
 
-  template <typename T> std::shared_ptr<T> GetComponent()
+  template <typename T>
+  std::shared_ptr<T> GetComponent()
   {
     // Check that we don't already have a component of this type.
     for (auto& exisitingComponent : m_components)
@@ -64,6 +66,21 @@ public:
     LOG_WARNING("[Object][GetComponent] Returned nullptr.");
 
     return nullptr;
+  };
+
+  template <typename T>
+  bool HasComponent() const
+  {
+    // Check that we don't already have a component of this type.
+    for (auto& exisitingComponent : m_components)
+    {
+      if (std::dynamic_pointer_cast<T>(exisitingComponent))
+      {
+        return true;
+      }
+    }
+
+    return false;
   };
 
 private:

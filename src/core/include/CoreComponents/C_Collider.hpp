@@ -22,5 +22,10 @@ class C_Collider : public Component
     virtual CollisionManifold Intersects(std::shared_ptr<C_Collider> other) = 0;
     virtual void ResolveOverlap(const CollisionManifold &manifold) = 0;
 
+    void SetLayer(int layer);
+    int GetLayer() const;
+
   private:
+
+    int m_layer;
 };
