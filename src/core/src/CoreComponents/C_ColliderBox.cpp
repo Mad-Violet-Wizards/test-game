@@ -5,7 +5,10 @@
 C_ColliderBox::C_ColliderBox(Object *owner) 
   : C_Collider(owner), 
     m_AABB(0.f, 0.f, 0.f, 0.f), 
-    m_offset(0.f, 0.f) {}
+    m_offset(0.f, 0.f)
+{
+
+}
 
 C_ColliderBox::~C_ColliderBox() { }
 
@@ -33,7 +36,12 @@ CollisionManifold C_ColliderBox::Intersects(std::shared_ptr<C_Collider> other)
 
 void C_ColliderBox::ResolveOverlap(const CollisionManifold &manifold)
 {
-  auto transform = m_owner -> GetComponent<C_Transform>();
+  auto transform = owner -> transform;
+
+  if (transform->IsStatic())
+  {
+    return;
+  }
 
   const sf::FloatRect &r1 = GetCollidable();
   const sf::FloatRect *r2 = manifold.other;
@@ -47,11 +55,11 @@ void C_ColliderBox::ResolveOverlap(const CollisionManifold &manifold)
   {
     if (xDiff > 0)
     {
-      resolve = (r1.left + r1.width) - r2 -> left;
+      resolve = (r2 -> left + r2 -> width) - r1.left;
     }
     else
     {
-      resolve = (r2 -> left + r2 -> width) - r1.left;
+      resolve = -((r1.left + r1.width) - r2 -> left);
     }
 
     transform -> AddX(resolve);
@@ -60,11 +68,11 @@ void C_ColliderBox::ResolveOverlap(const CollisionManifold &manifold)
   {
     if (yDiff > 0)
     {
-      resolve = (r1.top + r1.height) - r2 -> top;
+      resolve = (r2 -> top + r2 -> height) - r1.top;
     }
     else
     {
-      resolve = (r2 -> top + r2 -> height) - r1.top;
+      resolve = -((r1.top + r1.height) - r2 -> top);
     }
 
     transform -> AddY(resolve);
@@ -108,9 +116,9 @@ void C_ColliderBox::SetSize(float x, float y)
 
 void C_ColliderBox::SetPosition()
 {
-  auto transform = m_owner -> GetComponent<C_Transform>();
+  auto transform = owner -> transform;
 
-  if (transform)
+  if (!transform -> IsStatic())
   {
     m_AABB.left = transform -> GetPosition().x + m_offset.x;
     m_AABB.top = transform -> GetPosition().y + m_offset.y;

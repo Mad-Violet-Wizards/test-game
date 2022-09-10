@@ -8,7 +8,7 @@ void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<
   if (std::holds_alternative<std::shared_ptr<Object>>(variant))
   {
     std::shared_ptr<Object> obj = std::get<std::shared_ptr<Object>>(variant);
-
+    
     int layerLevel = obj -> GetComponent<C_Drawable>() -> GetLayer();
 
     m_drawableObjects.insert({ layerLevel, obj });

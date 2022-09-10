@@ -8,7 +8,7 @@ C_Velocity::C_Velocity(Object *owner)
 void C_Velocity::Update(float deltaTime)
 {
   sf::Vector2f absoluteVelocity(m_velocity * deltaTime);
-  m_owner -> GetComponent<C_Transform>() -> AddPosition(absoluteVelocity);
+  owner -> transform -> AddPosition(absoluteVelocity);
 }
 
 void C_Velocity::Set(const sf::Vector2f &velocity)

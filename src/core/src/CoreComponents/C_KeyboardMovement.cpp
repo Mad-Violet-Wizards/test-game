@@ -11,7 +11,7 @@ C_KeyboardMovement::C_KeyboardMovement(Object *owner)
 
 void C_KeyboardMovement::Awake()
 {
-  m_velocity = m_owner -> GetComponent<C_Velocity>();
+  m_velocity = owner -> GetComponent<C_Velocity>();
 }
 
 void C_KeyboardMovement::Update(float deltaTime)

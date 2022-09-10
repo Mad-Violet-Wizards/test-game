@@ -15,6 +15,14 @@ void SceneStateMachine::Update(float deltaTime)
   }
 }
 
+void SceneStateMachine::LateUpdate(float deltaTime)
+{
+  if (m_currentScene)
+  {
+    m_currentScene -> LateUpdate(deltaTime);
+  }
+}
+
 void SceneStateMachine::Draw(Window& window)
 {
   if (m_currentScene)

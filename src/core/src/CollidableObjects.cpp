@@ -1,5 +1,6 @@
 #include "CollidableObjects.hpp"
 
+#include "C_InstanceID.hpp"
 #include "C_ColliderBox.hpp"
 
 #ifdef DEBUG
@@ -37,6 +38,9 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
               int collidableObjectLayerlevel = collidableObject.getProperties().getValue<int>("level");
 
               auto colliderBox = gameObject -> AddComponent<C_ColliderBox>();
+
+              gameObject -> transform -> SetStatic(true);
+
               colliderBox -> SetLayer(collidableObjectLayerlevel);
 
               colliderBox -> SetCollidable({ static_cast<float>(collidableObject.getPosition().x),
@@ -70,18 +74,35 @@ void CollidableObjects::ClearObjects()
 
 void CollidableObjects::Update(float deltaTime)
 {
+  for (auto &[level, o1] : m_collidableObjects)
+  {
+    for (auto &[level, o2] : m_collidableObjects)
+    {
+      if ((o1 -> GetComponent<C_InstanceID>()) -> GetID() != (o2 -> GetComponent<C_InstanceID>()) -> GetID())
+      {
+        std::shared_ptr<C_ColliderBox> collider1 = o1 -> GetComponent<C_ColliderBox>();
+        std::shared_ptr<C_ColliderBox> collider2 = o2 -> GetComponent<C_ColliderBox>();
 
+        CollisionManifold manifold = collider1 -> Intersects(collider2);
+
+        if (manifold.colliding)
+        {
+          collider1 -> ResolveOverlap(manifold);
+        }
+      }
+    }
+  }
 }
 
 void CollidableObjects::Draw(Window &window)
 {
   #ifdef DEBUG
   for (auto &[level, object] : m_collidableObjects)
-  {
-    auto colliderBox = object -> GetComponent<C_ColliderBox>();
-
-    if (colliderBox)
+  { 
+    if (object -> HasComponent<C_ColliderBox>())
     {
+      auto colliderBox = object -> GetComponent<C_ColliderBox>();
+
       Debug::AddRect(colliderBox -> GetCollidable());
     }
   }

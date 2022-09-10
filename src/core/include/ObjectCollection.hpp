@@ -21,6 +21,7 @@ public:
   void Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant);
 
   void Update(float deltaTime);
+  void LateUpdate(float deltaTime);
   void Draw(Window &window);
 
   void ProcessNewObjects();

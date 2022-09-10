@@ -29,6 +29,14 @@ void ObjectCollection::Update(float deltaTime)
   m_drawableObjects.Update(deltaTime);
 }
 
+void ObjectCollection::LateUpdate(float deltaTime)
+{
+  for (auto &object : m_objects)
+  {
+    object -> LateUpdate(deltaTime);
+  }
+}
+
 void ObjectCollection::Draw(Window &window)
 {
   m_collidableObjects.Draw(window);

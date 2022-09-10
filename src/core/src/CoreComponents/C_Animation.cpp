@@ -18,7 +18,7 @@ C_Animation::C_Animation(Object *owner)
 
 void C_Animation::Awake()
 {
-  m_animationOwner = m_owner -> GetComponent<C_Sprite>();
+  m_animationOwner = owner -> GetComponent<C_Sprite>();
 }
 
 void C_Animation::Update(float deltaTime)

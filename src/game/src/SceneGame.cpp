@@ -16,12 +16,8 @@ SceneGame::~SceneGame() {}
 void SceneGame::OnCreate()
 {
   m_player = std::make_shared<Object>();
-  m_player -> SetDrawable(true);
-  m_player -> SetCollidable(true);
 
   auto sprite = m_player -> AddComponent<C_Sprite>();
-
-  auto transform = m_player -> AddComponent<C_Transform>();
 
   auto velocity = m_player -> AddComponent<C_Velocity>();
 
@@ -54,6 +50,11 @@ void SceneGame::Update(float deltaTime)
   m_objects.ProcessNewObjects();
 
   m_objects.Update(deltaTime);
+}
+
+void SceneGame::LateUpdate(float deltaTime)
+{
+  m_objects.LateUpdate(deltaTime);
 }
 
 void SceneGame::Draw(Window& window)

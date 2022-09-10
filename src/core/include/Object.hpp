@@ -7,6 +7,10 @@
 #include "Component.hpp"
 #include "Log.hpp"
 
+#include "Component.hpp"
+#include "C_InstanceID.hpp"
+#include "C_Transform.hpp"
+
 class Object
 {
 
@@ -25,11 +29,8 @@ public:
   bool QueuedForRemoval() const;
   void QueueForRemoval();
 
-  void SetDrawable(bool drawable);
-  void SetCollidable(bool collidable);
-
-  bool Drawable() const;
-  bool Collidable() const;
+  std::shared_ptr<C_Transform> transform;
+  std::shared_ptr<C_InstanceID> instanceID;
 
   template <typename T>
   std::shared_ptr<T> AddComponent()
@@ -71,7 +72,6 @@ public:
   template <typename T>
   bool HasComponent() const
   {
-    // Check that we don't already have a component of this type.
     for (auto& exisitingComponent : m_components)
     {
       if (std::dynamic_pointer_cast<T>(exisitingComponent))
@@ -87,8 +87,5 @@ private:
 
   std::vector<std::shared_ptr<Component>> m_components;
   bool m_queuedForRemoval;
-
-  bool m_drawable;
-  bool m_collidable;
 
 };
