@@ -1,5 +1,6 @@
 #include "TiledMapParser.hpp"
 
+#include "AssetsManager.hpp"
 #include "Directory.hpp"
 #include "Log.hpp"
 
@@ -13,13 +14,6 @@ std::shared_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationN
 
   if (map -> getStatus() == tson::ParseStatus::OK)
   {
-    for (auto &tilesetFile : map -> getTilesets())
-    {
-      LOG_INFO("[TiledMapParser][ParseMap] Tileset file: ", tilesetFile.getImage().generic_string());
-
-      LoadAndStoreTilesetImage(tilesetFile.getImage().generic_string(), { 0, 0 });
-    }
-
     LOG_INFO("[TiledMapParser][ParseMap] Map parsed successfully.");
 
     m_map = std::move(map);
@@ -34,39 +28,17 @@ std::shared_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationN
   return nullptr;
 }
 
-sf::Sprite *TiledMapParser::LoadAndStoreTilesetImage(const std::string  &imageFile,
-                                                     const sf::Vector2f &position)
+sf::Sprite *TiledMapParser::GetTilesetImage(const std::string  &imageFile,
+                                            const sf::Vector2f &position)
 {
-  if (m_textures.count(imageFile) == 0)
+  if (m_sprites.count(imageFile) == 0)
   {
-    fs::path path = m_basePath / imageFile;
+    std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
 
-    if (fs::exists(path) && fs::is_regular_file(path))
-    {
-      std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
+    sprite -> setTexture(AssetsManager::GetInstance().GetTexture(imageFile));
+    sprite -> setPosition(position);
 
-      bool imageFound = texture -> loadFromFile(path.generic_string());
-
-      if (imageFound)
-      {
-        std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
-
-        sprite -> setTexture(*texture);
-
-        sprite -> setPosition(position);
-
-        m_textures[imageFile] = std::move(texture);
-        m_sprites[imageFile] = std::move(sprite);
-      }
-      else
-      {
-        LOG_INFO("[TiledMapParser][LoadAndStoreTilesetImage] Image file not found: ", path.generic_string());
-      }
-    }
-    else
-    {
-      LOG_WARNING("[TiledMapParser][LoadAndStoreTilesetImage] Path not found/This is not file: ", path.generic_string());
-    }
+    m_sprites[imageFile] = std::move(sprite);
   }
 
   if (m_sprites.count(imageFile) > 0)

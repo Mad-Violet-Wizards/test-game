@@ -88,7 +88,7 @@ void MapRenderer::DrawTileLayer(Window &window, tson::Layer &layer)
       drawingRect = tileObject.getDrawingRect();
     }
 
-    sf::Sprite *sprite = m_tiledMapParser.LoadAndStoreTilesetImage(tileset -> getImage().generic_string(), { 0, 0 });
+    sf::Sprite *sprite = m_tiledMapParser.GetTilesetImage(tileset -> getImage().generic_string(), { 0, 0 });
 
     if (sprite != nullptr)
     {
@@ -147,7 +147,7 @@ void MapRenderer::DrawObjectGroup(Window &window, tson::Layer &layer)
           tson::Tileset *tileset = map -> getTilesetByGid(obj.getGid());
           sf::Vector2f offset = m_tiledMapParser.GetTileOffset(obj.getGid(), map, tileset);
 
-          sf::Sprite *sprite = m_tiledMapParser.LoadAndStoreTilesetImage(tileset -> getImage().generic_string(), { 0, 0 });
+          sf::Sprite *sprite = m_tiledMapParser.GetTilesetImage(tileset -> getImage().generic_string(), { 0, 0 });
 
           sf::Vector2f position = { static_cast<float>(obj.getPosition().x), static_cast<float>(obj.getPosition().y) };
 
@@ -241,7 +241,7 @@ void MapRenderer::DrawObjectGroup(Window &window, tson::Layer &layer)
         {
           sf::Text *text = new sf::Text();
 
-          text -> setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter"));
+          text -> setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter.ttf"));
           text -> setPosition(static_cast<float>(obj.getPosition().x), static_cast<float>(obj.getPosition().y));
           text -> setString(obj.getText().text);
           text -> setFillColor(sf::Color(255, 255, 255));
@@ -267,9 +267,9 @@ void MapRenderer::DrawObjectGroup(Window &window, tson::Layer &layer)
 
 void MapRenderer::DrawImageLayer(Window &window, tson::Layer &layer)
 {
-  sf::Sprite *sprite = m_tiledMapParser.LoadAndStoreTilesetImage(layer.getImage(),
-                                                                { layer.getOffset().x,
-                                                                  layer.getOffset().y });
+  sf::Sprite *sprite = m_tiledMapParser.GetTilesetImage(layer.getImage(),
+                                                      { layer.getOffset().x,
+                                                        layer.getOffset().y });
   if (sprite != nullptr)
   {
     window.Draw(*sprite);

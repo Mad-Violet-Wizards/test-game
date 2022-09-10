@@ -1,0 +1,15 @@
+{ "columns":39,
+ "image":"Japanese_Kangawa.png",
+ "imageheight":1216,
+ "imagewidth":1248,
+ "margin":0,
+ "name":"Japanese_Kangawa",
+ "spacing":0,
+ "tilecount":1482,
+ "tiledversion":"1.9.1",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#6f6f6f",
+ "type":"tileset",
+ "version":"1.8"
+}
