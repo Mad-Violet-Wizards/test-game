@@ -8,17 +8,21 @@ std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
 
 AssetsManager::AssetsManager()
 {
-  CreateFilesMap< sf::Texture >( Directory::TEXTURES_DIRECTORY,
+  ParseAssetsToMap< sf::Texture >( Directory::TEXTURES_DIRECTORY,
                                 { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
                                 m_textures );
 
-  CreateFilesMap< sf::Font >( Directory::FONTS_DIRECTORY,
+  ParseAssetsToMap< sf::Font >( Directory::FONTS_DIRECTORY,
                              { ".ttf" },
                              m_fonts );
 
-  CreateFilesMap< sf::Image >( Directory::IMAGES_DIRECTORY,
+  ParseAssetsToMap< sf::Image >( Directory::IMAGES_DIRECTORY,
                               { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
                               m_images );
+
+  ParseAssetsToMap< sf::Texture>( Directory::MAPS_DIRECTORY,
+                               { ".png" },
+                               m_textures );
 }
 
 AssetsManager::~AssetsManager()
@@ -43,6 +47,11 @@ sf::Image &AssetsManager::GetImage(const std::string &imageName) const
 {
   return FindInFilesMap< sf::Image >(imageName, m_images);
 }
+
+// void AssetsManager::AddTexture(const std::string &textureName, const std::string &texturePath)
+// {
+//   AddToFilesMap< sf::Texture >(textureName, m_textures);
+// }
 
 AssetsManager &AssetsManager::GetInstance()
 {

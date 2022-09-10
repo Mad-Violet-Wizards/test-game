@@ -15,9 +15,11 @@ public:
 
   static AssetsManager &GetInstance();
 
-  sf::Texture &GetTexture(const std::string &textureName) const;
-  sf::Font    &GetFont(const std::string &fontName) const;
-  sf::Image   &GetImage(const std::string &imageName) const;
+  sf::Texture &GetTexture(const std::string &texturePath) const;
+  sf::Font    &GetFont(const std::string &fontPath) const;
+  sf::Image   &GetImage(const std::string &imagePath) const;
+
+  // void AddTexture(const std::string &textureName, const std::string &texturePath);
 
 private:
 

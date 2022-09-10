@@ -2,6 +2,7 @@
 
 #include "rapidjson/document.h"
 
+#include "AssetsManager.hpp"
 #include "Directory.hpp"
 #include "JsonHandler.hpp"
 #include "C_Animation.hpp"
@@ -33,7 +34,7 @@ void C_Animation::Update(float deltaTime)
 
       if (m_singleFile)
       {
-        m_animationOwner -> Load(m_texture);
+        m_animationOwner -> Load(AssetsManager::GetInstance().GetTexture(m_textureFileName));
         m_animationOwner -> SetTextureRect(frameData -> x, frameData -> y, frameData -> width, frameData -> height);
       }
       else
@@ -134,12 +135,7 @@ void C_Animation::LoadSingleFileAnimation(rapidjson::Document &animationDocument
   // WALKING ANIMATIONS.
   //
 
-  m_texture = std::make_shared<sf::Texture>();
-
-  if (!m_texture -> loadFromFile(Directory::ANIMATIONS_DIRECTORY + animationDocument["animation-file"].GetString()))
-  {
-    LOG_WARNING("[Animation] Could not load the file.")
-  }
+  m_textureFileName = std::move(animationDocument["animation-file"].GetString());
 
   m_singleFile = true;
 

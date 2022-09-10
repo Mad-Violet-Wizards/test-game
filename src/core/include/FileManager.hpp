@@ -11,7 +11,7 @@
 // TODO: Think of the better name for this function.
 
 template <typename T, typename Key = std::string>
-constexpr void CreateFilesMap(const Key &directory,
+constexpr void ParseAssetsToMap(const Key &directory,
                               const std::initializer_list<const char*> &supportedFileFormats,
                               std::map < Key, std::shared_ptr<T> > &map)
 {
@@ -40,7 +40,7 @@ constexpr void CreateFilesMap(const Key &directory,
           std::cout << "[FileLoader] Couldn't load the file.\n";
         }
 
-        const Key name = file.replace_extension().filename().string();
+        const Key name = file.filename().string();
 
         map.insert(std::pair< Key, std::shared_ptr<T> >(name, SFML_OBJECT));
       }

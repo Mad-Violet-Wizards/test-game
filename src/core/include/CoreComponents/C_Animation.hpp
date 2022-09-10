@@ -36,7 +36,7 @@ private:
   void LoadMultipleFileAnimation(rapidjson::Document &animationDocument);
 
   bool m_singleFile;
-  std::shared_ptr<sf::Texture> m_texture;
+  std::string m_textureFileName;
 
   std::shared_ptr<C_Sprite> m_animationOwner;
 
