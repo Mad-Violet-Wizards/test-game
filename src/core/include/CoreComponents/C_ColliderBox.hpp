@@ -20,6 +20,8 @@ class C_ColliderBox : public C_Collider
     void SetCollidable(const sf::FloatRect &rect);
     const sf::FloatRect &GetCollidable();
 
+    sf::FloatRect GetPreviousFrameCollidable() const;
+
     void SetOffset(const sf::Vector2f &offset);
     void SetOffset(float x, float y);
 

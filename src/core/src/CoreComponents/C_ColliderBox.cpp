@@ -91,6 +91,18 @@ const sf::FloatRect &C_ColliderBox::GetCollidable()
   return m_AABB;
 }
 
+sf::FloatRect C_ColliderBox::GetPreviousFrameCollidable() const
+{
+  const sf::Vector2f &pos = owner -> transform -> GetPreviousFramePosition();
+
+  sf::FloatRect prevAABB;
+
+  prevAABB.left = pos.x + m_offset.x;
+  prevAABB.top = pos.y + m_offset.y;
+
+  return prevAABB;
+}
+
 void C_ColliderBox::SetOffset(const sf::Vector2f &offset)
 {
   m_offset = offset;

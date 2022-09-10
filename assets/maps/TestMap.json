@@ -160,6 +160,33 @@
                  "width":32,
                  "x":128,
                  "y":0
+                }, 
+                {
+                 "class":"",
+                 "height":32,
+                 "id":17,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collidable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"drawable",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"level",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":0
                 }],
          "opacity":1,
          "properties":[
@@ -311,7 +338,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":16,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

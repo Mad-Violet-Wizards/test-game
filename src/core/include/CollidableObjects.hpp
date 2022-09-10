@@ -5,6 +5,7 @@
 
 #include "tileson.hpp"
 #include "Object.hpp"
+#include "Quadtree.hpp"
 
 class CollidableObjects
 {
@@ -19,8 +20,13 @@ class CollidableObjects
   
       void Update(float deltaTime);
       void Draw(Window &window);
+
+    private:
+
+      void Resolve();
   
     private:
 
-    std::multimap<int, std::shared_ptr<Object>> m_collidableObjects;
+      std::multimap<int, std::shared_ptr<Object>> m_collidableObjects;
+      Quadtree m_quadtree;
 };

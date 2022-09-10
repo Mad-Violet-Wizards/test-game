@@ -15,9 +15,13 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
   {
     std::shared_ptr<Object> gameObject = std::get<std::shared_ptr<Object>>(variant);
 
-    int layerLevel = gameObject -> GetComponent<C_ColliderBox>() -> GetLayer();
+    auto collider = gameObject -> GetComponent<C_ColliderBox>();
+
+    int layerLevel = collider -> GetLayer();
 
     m_collidableObjects.insert({ layerLevel, gameObject });
+
+    m_quadtree.Insert(collider);
   }
   else if (std::holds_alternative<std::shared_ptr<tson::Map>>(variant))
   {
@@ -49,6 +53,8 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
                                              static_cast<float>(collidableObject.getSize().y) });
 
               m_collidableObjects.insert({ collidableObjectLayerlevel, gameObject });
+
+              m_quadtree.Insert(colliderBox);
             }
             LOG_INFO("[CollidableObjects][Add] Detected new collidable object");
           }
@@ -74,24 +80,38 @@ void CollidableObjects::ClearObjects()
 
 void CollidableObjects::Update(float deltaTime)
 {
-  for (auto &[level, o1] : m_collidableObjects)
+
+  m_quadtree.DrawDebug();
+
+  m_quadtree.Clear();
+
+  for (auto &[level, object] : m_collidableObjects)
   {
-    for (auto &[level, o2] : m_collidableObjects)
-    {
-      if ((o1 -> GetComponent<C_InstanceID>()) -> GetID() != (o2 -> GetComponent<C_InstanceID>()) -> GetID())
-      {
-        std::shared_ptr<C_ColliderBox> collider1 = o1 -> GetComponent<C_ColliderBox>();
-        std::shared_ptr<C_ColliderBox> collider2 = o2 -> GetComponent<C_ColliderBox>();
+    auto collider = object -> GetComponent<C_ColliderBox>();
 
-        CollisionManifold manifold = collider1 -> Intersects(collider2);
-
-        if (manifold.colliding)
-        {
-          collider1 -> ResolveOverlap(manifold);
-        }
-      }
-    }
+    m_quadtree.Insert(collider);
   }
+
+  Resolve();
+
+  // for (auto &[level, o1] : m_collidableObjects)
+  // {
+  //   for (auto &[level, o2] : m_collidableObjects)
+  //   {
+  //     if ((o1 -> GetComponent<C_InstanceID>()) -> GetID() != (o2 -> GetComponent<C_InstanceID>()) -> GetID())
+  //     {
+  //       std::shared_ptr<C_ColliderBox> collider1 = o1 -> GetComponent<C_ColliderBox>();
+  //       std::shared_ptr<C_ColliderBox> collider2 = o2 -> GetComponent<C_ColliderBox>();
+
+  //       CollisionManifold manifold = collider1 -> Intersects(collider2);
+
+  //       if (manifold.colliding)
+  //       {
+  //         collider1 -> ResolveOverlap(manifold);
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 void CollidableObjects::Draw(Window &window)
@@ -107,4 +127,40 @@ void CollidableObjects::Draw(Window &window)
     }
   }
   #endif
+}
+
+void CollidableObjects::Resolve()
+{
+  for (auto &[level, object] : m_collidableObjects)
+  {
+    if (object -> transform -> IsStatic())
+    {
+      continue;
+    }
+
+    auto currentObjectColliderBox = object -> GetComponent<C_ColliderBox>();
+
+    std::vector<std::shared_ptr<C_ColliderBox>> collisions = m_quadtree.Search(currentObjectColliderBox -> GetCollidable());
+
+    for (auto collision : collisions)
+    {
+      if (currentObjectColliderBox == collision)
+      {
+        continue;
+      }
+
+      if (collision -> GetLayer() == currentObjectColliderBox -> GetLayer())
+      {
+        CollisionManifold m = currentObjectColliderBox -> Intersects(collision);
+
+        if (m.colliding)
+        {
+          Debug::AddRect(currentObjectColliderBox -> GetCollidable(), sf::Color::Red);
+          Debug::AddRect(collision -> GetCollidable(), sf::Color::Red);
+
+          currentObjectColliderBox -> ResolveOverlap(m);
+        }
+      }
+    }
+  }
 }
