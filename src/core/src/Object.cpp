@@ -1,7 +1,11 @@
 #include "Object.hpp"
 
 Object::Object()
-  : m_queuedForRemoval(false) { }
+  : m_queuedForRemoval(false)
+{
+  transform = AddComponent<C_Transform>();
+  instanceID = AddComponent<C_InstanceID>();
+}
 
 Object::~Object() { }
 
@@ -26,6 +30,14 @@ void Object::Update(float deltaTime)
   for (const auto &c : m_components)
   {
     c -> Update(deltaTime);
+  }
+}
+
+void Object::LateUpdate(float deltaTime)
+{
+  for (const auto &c : m_components)
+  {
+    c -> LateUpdate(deltaTime);
   }
 }
 

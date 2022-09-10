@@ -1,35 +1,27 @@
 #include "DrawableObjects.hpp"
 
+#include "C_Drawable.hpp"
 #include "Log.hpp"
 
-void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> object)
+void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {
-  if (std::holds_alternative<std::shared_ptr<Object>>(object))
+  if (std::holds_alternative<std::shared_ptr<Object>>(variant))
   {
-    std::shared_ptr<Object> obj = std::get<std::shared_ptr<Object>>(object);
+    std::shared_ptr<Object> obj = std::get<std::shared_ptr<Object>>(variant);
+    
+    int layerLevel = obj -> GetComponent<C_Drawable>() -> GetLayer();
 
-    m_drawableObjects.insert(std::make_pair(LayerLevel::PlayerLayer, obj));
+    m_drawableObjects.insert({ layerLevel, obj });
   }
-  else if (std::holds_alternative<std::shared_ptr<tson::Map>>(object))
+  else if (std::holds_alternative<std::shared_ptr<tson::Map>>(variant))
   {
-    std::shared_ptr<tson::Map> map = std::get<std::shared_ptr<tson::Map>>(object);
+    std::shared_ptr<tson::Map> map = std::get<std::shared_ptr<tson::Map>>(variant);
 
     for (auto &layer : map -> getLayers())
     {
-      int level = layer.getProperties().getValue<int>("level");
+      int layerLevel = layer.getProperties().getValue<int>("level");
 
-      if (level < 0)
-      {
-        m_drawableObjects.insert(std::make_pair(LayerLevel::BelowLayer, layer));
-      }
-      else if (level > 0)
-      {
-        m_drawableObjects.insert(std::make_pair(LayerLevel::AboveLayer, layer));
-      }
-      else
-      {
-        m_drawableObjects.insert(std::make_pair(LayerLevel::StanardLayer, layer));
-      }
+      m_drawableObjects.insert({ layerLevel, layer });
     }
   }
 }

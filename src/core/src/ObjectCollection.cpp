@@ -1,5 +1,8 @@
 #include "ObjectCollection.hpp"
 
+#include "C_ColliderBox.hpp"
+#include "C_Drawable.hpp"
+
 ObjectCollection::ObjectCollection()
 {
 
@@ -10,9 +13,9 @@ ObjectCollection::~ObjectCollection()
 
 }
 
-void ObjectCollection::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> object)
+void ObjectCollection::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {
-  m_newObjects.push(object);
+  m_newObjects.push(variant);
 }
 
 void ObjectCollection::Update(float deltaTime)
@@ -22,11 +25,21 @@ void ObjectCollection::Update(float deltaTime)
     object -> Update(deltaTime);
   }
 
+  m_collidableObjects.Update(deltaTime);
   m_drawableObjects.Update(deltaTime);
+}
+
+void ObjectCollection::LateUpdate(float deltaTime)
+{
+  for (auto &object : m_objects)
+  {
+    object -> LateUpdate(deltaTime);
+  }
 }
 
 void ObjectCollection::Draw(Window &window)
 {
+  m_collidableObjects.Draw(window);
   m_drawableObjects.Draw(window);
 }
 
@@ -43,7 +56,15 @@ void ObjectCollection::ProcessNewObjects()
       object -> Awake();
       object -> Start();
 
-      m_drawableObjects.Add(object);
+      if (object -> HasComponent<C_Drawable>())
+      {
+        m_drawableObjects.Add(object);
+      }
+
+      if (object -> HasComponent<C_ColliderBox>())
+      {
+        m_collidableObjects.Add(object);
+      }
 
       m_objects.push_back(object);
     }
@@ -51,7 +72,8 @@ void ObjectCollection::ProcessNewObjects()
     {
       std::shared_ptr<tson::Map> map = std::get<std::shared_ptr<tson::Map>>(VariantObject);
 
-      m_drawableObjects.Add(map); 
+      m_collidableObjects.Add(map);
+      m_drawableObjects.Add(map);
     }
     else
     {

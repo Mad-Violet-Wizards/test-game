@@ -25,6 +25,7 @@ public:
   void OnDestroy() override;
 
   void Update(float deltaTime) override;
+  void LateUpdate(float deltaTime) override;
   void Draw(Window &window) override;
 
   //

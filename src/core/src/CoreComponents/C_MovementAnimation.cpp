@@ -7,8 +7,8 @@ C_MovementAnimation::C_MovementAnimation(Object* owner)
 
 void C_MovementAnimation::Awake()
 {
-  m_velocity = m_owner -> GetComponent<C_Velocity>();
-  m_animation = m_owner -> GetComponent<C_Animation>();
+  m_velocity = owner -> GetComponent<C_Velocity>();
+  m_animation = owner -> GetComponent<C_Animation>();
 }
 
 void C_MovementAnimation::Update(float deltaTime)

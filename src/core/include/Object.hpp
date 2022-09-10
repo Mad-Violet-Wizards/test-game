@@ -7,6 +7,10 @@
 #include "Component.hpp"
 #include "Log.hpp"
 
+#include "Component.hpp"
+#include "C_InstanceID.hpp"
+#include "C_Transform.hpp"
+
 class Object
 {
 
@@ -25,7 +29,11 @@ public:
   bool QueuedForRemoval() const;
   void QueueForRemoval();
 
-  template <typename T> std::shared_ptr<T> AddComponent()
+  std::shared_ptr<C_Transform> transform;
+  std::shared_ptr<C_InstanceID> instanceID;
+
+  template <typename T>
+  std::shared_ptr<T> AddComponent()
   {
     static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
@@ -44,7 +52,8 @@ public:
     return newComponent;
   };
 
-  template <typename T> std::shared_ptr<T> GetComponent()
+  template <typename T>
+  std::shared_ptr<T> GetComponent()
   {
     // Check that we don't already have a component of this type.
     for (auto& exisitingComponent : m_components)
@@ -58,6 +67,20 @@ public:
     LOG_WARNING("[Object][GetComponent] Returned nullptr.");
 
     return nullptr;
+  };
+
+  template <typename T>
+  bool HasComponent() const
+  {
+    for (auto& exisitingComponent : m_components)
+    {
+      if (std::dynamic_pointer_cast<T>(exisitingComponent))
+      {
+        return true;
+      }
+    }
+
+    return false;
   };
 
 private:

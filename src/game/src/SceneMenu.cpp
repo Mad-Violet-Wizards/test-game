@@ -33,6 +33,11 @@ void SceneMenu::Update(float deltaTime)
   m_menuGuiManager.Update(deltaTime);
 }
 
+void SceneMenu::LateUpdate(float deltaTime)
+{
+  
+}
+
 void SceneMenu::Draw(Window &window)
 {
   m_menuGuiManager.Draw(window);

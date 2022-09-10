@@ -24,6 +24,11 @@ void Game::Update()
   m_sceneManager.Update(m_deltaTime);
 }
 
+void Game::LateUpdate()
+{
+  m_sceneManager.LateUpdate(m_deltaTime);
+}
+
 void Game::Draw()
 {
   m_window.BeginDraw();

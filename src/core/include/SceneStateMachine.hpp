@@ -15,6 +15,7 @@ public:
   ~SceneStateMachine();
 
   void Update(float deltaTime);
+  void LateUpdate(float deltaTime);
   void Draw(Window &window);
 
   unsigned int Add(std::shared_ptr<Scene> scene);

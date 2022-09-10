@@ -16,7 +16,7 @@ void C_Sprite::Load(std::shared_ptr<sf::Texture> texture)
 
 void C_Sprite::Update(float deltaTime)
 {
-  m_sprite.setPosition(m_owner -> GetComponent<C_Transform>() -> GetPosition());
+  m_sprite.setPosition(owner -> transform -> GetPosition());
 }
 
 void C_Sprite::Draw(Window &window)
