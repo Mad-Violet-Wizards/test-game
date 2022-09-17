@@ -13,51 +13,6 @@ Animation::Animation()
 
 Animation::~Animation() {}
 
-void Animation::LoadMovementAnimationMultipleFile(rapidjson::Document &animationDocument, 
-                                                  AnimationState state, 
-                                                  FacingDirection direction)
-{
-  using namespace rapidjson;
-
-  Value animationFilesArray;
-
-  if (state == AnimationState::Walk)
-  {
-    if (direction == FacingDirection::North)      { animationFilesArray = animationDocument["walking-north"]; }
-    else if (direction == FacingDirection::East)  { animationFilesArray = animationDocument["walking-east"]; }
-    else if (direction == FacingDirection::South) { animationFilesArray = animationDocument["walking-south"]; }
-    else if (direction == FacingDirection::West)  { animationFilesArray = animationDocument["walking-west"]; }
-  }
-  else if (state == AnimationState::Idle)
-  {
-    if (direction == FacingDirection::North)      { animationFilesArray = animationDocument["idle-north"]; }
-    else if (direction == FacingDirection::East)  { animationFilesArray = animationDocument["idle-east"]; }
-    else if (direction == FacingDirection::South) { animationFilesArray = animationDocument["idle-south"]; }
-    else if (direction == FacingDirection::West)  { animationFilesArray = animationDocument["idle-west"]; }
-  }
-
-  assert(animationFilesArray.IsArray());
-
-  for (auto &textureJsonObject : animationFilesArray.GetArray())
-  {
-    std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
-
-    if (!texture -> loadFromFile(Directory::ANIMATIONS_DIRECTORY + textureJsonObject["fileName"].GetString()))
-    {
-      LOG_WARNING("[Animation] Could not load the file.")
-    }
-
-    FrameData frameData;
-    
-    frameData.texture = texture;
-    frameData.width = 0;
-    frameData.height = 0;
-    frameData.displayTime = textureJsonObject["frameDuration"].GetDouble();
-
-    m_frames.push_back(frameData);
-  }
-}
-
 void Animation::LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
                                                 AnimationState state,
                                                 FacingDirection direction)
