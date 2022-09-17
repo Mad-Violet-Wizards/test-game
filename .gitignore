@@ -18,4 +18,6 @@ src/.vs
 src/CMakeSettings.json
 *.vs
 
+__pycache__
+
 CMakeCache.txt
