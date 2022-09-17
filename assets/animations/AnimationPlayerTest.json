@@ -1,5 +1,4 @@
 {
-  "single-file": true,
   "animation-file": "single_file_animation.png",
   "walking-north": { "tileRow": 0, "frameCount": 8, "frameDuration": 0.2 },
   "walking-east": { "tileRow": 1, "frameCount": 8, "frameDuration": 0.2 },
