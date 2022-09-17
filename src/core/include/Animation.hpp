@@ -26,8 +26,6 @@ enum class AnimationState
 
 struct FrameData
 {
-  std::shared_ptr<sf::Texture> texture;
-
   int x;
   int y;
 
@@ -44,10 +42,6 @@ public:
 
   Animation();
   ~Animation();
-
-  void LoadMovementAnimationMultipleFile(rapidjson::Document &animationDocument,
-                                         AnimationState state, 
-                                         FacingDirection direction);
 
   void LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
                                        AnimationState state, 
