@@ -6,6 +6,8 @@
 build/
 test-game/
 logs/
+*.dll
+assets_compressed/
 
 # Don't add local logs to repo.
 log/

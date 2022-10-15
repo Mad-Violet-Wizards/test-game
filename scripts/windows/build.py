@@ -75,14 +75,13 @@ class Build:
 
       os.chdir("..")
 
-    copy = shutil.copytree("./assets", "test-game/assets")
+    copy = shutil.copytree("./assets_raw", "test-game/assets")
     copy = shutil.copytree("build/src/app/bin", "test-game/bin")
 
     for file in os.listdir("build/bin"):
       shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")
 
     print("[Build] Release prepared")
-
 
 if __name__ == "__main__":
   fire.Fire(Build)
