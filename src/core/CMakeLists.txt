@@ -4,11 +4,20 @@ project (core) # Specify the name of project
 set(CMAKE_CXX_STANDARD 20)
 
 # List the source files for all folders.
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/CoreComponents/ CORE_COMPONENTS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/ SRC)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Animation/ ANIMATION)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Components/ COMPONENTS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Debug/ DEBUG)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Events/ EVENTS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Filesystem/ FILESYSTEM)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Input/ INPUT)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Level/ LEVEL)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Objects/ OBJECTS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/ SCENE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/ UTILITY)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Window/ WINDOW)
 
 # Specify the whole framework as a library and add source files. (cpp)
-add_library(${PROJECT_NAME} ${SRC} ${CORE_COMPONENTS})
+add_library(${PROJECT_NAME} ${ANIMATION} ${COMPONENTS} ${DEBUG} ${EVENTS} ${FILESYSTEM} ${INPUT} ${LEVEL} ${OBJECTS} ${SCENE} ${UTILITY} ${WINDOW})
 
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
@@ -16,8 +25,17 @@ conan_basic_setup()
 
 # Include all header files.
 target_include_directories( ${PROJECT_NAME}
-  PUBLIC ${PROJECT_SOURCE_DIR}/include
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/CoreComponents
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/ANIMATION
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/COMPONENTS
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/DEBUG
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/EVENTS
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/FILESYSTEM
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/INPUT
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/LEVEL
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/OBJECTS
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/SCENE
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/UTILITY
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/WINDOW
 )
 
 target_link_libraries(${PROJECT_NAME} external cryptopp)
