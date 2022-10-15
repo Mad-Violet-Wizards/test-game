@@ -1,0 +1,9 @@
+[requires]
+zlib/1.2.12
+rapidjson/1.1.0
+
+[generators]
+cmake
+
+[imports]
+bin, *.dll -> ./bin/

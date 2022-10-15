@@ -15,4 +15,6 @@ int main()
     game.Draw();
     game.CalculateDeltaTime();
   }
+
+  return EXIT_SUCCESS;
 }
