@@ -3,23 +3,29 @@
 #include <string>
 #include <vector>
 
-class AssetsJsonDescriptor
+namespace OnyxTools
 {
-
-public:
-
-  enum class Type
+  namespace Compressor
   {
-    Texture,
-    Font,
-    Image,
-    Map,
-    Animation,
-    Unknown
-  };
+    class AssetsJsonDescriptor
+    {
 
-  AssetsJsonDescriptor() = default;
-  ~AssetsJsonDescriptor() = default;
+    public:
 
-  void CreateJsonFile(const std::vector<std::string> &files);
-};
+      enum class Type
+      {
+        Texture,
+        Font,
+        Image,
+        Map,
+        Animation,
+        Unknown
+      };
+
+      AssetsJsonDescriptor() = default;
+      ~AssetsJsonDescriptor() = default;
+
+      void CreateJsonFile(const std::vector<std::string> &files);
+    };
+  }
+}

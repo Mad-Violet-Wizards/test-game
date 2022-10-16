@@ -2,22 +2,26 @@
 
 #include <chrono>
 
-class Timer
+namespace OnyxTools
 {
+    namespace Compressor
+    {
+        class Timer
+        {
+        public:
 
-public:
+            Timer() = default;
+            ~Timer() = default;
 
-    Timer() = default;
-    ~Timer() = default;
+            void Start();
+            void End();
 
-    void Start();
-    void End();
-    
-    double ElapsedTime() const;
+            [[nodiscard]] double ElapsedTime() const;
 
-private:
+        private:
 
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_start;
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_end;
-
-};
+            std::chrono::time_point<std::chrono::high_resolution_clock> m_start;
+            std::chrono::time_point<std::chrono::high_resolution_clock> m_end;
+        };
+    }
+}

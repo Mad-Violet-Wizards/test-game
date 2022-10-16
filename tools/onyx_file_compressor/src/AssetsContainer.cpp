@@ -5,19 +5,19 @@
 
 #include "Log.hpp"
 
-AssetsContainer::AssetsContainer() 
+OnyxTools::Compressor::AssetsContainer::AssetsContainer() 
     : m_isDirectory(false),
       m_currentPath({ASSETS_DIRECTORY_INPUT})
 {
 }
 
 
-AssetsContainer::~AssetsContainer()
+OnyxTools::Compressor::AssetsContainer::~AssetsContainer()
 {
     // Delete everything.
 }
 
-void AssetsContainer::CollectAssets(const std::string &path, bool createOutputDirectory)
+void OnyxTools::Compressor::AssetsContainer::CollectAssets(const std::string &path, bool createOutputDirectory)
 {
     if (std::filesystem::exists(path))
     {
@@ -46,7 +46,7 @@ void AssetsContainer::CollectAssets(const std::string &path, bool createOutputDi
     }
 }
 
-void AssetsContainer::PrintFoundFiles()
+void OnyxTools::Compressor::AssetsContainer::PrintFoundFiles()
 {
     for (const auto &file : m_files)
     {
@@ -54,17 +54,17 @@ void AssetsContainer::PrintFoundFiles()
     }
 }
 
-int AssetsContainer::Size() const
+int OnyxTools::Compressor::AssetsContainer::Size() const
 {
     return m_files.size();
 }
 
-const std::vector<std::string> &AssetsContainer::GetPathes() const
+const std::vector<std::string> &OnyxTools::Compressor::AssetsContainer::GetPathes() const
 {
     return m_files;
 }
 
-void AssetsContainer::CreateOutputDirectory(const std::string &path)
+void OnyxTools::Compressor::AssetsContainer::CreateOutputDirectory(const std::string &path)
 {
     std::string outputPath = std::regex_replace(path, std::regex(ASSETS_DIRECTORY_INPUT), ASSETS_DIRECTORY_OUTPUT);
     if (!std::filesystem::exists(outputPath))

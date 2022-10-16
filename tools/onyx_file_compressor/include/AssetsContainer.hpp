@@ -5,28 +5,34 @@
 
 #include "Directory.hpp"
 
-class AssetsContainer
+namespace OnyxTools
 {
+    namespace Compressor
+    {
+        class AssetsContainer
+        {
 
-public:
+        public:
 
-    AssetsContainer();
-    ~AssetsContainer();
+            AssetsContainer();
+            ~AssetsContainer();
 
-    void CollectAssets(const std::string &path, bool createOutputDirectory);
-    void PrintFoundFiles();
+            void CollectAssets(const std::string &path, bool createOutputDirectory);
+            void PrintFoundFiles();
 
-    int Size() const;
+            int Size() const;
 
-    const std::vector<std::string> &GetPathes() const;
+            const std::vector<std::string> &GetPathes() const;
 
-private:
+        private:
 
-    void CreateOutputDirectory(const std::string &path);
+            void CreateOutputDirectory(const std::string &path);
 
-private:
+        private:
 
-    bool m_isDirectory;
-    std::string m_currentPath;
-    std::vector<std::string> m_files;
-};
+            bool m_isDirectory;
+            std::string m_currentPath;
+            std::vector<std::string> m_files;
+        };
+    }
+}
