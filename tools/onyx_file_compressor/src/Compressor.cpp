@@ -5,14 +5,14 @@
 #include "Directory.hpp"
 #include "Log.hpp"
 
-int Compressor::s_Progress = 0;
+int OnyxTools::Compressor::Compressor::s_Progress = 0;
 
-void Compressor::ShowProgress(int progress, int totalFiles)
+void OnyxTools::Compressor::Compressor::ShowProgress(int progress, int totalFiles)
 {
   LOG("Processed files: ", progress, " / ", totalFiles);
 }
 
-void Compressor::CompressPathes(const std::vector<std::string> &pathes)
+void OnyxTools::Compressor::Compressor::CompressPathes(const std::vector<std::string> &pathes)
 {
   auto StringContains = [](const std::string &str, const std::string &substr)
   {
@@ -65,12 +65,12 @@ void Compressor::CompressPathes(const std::vector<std::string> &pathes)
   }
 }
 
-void Compressor::DecompressPathes(const std::vector<std::string> &pathes)
+void OnyxTools::Compressor::Compressor::DecompressPathes(const std::vector<std::string> &pathes)
 {
   // TODO.
 }
 
-std::string Compressor::CompressString(const std::string &str, int compressionlevel)
+std::string OnyxTools::Compressor::Compressor::CompressString(const std::string &str, int compressionlevel)
 {
     z_stream zs;                        // z_stream is zlib's control structure
     memset(&zs, 0, sizeof(zs));
@@ -110,7 +110,7 @@ std::string Compressor::CompressString(const std::string &str, int compressionle
     return outstring;
 }
 
-std::string Compressor::DecompressString(const std::string &str)
+std::string OnyxTools::Compressor::Compressor::DecompressString(const std::string &str)
 {
     z_stream zs;                        // z_stream is zlib's control structure
     memset(&zs, 0, sizeof(zs));
@@ -151,7 +151,7 @@ std::string Compressor::DecompressString(const std::string &str)
     return outstring;
 }
 
-std::string Compressor::ReplaceFileExtension(const std::string &path, const std::string &newExtension)
+std::string OnyxTools::Compressor::Compressor::ReplaceFileExtension(const std::string &path, const std::string &newExtension)
 {
   const size_t lastDot = path.find_last_of('.');
   std::string res = "";

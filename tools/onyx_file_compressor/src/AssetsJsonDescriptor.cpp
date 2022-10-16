@@ -12,7 +12,7 @@
 
 #include "Log.hpp"
 
-void AssetsJsonDescriptor::CreateJsonFile(const std::vector<std::string> &files)
+void OnyxTools::Compressor::AssetsJsonDescriptor::CreateJsonFile(const std::vector<std::string> &files)
 {
 
   auto GetFileExtension = [](const std::string &file)
