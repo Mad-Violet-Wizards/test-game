@@ -15,6 +15,7 @@ If you want to create a new branch, use one of those names:
 * **docs** - if you're doing something related to docs/ folder.
 * **build** - if you're changing something in build system, f.e. CMakeLists.
 * **test** - if you're implementing or refactoring one of the unit-tests.
+* **tools** - if you're doing something in tools/ folder.
 
 Second part is some description of thing, you're doing, f.e **adding-new-player-animation**,
 
