@@ -43,6 +43,8 @@ public:
   Animation();
   ~Animation();
 
+  // FIXME: Change the god damn name of this method.
+
   void LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
                                        AnimationState state, 
                                        FacingDirection direction);

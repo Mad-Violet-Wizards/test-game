@@ -56,6 +56,14 @@ class Build:
     os.system('cmd /c cmake --build . --config Release')
     os.system('cmd /c conan imports ..')
 
+    os.chdir('../tools')
+    files = os.listdir(os.getcwd())
+
+    for file in files:
+      if file.endswith(".dll"):
+        shutil.copy2(os.path.join(os.getcwd(), file), "../build/bin")
+        print(f"[Build] Copied {file} to build/bin")
+
     print("[Build] Build finished")
 
   def release(self):
@@ -75,8 +83,10 @@ class Build:
 
       os.chdir("..")
 
-    copy = shutil.copytree("./assets_raw", "test-game/assets")
-    copy = shutil.copytree("build/src/app/bin", "test-game/bin")
+    os.mkdir("test-game/bin/")
+
+    copy = shutil.copytree("./assets_compressed", "test-game/assets")
+    shutil.copy("build/src/app/bin/app.exe", "test-game/bin/")
 
     for file in os.listdir("build/bin"):
       shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")

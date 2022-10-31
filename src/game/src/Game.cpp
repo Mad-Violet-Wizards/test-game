@@ -1,8 +1,11 @@
 #include "Game.hpp"
 #include "FpsCounter.hpp"
+#include "AssetsManager.hpp"
 
 Game::Game() : m_window("Test-Game 1.0.0")
 {
+  AssetsManager::GetInstance().ParseAssetsSchema("../assets/assets-schema.json");
+
   std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>();
   std::shared_ptr<SceneMenu> menuScene = std::make_shared<SceneMenu>(&m_window, &m_sceneManager);
 

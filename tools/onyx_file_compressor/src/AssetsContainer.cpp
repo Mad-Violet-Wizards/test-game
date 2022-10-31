@@ -2,6 +2,7 @@
 
 #include <filesystem>
 #include <regex>
+#include <cstring>
 
 #include "Log.hpp"
 
@@ -17,7 +18,7 @@ OnyxTools::Compressor::AssetsContainer::~AssetsContainer()
     // Delete everything.
 }
 
-void OnyxTools::Compressor::AssetsContainer::CollectAssets(const std::string &path, bool createOutputDirectory)
+void OnyxTools::Compressor::AssetsContainer::CollectAssets(const std::string &path)
 {
     if (std::filesystem::exists(path))
     {
@@ -25,13 +26,8 @@ void OnyxTools::Compressor::AssetsContainer::CollectAssets(const std::string &pa
         {
             if (std::filesystem::is_directory(entry))
             {
-                // TODO: Maybe us std::format?
                 auto directory_path = path + std::filesystem::path(entry).filename().generic_string() + "/";
-                if (createOutputDirectory)
-                {
-                    CreateOutputDirectory(directory_path);
-                }
-                CollectAssets(directory_path, createOutputDirectory);
+                CollectAssets(directory_path);
             }
             else
             {
@@ -64,11 +60,19 @@ const std::vector<std::string> &OnyxTools::Compressor::AssetsContainer::GetPathe
     return m_files;
 }
 
-void OnyxTools::Compressor::AssetsContainer::CreateOutputDirectory(const std::string &path)
+void OnyxTools::Compressor::AssetsContainer::CreateOutputDirectory()
 {
-    std::string outputPath = std::regex_replace(path, std::regex(ASSETS_DIRECTORY_INPUT), ASSETS_DIRECTORY_OUTPUT);
-    if (!std::filesystem::exists(outputPath))
+    for (const std::string &file : m_files)
     {
-        std::filesystem::create_directory(outputPath);
+        // Delete the last part of the path.
+        const std::string directory = file.substr(0, file.find_last_of("/")); 
+
+        // Replace the assets_raw with assets_compressed
+        const std::string outputPath = std::regex_replace(directory, std::regex(ASSETS_DIRECTORY_INPUT), ASSETS_DIRECTORY_OUTPUT);
+
+        if (!std::filesystem::exists(outputPath))
+        {
+            std::filesystem::create_directories(outputPath);
+        }
     }
 }

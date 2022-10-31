@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <filesystem>
 #include <regex>
+#include <ranges>
+#include <string_view>
 
 #include "Directory.hpp"
 #include "rapidjson/document.h"
@@ -14,119 +16,67 @@
 
 void OnyxTools::Compressor::AssetsJsonDescriptor::CreateJsonFile(const std::vector<std::string> &files)
 {
-
   auto GetFileExtension = [](const std::string &file)
   {
     auto pos = file.find_last_of('.');
     return file.substr(pos);
   };
 
-  auto StringContains = [](const std::string &str, const std::string &substr)
-  {
-    return str.find(substr) != std::string::npos;
-  };
-
-  auto DetermineAssetType = [&](const std::string &file)
-  {
-    if (StringContains(file, "textures"))
-    {
-      return Type::Texture;
-    }
-    else if (StringContains(file, "fonts"))
-    {
-      return Type::Font;
-    }
-    else if (StringContains(file, "images"))
-    {
-      return Type::Image;
-    }
-    else if (StringContains(file, "maps"))
-    {
-      return Type::Map;
-    }
-    else if (StringContains(file, "animations"))
-    {
-      return Type::Animation;
-    }
-    else
-    {
-      return Type::Unknown;
-    }
-  };
+  constexpr std::string_view delimeter("/");
 
   rapidjson::Document document;
   document.SetObject();
 
-  rapidjson::Value texturesArray(rapidjson::kArrayType);
-  rapidjson::Value fontsArray(rapidjson::kArrayType);
-  rapidjson::Value imagesArray(rapidjson::kArrayType);
-  rapidjson::Value mapsArray(rapidjson::kArrayType);
-  rapidjson::Value animationsArray(rapidjson::kArrayType);
-
   rapidjson::Document::AllocatorType &allocator = document.GetAllocator();
 
-  for (const std::string &file : files)
-  {
-    rapidjson::Value outputObj(rapidjson::kObjectType);
+  rapidjson::Value assetsSchemaArray(rapidjson::kArrayType);
 
-    std::string fileExtension = GetFileExtension(file);
-    
+  for (const std::string_view &file : files)
+  {
+    std::vector<std::string> splittedFile;
+
+    for (auto word : std::views::split(file, delimeter))
+    {
+      splittedFile.push_back({word.begin(), word.end()});
+    }
+
+    const std::string &type = splittedFile[splittedFile.size() - 2];
+    const std::string &filename = splittedFile.back();
+    const std::string &fileExtension = GetFileExtension(filename);
+
     std::filesystem::path path = std::filesystem::path(file);
     path.replace_extension(".dat");
-    std::string compressedFile = std::move(path.filename().generic_string());
+    const std::string &compressedFile = path.filename().generic_string();
+    const std::string &releasePath = "../assets/" + type + "/" + compressedFile;
+
+    rapidjson::Value outputObj(rapidjson::kObjectType);
 
     outputObj.AddMember("file", rapidjson::Value(compressedFile.c_str(), allocator).Move(), allocator);
-    outputObj.AddMember("raw-extension", rapidjson::Value(fileExtension.c_str(), allocator).Move(), allocator);
+    outputObj.AddMember("filename", rapidjson::Value(filename.c_str(), allocator).Move(), allocator);
+    outputObj.AddMember("extension", rapidjson::Value(fileExtension.c_str(), allocator).Move(), allocator);
+    outputObj.AddMember("path", rapidjson::Value(releasePath.c_str(), allocator).Move(), allocator);
+    outputObj.AddMember("type", rapidjson::Value(type.c_str(), allocator).Move(), allocator);
 
-    switch (DetermineAssetType(file))
+    if (fileExtension != ".json")
     {
-      case Type::Texture:
-      {
-        texturesArray.PushBack(outputObj.Move(), allocator);
-        break;
-      }
-      case Type::Font:
-      {
-        fontsArray.PushBack(outputObj.Move(), allocator);
-        break;
-      }
-      case Type::Image:
-      {
-        imagesArray.PushBack(outputObj.Move(), allocator);
-        break;
-      }
-      case Type::Map:
-      {
-        mapsArray.PushBack(outputObj.Move(), allocator);
-        break;
-      }
-      case Type::Animation:
-      {
-        animationsArray.PushBack(outputObj.Move(), allocator);
-        break;
-      }
-      default:
-      {
-        break;
-      }
-    } 
+      assetsSchemaArray.PushBack(outputObj.Move(), allocator);
+    }
   }
 
-  document.AddMember("textures", texturesArray, allocator);
-  document.AddMember("fonts", fontsArray, allocator);
-  document.AddMember("images", imagesArray, allocator);
-  document.AddMember("maps", mapsArray, allocator);
-  document.AddMember("animations", animationsArray, allocator);
+  // Create schema for assets.
+  {
+    document.AddMember("assets", assetsSchemaArray, allocator);
 
-  std::string output = ASSETS_DIRECTORY_OUTPUT + "schema.json";
+    std::string output = ASSETS_DIRECTORY_OUTPUT + "assets-schema.json";
 
-  FILE *fp = fopen(output.c_str(), "wb");
+    FILE *fp = fopen(output.c_str(), "wb");
 
-  char writeBuffer[65536];
+    char writeBuffer[65536];
 
-  rapidjson::FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
-  rapidjson::PrettyWriter<rapidjson::FileWriteStream> writer(os);
-  document.Accept(writer);
+    rapidjson::FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
+    rapidjson::PrettyWriter<rapidjson::FileWriteStream> writer(os);
+    document.Accept(writer);
 
-  fclose(fp);
+    fclose(fp);
+  }
 }

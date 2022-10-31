@@ -1,7 +1,7 @@
 #include "TiledMapParser.hpp"
 
 #include "AssetsManager.hpp"
-#include "Directory.hpp"
+#include "AssetsStructure.hpp"
 #include "Log.hpp"
 
 TiledMapParser::TiledMapParser() : m_basePath("../assets/maps/") { }
@@ -78,7 +78,7 @@ sf::Vector2f TiledMapParser::GetTileOffset(int tileId, tson::Map *map, tson::Til
 
 fs::path TiledMapParser::GetTilesetImagePath(const tson::Tileset &tileset)
 {
-  fs::path tilesetPath = fs::path(Directory::MAPS_DIRECTORY / tileset.getImage().filename());
+  fs::path tilesetPath = fs::path(AssetsStructure::MAPS_DIRECTORY / tileset.getImage().filename());
 
   return tilesetPath;
 }
