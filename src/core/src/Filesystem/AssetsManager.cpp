@@ -2,27 +2,15 @@
 
 #include "AssetsManager.hpp"
 #include "FileManager.hpp"
-#include "Directory.hpp"
+#include "File.hpp"
+#include "ObjectBroker.hpp"
+
+#include "rapidjson/document.h"
 
 std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
 
 AssetsManager::AssetsManager()
 {
-  ParseAssetsToMap< sf::Texture >( Directory::TEXTURES_DIRECTORY,
-                                { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
-                                m_textures );
-
-  ParseAssetsToMap< sf::Font >( Directory::FONTS_DIRECTORY,
-                             { ".ttf" },
-                             m_fonts );
-
-  ParseAssetsToMap< sf::Image >( Directory::IMAGES_DIRECTORY,
-                              { ".bmp", ".png", ".tga", ".jpg", ".gif", ".psd", ".hdr", ".pic" },
-                              m_images );
-
-  ParseAssetsToMap< sf::Texture>( Directory::MAPS_DIRECTORY,
-                               { ".png" },
-                               m_textures );
 }
 
 AssetsManager::~AssetsManager()
@@ -48,11 +36,6 @@ sf::Image &AssetsManager::GetImage(const std::string &imageName) const
   return FindInFilesMap< sf::Image >(imageName, m_images);
 }
 
-// void AssetsManager::AddTexture(const std::string &textureName, const std::string &texturePath)
-// {
-//   AddToFilesMap< sf::Texture >(textureName, m_textures);
-// }
-
 AssetsManager &AssetsManager::GetInstance()
 {
   if (AssetsManager::s_instance == nullptr)
@@ -61,4 +44,51 @@ AssetsManager &AssetsManager::GetInstance()
   }
 
   return *s_instance;
+}
+
+void AssetsManager::ParseAssetsSchema(const std::string &path)
+{
+  ObjectBroker broker;
+
+  File assetsSchema;
+  assetsSchema.LoadFile(path);
+
+  rapidjson::Document assetsSchemaDocument;
+  assetsSchemaDocument.Parse(assetsSchema.GetData().c_str());
+
+  rapidjson::Value assetsFiles;
+  assetsFiles = assetsSchemaDocument["assets"];
+
+  for (const auto &jsonData : assetsFiles.GetArray())
+  {
+    // FIXME: There's a memory leak.
+
+    File *file = new File;
+
+    file -> LoadFile(jsonData["path"].GetString(), std::ios::binary);
+    file -> SetType(jsonData["type"].GetString());
+
+    switch(file -> GetType())
+    {
+      case (File::Type::Texture):
+      {
+        m_textures.insert( { jsonData["filename"].GetString(), broker.CreateObjectFromFile< sf::Texture >(file, true) });
+        break;
+      }
+      case (File::Type::Image):
+      {
+        m_images.insert( { jsonData["filename"].GetString(), broker.CreateObjectFromFile< sf::Image >(file, true) });
+        break;
+      }
+      case (File::Type::Font):
+      {
+        m_fonts.insert( { jsonData["filename"].GetString(), broker.CreateObjectFromFile< sf::Font >(file, true) });
+        break;
+      }
+      default:
+      {
+        break;
+      }
+    }
+  }
 }

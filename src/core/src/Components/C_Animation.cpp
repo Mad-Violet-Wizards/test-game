@@ -3,8 +3,7 @@
 #include "rapidjson/document.h"
 
 #include "AssetsManager.hpp"
-#include "Directory.hpp"
-#include "JsonHandler.hpp"
+#include "File.hpp"
 #include "C_Animation.hpp"
 
 //
@@ -42,11 +41,11 @@ void C_Animation::Update(float deltaTime)
 
 void C_Animation::SetAnimationFile(const std::string &filePath)
 {
-  static JsonHandler jsonHandler;
-  jsonHandler.LoadFile(filePath);
+  File file;
+  file.LoadFile(filePath);
 
-  static rapidjson::Document animationDocument;
-  animationDocument.Parse(jsonHandler.GetJsonContent());
+  rapidjson::Document animationDocument;
+  animationDocument.Parse(file.GetData().c_str());
 
   LoadSingleFileAnimation(animationDocument);
 }

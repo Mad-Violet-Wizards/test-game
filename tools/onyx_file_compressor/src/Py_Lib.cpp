@@ -1,6 +1,4 @@
-#pragma once
-
-#include <new>
+#include <string>
 
 #include "Library.hpp"
 #include "Compressor.hpp"
@@ -15,7 +13,6 @@ namespace OnyxTools
   {
     extern "C"
     {
-
       ONYX_FILE_COMPRESSOR_API const char *Py_GetAssetsDirectoryInput()
       {
         return ASSETS_DIRECTORY_INPUT.c_str();
@@ -41,7 +38,12 @@ namespace OnyxTools
         try
         {
           auto assetsContainer = static_cast<AssetsContainer*>(ptr);
-          assetsContainer->CollectAssets(path, createOutputDirectory);
+          assetsContainer->CollectAssets(path);
+
+          if (createOutputDirectory)
+          {
+            assetsContainer->CreateOutputDirectory();
+          }
 
           Compressor::CompressPathes(assetsContainer->GetPathes());
           

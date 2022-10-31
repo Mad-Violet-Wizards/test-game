@@ -5,13 +5,6 @@
 #include "Directory.hpp"
 #include "Log.hpp"
 
-int OnyxTools::Compressor::Compressor::s_Progress = 0;
-
-void OnyxTools::Compressor::Compressor::ShowProgress(int progress, int totalFiles)
-{
-  LOG("Processed files: ", progress, " / ", totalFiles);
-}
-
 void OnyxTools::Compressor::Compressor::CompressPathes(const std::vector<std::string> &pathes)
 {
   auto StringContains = [](const std::string &str, const std::string &substr)
@@ -23,23 +16,25 @@ void OnyxTools::Compressor::Compressor::CompressPathes(const std::vector<std::st
   {
     // We currently don't support compressing .JSON files
     // so skip them and save as they are in compressed output.
-    // if (StringContains(path, ".json"))
-    // {
-    //   std::ifstream input(path, std::ios::in);
+    if (StringContains(path, ".json"))
+    {
+      std::ifstream input(path, std::ios::in);
 
-    //   std::ostringstream ss;
-    //   ss << input.rdbuf();
-    //   std::string data = ss.str();
+      std::ostringstream ss;
+      ss << input.rdbuf();
+      std::string data = ss.str();
 
-    //   std::string newJsonDirectory = std::regex_replace(path, std::regex(ASSETS_DIRECTORY_INPUT), ASSETS_DIRECTORY_OUTPUT);
+      std::string newJsonDirectory = std::regex_replace(path, std::regex(ASSETS_DIRECTORY_INPUT), ASSETS_DIRECTORY_OUTPUT);
 
-    //   std::ofstream output(newJsonDirectory, std::ios::out);
+      std::ofstream output(newJsonDirectory, std::ios::out);
 
-    //   output.write(reinterpret_cast<char*>(data.data()), data.size());
+      output.write(reinterpret_cast<char*>(data.data()), data.size());
 
-    //   input.close();
-    //   output.close();
-    // }
+      input.close();
+      output.close();
+
+      continue;
+    }
 
     std::ifstream input(path, std::ios::binary);
 
@@ -56,9 +51,6 @@ void OnyxTools::Compressor::Compressor::CompressPathes(const std::vector<std::st
     std::ofstream output(pathAfterCompression, std::ios::binary);
 
     output.write(reinterpret_cast<char*>(compressed_output.data()), compressed_output.size());
-
-    s_Progress++;
-    ShowProgress(s_Progress, pathes.size());
 
     input.close();
     output.close();
@@ -145,7 +137,7 @@ std::string OnyxTools::Compressor::Compressor::DecompressString(const std::strin
         std::ostringstream oss;
         oss << "Exception during zlib decompression: (" << ret << ") "
             << zs.msg;
-        throw(std::runtime_error(oss.str()));
+        std::cout << oss.str() << "\n";
     }
 
     return outstring;

@@ -2,7 +2,7 @@
 
 #include "SceneGame.hpp"
 #include "AssetsManager.hpp"
-#include "Directory.hpp"
+#include "AssetsStructure.hpp"
 #include "tileson.hpp"
 
 #ifdef DEBUG
@@ -26,7 +26,7 @@ void SceneGame::OnCreate()
 
   auto animation = m_player -> AddComponent<C_Animation>();
   animation -> Awake();
-  animation -> SetAnimationFile(Directory::ANIMATIONS_DIRECTORY + "AnimationPlayerTest.json");
+  animation -> SetAnimationFile(AssetsStructure::ANIMATIONS_DIRECTORY + "AnimationPlayerTest.json");
 
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();
@@ -38,7 +38,7 @@ void SceneGame::OnCreate()
   collider -> SetLayer(0);
   collider -> SetSize(32.f, 32.f);
 
-  m_objects.Add(m_mapParser.ParseMap(Directory::MAPS_DIRECTORY + "TestMap.json"));
+  m_objects.Add(m_mapParser.ParseMap(AssetsStructure::MAPS_DIRECTORY + "TestMap.json"));
   m_objects.Add(m_player);
 }
 

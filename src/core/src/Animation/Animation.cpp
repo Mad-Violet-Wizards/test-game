@@ -2,9 +2,7 @@
 #include <fstream>
 
 #include "Log.hpp"
-#include "JsonHandler.hpp"
 #include "Animation.hpp"
-#include "Directory.hpp"
 
 Animation::Animation() 
   : m_currentFrameIndex(0),
@@ -35,6 +33,8 @@ void Animation::LoadMovementAnimationSingleFile(rapidjson::Document &animationDo
     else if (direction == FacingDirection::South) { animationDetails = animationDocument["idle-south"]; }
     else if (direction == FacingDirection::West)  { animationDetails = animationDocument["idle-west"]; }
   }
+
+  // FIXME: Tile width & height should be read from the json file.
 
   int tileRow = animationDetails["tileRow"].GetInt();
   int tileWidth = 32;

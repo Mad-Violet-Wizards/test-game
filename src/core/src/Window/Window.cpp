@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Window.hpp"
 
 Window::Window(const std::string &windowName)

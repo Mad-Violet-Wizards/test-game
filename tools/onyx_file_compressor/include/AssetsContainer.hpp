@@ -17,16 +17,14 @@ namespace OnyxTools
             AssetsContainer();
             ~AssetsContainer();
 
-            void CollectAssets(const std::string &path, bool createOutputDirectory);
+            void CollectAssets(const std::string &path);
+            void CreateOutputDirectory();
+
             void PrintFoundFiles();
 
             int Size() const;
 
             const std::vector<std::string> &GetPathes() const;
-
-        private:
-
-            void CreateOutputDirectory(const std::string &path);
 
         private:
 

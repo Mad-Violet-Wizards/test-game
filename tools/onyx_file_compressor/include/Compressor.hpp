@@ -22,10 +22,6 @@ namespace OnyxTools
       Compressor() = default;
       ~Compressor() = default;
 
-      static int s_Progress;
-
-      static void ShowProgress(int progress, int totalFiles);
-
       static void CompressPathes(const std::vector<std::string> &pathes);
       static void DecompressPathes(const std::vector<std::string> &pathes);
 

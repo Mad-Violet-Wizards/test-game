@@ -15,11 +15,11 @@ public:
 
   static AssetsManager &GetInstance();
 
+  void ParseAssetsSchema(const std::string &path);
+
   sf::Texture &GetTexture(const std::string &texturePath) const;
   sf::Font    &GetFont(const std::string &fontPath) const;
   sf::Image   &GetImage(const std::string &imagePath) const;
-
-  // void AddTexture(const std::string &textureName, const std::string &texturePath);
 
 private:
 
