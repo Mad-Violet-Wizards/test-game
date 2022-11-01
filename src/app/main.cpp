@@ -6,12 +6,13 @@ int main()
 {
   Game game;
 
+  sf::Thread LoadingThread(&Game::LoadAssets, &game);
+
+  LoadingThread.launch();
+
   while (game.IsRunning())
   {
-    game.Update();
-    game.LateUpdate();
-    game.Draw();
-    game.CalculateDeltaTime();
+    game.GameLoop();
   }
 
   return EXIT_SUCCESS;

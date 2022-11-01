@@ -2,6 +2,7 @@
 
 #include "AssetsManager.hpp"
 #include "AssetsStructure.hpp"
+#include "FileOperations.hpp"
 #include "Log.hpp"
 
 TiledMapParser::TiledMapParser() : m_basePath("../assets/maps/") { }
@@ -35,7 +36,9 @@ sf::Sprite *TiledMapParser::GetTilesetImage(const std::string  &imageFile,
   {
     std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
 
-    sprite -> setTexture(AssetsManager::GetInstance().GetTexture(imageFile));
+    std::string imageFileDat = OnyxCore::Filesystem::ReplaceExtension(imageFile, ".dat");
+
+    sprite -> setTexture(AssetsManager::GetInstance().GetTexture(imageFileDat));
     sprite -> setPosition(position);
 
     m_sprites[imageFile] = std::move(sprite);

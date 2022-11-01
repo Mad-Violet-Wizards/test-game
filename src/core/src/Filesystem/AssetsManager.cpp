@@ -2,7 +2,6 @@
 
 #include "AssetsManager.hpp"
 #include "FileManager.hpp"
-#include "File.hpp"
 #include "ObjectBroker.hpp"
 
 #include "rapidjson/document.h"
@@ -36,6 +35,51 @@ sf::Image &AssetsManager::GetImage(const std::string &imageName) const
   return FindInFilesMap< sf::Image >(imageName, m_images);
 }
 
+void AssetsManager::LoadTexture(const std::string &path, bool isCompressed)
+{
+  ObjectBroker broker;
+
+  File *file = new File();
+
+  file -> LoadFile(path, std::ios::binary);
+  file -> SetType(File::Type::Texture);
+
+  if (m_textures.count(file -> GetFilename()) == 0)
+  {
+    m_textures.insert( { file -> GetFilename(), broker.CreateObjectFromFile< sf::Texture >(file, isCompressed) } );
+  }
+}
+
+void AssetsManager::LoadFont(const std::string &path, bool isCompressed)
+{
+  ObjectBroker broker;
+
+  File *file = new File();
+
+  file -> LoadFile(path, std::ios::binary);
+  file -> SetType(File::Type::Font);
+
+  if (m_fonts.count(file -> GetFilename()) == 0)
+  {
+    m_fonts.insert( { file -> GetFilename(), broker.CreateObjectFromFile< sf::Font >(file, isCompressed) } );
+  }
+}
+
+void AssetsManager::LoadImage(const std::string &path, bool isCompressed)
+{
+  ObjectBroker broker;
+
+  File *file = new File();
+
+  file -> LoadFile(path, std::ios::binary);
+  file -> SetType(File::Type::Image);
+
+  if (m_images.count(file -> GetFilename()) == 0)
+  {
+    m_images.insert( { file -> GetFilename(), broker.CreateObjectFromFile< sf::Image >(file, isCompressed) } );
+  }
+}
+
 AssetsManager &AssetsManager::GetInstance()
 {
   if (AssetsManager::s_instance == nullptr)
@@ -46,7 +90,7 @@ AssetsManager &AssetsManager::GetInstance()
   return *s_instance;
 }
 
-void AssetsManager::ParseAssetsSchema(const std::string &path)
+bool AssetsManager::ParseAssetsSchema(const std::string &path)
 {
   ObjectBroker broker;
 
@@ -59,6 +103,8 @@ void AssetsManager::ParseAssetsSchema(const std::string &path)
   rapidjson::Value assetsFiles;
   assetsFiles = assetsSchemaDocument["assets"];
 
+  m_totalAssets = assetsFiles.Size();
+
   for (const auto &jsonData : assetsFiles.GetArray())
   {
     // FIXME: There's a memory leak.
@@ -68,21 +114,32 @@ void AssetsManager::ParseAssetsSchema(const std::string &path)
     file -> LoadFile(jsonData["path"].GetString(), std::ios::binary);
     file -> SetType(jsonData["type"].GetString());
 
+    m_assetsLoaded++;
+
     switch(file -> GetType())
     {
       case (File::Type::Texture):
       {
-        m_textures.insert( { jsonData["filename"].GetString(), broker.CreateObjectFromFile< sf::Texture >(file, true) });
+        if (m_textures.count(jsonData["file"].GetString()) == 0)
+        {
+          m_textures.insert( { jsonData["file"].GetString(), broker.CreateObjectFromFile< sf::Texture >(file, true) });
+        }
         break;
       }
       case (File::Type::Image):
       {
-        m_images.insert( { jsonData["filename"].GetString(), broker.CreateObjectFromFile< sf::Image >(file, true) });
+        if (m_images.count(jsonData["file"].GetString()) == 0)
+        {
+          m_images.insert( { jsonData["file"].GetString(), broker.CreateObjectFromFile< sf::Image >(file, true) });
+        }
         break;
       }
       case (File::Type::Font):
       {
-        m_fonts.insert( { jsonData["filename"].GetString(), broker.CreateObjectFromFile< sf::Font >(file, true) });
+        if (m_fonts.count(jsonData["file"].GetString()) == 0)
+        {
+          m_fonts.insert( { jsonData["file"].GetString(), broker.CreateObjectFromFile< sf::Font >(file, true) });
+        }
         break;
       }
       default:
@@ -91,4 +148,6 @@ void AssetsManager::ParseAssetsSchema(const std::string &path)
       }
     }
   }
+
+  return true;
 }
