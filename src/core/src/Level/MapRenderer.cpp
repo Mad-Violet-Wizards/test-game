@@ -241,7 +241,7 @@ void MapRenderer::DrawObjectGroup(Window &window, tson::Layer &layer)
         {
           sf::Text *text = new sf::Text();
 
-          text -> setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter.ttf"));
+          text -> setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter.dat"));
           text -> setPosition(static_cast<float>(obj.getPosition().x), static_cast<float>(obj.getPosition().y));
           text -> setString(obj.getText().text);
           text -> setFillColor(sf::Color(255, 255, 255));

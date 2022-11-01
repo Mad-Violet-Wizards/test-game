@@ -3,6 +3,10 @@
 #include "C_ColliderBox.hpp"
 #include "C_Drawable.hpp"
 
+#include <chrono>
+#include <future>
+#include <thread>
+
 ObjectCollection::ObjectCollection()
 {
 
@@ -20,13 +24,24 @@ void ObjectCollection::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr
 
 void ObjectCollection::Update(float deltaTime)
 {
-  for (auto &object : m_objects)
-  {
-    object -> Update(deltaTime);
-  }
+  auto objectsTasks = std::async(std::launch::async, [&]() {
+    for (auto &object : m_objects)
+    {
+      object -> Update(deltaTime);
+    }
+  });
 
-  m_collidableObjects.Update(deltaTime);
-  m_drawableObjects.Update(deltaTime);
+  auto collidableTasks = std::async(std::launch::async, [&]() {
+    m_collidableObjects.Update(deltaTime);
+  });
+
+  auto drawableTasks = std::async(std::launch::async, [&]() {
+    m_drawableObjects.Update(deltaTime);
+  });
+
+  objectsTasks.wait();
+  collidableTasks.wait();
+  drawableTasks.wait();
 }
 
 void ObjectCollection::LateUpdate(float deltaTime)
@@ -39,8 +54,8 @@ void ObjectCollection::LateUpdate(float deltaTime)
 
 void ObjectCollection::Draw(Window &window)
 {
-  m_collidableObjects.Draw(window);
   m_drawableObjects.Draw(window);
+  m_collidableObjects.Draw(window);
 }
 
 void ObjectCollection::ProcessNewObjects()

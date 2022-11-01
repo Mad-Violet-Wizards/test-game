@@ -31,6 +31,8 @@ class File
     void SetPath(const std::string &path) { m_path = path; };
     const std::string &GetPath() const { return m_path; };
 
+    const std::string &GetFilename() const;
+
   private:
 
     Type m_type;

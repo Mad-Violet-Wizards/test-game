@@ -8,6 +8,8 @@ void File::LoadFile(const std::string &path, std::ios_base::openmode mode)
     std::ostringstream ss;
     ss << input.rdbuf();
     m_data = ss.str();
+    m_path = path;
+    m_filename = path.substr(path.find_last_of("/") + 1, path.length() - path.find_last_of("/")); 
 
     input.close();
 }
@@ -44,4 +46,9 @@ void File::SetType(const std::string &type)
   {
     m_type = Type::Unknown;
   }
+}
+
+const std::string &File::GetFilename() const
+{
+  return m_filename;
 }

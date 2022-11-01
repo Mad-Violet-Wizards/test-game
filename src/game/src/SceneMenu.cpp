@@ -45,7 +45,7 @@ void SceneMenu::Draw(Window &window)
 
 void SceneMenu::StartNewGame()
 {
-  m_sceneManager -> SwitchTo(0);
+  m_sceneManager -> SwitchTo(1);
 }
 
 void SceneMenu::OpenOptions()
