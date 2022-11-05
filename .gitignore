@@ -8,6 +8,8 @@ test-game/
 logs/
 *.dll
 *.lib
+
+# Don't add compressed_assets to the repo.
 assets_compressed/
 
 # Don't add local logs to repo.
@@ -20,6 +22,9 @@ env/
 src/.vs
 src/CMakeSettings.json
 *.vs
+
+# Dont add local changelist.
+changelog_local.md
 
 __pycache__
 

@@ -1,6 +1,6 @@
 #include "TiledMapParser.hpp"
 
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 #include "AssetsStructure.hpp"
 #include "FileOperations.hpp"
 #include "Log.hpp"
@@ -38,7 +38,7 @@ sf::Sprite *TiledMapParser::GetTilesetImage(const std::string  &imageFile,
 
     std::string imageFileDat = OnyxCore::Filesystem::ReplaceExtension(imageFile, ".dat");
 
-    sprite -> setTexture(AssetsManager::GetInstance().GetTexture(imageFileDat));
+    sprite -> setTexture(AssetsStorage::GetInstance().GetTexture(imageFileDat));
     sprite -> setPosition(position);
 
     m_sprites[imageFile] = std::move(sprite);

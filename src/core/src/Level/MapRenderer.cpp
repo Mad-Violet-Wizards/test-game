@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "MapRenderer.hpp"
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 #include "Log.hpp"
 
 void MapRenderer::Update(float deltaTime)
@@ -241,7 +241,7 @@ void MapRenderer::DrawObjectGroup(Window &window, tson::Layer &layer)
         {
           sf::Text *text = new sf::Text();
 
-          text -> setFont(AssetsManager::GetInstance().GetFont("GoudyBookletter.dat"));
+          text -> setFont(AssetsStorage::GetInstance().GetFont("GoudyBookletter.dat"));
           text -> setPosition(static_cast<float>(obj.getPosition().x), static_cast<float>(obj.getPosition().y));
           text -> setString(obj.getText().text);
           text -> setFillColor(sf::Color(255, 255, 255));

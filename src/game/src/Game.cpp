@@ -1,6 +1,6 @@
 #include "Game.hpp"
 #include "FpsCounter.hpp"
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 
 #include <future>
 #include <thread>
@@ -68,7 +68,7 @@ void Game::CreateScenesAfterLoading()
 
 void Game::LoadAssets()
 {
-  if (AssetsManager::GetInstance().ParseAssetsSchema("../assets/assets-schema.json"))
+  if (AssetsStorage::GetInstance().ParseAssetsSchema("../assets/assets-schema.json"))
   {
     CreateScenesAfterLoading();
   }

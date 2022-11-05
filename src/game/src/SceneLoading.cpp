@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "SceneLoading.hpp"
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 #include "Game.hpp"
 #include "File.hpp"
 
@@ -16,7 +16,7 @@ SceneLoading::~SceneLoading()
 
 void SceneLoading::OnCreate()
 {
-  AssetsManager::GetInstance().LoadFont("../assets/fonts/GoudyBookletter.dat", true);
+  AssetsStorage::GetInstance().LoadFont("../assets/fonts/GoudyBookletter.dat", true);
   CreateGUI();
 }
 
@@ -29,7 +29,7 @@ void SceneLoading::Update(float deltaTime)
 {
     m_guiManager.Update(deltaTime);
 
-    std::string loadingProcess = "~~ Loading (" + std::to_string(AssetsManager::GetInstance().GetAssetsLoadedCount()) + " / " + std::to_string(AssetsManager::GetInstance().GetAssetsCount()) + ")~~ ";
+    std::string loadingProcess = "~~ Loading (" + std::to_string(AssetsStorage::GetInstance().GetAssetsLoadedCount()) + " / " + std::to_string(AssetsStorage::GetInstance().GetAssetsCount()) + ")~~ ";
     m_loadingText -> SetText(loadingProcess);
 }
 

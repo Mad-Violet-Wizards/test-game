@@ -1,7 +1,7 @@
 #include "GuiImage.hpp"
 
 #include "Log.hpp"
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 
 GuiImage::GuiImage(Window *window)
   : GuiObject(window) { }
@@ -15,7 +15,7 @@ void GuiImage::Update(float deltaTime)
 
 void GuiImage::LoadImage(const std::string &name)
 {
-  m_image = AssetsManager::GetInstance().GetImage(name);
+  m_image = AssetsStorage::GetInstance().GetImage(name);
 
   sf::IntRect area(0, 0, m_image.getSize().x, m_image.getSize().y);
 
