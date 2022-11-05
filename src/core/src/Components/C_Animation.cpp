@@ -2,7 +2,7 @@
 
 #include "rapidjson/document.h"
 
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 #include "File.hpp"
 #include "C_Animation.hpp"
 
@@ -33,7 +33,7 @@ void C_Animation::Update(float deltaTime)
     {
       const FrameData *frameData = m_currentAnimation.second -> GetCurrentFrame();
 
-        m_animationOwner -> Load(AssetsManager::GetInstance().GetTexture(m_textureFileName));
+        m_animationOwner -> Load(AssetsStorage::GetInstance().GetTexture(m_textureFileName));
         m_animationOwner -> SetTextureRect(frameData -> x, frameData -> y, frameData -> width, frameData -> height);
     }
   }

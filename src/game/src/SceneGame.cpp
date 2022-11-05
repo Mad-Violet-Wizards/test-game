@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "SceneGame.hpp"
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
 #include "AssetsStructure.hpp"
 #include "tileson.hpp"
 

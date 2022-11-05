@@ -1,18 +1,19 @@
 #include <iostream>
 
-#include "AssetsManager.hpp"
+#include "AssetsStorage.hpp"
+#include "FileStorage.hpp"
 #include "FileManager.hpp"
 #include "ObjectBroker.hpp"
 
 #include "rapidjson/document.h"
 
-std::unique_ptr<AssetsManager> AssetsManager::s_instance = nullptr;
+std::unique_ptr<AssetsStorage> AssetsStorage::s_instance = nullptr;
 
-AssetsManager::AssetsManager()
+AssetsStorage::AssetsStorage()
 {
 }
 
-AssetsManager::~AssetsManager()
+AssetsStorage::~AssetsStorage()
 {
 }
 
@@ -20,26 +21,28 @@ AssetsManager::~AssetsManager()
 // TODO: Add check if assets dir even exists.
 //
 
-sf::Texture &AssetsManager::GetTexture(const std::string &textureName) const
+sf::Texture &AssetsStorage::GetTexture(const std::string &textureName) const
 {
   return FindInFilesMap< sf::Texture >(textureName, m_textures);
 }
 
-sf::Font &AssetsManager::GetFont(const std::string &fontName) const
+sf::Font &AssetsStorage::GetFont(const std::string &fontName) const
 {
   return FindInFilesMap< sf::Font >(fontName, m_fonts);
 }
 
-sf::Image &AssetsManager::GetImage(const std::string &imageName) const
+sf::Image &AssetsStorage::GetImage(const std::string &imageName) const
 {
   return FindInFilesMap< sf::Image >(imageName, m_images);
 }
 
-void AssetsManager::LoadTexture(const std::string &path, bool isCompressed)
+void AssetsStorage::LoadTexture(const std::string &path, bool isCompressed)
 {
   ObjectBroker broker;
 
-  File *file = new File();
+  File *file = new File(); 
+
+  FileStorage::GetInstance().InsertFile(file);
 
   file -> LoadFile(path, std::ios::binary);
   file -> SetType(File::Type::Texture);
@@ -50,11 +53,13 @@ void AssetsManager::LoadTexture(const std::string &path, bool isCompressed)
   }
 }
 
-void AssetsManager::LoadFont(const std::string &path, bool isCompressed)
+void AssetsStorage::LoadFont(const std::string &path, bool isCompressed)
 {
   ObjectBroker broker;
 
   File *file = new File();
+
+  FileStorage::GetInstance().InsertFile(file);
 
   file -> LoadFile(path, std::ios::binary);
   file -> SetType(File::Type::Font);
@@ -65,11 +70,13 @@ void AssetsManager::LoadFont(const std::string &path, bool isCompressed)
   }
 }
 
-void AssetsManager::LoadImage(const std::string &path, bool isCompressed)
+void AssetsStorage::LoadImage(const std::string &path, bool isCompressed)
 {
   ObjectBroker broker;
 
   File *file = new File();
+
+  FileStorage::GetInstance().InsertFile(file);
 
   file -> LoadFile(path, std::ios::binary);
   file -> SetType(File::Type::Image);
@@ -80,17 +87,17 @@ void AssetsManager::LoadImage(const std::string &path, bool isCompressed)
   }
 }
 
-AssetsManager &AssetsManager::GetInstance()
+AssetsStorage &AssetsStorage::GetInstance()
 {
-  if (AssetsManager::s_instance == nullptr)
+  if (AssetsStorage::s_instance == nullptr)
   {
-    AssetsManager::s_instance = std::unique_ptr<AssetsManager>(new AssetsManager);
+    AssetsStorage::s_instance = std::unique_ptr<AssetsStorage>(new AssetsStorage);
   }
 
   return *s_instance;
 }
 
-bool AssetsManager::ParseAssetsSchema(const std::string &path)
+bool AssetsStorage::ParseAssetsSchema(const std::string &path)
 {
   ObjectBroker broker;
 
@@ -107,9 +114,9 @@ bool AssetsManager::ParseAssetsSchema(const std::string &path)
 
   for (const auto &jsonData : assetsFiles.GetArray())
   {
-    // FIXME: There's a memory leak.
-
     File *file = new File;
+
+    FileStorage::GetInstance().InsertFile(file);
 
     file -> LoadFile(jsonData["path"].GetString(), std::ios::binary);
     file -> SetType(jsonData["type"].GetString());

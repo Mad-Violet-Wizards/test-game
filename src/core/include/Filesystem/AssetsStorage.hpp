@@ -8,14 +8,14 @@
 
 #include "File.hpp"
 
-class AssetsManager
+class AssetsStorage
 {
 
 public:
 
-  ~AssetsManager();
+  ~AssetsStorage();
 
-  static AssetsManager &GetInstance();
+  static AssetsStorage &GetInstance();
 
   bool ParseAssetsSchema(const std::string &path);
 
@@ -32,11 +32,11 @@ public:
 
 private:
 
-  AssetsManager();
+  AssetsStorage();
 
 private:
 
-  static std::unique_ptr<AssetsManager> s_instance;
+  static std::unique_ptr<AssetsStorage> s_instance;
 
   std::map< std::string, std::shared_ptr<sf::Texture> > m_textures;
   std::map< std::string, std::shared_ptr<sf::Font> >    m_fonts;
