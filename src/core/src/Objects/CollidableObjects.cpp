@@ -80,7 +80,6 @@ void CollidableObjects::ClearObjects()
 
 void CollidableObjects::Update(float deltaTime)
 {
-
   m_quadtree.DrawDebug();
 
   m_quadtree.Clear();
@@ -93,25 +92,6 @@ void CollidableObjects::Update(float deltaTime)
   }
 
   Resolve();
-
-  // for (auto &[level, o1] : m_collidableObjects)
-  // {
-  //   for (auto &[level, o2] : m_collidableObjects)
-  //   {
-  //     if ((o1 -> GetComponent<C_InstanceID>()) -> GetID() != (o2 -> GetComponent<C_InstanceID>()) -> GetID())
-  //     {
-  //       std::shared_ptr<C_ColliderBox> collider1 = o1 -> GetComponent<C_ColliderBox>();
-  //       std::shared_ptr<C_ColliderBox> collider2 = o2 -> GetComponent<C_ColliderBox>();
-
-  //       CollisionManifold manifold = collider1 -> Intersects(collider2);
-
-  //       if (manifold.colliding)
-  //       {
-  //         collider1 -> ResolveOverlap(manifold);
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 void CollidableObjects::Draw(Window &window)

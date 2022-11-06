@@ -3,6 +3,7 @@
 #include "C_ColliderBox.hpp"
 #include "C_Drawable.hpp"
 
+#include <execution>
 #include <chrono>
 #include <future>
 #include <thread>
@@ -25,10 +26,14 @@ void ObjectCollection::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr
 void ObjectCollection::Update(float deltaTime)
 {
   auto objectsTasks = std::async(std::launch::async, [&]() {
-    for (auto &object : m_objects)
-    {
-      object -> Update(deltaTime);
-    }
+
+    std::for_each(std::execution::par,
+                  m_objects.begin(),
+                  m_objects.end(),
+                  [&](auto &object)
+                  {
+                    object->Update(deltaTime);
+                  });
   });
 
   auto collidableTasks = std::async(std::launch::async, [&]() {

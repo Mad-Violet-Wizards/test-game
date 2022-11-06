@@ -19,17 +19,17 @@ AssetsStorage::~AssetsStorage()
 
 sf::Texture &AssetsStorage::GetTexture(const std::string &textureName) const
 {
-  return MapGetItem< sf::Texture >(textureName, m_textures) -> second;
+  return OnyxCore::Containers::MapGetItem< sf::Texture >(textureName, m_textures);
 }
 
 sf::Font &AssetsStorage::GetFont(const std::string &fontName) const
 {
-  return MapGetItem< sf::Font >(fontName, m_fonts) -> second;
+  return OnyxCore::Containers::MapGetItem< sf::Font >(fontName, m_fonts);
 }
 
 sf::Image &AssetsStorage::GetImage(const std::string &imageName) const
 {
-  return MapGetItem< sf::Image >(imageName, m_images) -> second;
+  return OnyxCore::Containers::MapGetItem< sf::Image >(imageName, m_images);
 }
 
 void AssetsStorage::LoadTexture(const std::string &path, bool isCompressed)
