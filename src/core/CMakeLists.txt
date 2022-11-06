@@ -41,6 +41,7 @@ target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include/SCENE
   PUBLIC ${PROJECT_SOURCE_DIR}/include/UTILITY
   PUBLIC ${PROJECT_SOURCE_DIR}/include/WINDOW
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/CONTAINERS
 )
 
 target_link_libraries(${PROJECT_NAME} external)
