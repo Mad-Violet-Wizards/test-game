@@ -1,6 +1,6 @@
 #include "GuiImage.hpp"
 
-#include "Log.hpp"
+#include "FileLog.hpp"
 #include "AssetsStorage.hpp"
 
 GuiImage::GuiImage(Window *window)
@@ -21,17 +21,17 @@ void GuiImage::LoadImage(const std::string &name)
 
   if (area.width > m_window -> GetWindowSize().x)
   {
-    LOG_WARNING("[GuiImage][LoadImage] Image width is higher that current Window size, it might cause problems with correct layout placements");
+    FILE_LOG_WARNING("[GuiImage][LoadImage] Image width is higher that current Window size, it might cause problems with correct layout placements");
   }
 
   if (area.height > m_window -> GetWindowSize().y)
   {
-    LOG_WARNING("[GuiImage][LoadImage] Image height is higher that current Window size, it might cause problems with correct layout placements");
+    FILE_LOG_WARNING("[GuiImage][LoadImage] Image height is higher that current Window size, it might cause problems with correct layout placements");
   }
 
   if (!m_texture.loadFromImage(m_image, area))
   {
-    LOG_ERROR("[GuiImage][LoadImage] Cannot create texture from image.\n");
+    FILE_LOG_ERROR("[GuiImage][LoadImage] Cannot create texture from image.\n");
 
     return;
   }
@@ -43,7 +43,7 @@ void GuiImage::LoadImageFromFilePath(const std::string &filePath)
 {
   if (!m_image.loadFromFile(filePath))
   {
-    LOG_ERROR("[GuiImage][LoadImageFromFilePath] Cannot load image from file path.\n");
+    FILE_LOG_ERROR("[GuiImage][LoadImageFromFilePath] Cannot load image from file path.\n");
 
     return;
   }
@@ -51,17 +51,17 @@ void GuiImage::LoadImageFromFilePath(const std::string &filePath)
 
   if (area.width > m_window -> GetWindowSize().x)
   {
-    LOG_WARNING("[GuiImage][LoadImageFromFilePath] Image width is higher that current Window size, it might cause problems with correct layout placements");
+    FILE_LOG_WARNING("[GuiImage][LoadImageFromFilePath] Image width is higher that current Window size, it might cause problems with correct layout placements");
   }
 
   if (area.height > m_window -> GetWindowSize().y)
   {
-    LOG_WARNING("[GuiImage][LoadImageFromFilePath] Image height is higher that current Window size, it might cause problems with correct layout placements");
+    FILE_LOG_WARNING("[GuiImage][LoadImageFromFilePath] Image height is higher that current Window size, it might cause problems with correct layout placements");
   }
 
   if (!m_texture.loadFromImage(m_image, area))
   {
-    LOG_ERROR("[GuiImage][LoadImageFromFilePath] Cannot create texture from image.\n");
+    FILE_LOG_ERROR("[GuiImage][LoadImageFromFilePath] Cannot create texture from image.\n");
 
     return;
   }

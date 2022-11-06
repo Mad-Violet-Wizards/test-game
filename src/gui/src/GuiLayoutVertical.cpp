@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Log.hpp"
+#include "FileLog.hpp"
 #include "GuiAlign.hpp"
 #include "GuiLayoutVertical.hpp"
 
@@ -139,7 +139,7 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
   {
     case GuiAlign::AlignTop:
     {
-      LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported in this layout.");
+      FILE_LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignTop is not supported in this layout.");
 
       break;
     }
@@ -180,7 +180,7 @@ void GuiLayoutVertical::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widget
     }
     case GuiAlign::AlignBottom:
     {
-      LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported in this layout.");
+      FILE_LOG_WARNING("[GuiLayoutVertical][UpdatePositionOfWidget] AlignBottom is not supported in this layout.");
 
       break;
     }

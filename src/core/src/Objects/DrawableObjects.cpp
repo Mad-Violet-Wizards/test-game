@@ -1,7 +1,7 @@
 #include "DrawableObjects.hpp"
 
 #include "C_Drawable.hpp"
-#include "Log.hpp"
+#include "FileLog.hpp"
 
 void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {
@@ -74,7 +74,7 @@ void DrawableObjects::Draw(Window &window)
     }
     else
     {
-      LOG_ERROR("[DrawableObjects][Draw] Unknown object type");
+      FILE_LOG_ERROR("[DrawableObjects][Draw] Unknown object type");
     }
   }
 }

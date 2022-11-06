@@ -1,7 +1,5 @@
 #include "Debug.hpp"
 
-#include "Log.hpp"
-
 std::vector<sf::RectangleShape> Debug::m_rects;
 
 void Debug::Draw(Window &window)

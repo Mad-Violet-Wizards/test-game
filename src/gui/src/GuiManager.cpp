@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "GuiManager.hpp"
-#include "Log.hpp"
+#include "FileLog.hpp"
 
 GuiManager::GuiManager()
 {
@@ -17,7 +17,7 @@ void GuiManager::AddLayout(LayoutLevel level, std::shared_ptr<GuiLayout> layout)
   {
     if (layout.first == level)
     {
-      LOG_ERROR("[GuiManager][AddLayout] Layout Level is already occupied.\n");
+      FILE_LOG_ERROR("[GuiManager][AddLayout] Layout Level is already occupied.\n");
     }
   }
   m_layouts.push_back(std::make_pair(level, layout));
@@ -43,7 +43,7 @@ void GuiManager::UpdateLayoutLevel(LayoutLevel level, std::shared_ptr<GuiLayout>
   {
     if (l.first == level)
     {
-      LOG_INFO("[GuiManager][UpdateLayoutLevel] Layout level is already occupied, removing.");
+      FILE_LOG_INFO("[GuiManager][UpdateLayoutLevel] Layout level is already occupied, removing.");
       RemoveLayout(l.second);
 
       AddLayout(level, layout);

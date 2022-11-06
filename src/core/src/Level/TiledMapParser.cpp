@@ -3,7 +3,7 @@
 #include "AssetsStorage.hpp"
 #include "AssetsStructure.hpp"
 #include "FileOperations.hpp"
-#include "Log.hpp"
+#include "FileLog.hpp"
 
 TiledMapParser::TiledMapParser() : m_basePath("../assets/maps/") { }
 
@@ -15,7 +15,7 @@ std::shared_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationN
 
   if (map -> getStatus() == tson::ParseStatus::OK)
   {
-    LOG_INFO("[TiledMapParser][ParseMap] Map parsed successfully.");
+    FILE_LOG_INFO("[TiledMapParser][ParseMap] Map parsed successfully.");
 
     m_map = std::move(map);
 
@@ -23,7 +23,7 @@ std::shared_ptr<tson::Map> TiledMapParser::ParseMap(const std::string &locationN
   }
   else
   {
-    LOG_INFO("[TiledMapParser][ParseMap] Map parsing failed, reason: ", map -> getStatusMessage());
+    FILE_LOG_INFO("[TiledMapParser][ParseMap] Map parsing failed, reason: ", map -> getStatusMessage());
   }
 
   return nullptr;
@@ -49,7 +49,7 @@ sf::Sprite *TiledMapParser::GetTilesetImage(const std::string  &imageFile,
     return m_sprites[imageFile].get();
   }
 
-  LOG_WARNING("[TiledMapParser][LoadAndStoreTilesetImage] Returning nullptr.\n");
+  FILE_LOG_WARNING("[TiledMapParser][LoadAndStoreTilesetImage] Returning nullptr.\n");
 
   return nullptr;
 

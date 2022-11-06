@@ -137,7 +137,6 @@ std::string OnyxTools::Compressor::Compressor::DecompressString(const std::strin
         std::ostringstream oss;
         oss << "Exception during zlib decompression: (" << ret << ") "
             << zs.msg;
-        std::cout << oss.str() << "\n";
     }
 
     return outstring;

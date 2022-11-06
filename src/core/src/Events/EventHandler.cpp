@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "Log.hpp"
+#include "FileLog.hpp"
+#include "ConsoleLog.hpp"
 #include "EventHandler.hpp"
 
 std::unique_ptr<EventHandler> EventHandler::s_instance = nullptr;
@@ -23,11 +24,13 @@ EventHandler &EventHandler::GetInstance()
   return *s_instance;
 }
 
+// FIXME: Fix C4715 warning.
+
 KeyboardInput &EventHandler::GetKeyboardInput()
 {
   if (s_instance == nullptr)
   {
-    LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
+    FILE_LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
   }
   else
   {
@@ -39,7 +42,7 @@ MouseInput &EventHandler::GetMouseInput()
 {
   if (s_instance == nullptr)
   {
-    LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
+    FILE_LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
   }
   else
   {
@@ -71,7 +74,7 @@ void EventHandler::ProcessEvent(const sf::Event &event)
 
   if (event.type == sf::Event::LostFocus)
   {
-    std::cout << "[EventHandler] Reporting that Window has lost focus.\n";
+    CONSOLE_LOG_INFO("[EventHandler] Reporting that Window has lost focus.");
 
     /*
     TODO: Implement a game freeze, and show of the pause menu when it will be implemented.
@@ -81,7 +84,7 @@ void EventHandler::ProcessEvent(const sf::Event &event)
 
   if (event.type == sf::Event::GainedFocus)
   {
-    std::cout << "[EventHandler] Reporting that Window has gained focus.\n";
+    CONSOLE_LOG_INFO("[EventHandler] Reporting that Window has gained focus.");
 
     /*
     TODO: Unfreeze the game.

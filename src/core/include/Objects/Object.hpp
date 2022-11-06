@@ -5,7 +5,7 @@
 
 #include "Window.hpp"
 #include "Component.hpp"
-#include "Log.hpp"
+#include "FileLog.hpp"
 
 #include "Component.hpp"
 #include "C_InstanceID.hpp"
@@ -64,7 +64,7 @@ public:
       }
     }
 
-    LOG_WARNING("[Object][GetComponent] Returned nullptr.");
+    FILE_LOG_WARNING("[Object][GetComponent] Returned nullptr.");
 
     return nullptr;
   };
