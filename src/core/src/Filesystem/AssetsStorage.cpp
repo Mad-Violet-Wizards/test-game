@@ -2,7 +2,7 @@
 
 #include "AssetsStorage.hpp"
 #include "FileStorage.hpp"
-#include "FileManager.hpp"
+#include "MapOperations.hpp"
 #include "ObjectBroker.hpp"
 
 #include "rapidjson/document.h"
@@ -17,23 +17,19 @@ AssetsStorage::~AssetsStorage()
 {
 }
 
-//
-// TODO: Add check if assets dir even exists.
-//
-
 sf::Texture &AssetsStorage::GetTexture(const std::string &textureName) const
 {
-  return FindInFilesMap< sf::Texture >(textureName, m_textures);
+  return MapGetItem< sf::Texture >(textureName, m_textures) -> second;
 }
 
 sf::Font &AssetsStorage::GetFont(const std::string &fontName) const
 {
-  return FindInFilesMap< sf::Font >(fontName, m_fonts);
+  return MapGetItem< sf::Font >(fontName, m_fonts) -> second;
 }
 
 sf::Image &AssetsStorage::GetImage(const std::string &imageName) const
 {
-  return FindInFilesMap< sf::Image >(imageName, m_images);
+  return MapGetItem< sf::Image >(imageName, m_images) -> second;
 }
 
 void AssetsStorage::LoadTexture(const std::string &path, bool isCompressed)
