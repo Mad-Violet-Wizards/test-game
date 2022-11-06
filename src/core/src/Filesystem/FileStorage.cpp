@@ -12,7 +12,6 @@ FileStorage::~FileStorage()
 {
   for (auto &file : m_files)
   {
-    std::cout << "Deleting file: " << file -> GetFilename() << std::endl;
     delete file;
   }
 

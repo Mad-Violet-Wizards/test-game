@@ -1,11 +1,17 @@
 #include <fstream>
 #include <format>
+#include <chrono>
 
 #include "LogFileManager.hpp"
+#include "ConsoleLog.hpp"
 
 std::unique_ptr<LogFileManager> LogFileManager::s_instance = nullptr;
 
-LogFileManager::LogFileManager() { }
+LogFileManager::LogFileManager()
+{
+  CreateLogDirectory();
+  CreateLogFile();
+}
 
 LogFileManager::~LogFileManager() { }
 
@@ -23,31 +29,26 @@ void LogFileManager::CreateLogDirectory()
 {
   if (s_instance == nullptr)
   {
-    std::cout << "[LogFileManager][Error] Instance of LogsFileManager does not exists.\n";
+    CONSOLE_LOG_ERROR("[LogFileManager] Instance of LogsFileManager is null.");
   }
 
   const std::string logsDirectory   = "../logs/";
 
-  if (std::filesystem::exists(logsDirectory))
+  if (!std::filesystem::exists(logsDirectory))
   {
-    std::cout << "[LogFileManager][Info] Logs directory found.\n";
-  }
-  else
-  {
-    std::cout << "[LogFileManager][Info] Logs directory does not exists. Creating.\n";
+    CONSOLE_LOG_INFO("[LogFileManager] Creating logs/ directory.");
 
     bool success = std::filesystem::create_directories(logsDirectory);
 
     if (success) { std::cout << "[LogFileManager][Info] Created logs directory.\n"; }
-    else         { std::cout << "[LogFileManager][Error] Cannot create logs directory.\n"; }
-  }
+    else         { std::cout << "[LogFileManager][Error] Cannot create logs directory.\n"; }  }
 }
 
 void LogFileManager::CreateLogFile()
 {
   if (s_instance == nullptr)
   {
-    std::cout << "[LogFileManager][Error] Instance of LogsFileManager does not exists.\n";
+    CONSOLE_LOG_ERROR("[LogFileManager] Instance of LogsFileManager is null.");
   }
 
   if (m_pathToLogFile.empty() == false)

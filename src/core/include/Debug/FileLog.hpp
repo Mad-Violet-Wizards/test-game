@@ -5,11 +5,8 @@
 #include "LogFileManager.hpp"
 
 template <typename T>
-constexpr void LOG(const T &msg)
+constexpr static inline void FILE_LOG(const T &msg)
 {
-  LogFileManager::GetInstance().CreateLogDirectory();
-  LogFileManager::GetInstance().CreateLogFile();
-
   std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(), std::ios_base::app);
 
   auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
@@ -26,11 +23,8 @@ constexpr void LOG(const T &msg)
 }
 
 template <typename ...Args>
-constexpr void LOG(const std::string &prefix, Args &&... args)
+constexpr static inline void FILE_LOG(const std::string &prefix, Args &&... args)
 {
-  LogFileManager::GetInstance().CreateLogDirectory();
-  LogFileManager::GetInstance().CreateLogFile();
-
   std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(), std::ios_base::app);
 
   auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
@@ -44,7 +38,7 @@ constexpr void LOG(const std::string &prefix, Args &&... args)
   logFile.close();
 }
 
-#define LOG_INFO(...)    LOG("[Info] ",    __VA_ARGS__);
-#define LOG_WARNING(...) LOG("[Warning] ", __VA_ARGS__);
-#define LOG_ERROR(...)   LOG("[Error] ",   __VA_ARGS__);
-#define LOG_DEBUG(...)   LOG("[Debug] ",   __VA_ARGS__);
+#define FILE_LOG_INFO(...)    FILE_LOG("[Info] ",    __VA_ARGS__);
+#define FILE_LOG_WARNING(...) FILE_LOG("[Warning] ", __VA_ARGS__);
+#define FILE_LOG_ERROR(...)   FILE_LOG("[Error] ",   __VA_ARGS__);
+#define FILE_LOG_DEBUG(...)   FILE_LOG("[Debug] ",   __VA_ARGS__);

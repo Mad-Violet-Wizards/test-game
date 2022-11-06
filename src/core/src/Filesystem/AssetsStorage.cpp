@@ -123,8 +123,6 @@ bool AssetsStorage::ParseAssetsSchema(const std::string &path)
 
     m_assetsLoaded++;
 
-    std::cout << "Loading asset: " << file -> GetFilename() << std::endl;
-
     switch(file -> GetType())
     {
       case (File::Type::Texture):

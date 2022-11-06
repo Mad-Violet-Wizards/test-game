@@ -7,7 +7,7 @@
 #include "Debug.hpp"
 #endif
 
-#include "Log.hpp"
+#include "FileLog.hpp"
 
 void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {
@@ -56,12 +56,12 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
 
               m_quadtree.Insert(colliderBox);
             }
-            LOG_INFO("[CollidableObjects][Add] Detected new collidable object");
+            FILE_LOG_INFO("[CollidableObjects][Add] Detected new collidable object");
           }
         }
         else
         {
-          LOG_INFO("[CollidableObjects][Add] Layer is not an object layer - engine does not support this yet");
+          FILE_LOG_INFO("[CollidableObjects][Add] Layer is not an object layer - engine does not support this yet");
           return;
         }
       }
@@ -69,7 +69,7 @@ void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_pt
   }
   else
   {
-    LOG_ERROR("[CollidableObjects][Add] Unknown object type");
+    FILE_LOG_ERROR("[CollidableObjects][Add] Unknown object type");
   }
 }
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "Log.hpp"
+#include "FileLog.hpp"
 #include "Animation.hpp"
 
 Animation::Animation() 
@@ -70,7 +70,7 @@ const FrameData *Animation::GetCurrentFrame() const
     return &m_frames[m_currentFrameIndex]; 
   }
 
-  LOG_WARNING("[Animation][GetCurrentFrame] Returned nullptr.");
+  FILE_LOG_WARNING("[Animation][GetCurrentFrame] Returned nullptr.");
   return nullptr;
 }
 

@@ -5,7 +5,7 @@
 #include <map>
 #include <initializer_list>
 
-#include "Log.hpp"
+#include "FileLog.hpp"
 
 // TODO: Think of the better name for this file.
 // TODO: Think of the better name for this function.
@@ -47,13 +47,13 @@
 //       }
 //       else
 //       {
-//         LOG_ERROR("[FileLoader][Error] File format is not supported.");
+//         FILE_LOG_ERROR("[FileLoader][Error] File format is not supported.");
 //       }
 //     }
 //   }
 //   else
 //   {
-//     LOG_WARNING("[FileLoader][Warning] Directory does not exists.");
+//     FILE_LOG_ERROR("[FileLoader][Warning] Directory does not exists.");
 //   }
 // }
 
@@ -68,7 +68,7 @@ constexpr T &FindInFilesMap(const Key &name, const std::map< Key, std::shared_pt
   }
   else
   {
-    LOG_ERROR("[FileManager][Error] Couldn't find the object associated with this name.");
+    FILE_LOG_ERROR("[FileManager][Error] Couldn't find the object associated with this name.");
 
     std::shared_ptr<T> EMPTY_SFML_OBJECT = std::make_shared<T>();
 
