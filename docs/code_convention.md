@@ -1,1 +1,1 @@
-TODO. 😛
+TODO. TO JEST NOWA ZMIANA.
