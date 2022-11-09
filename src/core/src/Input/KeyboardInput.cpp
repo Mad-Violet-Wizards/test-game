@@ -17,6 +17,7 @@ void KeyboardInput::InitializeAssociatedKeys()
   m_associatedKeys.insert({ sf::Keyboard::A, Key::Left });
   m_associatedKeys.insert({ sf::Keyboard::S, Key::Down });
   m_associatedKeys.insert({ sf::Keyboard::D, Key::Right });
+  m_associatedKeys.insert({ sf::Keyboard::E, Key::E });
 }
 
 void KeyboardInput::UpdateKeyPressed(int keyCode)

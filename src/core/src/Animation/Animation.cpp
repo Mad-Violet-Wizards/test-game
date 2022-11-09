@@ -7,11 +7,39 @@
 Animation::Animation() 
   : m_currentFrameIndex(0),
   m_currentFrameTime(0.f),
-  m_releaseFirstFrame(true) {}
+  m_releaseFirstFrame(true),
+  m_looped(false) {}
 
 Animation::~Animation() {}
 
-void Animation::LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
+void Animation::AddFrame(int x, int y, int width, int height, double displayTime)
+{
+  m_frames.push_back(FrameData{ x, y, width, height, displayTime});
+}
+
+void Animation::AddFrameAction(int frame, AnimationAction action)
+{
+  if (frame < m_frames.size())
+  {
+    auto actionKey = m_actions.find(frame);
+
+    if (actionKey == m_actions.end())
+    {
+      m_framesWithAction.SetBit(frame);
+      m_actions.insert({frame, std::vector<AnimationAction>{action}});
+    }
+    else
+    {
+      actionKey->second.emplace_back(action);
+    }
+  }
+  else
+  {
+    FILE_LOG_ERROR("[Animation] Frame index out of range.");
+  }
+}
+
+void Animation::LoadMovementAnimationFromFile(rapidjson::Document &animationDocument,
                                                 AnimationState state,
                                                 FacingDirection direction)
 {
@@ -78,20 +106,24 @@ bool Animation::UpdateFrame(float deltaTime)
 {
   if (m_releaseFirstFrame)
   {
+    RunActionForCurrentFrame();
     m_releaseFirstFrame = false;
     return true;
   }
 
-  if (m_frames.size() > 1)
+  if (m_frames.size() > 1 && (m_looped || m_currentFrameIndex < m_frames.size() - 1))
   {
     m_currentFrameTime += deltaTime;
-  }
 
-  if (m_currentFrameTime >= m_frames[m_currentFrameIndex].displayTime)
-  {
-    m_currentFrameTime = 0.f;
-    IncrementFrame();
-    return true;
+    if (m_currentFrameTime >= m_frames.at(m_currentFrameIndex).displayTime)
+    {
+      m_currentFrameTime = 0.0;
+
+      IncrementFrame();
+      RunActionForCurrentFrame();
+
+      return true;
+    }
   }
 
   return false;
@@ -104,7 +136,33 @@ void Animation::Reset()
   m_releaseFirstFrame = true;
 }
 
+void Animation::SetLooped(bool looped)
+{
+  m_looped = looped;
+}
+
+bool Animation::IsLooped() const
+{
+  return m_looped;
+}
+
 void Animation::IncrementFrame()
 {
   m_currentFrameIndex = (m_currentFrameIndex + 1) % m_frames.size();
+}
+
+void Animation::RunActionForCurrentFrame()
+{
+  if (m_actions.size() > 0)
+  {
+    if (m_framesWithAction.GetBit(m_currentFrameIndex))
+    {
+      auto actionsToRun = m_actions.at(m_currentFrameIndex);
+
+      for (auto action : actionsToRun)
+      {
+        action();
+      }
+    }
+  }
 }

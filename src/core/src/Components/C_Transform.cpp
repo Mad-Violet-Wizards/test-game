@@ -22,7 +22,7 @@ void C_Transform::SetPosition(float x, float y)
   m_position.y = y;
 }
 
-void C_Transform::SetPosition(sf::Vector2f &pos)
+void C_Transform::SetPosition(const sf::Vector2f &pos)
 {
   m_position = pos;
 }
@@ -33,7 +33,7 @@ void C_Transform::AddPosition(float x, float y)
   m_position.y += y;
 }
 
-void C_Transform::AddPosition(sf::Vector2f &pos)
+void C_Transform::AddPosition(const sf::Vector2f &pos)
 {
   m_position += pos;
 }

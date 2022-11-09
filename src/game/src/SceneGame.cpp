@@ -3,6 +3,18 @@
 #include "SceneGame.hpp"
 #include "AssetsStorage.hpp"
 #include "AssetsStructure.hpp"
+
+#include "C_Sprite.hpp"
+#include "C_KeyboardMovement.hpp"
+#include "C_Animation.hpp"
+#include "C_Velocity.hpp"
+#include "C_MovementAnimation.hpp"
+#include "C_ColliderBox.hpp"
+#include "C_Drawable.hpp"
+#include "C_Direction.hpp"
+#include "C_ProjectileAttackAnimation.hpp"
+#include "C_ProjectileGenerator.hpp"
+
 #include "tileson.hpp"
 
 #ifdef DEBUG
@@ -15,6 +27,8 @@ SceneGame::~SceneGame() {}
 
 void SceneGame::OnCreate()
 {
+  const FacingDirection directions[4] = { FacingDirection::North, FacingDirection::East, FacingDirection::South, FacingDirection::West };
+
   m_player = std::make_shared<Object>();
 
   auto sprite = m_player -> AddComponent<C_Sprite>();
@@ -24,9 +38,43 @@ void SceneGame::OnCreate()
   auto movement = m_player -> AddComponent<C_KeyboardMovement>();
   movement -> Awake();
 
+  auto direction = m_player -> AddComponent<C_Direction>();
+  direction -> Awake();
+
+  auto projectileGenerator = m_player -> AddComponent<C_ProjectileGenerator>(&m_objects);
+  projectileGenerator -> Awake();
+
   auto animation = m_player -> AddComponent<C_Animation>();
   animation -> Awake();
   animation -> SetAnimationFile(AssetsStructure::ANIMATIONS_DIRECTORY + "AnimationPlayerTest.json");
+
+  auto projectileAttackAnimation = m_player -> AddComponent<C_ProjectileAttackAnimation>();
+  projectileAttackAnimation -> Awake();
+
+  // ADD PROJECTILE ANIMATIONS.
+  const int projectileAnimationFrames = 4;
+  const double delayBetweenFrames = 0.2;
+  int initial_frame_pos_y = 256;
+
+  std::map<FacingDirection, std::shared_ptr<Animation>> projectileAnimations;
+
+  for (int i = 0; i < 4; i++)
+  {
+    std::shared_ptr<Animation> projectileAnimation = std::make_shared<Animation>();
+
+    projectileAnimation -> SetLooped(true);
+
+    for (int i = 0; i < projectileAnimationFrames; i++)
+    {
+      projectileAnimation->AddFrame(i * 32, initial_frame_pos_y, 32, 32, delayBetweenFrames);
+    }
+
+    projectileAnimations.insert({ directions[i], projectileAnimation });
+
+    initial_frame_pos_y += 32;
+  }
+
+  animation -> AddAnimation(AnimationState::Projectile, projectileAnimations);
 
   auto movementAnimation = m_player -> AddComponent<C_MovementAnimation>();
   movementAnimation -> Awake();

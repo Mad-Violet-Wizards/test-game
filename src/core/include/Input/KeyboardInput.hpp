@@ -18,6 +18,7 @@ public:
     Up = 3,
     Down = 4,
     Esc = 5,
+    E = 6
   };
 
   KeyboardInput();

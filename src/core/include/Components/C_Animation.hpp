@@ -8,6 +8,7 @@
 #include "Component.hpp"
 #include "Animation.hpp"
 #include "C_Sprite.hpp"
+#include "C_Direction.hpp"
 
 using AnimationList = std::map<FacingDirection, std::shared_ptr<Animation>>;
 
@@ -23,20 +24,24 @@ public:
 
   void SetAnimationFile(const std::string &filePath);
 
+  void AddAnimation(AnimationState state, AnimationList &animationList);
+
   void SetAnimationState(AnimationState state);
   AnimationState GetAnimationState() const;
 
   void SetAnimationDirection(FacingDirection direction);
   FacingDirection GetFacingDirection() const;
 
+  void AddAnimationAction(AnimationState state, FacingDirection dir, int frame, AnimationAction action);
 
 private:
 
-  void LoadSingleFileAnimation(rapidjson::Document &animationDocument);
+  void LoadMovementAnimationFromFile(rapidjson::Document &animationDocument);
 
   std::string m_textureFileName;
 
   std::shared_ptr<C_Sprite> m_animationOwner;
+  std::shared_ptr<C_Direction> m_direction;
 
   std::map<AnimationState, AnimationList> m_animations;
   std::pair<AnimationState, std::shared_ptr<Animation>> m_currentAnimation;

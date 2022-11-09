@@ -6,6 +6,8 @@
 #include "File.hpp"
 #include "C_Animation.hpp"
 
+#include "ConsoleLog.hpp"
+
 //
 // FIXME: Use std::tie so the code becomes more readable.
 //
@@ -21,10 +23,13 @@ C_Animation::C_Animation(Object *owner)
 void C_Animation::Awake()
 {
   m_animationOwner = owner -> GetComponent<C_Sprite>();
+  m_direction = owner -> GetComponent<C_Direction>();
 }
 
 void C_Animation::Update(float deltaTime)
 {
+  SetAnimationDirection(m_direction -> GetDirection());
+
   if (m_currentAnimation.first != AnimationState::None)
   {
     bool newFrame = m_currentAnimation.second -> UpdateFrame(deltaTime);
@@ -33,8 +38,8 @@ void C_Animation::Update(float deltaTime)
     {
       const FrameData *frameData = m_currentAnimation.second -> GetCurrentFrame();
 
-        m_animationOwner -> Load(AssetsStorage::GetInstance().GetTexture(m_textureFileName));
-        m_animationOwner -> SetTextureRect(frameData -> x, frameData -> y, frameData -> width, frameData -> height);
+      m_animationOwner -> Load(AssetsStorage::GetInstance().GetTexture(m_textureFileName));
+      m_animationOwner -> SetTextureRect(frameData -> x, frameData -> y, frameData -> width, frameData -> height);
     }
   }
 }
@@ -47,7 +52,17 @@ void C_Animation::SetAnimationFile(const std::string &filePath)
   rapidjson::Document animationDocument;
   animationDocument.Parse(file.GetData().c_str());
 
-  LoadSingleFileAnimation(animationDocument);
+  LoadMovementAnimationFromFile(animationDocument);
+}
+
+void C_Animation::AddAnimation(AnimationState state, AnimationList &animationList)
+{
+  m_animations.insert({ state, animationList });
+
+  if (m_currentAnimation.first == AnimationState::None)
+  {
+    SetAnimationState(state);
+  }
 }
 
 void C_Animation::SetAnimationState(AnimationState state)
@@ -79,7 +94,7 @@ AnimationState C_Animation::GetAnimationState() const
 
 void C_Animation::SetAnimationDirection(FacingDirection direction)
 {
-  if (m_currentDirection != direction)
+  if (direction != m_currentDirection)
   {
     m_currentDirection = direction;
 
@@ -103,7 +118,22 @@ FacingDirection C_Animation::GetFacingDirection() const
   return m_currentDirection;
 }
 
-void C_Animation::LoadSingleFileAnimation(rapidjson::Document &animationDocument)
+void C_Animation::AddAnimationAction(AnimationState state, FacingDirection dir, int frame, AnimationAction action)
+{
+  auto animationList = m_animations.find(state);
+
+  if (animationList != m_animations.end())
+  {
+    auto animation = animationList -> second.find(dir);
+
+    if (animation != animationList -> second.end())
+    {
+      animation -> second -> AddFrameAction(frame, action);
+    }
+  }
+}
+
+void C_Animation::LoadMovementAnimationFromFile(rapidjson::Document &animationDocument)
 {
 
   //
@@ -117,19 +147,24 @@ void C_Animation::LoadSingleFileAnimation(rapidjson::Document &animationDocument
   auto animationWalkingSouth = std::make_shared<Animation>();
   auto animationWalkingWest  = std::make_shared<Animation>();
 
-  animationWalkingNorth -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationWalkingNorth -> SetLooped(false);
+  animationWalkingEast  -> SetLooped(false);
+  animationWalkingSouth -> SetLooped(false);
+  animationWalkingWest  -> SetLooped(false);
+
+  animationWalkingNorth -> LoadMovementAnimationFromFile(animationDocument, 
                                                              AnimationState::Walk, 
                                                              FacingDirection::North);
 
-  animationWalkingEast  -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationWalkingEast  -> LoadMovementAnimationFromFile(animationDocument, 
                                                              AnimationState::Walk, 
                                                              FacingDirection::East);
 
-  animationWalkingSouth -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationWalkingSouth -> LoadMovementAnimationFromFile(animationDocument, 
                                                              AnimationState::Walk, 
                                                              FacingDirection::South);
 
-  animationWalkingWest  -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationWalkingWest  -> LoadMovementAnimationFromFile(animationDocument, 
                                                              AnimationState::Walk, 
                                                              FacingDirection::West);
 
@@ -151,19 +186,19 @@ void C_Animation::LoadSingleFileAnimation(rapidjson::Document &animationDocument
   auto animationIdleSotuh = std::make_shared<Animation>();
   auto animationIdleWest  = std::make_shared<Animation>();
 
-  animationIdleNorth -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationIdleNorth -> LoadMovementAnimationFromFile(animationDocument, 
                                                           AnimationState::Idle, 
                                                           FacingDirection::North);
 
-  animationIdleEast  -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationIdleEast  -> LoadMovementAnimationFromFile(animationDocument, 
                                                           AnimationState::Idle, 
                                                           FacingDirection::East);
 
-  animationIdleSotuh -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationIdleSotuh -> LoadMovementAnimationFromFile(animationDocument, 
                                                           AnimationState::Idle, 
                                                           FacingDirection::South);
 
-  animationIdleWest  -> LoadMovementAnimationSingleFile(animationDocument, 
+  animationIdleWest  -> LoadMovementAnimationFromFile(animationDocument, 
                                                           AnimationState::Idle, 
                                                           FacingDirection::West);
 
