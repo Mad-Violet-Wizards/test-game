@@ -13,40 +13,17 @@ void C_MovementAnimation::Awake()
 
 void C_MovementAnimation::Update(float deltaTime)
 {
-  const sf::Vector2f& currentVelocity = m_velocity -> Get();
-
-  if (currentVelocity.x != 0.f || currentVelocity.y != 0.f)
+  if (m_animation -> GetAnimationState() != AnimationState::Projectile)
   {
-    m_animation -> SetAnimationState(AnimationState::Walk);
+    const sf::Vector2f& currentVelocity = m_velocity -> Get();
 
-    float absVelocityX = fabs(currentVelocity.x);
-    float absVelocityY = fabs(currentVelocity.y);
-
-    if (absVelocityX > absVelocityY)
+    if (currentVelocity.x != 0.f || currentVelocity.y != 0.f)
     {
-      if (currentVelocity.x < 0.f)
-      {
-        m_animation -> SetAnimationDirection(FacingDirection::West);
-      }
-      else
-      {
-        m_animation -> SetAnimationDirection(FacingDirection::East);
-      }
+      m_animation -> SetAnimationState(AnimationState::Walk);
     }
     else
     {
-      if (currentVelocity.y < 0.f)
-      {
-        m_animation -> SetAnimationDirection(FacingDirection::North);
-      }
-      else
-      {
-        m_animation -> SetAnimationDirection(FacingDirection::South);
-      }
+      m_animation -> SetAnimationState(AnimationState::Idle);
     }
-  }
-  else
-  {
-    m_animation -> SetAnimationState(AnimationState::Idle);
   }
 }

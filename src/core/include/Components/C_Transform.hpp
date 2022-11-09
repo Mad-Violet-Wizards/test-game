@@ -12,10 +12,10 @@ public:
   void LateUpdate(float deltaTime) override;
 
   void SetPosition(float x, float y);
-  void SetPosition(sf::Vector2f &pos);
+  void SetPosition(const sf::Vector2f &pos);
 
   void AddPosition(float x, float y);
-  void AddPosition(sf::Vector2f &pos);
+  void AddPosition(const sf::Vector2f &pos);
 
   void SetX(float x);
   void SetY(float y);

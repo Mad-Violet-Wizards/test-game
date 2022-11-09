@@ -32,8 +32,8 @@ public:
   std::shared_ptr<C_Transform> transform;
   std::shared_ptr<C_InstanceID> instanceID;
 
-  template <typename T>
-  std::shared_ptr<T> AddComponent()
+  template <typename T, typename ...Args>
+  std::shared_ptr<T> AddComponent(Args &&...args)
   {
     static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
@@ -46,7 +46,7 @@ public:
       }
     }
 
-    std::shared_ptr<T> newComponent = std::make_shared<T>(this);
+    std::shared_ptr<T> newComponent = std::make_shared<T>(this, std::forward<Args>(args)...);
     m_components.push_back(newComponent);
 
     return newComponent;

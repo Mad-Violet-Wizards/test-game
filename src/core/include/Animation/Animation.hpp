@@ -3,8 +3,12 @@
 #include <SFML/Graphics.hpp>
 
 #include <memory>
+#include <map>
 #include <vector>
 #include <string>
+#include <functional>
+
+#include "Bitmask.hpp"
 
 #include "rapidjson/document.h"
 
@@ -21,7 +25,8 @@ enum class AnimationState
 {
   None,
   Idle,
-  Walk
+  Walk,
+  Projectile
 };
 
 struct FrameData
@@ -35,6 +40,8 @@ struct FrameData
   double displayTime;
 };
 
+using AnimationAction = std::function<void(void)>;
+
 class Animation
 {
 
@@ -43,11 +50,15 @@ public:
   Animation();
   ~Animation();
 
-  // FIXME: Change the god damn name of this method.
+  // TODO: Maybe this method should be moved to different place?
 
-  void LoadMovementAnimationSingleFile(rapidjson::Document &animationDocument,
+  void LoadMovementAnimationFromFile(rapidjson::Document &animationDocument,
                                        AnimationState state, 
                                        FacingDirection direction);
+
+  void AddFrame(int x, int y, int width, int height, double displayTime);
+
+  void AddFrameAction(int frame, AnimationAction action);
 
   const FrameData *GetCurrentFrame() const;
 
@@ -55,9 +66,13 @@ public:
 
   void Reset();
 
+  void SetLooped(bool looped);
+  bool IsLooped() const;
+
 private:
 
   void IncrementFrame();
+  void RunActionForCurrentFrame();
 
 private:
 
@@ -67,5 +82,9 @@ private:
 
   float m_currentFrameTime;
   bool m_releaseFirstFrame;
+  bool m_looped;
+
+  std::map<int, std::vector<AnimationAction>> m_actions;
+  Bitmask m_framesWithAction;
 
 };
