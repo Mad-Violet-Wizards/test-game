@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "FpsCounter.hpp"
 #include "AssetsStorage.hpp"
+#include "ProjectileStorage.hpp"
 
 #include <future>
 #include <thread>
@@ -68,6 +69,8 @@ void Game::CreateScenesAfterLoading()
 
 void Game::LoadAssets()
 {
+  ProjectileStorage::Initalize();
+
   if (AssetsStorage::GetInstance().ParseAssetsSchema("../assets/assets-schema.json"))
   {
     CreateScenesAfterLoading();

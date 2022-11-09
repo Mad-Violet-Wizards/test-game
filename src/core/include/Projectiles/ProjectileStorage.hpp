@@ -24,6 +24,8 @@ class ProjectileStorage
     ProjectileStorage();
     ~ProjectileStorage();
 
+    static void Initalize();
+
     static const ProjectileData &GetProjectileData(const std::string &name);
 
   private:

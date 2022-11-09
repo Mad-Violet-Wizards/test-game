@@ -3,6 +3,14 @@
 std::vector<ProjectileData> ProjectileStorage::m_projectileData = std::vector<ProjectileData>();
 
 ProjectileStorage::ProjectileStorage()
+{}
+
+ProjectileStorage::~ProjectileStorage()
+{
+
+}
+
+void ProjectileStorage::Initalize()
 {
   ProjectileData ARROW;
 
@@ -26,11 +34,6 @@ ProjectileStorage::ProjectileStorage()
   ARROW.VELOCITY.emplace(FacingDirection::West, sf::Vector2f(-1.f, 0.f));
 
   m_projectileData.push_back(ARROW);
-}
-
-ProjectileStorage::~ProjectileStorage()
-{
-
 }
 
 const ProjectileData &ProjectileStorage::GetProjectileData(const std::string &name)
