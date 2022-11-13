@@ -5,6 +5,7 @@
 
 #ifdef DEBUG
 #include "Debug.hpp"
+#include "ConsoleLog.hpp"
 #endif
 
 #include "FileLog.hpp"
@@ -78,9 +79,26 @@ void CollidableObjects::ClearObjects()
 
 }
 
+void CollidableObjects::ProcessRemovedObjects()
+{
+  for (auto it = m_collidableObjects.begin(); it != m_collidableObjects.end();)
+  {
+    if (it -> second -> QueuedForRemoval())
+    {
+      it = m_collidableObjects.erase(it);
+    }
+    else
+    {
+      ++it;
+    }
+  }
+}
+
 void CollidableObjects::Update(float deltaTime)
 {
   m_quadtree.DrawDebug();
+
+  ProcessCollidingObjects();
 
   m_quadtree.Clear();
 
@@ -109,6 +127,44 @@ void CollidableObjects::Draw(Window &window)
   #endif
 }
 
+void CollidableObjects::ProcessCollidingObjects()
+{
+  for (auto it = m_objectsColliding.begin(); it != m_objectsColliding.end();)
+  {
+    auto pair = *it;
+
+    std::shared_ptr<C_ColliderBox> first = pair.first;
+    std::shared_ptr<C_ColliderBox> second = pair.second;
+
+    if (first -> owner -> QueuedForRemoval() || second -> owner -> QueuedForRemoval())
+    {
+      first -> owner -> OnCollisionExit(second);
+      second -> owner -> OnCollisionExit(first);
+
+      it = m_objectsColliding.erase(it);
+    }
+    else
+    {
+      CollisionManifold m = first -> Intersects(second);
+
+      if (m.colliding)
+      {
+        first -> owner -> OnCollisionStay(second);
+        second -> owner -> OnCollisionStay(first);
+                
+        ++it;
+      }
+      else
+      {
+        first -> owner -> OnCollisionExit(second);
+        second -> owner -> OnCollisionExit(first);
+
+        it = m_objectsColliding.erase(it);
+      }
+    }
+  }
+}
+
 void CollidableObjects::Resolve()
 {
   for (auto &[level, object] : m_collidableObjects)
@@ -135,6 +191,14 @@ void CollidableObjects::Resolve()
 
         if (m.colliding)
         {
+          auto collisionPair = m_objectsColliding.emplace(std::make_pair(currentObjectColliderBox, collision));
+
+          if (collisionPair.second)
+          {
+            currentObjectColliderBox -> owner -> OnCollisionEnter(collision);
+            collision -> owner -> OnCollisionEnter(currentObjectColliderBox);
+          }
+
           Debug::AddRect(currentObjectColliderBox -> GetCollidable(), sf::Color::Red);
           Debug::AddRect(collision -> GetCollidable(), sf::Color::Red);
 

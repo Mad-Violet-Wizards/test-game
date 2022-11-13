@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Component.hpp"
-#include "Object.hpp"
 
 struct CollisionManifold
 {

@@ -19,7 +19,6 @@ void C_ProjectileAttackAnimation::Awake()
 
 void C_ProjectileAttackAnimation::Start()
 {
-  CONSOLE_LOG("Starting C_ProjectileAttack");
   m_animation -> AddAnimationAction(AnimationState::Projectile, FacingDirection::North, 3, std::bind(&C_ProjectileGenerator::GenerateProjectile, m_projectileGenerator, "Arrow"));
   m_animation -> AddAnimationAction(AnimationState::Projectile, FacingDirection::East,  3, std::bind(&C_ProjectileGenerator::GenerateProjectile, m_projectileGenerator, "Arrow"));
   m_animation -> AddAnimationAction(AnimationState::Projectile, FacingDirection::South, 3, std::bind(&C_ProjectileGenerator::GenerateProjectile, m_projectileGenerator, "Arrow"));

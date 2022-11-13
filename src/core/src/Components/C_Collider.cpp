@@ -1,4 +1,5 @@
 #include "C_Collider.hpp"
+#include "Object.hpp"
 
 C_Collider::C_Collider(Object *owner) 
   : Component(owner),

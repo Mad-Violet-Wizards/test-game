@@ -19,6 +19,8 @@ class DrawableObjects
     void ClearLayers();
     void ClearObjects();
 
+    void ProcessRemovedObjects();
+
     void Update(float deltaTime);
     void Draw(Window &window);
 

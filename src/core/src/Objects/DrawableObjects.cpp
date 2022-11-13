@@ -48,6 +48,30 @@ void DrawableObjects::ClearObjects()
   }
 }
 
+void DrawableObjects::ProcessRemovedObjects()
+{
+  for (auto it = m_drawableObjects.begin(); it != m_drawableObjects.end();)
+  {
+    if (std::holds_alternative<std::shared_ptr<Object>>(it -> second))
+    {
+      std::shared_ptr<Object> object = std::get<std::shared_ptr<Object>>(it -> second);
+
+      if (object -> QueuedForRemoval())
+      {
+        it = m_drawableObjects.erase(it);
+      }
+      else
+      {
+        ++it;
+      }
+    }
+    else
+    {
+      ++it;
+    }
+  }
+}
+
 void DrawableObjects::Update(float deltaTime)
 {
   m_mapRenderer.Update(deltaTime);
