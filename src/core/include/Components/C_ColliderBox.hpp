@@ -2,7 +2,6 @@
 
 #include <math.h>
 
-#include "Object.hpp"
 #include "Component.hpp"
 #include "C_Collider.hpp"
 

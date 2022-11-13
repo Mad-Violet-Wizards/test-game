@@ -1,5 +1,6 @@
 #include "C_ColliderBox.hpp"
 
+#include "Object.hpp"
 #include "C_Transform.hpp"
 
 C_ColliderBox::C_ColliderBox(Object *owner) 

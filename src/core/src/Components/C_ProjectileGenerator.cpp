@@ -6,6 +6,8 @@
 #include "C_Sprite.hpp"
 #include "C_Drawable.hpp"
 #include "C_Velocity.hpp"
+#include "C_ColliderBox.hpp"
+#include "C_RemoveObjectOnCollisionEnter.hpp"
 
 C_ProjectileGenerator::C_ProjectileGenerator(Object *owner, ObjectCollection *objectCollection)
   : Component(owner),
@@ -37,6 +39,12 @@ void C_ProjectileGenerator::GenerateProjectile(const std::string &name)
 
   auto projectileDrawable = projectile -> AddComponent<C_Drawable>();
   projectileDrawable -> SetLayer(0);
+
+  auto projectileCollider = projectile -> AddComponent<C_ColliderBox>();
+  projectileCollider -> SetLayer(0);
+  projectileCollider -> SetSize(32.f, 32.f);
+
+  projectile -> AddComponent<C_RemoveObjectOnCollisionEnter>();
 
   m_objectCollection -> Add(projectile);
 }

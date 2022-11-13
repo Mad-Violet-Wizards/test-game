@@ -8,6 +8,8 @@
 #include <future>
 #include <thread>
 
+#include "ConsoleLog.hpp"
+
 ObjectCollection::ObjectCollection()
 {
 
@@ -106,19 +108,28 @@ void ObjectCollection::ProcessNewObjects()
 
 void ObjectCollection::ProcessRemovedObjects()
 {
+  bool removed = false;
   auto it = m_objects.begin();
 
   while (it != m_objects.end())
   {
-    auto object = **it;
+    auto object = *it;
 
-    if (object.QueuedForRemoval())
+    if (object -> QueuedForRemoval())
     {
       it = m_objects.erase(it);
+      removed = true;
+      break;
     }
     else
     {
       ++it;
     }
+  }
+
+  if (removed)
+  {
+    m_collidableObjects.ProcessRemovedObjects();
+    m_drawableObjects.ProcessRemovedObjects();
   }
 }

@@ -10,6 +10,7 @@
 #include "Component.hpp"
 #include "C_InstanceID.hpp"
 #include "C_Transform.hpp"
+#include "C_Collidable.hpp"
 
 class Object
 {
@@ -25,6 +26,10 @@ public:
   void Update(float deltaTime);
   void LateUpdate(float deltaTime);
   void Draw(Window &window);
+
+  void OnCollisionEnter(std::shared_ptr<C_ColliderBox> other);
+  void OnCollisionStay(std::shared_ptr<C_ColliderBox> other);
+  void OnCollisionExit(std::shared_ptr<C_ColliderBox> other);
 
   bool QueuedForRemoval() const;
   void QueueForRemoval();
@@ -48,6 +53,11 @@ public:
 
     std::shared_ptr<T> newComponent = std::make_shared<T>(this, std::forward<Args>(args)...);
     m_components.push_back(newComponent);
+
+    if (std::shared_ptr<C_Collidable> collidable = std::dynamic_pointer_cast<C_Collidable>(newComponent))
+    {
+      m_collidables.push_back(collidable);
+    }
 
     return newComponent;
   };
@@ -86,6 +96,7 @@ public:
 private:
 
   std::vector<std::shared_ptr<Component>> m_components;
+  std::vector<std::shared_ptr<C_Collidable>> m_collidables;
   bool m_queuedForRemoval;
 
 };

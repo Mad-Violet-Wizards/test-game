@@ -27,11 +27,6 @@ LogFileManager &LogFileManager::GetInstance()
 
 void LogFileManager::CreateLogDirectory()
 {
-  if (s_instance == nullptr)
-  {
-    CONSOLE_LOG_ERROR("[LogFileManager] Instance of LogsFileManager is null.");
-  }
-
   const std::string logsDirectory   = "../logs/";
 
   if (!std::filesystem::exists(logsDirectory))
@@ -46,11 +41,6 @@ void LogFileManager::CreateLogDirectory()
 
 void LogFileManager::CreateLogFile()
 {
-  if (s_instance == nullptr)
-  {
-    CONSOLE_LOG_ERROR("[LogFileManager] Instance of LogsFileManager is null.");
-  }
-
   if (m_pathToLogFile.empty() == false)
   {
     return;

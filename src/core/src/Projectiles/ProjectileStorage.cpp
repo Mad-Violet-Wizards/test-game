@@ -23,10 +23,10 @@ void ProjectileStorage::Initalize()
   ARROW.TEXTURE.emplace(FacingDirection::South,  sf::IntRect(64, 0, 32, 32));
   ARROW.TEXTURE.emplace(FacingDirection::West,  sf::IntRect(96, 0, 32, 32));
 
-  ARROW.OFFSET.emplace(FacingDirection::North, sf::Vector2f(0.f, 0.f));
-  ARROW.OFFSET.emplace(FacingDirection::East, sf::Vector2f(0.f, 0.f));
-  ARROW.OFFSET.emplace(FacingDirection::South, sf::Vector2f(0.f, 0.f));
-  ARROW.OFFSET.emplace(FacingDirection::West, sf::Vector2f(0.f, 0.f));
+  ARROW.OFFSET.emplace(FacingDirection::North, sf::Vector2f(0.f, -32.f));
+  ARROW.OFFSET.emplace(FacingDirection::East, sf::Vector2f(32.f, 0.f));
+  ARROW.OFFSET.emplace(FacingDirection::South, sf::Vector2f(0.f, 32.f));
+  ARROW.OFFSET.emplace(FacingDirection::West, sf::Vector2f(-32.f, 0.f));
 
   ARROW.VELOCITY.emplace(FacingDirection::North, sf::Vector2f(0.f, -1.f));
   ARROW.VELOCITY.emplace(FacingDirection::East, sf::Vector2f(1.f, 0.f));
