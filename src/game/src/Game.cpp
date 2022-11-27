@@ -9,10 +9,6 @@
 
 Game::Game() : m_window("Test-Game 1.0.0")
 {
-  std::shared_ptr<SceneLoading> loadingScene = std::make_shared<SceneLoading>(&m_window);
-  unsigned int loadingSceneID = m_sceneManager.Add(loadingScene);
-  m_sceneManager.SwitchTo(loadingSceneID);
-
   m_deltaTime = m_clock.restart().asSeconds();
 }
 
@@ -65,14 +61,4 @@ void Game::CreateScenesAfterLoading()
   unsigned int gameSceneID = m_sceneManager.Add(gameScene);
   unsigned int menuSceneID = m_sceneManager.Add(menuScene);
   m_sceneManager.SwitchTo(menuSceneID);
-}
-
-void Game::LoadAssets()
-{
-  ProjectileStorage::Initalize();
-
-  if (AssetsStorage::GetInstance().ParseAssetsSchema("../assets/assets-schema.json"))
-  {
-    CreateScenesAfterLoading();
-  }
 }
