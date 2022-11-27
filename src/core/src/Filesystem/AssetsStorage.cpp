@@ -93,7 +93,7 @@ AssetsStorage &AssetsStorage::GetInstance()
   return *s_instance;
 }
 
-bool AssetsStorage::ParseAssetsSchema(const std::string &path)
+void AssetsStorage::ParseAssetsSchema(const std::string &path)
 {
   ObjectBroker broker;
 
@@ -151,6 +151,4 @@ bool AssetsStorage::ParseAssetsSchema(const std::string &path)
       }
     }
   }
-
-  return true;
 }

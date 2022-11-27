@@ -10,7 +10,7 @@ ProjectileStorage::~ProjectileStorage()
 
 }
 
-void ProjectileStorage::Initalize()
+void ProjectileStorage::Initialize()
 {
   ProjectileData ARROW;
 

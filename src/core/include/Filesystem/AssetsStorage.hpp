@@ -17,7 +17,7 @@ public:
 
   static AssetsStorage &GetInstance();
 
-  bool ParseAssetsSchema(const std::string &path);
+  void ParseAssetsSchema(const std::string &path);
 
   sf::Texture &GetTexture(const std::string &texturePath) const;
   sf::Font    &GetFont(const std::string &fontPath) const;

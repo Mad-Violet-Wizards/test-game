@@ -24,8 +24,6 @@ public:
 
   void CreateScenesAfterLoading();
 
-  void LoadAssets();
-
 private:
 
   Window m_window;

@@ -4,10 +4,13 @@
 #include <chrono>
 #include <format>
 #include <string>
+#include <syncstream>
 
 template <typename T>
 constexpr static inline void CONSOLE_LOG(const T &msg)
 {
+  thread_local std::osyncstream sync_cout(std::cout);
+
   std::cout << msg
             << "\n"
             << std::flush;
@@ -16,6 +19,8 @@ constexpr static inline void CONSOLE_LOG(const T &msg)
 template <typename ...Args>
 constexpr static inline void CONSOLE_LOG(const std::string &prefix, Args &&... args)
 {
+  thread_local std::osyncstream sync_cout(std::cout);
+
   std::cout << prefix;
 
   ((std::cout << std::forward<Args>(args) << " "), ...);

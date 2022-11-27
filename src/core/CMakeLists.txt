@@ -21,9 +21,10 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/ SCENE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/ UTILITY)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Window/ WINDOW)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Projectiles/ PROJECTILES)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Threads/ THREADS)
 
 # Specify the whole framework as a library and add source files. (cpp)
-add_library(${PROJECT_NAME} ${ANIMATION} ${COMPONENTS} ${DEBUG} ${EVENTS} ${FILESYSTEM} ${INPUT} ${LEVEL} ${OBJECTS} ${SCENE} ${UTILITY} ${WINDOW} ${PROJECTILES})
+add_library(${PROJECT_NAME} ${ANIMATION} ${COMPONENTS} ${DEBUG} ${EVENTS} ${FILESYSTEM} ${INPUT} ${LEVEL} ${OBJECTS} ${SCENE} ${UTILITY} ${WINDOW} ${PROJECTILES} ${THREADS})
 
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
@@ -44,6 +45,7 @@ target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include/WINDOW
   PUBLIC ${PROJECT_SOURCE_DIR}/include/CONTAINERS
   PUBLIC ${PROJECT_SOURCE_DIR}/include/PROJECTILES
+  PUBLIC ${PROJECT_SOURCE_DIR}/include/THREADS
 )
 
 target_link_libraries(${PROJECT_NAME} external)
