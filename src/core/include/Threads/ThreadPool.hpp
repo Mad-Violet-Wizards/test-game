@@ -7,6 +7,12 @@
 
 #include "ThreadSafe_Queue.hpp"
 
+/*
+Please do not use this ThreadPool, for some reason using std::thread instead of sf::Thread
+causes some OpenGL errors, I don't know why, but I'm not going to spend more time on this.
+Use ThreadPoolSFML instead.
+*/
+
 class ThreadPool
 {
   public:
@@ -20,6 +26,12 @@ class ThreadPool
     ThreadPool &operator=(const ThreadPool &other) = delete;
     ThreadPool &operator=(ThreadPool &&other) = delete;
 
+    template<typename F, typename... Args>
+    auto Make_Function(F&& f, Args&&... args)
+    {
+      return std::function{[f, args...](){ return f(args...); }};
+    }
+
     template <typename F, typename... Args>
     void Submit(F&& f, Args&&... args)
     {
@@ -27,20 +39,15 @@ class ThreadPool
         std::unique_lock<std::mutex> lock(m_mutex);
         m_jobsPending++;
 
-        std::function<decltype(f(args...))()> job = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
-
-        std::function<void()> wrapperJob = [job]()
-        {
-          job();
-        };
-
-        m_queue.Push(wrapperJob);
+        m_queue.Push(Make_Function(f, args...));
       }
 
       m_condition.notify_one();
     }
 
     void Shutdown();
+
+    bool DoesFinished();
 
     void WaitForFinish();
 
@@ -52,7 +59,7 @@ class ThreadPool
 
     std::vector<std::thread> m_threads;
 
-    OnyxCore::Containers::ThreadSafe::Queue<std::function<void()>> m_queue;
+    ThreadSafe::Queue<std::function<void()>> m_queue;
 
     bool m_shutdown;
 

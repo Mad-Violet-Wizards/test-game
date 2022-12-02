@@ -22,6 +22,7 @@ public:
   void CalculateDeltaTime();
   bool IsRunning() const;
 
+  void CreateLoadingScene();
   void CreateScenesAfterLoading();
 
 private:
