@@ -3,63 +3,54 @@
 #include <mutex>
 #include <queue>
 
-namespace OnyxCore
+namespace ThreadSafe
 {
-  namespace Containers
+  template <typename T>
+  class Queue
   {
-    namespace ThreadSafe
+
+    public:
+
+      Queue() = default;
+      ~Queue() = default;
+
+    // TODO: Implement copy & move constructors & assignemnt operator.
+    Queue(const Queue &other) = delete;
+    Queue(Queue &&other) = delete;
+
+    Queue &operator=(const Queue &other) = delete;
+    Queue &operator=(Queue &&other) = delete;
+
+    void Push(T item)
     {
-      template <typename T>
-      class Queue
-      {
-          public:
+      std::lock_guard<std::mutex> lock(m_mutex);
+      m_queue.push(item);
+    }
 
-            Queue() = default;
-            ~Queue() = default;
+    [[nodiscard]] T Dequeue()
+    {
+      std::lock_guard<std::mutex> lock(m_mutex);
+      T item = m_queue.front();
+      m_queue.pop();
+      return item;
+    }
 
-            // TODO: Implement copy & move constructors & assignemnt operator.
-            Queue(const Queue &other) = delete;
-            Queue(Queue &&other) = delete;
+    [[nodiscard]] bool Empty() const noexcept
+    {
+      std::lock_guard<std::mutex> lock(m_mutex);
+      return m_queue.empty();
+    }
 
-            Queue &operator=(const Queue &other) = delete;
-            Queue &operator=(Queue &&other) = delete;
-
-            void Push(T& item)
-            {
-              std::lock_guard<std::mutex> lock(m_mutex);
-              m_queue.push(item);
-            }
-
-            [[nodiscard]] T&& Front()
-            {
-              std::lock_guard<std::mutex> lock(m_mutex);
-              return std::move(m_queue.front());
-            }
-
-            void Pop()
-            {
-              std::lock_guard<std::mutex> lock(m_mutex);
-              m_queue.pop();
-            }
-
-            [[nodiscard]] bool Empty() const noexcept
-            {
-              std::lock_guard<std::mutex> lock(m_mutex);
-              return m_queue.empty();
-            }
-
-            [[nodiscard]] size_t Size() const noexcept
-            {
-              std::lock_guard<std::mutex> lock(m_mutex);
-              return m_queue.size();
-            }
+    [[nodiscard]] size_t Size() const noexcept
+    {
+      std::lock_guard<std::mutex> lock(m_mutex);
+      return m_queue.size();
+    }
             
 
-          private:
+    private:
 
-            mutable std::mutex m_mutex;
-            std::queue<T> m_queue;
-      };
-    }
-  }
+        mutable std::mutex m_mutex;
+        std::queue<T> m_queue;
+  };
 }

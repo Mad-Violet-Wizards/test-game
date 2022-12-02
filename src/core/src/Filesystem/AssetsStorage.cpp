@@ -106,8 +106,6 @@ void AssetsStorage::ParseAssetsSchema(const std::string &path)
   rapidjson::Value assetsFiles;
   assetsFiles = assetsSchemaDocument["assets"];
 
-  m_totalAssets = assetsFiles.Size();
-
   for (const auto &jsonData : assetsFiles.GetArray())
   {
     File *file = new File;
@@ -116,8 +114,6 @@ void AssetsStorage::ParseAssetsSchema(const std::string &path)
 
     file -> LoadFile(jsonData["path"].GetString(), std::ios::binary);
     file -> SetType(jsonData["type"].GetString());
-
-    m_assetsLoaded++;
 
     switch(file -> GetType())
     {

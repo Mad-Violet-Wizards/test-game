@@ -28,9 +28,6 @@ void SceneLoading::OnDestroy()
 void SceneLoading::Update(float deltaTime)
 {
     m_guiManager.Update(deltaTime);
-
-    std::string loadingProcess = "~~ Loading (" + std::to_string(AssetsStorage::GetInstance().GetAssetsLoadedCount()) + " / " + std::to_string(AssetsStorage::GetInstance().GetAssetsCount()) + ")~~ ";
-    m_loadingText -> SetText(loadingProcess);
 }
 
 void SceneLoading::LateUpdate(float deltaTime)
@@ -48,7 +45,7 @@ void SceneLoading::CreateGUI()
   m_loadingText = std::make_shared<GuiTextWidget>(m_window);
   m_loadingText -> SetColor(sf::Color::White);
   m_loadingText -> SetCharacterSize(24);
-  m_loadingText -> SetText("~~ Loading (0 / 0) --");
+  m_loadingText -> SetText("~~ Loading --");
   m_loadingText -> SetAlign(GuiAlign::AlignCenter);
 
   m_loadingLayout -> SetRelativeSize(100, 0);

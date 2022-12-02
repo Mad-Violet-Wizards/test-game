@@ -1,6 +1,7 @@
 #include "C_ProjectileGenerator.hpp"
 
 #include "ProjectileStorage.hpp"
+#include "Projectile.hpp"
 #include "ConsoleLog.hpp"
 
 #include "C_Sprite.hpp"
@@ -24,18 +25,18 @@ void C_ProjectileGenerator::GenerateProjectile(const std::string &name)
 {
   FacingDirection direction = m_direction -> GetDirection();
 
-  ProjectileData projectileData = ProjectileStorage::GetProjectileData(name);
+  Projectile projectileData = ProjectileStorage::GetProjectileData(name);
 
   std::shared_ptr<Object> projectile = std::make_shared<Object>();
 
-  projectile -> transform -> SetPosition(owner -> transform -> GetPosition() + projectileData.OFFSET.at(direction));
+  projectile -> transform -> SetPosition(owner -> transform -> GetPosition() + projectileData.GetOffset().at(direction));
 
   auto projectileSprite = projectile -> AddComponent<C_Sprite>();
-  projectileSprite -> Load(AssetsStorage::GetInstance().GetTexture(projectileData.TEXTURE_NAME));
-  projectileSprite -> SetTextureRect(projectileData.TEXTURE.at(direction));
+  projectileSprite -> Load(AssetsStorage::GetInstance().GetTexture(projectileData.m_textureName));
+  projectileSprite -> SetTextureRect(projectileData.GetTexture().at(direction));
 
   auto projectileVelocity = projectile -> AddComponent<C_Velocity>();
-  projectileVelocity -> Set(projectileData.VELOCITY.at(direction) * 500.f);
+  projectileVelocity -> Set(projectileData.GetVelocity().at(direction) * 500.f);
 
   auto projectileDrawable = projectile -> AddComponent<C_Drawable>();
   projectileDrawable -> SetLayer(0);

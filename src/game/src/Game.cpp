@@ -53,6 +53,15 @@ bool Game::IsRunning() const
   return m_window.IsOpen();
 }
 
+void Game::CreateLoadingScene()
+{
+  std::shared_ptr<SceneLoading> loadingScene = std::make_shared<SceneLoading>(&m_window);
+
+  unsigned int loadingSceneID = m_sceneManager.Add(loadingScene);
+
+  m_sceneManager.SwitchTo(loadingSceneID);
+}
+
 void Game::CreateScenesAfterLoading()
 {
   std::shared_ptr<SceneGame> gameScene = std::make_shared<SceneGame>();

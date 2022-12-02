@@ -30,8 +30,7 @@ void ThreadWorker::operator()()
         return;
       }
 
-      f = m_pool -> m_queue.Front();
-      m_pool -> m_queue.Pop();
+      f = m_pool -> m_queue.Dequeue();
     }
 
     f();

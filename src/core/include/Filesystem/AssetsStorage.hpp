@@ -27,9 +27,6 @@ public:
   void LoadFont(const std::string &path, bool isCompressed);
   void LoadImage(const std::string &path, bool isCompressed);
 
-  int GetAssetsLoadedCount() const { return m_assetsLoaded; }
-  int GetAssetsCount() const { return m_totalAssets; }
-
 private:
 
   AssetsStorage();
@@ -41,7 +38,4 @@ private:
   std::map< std::string, std::shared_ptr<sf::Texture> > m_textures;
   std::map< std::string, std::shared_ptr<sf::Font> >    m_fonts;
   std::map< std::string, std::shared_ptr<sf::Image> >   m_images;
-
-  int m_assetsLoaded = 0;
-  int m_totalAssets = 0;
 };
