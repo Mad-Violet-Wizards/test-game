@@ -71,17 +71,21 @@ class Build:
     print("[Build] Preparing release")
     os.chdir('../..')
 
-    if (os.path.exists("test-game")):
-      os.chdir('./test-game')
+    if (not os.path.exists("test-game")):
+      os.mkdir('test-game')
+    
+    os.chdir('./test-game')
 
-      if (os.path.exists("bin")):
-        shutil.rmtree("bin")
-      if (os.path.exists("assets")):
-        shutil.rmtree("assets")
-      if (os.path.exists("lib")):
-        shutil.rmtree("lib")
+    if (os.path.exists("bin")):
+      shutil.rmtree("bin")
+    if (os.path.exists("assets")):
+      shutil.rmtree("assets")
+    if (os.path.exists("lib")):
+      shutil.rmtree("lib")
+    if (os.path.exists("logs")):
+      shutil.rmtree("logs")
 
-      os.chdir("..")
+    os.chdir("..")
 
     os.mkdir("test-game/bin/")
 

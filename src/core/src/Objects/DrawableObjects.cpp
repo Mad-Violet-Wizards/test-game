@@ -98,7 +98,7 @@ void DrawableObjects::Draw(Window &window)
     }
     else
     {
-      FILE_LOG_ERROR("[DrawableObjects][Draw] Unknown object type");
+      FILE_LOG_ERROR("debug.txt", "[DrawableObjects][Draw] Unknown object type");
     }
   }
 }

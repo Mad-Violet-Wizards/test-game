@@ -45,9 +45,9 @@ public:
     // Check that we don't already have a component of this type.
     for (auto& exisitingComponent : m_components)
     {
-      if (std::dynamic_pointer_cast<T>(exisitingComponent))
+      if (std::shared_ptr<T> component = std::dynamic_pointer_cast<T>(exisitingComponent))
       {
-        return std::dynamic_pointer_cast<T>(exisitingComponent);
+        return component;
       }
     }
 
@@ -68,13 +68,13 @@ public:
     // Check that we don't already have a component of this type.
     for (auto& exisitingComponent : m_components)
     {
-      if (std::dynamic_pointer_cast<T>(exisitingComponent))
+      if (std::shared_ptr<T> component = std::dynamic_pointer_cast<T>(exisitingComponent))
       {
-        return std::dynamic_pointer_cast<T>(exisitingComponent);
+        return component;
       }
     }
 
-    FILE_LOG_WARNING("[Object][GetComponent] Returned nullptr.");
+    FILE_LOG_WARNING("debug.txt", "[Object][GetComponent] Returned nullptr.");
 
     return nullptr;
   };

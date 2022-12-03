@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <filesystem>
+#include <unordered_map>
 
 class LogFileManager
 {
@@ -13,9 +14,11 @@ public:
   static LogFileManager &GetInstance();
 
   void CreateLogDirectory();
-  void CreateLogFile();
 
-  const std::string &GetLogFilePath() const;
+  void CreateLogFile(const std::string &fileName);
+
+  const std::string &GetLogFilePath(const std::string &filename) const;
+  bool DoesLogFileExists(const std::string &logFile) const;
 
 private:
 
@@ -24,7 +27,6 @@ private:
 private:
 
   static std::unique_ptr<LogFileManager> s_instance;
-
-  std::string m_pathToLogFile;
+  std::unordered_map<std::string, std::string> m_logFiles;
 
 };
