@@ -70,7 +70,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithSmallestWidth()
 {
   if (m_widgets.size() == 0)
   {
-    FILE_LOG_WARNING("[GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.");
+    FILE_LOG_WARNING("debug.txt", "[GuiLayout][FindWidgetWithSmallestWidth]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -87,7 +87,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithHighestWidth()
 {
   if (m_widgets.size() == 0)
   {
-    FILE_LOG_WARNING("[GuiLayout][FindWidgetWithHighestWidth]: Couldn't find any widget.");
+    FILE_LOG_WARNING("debug.txt", "[GuiLayout][FindWidgetWithHighestWidth]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -104,7 +104,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithSmallestHeight()
 {
   if (m_widgets.size() == 0)
   {
-    FILE_LOG_WARNING("[GuiLayout][FindWidgetWithSmallestHeight]: Couldn't find any widget.");
+    FILE_LOG_WARNING("debug.txt", "[GuiLayout][FindWidgetWithSmallestHeight]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -121,7 +121,7 @@ std::shared_ptr<GuiObject> GuiLayout::FindWidgetWithHighestHeight()
 {
   if (m_widgets.size() == 0)
   {
-    FILE_LOG_WARNING("[GuiLayout][FindWidgetWithHighestHeight]: Couldn't find any widget.");
+    FILE_LOG_WARNING("debug.txt", "[GuiLayout][FindWidgetWithHighestHeight]: Couldn't find any widget.");
     return nullptr;
   }
 
@@ -138,14 +138,14 @@ const sf::Vector2f GuiLayout::ScaleRelativeToWindowAbsolute(const sf::Vector2u &
 {
   if (m_window == nullptr)
   {
-    FILE_LOG_WARNING("[GuiLayout][ScaleRelativeToWindowAbsolute]: Window is nullptr.");
+    FILE_LOG_WARNING("debug.txt", "[GuiLayout][ScaleRelativeToWindowAbsolute]: Window is nullptr.");
 
-    FILE_LOG_ERROR("[GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
+    FILE_LOG_ERROR("debug.txt", "[GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
   }
 
   if (proportions.x < 0 || proportions.x > 100 || proportions.y < 0 || proportions.y > 100)
   {
-    FILE_LOG_ERROR("[GuiLayout][ScaleRelativeToWindowAbsolute] x & y must be values between 0 and 100.");
+    FILE_LOG_ERROR("debug.txt", "[GuiLayout][ScaleRelativeToWindowAbsolute] x & y must be values between 0 and 100.");
   }
   
   const sf::Vector2f result = { (m_window -> GetWindowSize().x * static_cast<float>(proportions.x)) / 100, 
@@ -158,7 +158,7 @@ const sf::Vector2u GuiLayout::ScaleWindowAbsoluteToRelative(const sf::Vector2f &
 {
   if (m_window == nullptr)
   {
-    FILE_LOG_ERROR("[GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
+    FILE_LOG_ERROR("debug.txt", "[GuiLayout][ScaleRelativeToWindowAbsolute] Window is nullptr.");
   }
 
   const sf::Vector2u result = { (100 * static_cast<unsigned int>(values.x) / m_window -> GetWindowSize().x), 

@@ -17,7 +17,7 @@ namespace OnyxCore
       }
       else
       {
-        FILE_LOG_ERROR("[MapOperations][Error] Key not found.");
+        FILE_LOG_ERROR("debug.txt", "[MapOperations][Error] Key not found.");
       }
     }
 
@@ -32,7 +32,7 @@ namespace OnyxCore
       }
       else
       {
-        FILE_LOG_ERROR("[MapOperations][Error] Key not found.");
+        FILE_LOG_ERROR("debug.txt", "[MapOperations][Error] Key not found.");
 
         throw std::runtime_error("[MapOperations] Key not found.");
       }

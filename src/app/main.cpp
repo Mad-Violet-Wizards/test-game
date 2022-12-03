@@ -6,6 +6,7 @@
 #include "ProjectileStorage.hpp"
 #include "ConsoleLog.hpp"
 #include "ThreadPoolSFML.hpp"
+#include "Timer.hpp"
 
 int main()
 {
@@ -29,6 +30,9 @@ int main()
     ThreadPoolSFML::s_jobsFinished++;
   };
 
+  Timer t;
+  t.Start();
+
   threadPool.Submit(LoadAssets);
   threadPool.Submit(LoadProjectiles);
 
@@ -45,6 +49,9 @@ int main()
       ThreadPoolSFML::s_jobsFinished = 0;
       threadPool.Clear();
       game.CreateScenesAfterLoading();
+
+      t.Stop();
+      CONSOLE_LOG("[Info][Main] Loading time: ", t.GetElapsedTime<std::chrono::milliseconds>(), " ms.");
     }
   }
 

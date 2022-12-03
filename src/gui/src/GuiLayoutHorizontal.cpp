@@ -155,7 +155,7 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
     }
     case GuiAlign::AlignRight:
     {
-      FILE_LOG_WARNING("[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignRight is not supported in this layout.");
+      FILE_LOG_WARNING("debug.txt", "[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignRight is not supported in this layout.");
 
       break;
     }
@@ -180,7 +180,7 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
       }
       else
       {
-        FILE_LOG_ERROR("[GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
+        FILE_LOG_ERROR("debug.txt", "[GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
       }
 
       break;
@@ -204,13 +204,13 @@ void GuiLayoutHorizontal::UpdatePositionOfWidget(std::shared_ptr<GuiObject> widg
       }
       else
       {
-        FILE_LOG_ERROR("[GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
+        FILE_LOG_ERROR("debug.txt", "[GuiLayoutHorizontal][UpdatePositionOfWidget] Didn't found widget with highest height.\n");
       }
       break;
     }
     case GuiAlign::AlignLeft:
     {
-      FILE_LOG_WARNING("[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignLeft is not supported in this layout.");
+      FILE_LOG_WARNING("debug.txt", "[GuiLayoutHorizontal][UpdatePositionOfWidget] AlignLeft is not supported in this layout.");
 
       break;
     }

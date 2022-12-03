@@ -99,7 +99,7 @@ void ObjectCollection::ProcessNewObjects()
     }
     else
     {
-      FILE_LOG_ERROR("[ObjectCollection][ProcessNewObjects] Unknown object type");
+      FILE_LOG_ERROR("debug.txt", "[ObjectCollection][ProcessNewObjects] Unknown object type");
     }
 
     m_newObjects.pop();

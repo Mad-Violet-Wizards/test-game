@@ -35,7 +35,7 @@ void Animation::AddFrameAction(int frame, AnimationAction action)
   }
   else
   {
-    FILE_LOG_ERROR("[Animation] Frame index out of range.");
+    FILE_LOG_ERROR("debug.txt", "[Animation] Frame index out of range.");
   }
 }
 
@@ -98,7 +98,7 @@ const FrameData *Animation::GetCurrentFrame() const
     return &m_frames[m_currentFrameIndex]; 
   }
 
-  FILE_LOG_WARNING("[Animation][GetCurrentFrame] Returned nullptr.");
+  FILE_LOG_WARNING("debug.txt", "[Animation][GetCurrentFrame] Returned nullptr.");
   return nullptr;
 }
 

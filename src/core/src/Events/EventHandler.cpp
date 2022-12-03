@@ -30,7 +30,7 @@ KeyboardInput &EventHandler::GetKeyboardInput()
 {
   if (s_instance == nullptr)
   {
-    FILE_LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
+    FILE_LOG_ERROR("debug.txt", "[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
   }
   else
   {
@@ -42,7 +42,7 @@ MouseInput &EventHandler::GetMouseInput()
 {
   if (s_instance == nullptr)
   {
-    FILE_LOG_ERROR("[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
+    FILE_LOG_ERROR("debug.txt", "[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
   }
   else
   {

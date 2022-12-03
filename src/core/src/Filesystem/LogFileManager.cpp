@@ -10,7 +10,6 @@ std::unique_ptr<LogFileManager> LogFileManager::s_instance = nullptr;
 LogFileManager::LogFileManager()
 {
   CreateLogDirectory();
-  CreateLogFile();
 }
 
 LogFileManager::~LogFileManager() { }
@@ -27,7 +26,7 @@ LogFileManager &LogFileManager::GetInstance()
 
 void LogFileManager::CreateLogDirectory()
 {
-  const std::string logsDirectory   = "../logs/";
+  const std::string logsDirectory   = "../logs";
 
   if (!std::filesystem::exists(logsDirectory))
   {
@@ -39,27 +38,28 @@ void LogFileManager::CreateLogDirectory()
     else         { std::cout << "[LogFileManager][Error] Cannot create logs directory.\n"; }  }
 }
 
-void LogFileManager::CreateLogFile()
+void LogFileManager::CreateLogFile(const std::string &fileName)
 {
-  if (m_pathToLogFile.empty() == false)
-  {
-    return;
-  }
+  const std::string logFilePath { "../logs/" + fileName };
 
-  auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
+  m_logFiles.insert( { fileName, logFilePath} );
 
-  const std::string timeFileName = std::format("{:%Y-%m-%d-%H-%M-%S-log.txt}",
-                                               std::chrono::floor<std::chrono::seconds>(time));
-
-  std::string timeFilePath = std::format("{}{}", "../logs/", timeFileName);
-
-  std::ofstream timeFile(timeFilePath);
-  timeFile.close();
-
-  LogFileManager::m_pathToLogFile = std::move(timeFilePath);
+  std::ofstream logFile(logFilePath);
+ 
+  logFile.close();
 }
 
-const std::string &LogFileManager::GetLogFilePath() const
+const std::string &LogFileManager::GetLogFilePath(const std::string &fileName) const
 {
-  return m_pathToLogFile;
+  return m_logFiles.at(fileName);
+}
+
+bool LogFileManager::DoesLogFileExists(const std::string &logFile) const
+{
+  if (m_logFiles.find(logFile) != m_logFiles.end())
+  {
+    return true;
+  }
+
+  return false;
 }
