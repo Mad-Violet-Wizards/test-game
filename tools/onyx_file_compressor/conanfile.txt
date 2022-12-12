@@ -1,5 +1,5 @@
 [requires]
-zlib/1.2.12
+zlib/1.2.13
 rapidjson/1.1.0
 
 [generators]
