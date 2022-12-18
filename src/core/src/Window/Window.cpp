@@ -1,10 +1,8 @@
 #include "Window.hpp"
 
 Window::Window(const std::string &windowName)
-  : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Titlebar)
-{
-  m_renderWindow.setFramerateLimit(60);
-}
+  : m_renderWindow(m_windowResolutionInfo.GetDefaultResolution(), windowName, sf::Style::Titlebar) {}
+
 
 Window::~Window() {}
 
@@ -60,7 +58,7 @@ void Window::UpdateResolution(const sf::VideoMode &videoMode)
                         sf::Style::Fullscreen);
 
   /*
-    We inform every connceted slot to this signal
+    We inform every connected slot to this signal
     That resolution has changed and there's something
     that needs to be updated.
   */
