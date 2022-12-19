@@ -1,5 +1,5 @@
 #include <string>
-#include <boost/format.hpp>
+#include <format>
 
 #include "WindowResolution.hpp"
 
@@ -26,7 +26,7 @@ const sf::VideoMode &WindowResolution::GetCurrentResolution()
 
 const std::string WindowResolution::GetCurrentResolutionString()
 {
-  boost::format fmt = boost::format("%1% x %2%") 
+  std::format fmt = boost::format("%1% x %2%") 
                       % GetCurrentResolution().width 
                       % GetCurrentResolution().height;
 
