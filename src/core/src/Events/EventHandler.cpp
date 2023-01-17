@@ -28,26 +28,12 @@ EventHandler &EventHandler::GetInstance()
 
 KeyboardInput &EventHandler::GetKeyboardInput()
 {
-  if (s_instance == nullptr)
-  {
-    FILE_LOG_ERROR("debug.txt", "[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
-  }
-  else
-  {
-    return m_keyboardInput;
-  }
+  return m_keyboardInput;
 }
 
 MouseInput &EventHandler::GetMouseInput()
 {
-  if (s_instance == nullptr)
-  {
-    FILE_LOG_ERROR("debug.txt", "[EventHandler] You've to use GetKeyboardInput on instance of EventHandler.");
-  }
-  else
-  {
-    return m_mouseInput;
-  }
+  return m_mouseInput;
 }
 
 void EventHandler::ProcessEvent(const sf::Event &event)
