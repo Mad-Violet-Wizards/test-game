@@ -1,4 +1,4 @@
-conan==1.54.0
+conan==1.57.0
 fire==0.4.0
 numpy==1.23.3
 cryptography==38.0.1

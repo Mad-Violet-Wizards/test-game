@@ -1,36 +1,35 @@
 import os
 import fire
+from utility.utility_detector import Detector
 
-from utility.compilator_detector import CompilatorDetector
-from utility.conan_detector import ConanDetector
-from utility.cmake_detector import CmakeDetector
 
 class BuildTools:
 
-  def __init__(self):
+    def __init__(self):
 
-    self.detected_compilator = CompilatorDetector().detect()
-    self.found_conan = ConanDetector().detect()
-    self.found_cmake = CmakeDetector().detect()
+        self.compiler = Detector("g++").detect()
+        self.detect_conan = Detector("conan").detect()
+        self.detect_cmake = Detector("cmake").detect()
 
-    self.compilator = f"{self.detected_compilator['compilator']} {self.detected_compilator['version']} {self.detected_compilator['release_date']}"
-    self.cwd = os.getcwd()
+        self.cwd = os.getcwd()
 
-  def check(self):
-    if (self.compilator and self.found_cmake and self.found_conan):
-      return True
-    else:
-      return False
+    def check(self):
+        if (self.compiler and self.found_cmake and self.found_conan):
+            return True
+        else:
+            return False
 
-  def build_compressor(self):
+    def build_compressor(self):
 
-    if self.check() is False:
-      return
+        if self.check() is False:
+            return
 
-    print(f"[Build-Tools] Going to execute build with compilator: {self.compilator}")
+        print(
+            f"[Build-Tools] Going to execute build with compiler: {self.compiler}")
 
-    os.chdir('../../tools/onyx_file_compressor')
-    os.system('cmd /c py build.py')
+        os.chdir('../../tools/onyx_file_compressor')
+        os.system('cmd /c py build.py')
+
 
 if __name__ == "__main__":
-  fire.Fire(BuildTools)
+    fire.Fire(BuildTools)
