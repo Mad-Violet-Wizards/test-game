@@ -2,8 +2,13 @@
 
 # !!! This script is not meant to be run without administrator rights. !!!
 
-$env_directory = "../env"
-$python_requriements_dir = "../requirements.txt"
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
+$workdir = Get-Location
+$scriptdir = Set-Location -Path .. -PassThru
+
+$env_directory = "$scriptdir\env"
+$python_requriements_dir = "$scriptdir\requirements.txt"
 
 function Detect
 {
@@ -91,7 +96,7 @@ $compilerConfig["compilator"] = "Visual Studio"
 $compilerConfig["version"] = $vsMajorVersion
 $compilerConfig["release_date"] = $vsLineVersion
 
-$compilerConfig | ConvertTo-Json | Out-File "config.json"
+$compilerConfig | ConvertTo-Json | Out-File "$workdir/config.json"
 
 Write-Host "Visual Studio $vsMajorVersion $vsLineVersion detected, saved to config.json"
 
@@ -103,7 +108,7 @@ if (!(Test-Path $env_directory))
 
 Write-Host "Env directory detected, activating..."
 
-Invoke-Expression "$env_directory\Scripts\activate"
+Invoke-Expression "$env_directory\Scripts\Activate.ps1"
 
 if (Test-Path env:VIRTUAL_ENV)
 {
@@ -120,3 +125,5 @@ Invoke-Expression "pip install -r $python_requriements_dir"
 
 Write-Host "Python requirements installed."
 Write-Host "Setup complete."
+
+Set-Location -Path $workdir
