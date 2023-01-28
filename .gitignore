@@ -17,6 +17,12 @@ log/
 
 # Don't add local python env to repo.
 env/
+.env/
+.venv/
+venv/
+env.bak/
+venv.bak/
+
 
 # Windows gitignore - don't add local CMakeSettings
 src/.vs
