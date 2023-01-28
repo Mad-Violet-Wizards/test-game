@@ -26,6 +26,8 @@ RUN pip3 install -r /game-engine/requirements.txt
 
 COPY . /game-engine/
 
-RUN python3 /game-engine/scripts/linux/build.py install
-RUN python3 /game-engine/scripts/linux/build.py build
-RUN python3 /game-engine/scripts/linux/build.py release
+RUN python3 /game-engine/scripts/linux/build.py install && \
+    python3 build_tools.py build_compressor && \
+    python3 compress_assets.py && \
+    python3 /game-engine/scripts/linux/build.py build && \
+    python3 /game-engine/scripts/linux/build.py release
