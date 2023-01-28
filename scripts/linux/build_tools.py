@@ -10,6 +10,8 @@ class BuildTools:
         self.compiler = Detector("g++").detect()
         self.detect_conan = Detector("conan").detect()
         self.detect_cmake = Detector("cmake").detect()
+        self.project_path = os.path.abspath(os.path.join(
+            os.path.abspath(os.path.dirname(__file__)), os.pardir, os.pardir))
 
         self.cwd = os.getcwd()
 
@@ -27,7 +29,7 @@ class BuildTools:
         print(
             f"[Build-Tools] Going to execute build with compiler: {self.compiler}")
 
-        os.chdir('../../tools/onyx_file_compressor')
+        os.chdir(f'{self.project_path}/tools/onyx_file_compressor')
         os.system('cmd /c py build.py')
 
 
