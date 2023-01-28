@@ -26,6 +26,9 @@ src/CMakeSettings.json
 # Dont add local changelist.
 changelog_local.md
 
+# Don't add config.json for compilation.
+scripts/windows/config.json
+
 __pycache__
 
 CMakeCache.txt
