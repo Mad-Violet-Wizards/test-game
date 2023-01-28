@@ -11,7 +11,8 @@ class Build:
         self.detect_compiler: bool = Detector("g++").detect()
         self.detect_conan: bool = Detector("conan").detect()
         self.detect_cmake: bool = Detector("cmake").detect()
-        self.project_path = os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir, os.pardir))
+        self.project_path = os.path.abspath(os.path.join(
+            os.path.abspath(os.path.dirname(__file__)), os.pardir, os.pardir))
         self.cwd = os.getcwd()
 
     def check(self):
@@ -31,68 +32,68 @@ class Build:
         if (os.path.exists("build") == False):
             os.mkdir('build')
 
-        os.chdir(f'{self.project_path}/build')
+        os.chdir('./build')
         os.system('conan install .. --build=missing')
 
-    # def build(self):
+    def build(self):
 
-    #     if self.check() is False:
-    #         return
+        if self.check() is False:
+            return
 
-    #     print(
-    #         f"[Build] Going to execute build with compilator: {self.detect_compiler}")
+        print(
+            f"[Build] Going to execute build with compilator: {self.detect_compiler}")
 
-    #     os.chdir('../..')
+        os.chdir(self.project_path)
 
-    #     if (os.path.exists("build") == False):
-    #         os.mkdir('build')
+        if (os.path.exists("build") == False):
+            os.mkdir('build')
 
-    #     os.chdir('./build')
-    #     os.system('cmd /c conan install .. --build=missing')
-    #     os.system(f'cmd /c cmake -G "{self.detect_compiler}" ..')
-    #     os.system('cmd /c cmake --build . --config Release')
-    #     os.system('cmd /c conan imports ..')
+        os.chdir('./build')
+        os.system('conan install .. --build=missing')
+        os.system(f'cmake -G "{self.detect_compiler}" ..')
+        os.system('cmake --build . --config Release')
+        os.system('conan imports ..')
 
-    #     os.chdir('../tools')
-    #     files = os.listdir(os.getcwd())
+        os.chdir(f'{self.project_path}/tools')
+        files = os.listdir(os.getcwd())
 
-    #     for file in files:
-    #         if file.endswith(".dll"):
-    #             shutil.copy2(os.path.join(os.getcwd(), file), "../build/bin")
-    #             print(f"[Build] Copied {file} to build/bin")
+        for file in files:
+            if file.endswith(".dll"):
+                shutil.copy2(os.path.join(os.getcwd(), file), f"{self.project_path}/build/bin")
+                print(f"[Build] Copied {file} to build/bin")
 
-    #     print("[Build] Build finished")
+        print("[Build] Build finished")
 
-    # def release(self):
+    def release(self):
 
-    #     print("[Build] Preparing release")
-    #     os.chdir('../..')
+        print("[Build] Preparing release")
+        os.chdir(self.project_path)
 
-    #     if (not os.path.exists("test-game")):
-    #         os.mkdir('test-game')
+        if (not os.path.exists("test-game")):
+            os.mkdir('test-game')
 
-    #     os.chdir('./test-game')
+        os.chdir('./test-game')
 
-    #     if (os.path.exists("bin")):
-    #         shutil.rmtree("bin")
-    #     if (os.path.exists("assets")):
-    #         shutil.rmtree("assets")
-    #     if (os.path.exists("lib")):
-    #         shutil.rmtree("lib")
-    #     if (os.path.exists("logs")):
-    #         shutil.rmtree("logs")
+        if (os.path.exists("bin")):
+            shutil.rmtree("bin")
+        if (os.path.exists("assets")):
+            shutil.rmtree("assets")
+        if (os.path.exists("lib")):
+            shutil.rmtree("lib")
+        if (os.path.exists("logs")):
+            shutil.rmtree("logs")
 
-    #     os.chdir("..")
 
-    #     os.mkdir("test-game/bin/")
+        os.chdir(self.project_path)
+        os.mkdir("test-game/bin/")
 
-    #     copy = shutil.copytree("./assets_compressed", "test-game/assets")
-    #     shutil.copy("build/src/app/bin/app.exe", "test-game/bin/")
+        copy = shutil.copytree("./assets_compressed", "test-game/assets")
+        shutil.copy("build/src/app/bin/app.exe", "test-game/bin/")
 
-    #     for file in os.listdir("build/bin"):
-    #         shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")
+        for file in os.listdir("build/bin"):
+            shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")
 
-    #     print("[Build] Release prepared")
+        print("[Build] Release prepared")
 
 
 if __name__ == "__main__":
