@@ -10,13 +10,14 @@ class CompilatorDetector:
 
   def detect(self):
     print("[CompilatorDetector] Going to detect compilator.")
-    os.chdir('C:/Program Files (x86)/Microsoft Visual Studio/Installer/')
-    result = json.loads(subprocess.check_output(f"{os.getcwd()}/vswhere.exe -latest -format json").decode('cp1252'))
 
-    major_version = result[0]["installationVersion"].split(".")[0]
+    if (os.path.exists("./config.json") == False):
+      print("[CompilatorDetector] Config file not found. Please run auto-config script first.")
 
-    release_date = result[0]["catalog"]["productLineVersion"]
+    with open('./config.json', 'rb') as config_file:
 
-    os.chdir(self.cwd)
+      data = config_file.read()
 
-    return { "compilator": "Visual Studio", "version": major_version, "release_date": release_date }
+      result = json.loads(data)
+
+      return result
