@@ -4,7 +4,7 @@ WORKDIR /game-engine
 
 RUN dnf update -y 
 
-# RUN dnf groupinstall "Development Tools" "Development Libraries" -y
+RUN dnf groupinstall "Development Tools" "Development Libraries" -y
 RUN dnf install cmake g++ make systemd-devel \
     glew-devel SDL2-devel SDL2_image-devel \
     glm-devel freetype-devel \
@@ -26,4 +26,6 @@ RUN pip3 install -r /game-engine/requirements.txt
 
 COPY . /game-engine/
 
-CMD [ "python3", "/game-engine/scripts/linux/build.py", "install" ]
+RUN python3 /game-engine/scripts/linux/build.py install
+RUN python3 /game-engine/scripts/linux/build.py build
+RUN python3 /game-engine/scripts/linux/build.py release
