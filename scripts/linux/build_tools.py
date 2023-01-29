@@ -7,7 +7,8 @@ class BuildTools:
 
     def __init__(self):
 
-        self.compiler = Detector("g++").detect()
+        self.compiler = "g++"
+        self.detect_compiler = Detector(self.compiler).detect()
         self.detect_conan = Detector("conan").detect()
         self.detect_cmake = Detector("cmake").detect()
         self.project_path = os.path.abspath(os.path.join(
@@ -16,7 +17,7 @@ class BuildTools:
         self.cwd = os.getcwd()
 
     def check(self):
-        if (self.compiler and self.found_cmake and self.found_conan):
+        if (self.detect_compiler and self.detect_cmake and self.detect_conan):
             return True
         else:
             return False
@@ -29,8 +30,8 @@ class BuildTools:
         print(
             f"[Build-Tools] Going to execute build with compiler: {self.compiler}")
 
-        os.chdir(f'{self.project_path}/tools/onyx_file_compressor')
-        os.system('cmd /c py build.py')
+        os.chdir(f'{self.project_path}/tools/onyx_file_compressor/')
+        os.system('python3 build-linux.py')
 
 
 if __name__ == "__main__":
