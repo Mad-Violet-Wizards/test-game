@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     os.chdir(project_path)
 
-    if (os.path.exists("./tools/onyx_lib_compressor.dll") == False):
+    if (os.path.exists(f"{project_path}/tools/onyx_lib_compressor.dll") == False):
         print("[Compress-Assets] Error: onyx_lib_compressor.dll not found")
         exit()
 

@@ -1,10 +1,13 @@
 FROM fedora:latest
 
+# Changing the working directory to /game-engine
 WORKDIR /game-engine
 
-RUN dnf update -y 
+# Installing the dependencies
+RUN dnf update -y
 
 RUN dnf groupinstall "Development Tools" "Development Libraries" -y
+
 RUN dnf install cmake g++ make systemd-devel \
     glew-devel SDL2-devel SDL2_image-devel \
     glm-devel freetype-devel \
@@ -20,14 +23,32 @@ RUN dnf install cmake g++ make systemd-devel \
     libXv-devel xcb-util-devel libuuid-devel -y
 RUN dnf install python3-pip -y
 
+
+# Installing the python dependencies
 RUN pip3 install --upgrade pip
 COPY ./scripts/requirements.txt /game-engine/requirements.txt
 RUN pip3 install -r /game-engine/requirements.txt
 
-COPY . /game-engine/
+# Copying the source code
+COPY ./assets_raw /game-engine/assets_raw
+COPY ./build /game-engine/build
+COPY ./external /game-engine/external
+COPY ./src /game-engine/src
+COPY ./tools /game-engine/tools
+COPY ./CMakeLists.txt ./conanfile.txt  /game-engine/
+COPY ./scripts/linux/build.py /game-engine/scripts/linux/build.py
+COPY ./scripts/linux/utility /game-engine/scripts/linux/utility
 
-RUN python3 /game-engine/scripts/linux/build.py install && \
-    python3 build_tools.py build_compressor && \
-    python3 compress_assets.py && \
-    python3 /game-engine/scripts/linux/build.py build && \
-    python3 /game-engine/scripts/linux/build.py release
+
+
+# Building the game engine
+RUN python3 /game-engine/scripts/linux/build.py install
+
+COPY ./scripts/linux/build_tools.py /game-engine/scripts/linux/build_tools.py
+RUN python3 /game-engine/scripts/linux/build_tools.py build_compressor
+
+COPY ./scripts/linux/compress_assets.py /game-engine/scripts/linux/compress_assets.py
+RUN python3 /game-engine/scripts/linux/compress_assets.py
+
+RUN python3 /game-engine/scripts/linux/build.py build
+RUN python3 /game-engine/scripts/linux/build.py release
