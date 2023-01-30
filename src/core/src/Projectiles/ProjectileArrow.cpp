@@ -3,7 +3,7 @@
 ProjectileArrow::ProjectileArrow(const std::string &name)
   : Projectile(name)
 {
-  m_textureName = "projectile_arrow.dat";
+  m_textureName = "projectile_arrow.png";
 
   m_texture.emplace(FacingDirection::North, sf::IntRect(0, 0, 32, 32));
   m_texture.emplace(FacingDirection::East,  sf::IntRect(32, 0, 32, 32));

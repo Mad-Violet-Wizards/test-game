@@ -16,7 +16,7 @@ SceneLoading::~SceneLoading()
 
 void SceneLoading::OnCreate()
 {
-  AssetsStorage::GetInstance().LoadFont("../assets/fonts/GoudyBookletter.dat", true);
+  AssetsStorage::GetInstance().LoadFont("../assets/fonts/GoudyBookletter.ttf");
   CreateGUI();
 }
 

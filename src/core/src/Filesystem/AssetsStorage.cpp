@@ -1,9 +1,10 @@
 #include <iostream>
+#include <filesystem>
 
 #include "AssetsStorage.hpp"
 #include "FileStorage.hpp"
 #include "MapOperations.hpp"
-#include "ObjectBroker.hpp"
+#include "ConsoleLog.hpp"
 
 #include "rapidjson/document.h"
 
@@ -11,6 +12,9 @@ std::unique_ptr<AssetsStorage> AssetsStorage::s_instance = nullptr;
 
 AssetsStorage::AssetsStorage()
 {
+  m_textureExtensions = { ".png", ".jpg", ".jpeg", ".bmp", ".tga", ".psd", ".hdr", ".pic" };
+  m_fontExtensions    = { ".ttf" };
+  m_imageExtensions   = { ".png", ".jpg", ".jpeg", ".bmp", ".tga", ".psd", ".hdr", ".pic" };
 }
 
 AssetsStorage::~AssetsStorage()
@@ -32,55 +36,58 @@ sf::Image &AssetsStorage::GetImage(const std::string &imageName) const
   return OnyxCore::Containers::MapGetItem< sf::Image >(imageName, m_images);
 }
 
-void AssetsStorage::LoadTexture(const std::string &path, bool isCompressed)
+void AssetsStorage::LoadTexture(const std::string &path)
 {
-  ObjectBroker broker;
+  namespace fs = std::filesystem;
 
-  File *file = new File(); 
+  const std::string &extension = fs::path(path).filename().extension().string();
 
-  FileStorage::GetInstance().InsertFile(file);
-
-  file -> LoadFile(path, std::ios::binary);
-  file -> SetType(File::Type::Texture);
-
-  if (m_textures.count(file -> GetFilename()) == 0)
+  if (std::find(m_textureExtensions.begin(), m_textureExtensions.end(), extension) == m_textureExtensions.end())
   {
-    m_textures.insert( { file -> GetFilename(), broker.CreateObjectFromFile< sf::Texture >(file, isCompressed) } );
+    FILE_LOG_ERROR("AssetsStorage::LoadTexture", "Unknown texture extension: ", path);
+    return;
   }
+
+  const std::string &filename = fs::path(path).filename().string();
+    
+  m_textures[filename] = std::make_shared<sf::Texture>();
+  m_textures[filename] -> loadFromFile(path);
 }
 
-void AssetsStorage::LoadFont(const std::string &path, bool isCompressed)
+void AssetsStorage::LoadFont(const std::string &path)
 {
-  ObjectBroker broker;
+  namespace fs = std::filesystem;
 
-  File *file = new File();
+  const std::string &extension = fs::path(path).filename().extension().string();
 
-  FileStorage::GetInstance().InsertFile(file);
-
-  file -> LoadFile(path, std::ios::binary);
-  file -> SetType(File::Type::Font);
-
-  if (m_fonts.count(file -> GetFilename()) == 0)
+  if (std::find(m_fontExtensions.begin(), m_fontExtensions.end(), extension) == m_fontExtensions.end())
   {
-    m_fonts.insert( { file -> GetFilename(), broker.CreateObjectFromFile< sf::Font >(file, isCompressed) } );
+    FILE_LOG_ERROR("AssetsStorage::LoadFont", "Unknown font extension: ", path);
+    return;
   }
+
+  const std::string &filename = fs::path(path).filename().string();
+
+  m_fonts[filename] = std::make_shared<sf::Font>();
+  m_fonts[filename] -> loadFromFile(path);
 }
 
-void AssetsStorage::LoadImage(const std::string &path, bool isCompressed)
+void AssetsStorage::LoadImage(const std::string &path)
 {
-  ObjectBroker broker;
+  namespace fs = std::filesystem;
 
-  File *file = new File();
+  const std::string &extension = fs::path(path).filename().extension().string();
 
-  FileStorage::GetInstance().InsertFile(file);
-
-  file -> LoadFile(path, std::ios::binary);
-  file -> SetType(File::Type::Image);
-
-  if (m_images.count(file -> GetFilename()) == 0)
+  if (std::find(m_imageExtensions.begin(), m_imageExtensions.end(), extension) == m_imageExtensions.end())
   {
-    m_images.insert( { file -> GetFilename(), broker.CreateObjectFromFile< sf::Image >(file, isCompressed) } );
+    FILE_LOG_ERROR("AssetsStorage::LoadImage", "Unknown image extension: ", path);
+    return;
   }
+
+  const std::string &filename = fs::path(path).filename().string();
+
+  m_images[filename] = std::make_shared<sf::Image>();
+  m_images[filename] -> loadFromFile(path);
 }
 
 AssetsStorage &AssetsStorage::GetInstance()
@@ -93,57 +100,71 @@ AssetsStorage &AssetsStorage::GetInstance()
   return *s_instance;
 }
 
-void AssetsStorage::ParseAssetsSchema(const std::string &path)
+void AssetsStorage::LoadAssets(const std::string &path)
 {
-  ObjectBroker broker;
+  namespace fs = std::filesystem;
 
-  File assetsSchema;
-  assetsSchema.LoadFile(path);
-
-  rapidjson::Document assetsSchemaDocument;
-  assetsSchemaDocument.Parse(assetsSchema.GetData().c_str());
-
-  rapidjson::Value assetsFiles;
-  assetsFiles = assetsSchemaDocument["assets"];
-
-  for (const auto &jsonData : assetsFiles.GetArray())
+  auto GetType = [this](const std::string &extension)
   {
-    File *file = new File;
-
-    FileStorage::GetInstance().InsertFile(file);
-
-    file -> LoadFile(jsonData["path"].GetString(), std::ios::binary);
-    file -> SetType(jsonData["type"].GetString());
-
-    switch(file -> GetType())
+    if (std::find(m_textureExtensions.begin(), m_textureExtensions.end(), extension) != m_textureExtensions.end())
     {
-      case (File::Type::Texture):
+      return Type::Texture;
+    }
+    if (std::find(m_fontExtensions.begin(), m_fontExtensions.end(), extension) != m_fontExtensions.end())
+    {
+      return Type::Font;
+    }
+    if (std::find(m_imageExtensions.begin(), m_imageExtensions.end(), extension) != m_imageExtensions.end())
+    {
+      return Type::Image;
+    }
+
+    return Type::Unknown;
+  };
+
+  for (const auto &entry : fs::directory_iterator(path))
+  {
+    if (entry.is_directory())
+    {
+      LoadAssets(entry.path().string());
+    }
+
+    if (entry.is_regular_file())
+    {
+      const std::string &extension = entry.path().extension().string();
+
+      const std::string& filename = entry.path().filename().string();
+
+      if (GetType(extension) == Type::Texture)
       {
-        if (m_textures.count(jsonData["file"].GetString()) == 0)
+        m_textures[filename] = std::make_shared<sf::Texture>();
+
+        if (!m_textures[filename] -> loadFromFile(entry.path().string()))
         {
-          m_textures.insert( { jsonData["file"].GetString(), broker.CreateObjectFromFile< sf::Texture >(file, true) });
+          CONSOLE_LOG_ERROR("Failed to load texture: ", entry.path().string());
         }
-        break;
       }
-      case (File::Type::Image):
+      else if (GetType(extension) == Type::Font)
       {
-        if (m_images.count(jsonData["file"].GetString()) == 0)
+        m_fonts[filename] = std::make_shared<sf::Font>();
+
+        if (!m_fonts[filename] -> loadFromFile(entry.path().string()))
         {
-          m_images.insert( { jsonData["file"].GetString(), broker.CreateObjectFromFile< sf::Image >(file, true) });
+          CONSOLE_LOG_ERROR("Failed to load font: ", entry.path().string());
         }
-        break;
       }
-      case (File::Type::Font):
+      else if (GetType(extension) == Type::Image)
       {
-        if (m_fonts.count(jsonData["file"].GetString()) == 0)
+        m_images[filename] = std::make_shared<sf::Image>();
+        
+        if (!m_images[filename] -> loadFromFile(entry.path().string()))
         {
-          m_fonts.insert( { jsonData["file"].GetString(), broker.CreateObjectFromFile< sf::Font >(file, true) });
+          CONSOLE_LOG_ERROR("Failed to load image: ", entry.path().string());
         }
-        break;
       }
-      default:
+      else
       {
-        break;
+        FILE_LOG_ERROR("Unknown asset type: ", entry.path().string());
       }
     }
   }
