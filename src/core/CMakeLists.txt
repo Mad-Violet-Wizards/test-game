@@ -4,22 +4,22 @@ project (core) # Specify the name of project
 set(CMAKE_CXX_STANDARD 20)
 
 # List the source files for all folders.
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Animation/ ANIMATION)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Components/ COMPONENTS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Debug/ DEBUG)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Events/ EVENTS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Filesystem/ FILESYSTEM)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Input/ INPUT)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Level/ LEVEL)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Objects/ OBJECTS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/ SCENE)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/ UTILITY)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Window/ WINDOW)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Projectiles/ PROJECTILES)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Threads/ THREADS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Animation/ Animation)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Components/ Components)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Debug/ Debug)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Events/ Events)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem/ Filesystem)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Input/ Input)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Level/ Level)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Objects/ Objects)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Scene/ Scene)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Utility/ Utility)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Window/ Window)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Projectiles/ Projectiles)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Threads/ Threads)
 
 # Specify the whole framework as a library and add source files. (cpp)
-add_library(${PROJECT_NAME} ${ANIMATION} ${COMPONENTS} ${DEBUG} ${EVENTS} ${FILESYSTEM} ${INPUT} ${LEVEL} ${OBJECTS} ${SCENE} ${UTILITY} ${WINDOW} ${PROJECTILES} ${THREADS})
+add_library(${PROJECT_NAME} ${Animation} ${Components} ${Debug} ${Events} ${Filesystem} ${Input} ${Level} ${Objects} ${Scene} ${Utility} ${Window} ${Projectiles} ${Threads})
 
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
@@ -27,20 +27,20 @@ conan_basic_setup()
 
 # Include all header files.
 target_include_directories( ${PROJECT_NAME}
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/ANIMATION
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/COMPONENTS
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/DEBUG
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/EVENTS
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/FILESYSTEM
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/INPUT
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/LEVEL
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/OBJECTS
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/SCENE
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/UTILITY
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/WINDOW
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/CONTAINERS
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/PROJECTILES
-  PUBLIC ${PROJECT_SOURCE_DIR}/include/THREADS
+  PUBLIC ${PROJECT_SOURCE_DIR}/Animation
+  PUBLIC ${PROJECT_SOURCE_DIR}/Components
+  PUBLIC ${PROJECT_SOURCE_DIR}/Debug
+  PUBLIC ${PROJECT_SOURCE_DIR}/Events
+  PUBLIC ${PROJECT_SOURCE_DIR}/Filesystem
+  PUBLIC ${PROJECT_SOURCE_DIR}/Input
+  PUBLIC ${PROJECT_SOURCE_DIR}/Level
+  PUBLIC ${PROJECT_SOURCE_DIR}/Objects
+  PUBLIC ${PROJECT_SOURCE_DIR}/Scene
+  PUBLIC ${PROJECT_SOURCE_DIR}/Utility
+  PUBLIC ${PROJECT_SOURCE_DIR}/Window
+  PUBLIC ${PROJECT_SOURCE_DIR}/Containers
+  PUBLIC ${PROJECT_SOURCE_DIR}/Projectiles
+  PUBLIC ${PROJECT_SOURCE_DIR}/Threads
 )
 
 target_link_libraries(${PROJECT_NAME} external)
