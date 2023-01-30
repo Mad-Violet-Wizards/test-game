@@ -29,7 +29,7 @@ class Build:
     if self.check() is False:
       return
 
-    os.chdir('../..')
+    os.chdir('..')
 
     if (os.path.exists("build") == False):
       os.mkdir('build')
@@ -45,7 +45,7 @@ class Build:
 
     print(f"[Build] Going to execute build with compilator: {self.compilator}")
 
-    os.chdir('../..')
+    os.chdir('..')
 
     if (os.path.exists("build") == False):
       os.mkdir('build')
@@ -69,7 +69,7 @@ class Build:
   def release(self):
 
     print("[Build] Preparing release")
-    os.chdir('../..')
+    os.chdir('..')
 
     if (not os.path.exists("test-game")):
       os.mkdir('test-game')
