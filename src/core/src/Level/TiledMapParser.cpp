@@ -36,9 +36,7 @@ sf::Sprite *TiledMapParser::GetTilesetImage(const std::string  &imageFile,
   {
     std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
 
-    std::string imageFileDat = OnyxCore::Filesystem::ReplaceExtension(imageFile, ".dat");
-
-    sprite -> setTexture(AssetsStorage::GetInstance().GetTexture(imageFileDat));
+    sprite -> setTexture(AssetsStorage::GetInstance().GetTexture(imageFile));
     sprite -> setPosition(position);
 
     m_sprites[imageFile] = std::move(sprite);

@@ -3,11 +3,6 @@ project (core) # Specify the name of project
 # Set the C++ "version"
 set(CMAKE_CXX_STANDARD 20)
 
-IF(MSVC)
-  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
-  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MD")
-ENDIF()
-
 # List the source files for all folders.
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Animation/ ANIMATION)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/Components/ COMPONENTS)
@@ -49,4 +44,3 @@ target_include_directories( ${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} external)
-target_link_options(${PROJECT_NAME} PUBLIC "/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrtd.lib")

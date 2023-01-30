@@ -8,7 +8,7 @@
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
 {
-  m_text.setFont(AssetsStorage::GetInstance().GetFont("GoudyBookletter.dat"));
+  m_text.setFont(AssetsStorage::GetInstance().GetFont("GoudyBookletter.ttf"));
 
   m_margins.SetMargins(12.f, 12.f, 12.f, 12.f);
 
