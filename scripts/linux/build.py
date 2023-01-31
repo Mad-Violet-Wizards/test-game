@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import shutil
 import fire
@@ -54,14 +55,6 @@ class Build:
         os.system('cmake --build . --config Release')
         os.system('conan imports ..')
 
-        os.chdir(f'{self.project_path}/tools')
-        files = os.listdir(os.getcwd())
-
-        for file in files:
-            if file.endswith(".dll"):
-                shutil.copy2(os.path.join(os.getcwd(), file), f"{self.project_path}/build/bin")
-                print(f"[Build] Copied {file} to build/bin")
-
         print("[Build] Build finished")
 
     def release(self):
@@ -83,12 +76,11 @@ class Build:
         if (os.path.exists("logs")):
             shutil.rmtree("logs")
 
-
         os.chdir(self.project_path)
         os.mkdir("test-game/bin/")
 
         copy = shutil.copytree("./assets", "test-game/assets")
-        shutil.copy("build/src/app/bin/app.exe", "test-game/bin/")
+        shutil.copy("build/src/app/bin/app", "test-game/bin/")
 
         for file in os.listdir("build/bin"):
             shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")
