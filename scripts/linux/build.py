@@ -9,12 +9,15 @@ class Build:
 
     def __init__(self):
 
-        self.detect_compiler: bool = Detector("g++").detect()
+        self.compiler = "g++"
+        self.detect_compiler: bool = Detector(self.compiler).detect()
         self.detect_conan: bool = Detector("conan").detect()
         self.detect_cmake: bool = Detector("cmake").detect()
         self.project_path = os.path.abspath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), os.pardir, os.pardir))
         self.cwd = os.getcwd()
+
+
 
     def check(self):
         if (self.detect_compiler and self.detect_cmake and self.detect_conan):
@@ -37,12 +40,11 @@ class Build:
         os.system('conan install .. --build=missing')
 
     def build(self):
-
         if self.check() is False:
             return
 
         print(
-            f"[Build] Going to execute build with compilator: {self.detect_compiler}")
+            f"[Build] Going to execute build with compilator: {self.compiler}")
 
         os.chdir(self.project_path)
 
