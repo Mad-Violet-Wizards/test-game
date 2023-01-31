@@ -36,19 +36,12 @@ COPY ./external /game-engine/external
 COPY ./src /game-engine/src
 COPY ./tools /game-engine/tools
 COPY ./CMakeLists.txt ./conanfile.txt  /game-engine/
-COPY ./scripts/linux/build.py /game-engine/scripts/linux/build.py
 COPY ./scripts/linux/utility /game-engine/scripts/linux/utility
 
 
 
+COPY ./scripts/linux/build.py /game-engine/scripts/linux/build.py
 # Building the game engine
 RUN python3 /game-engine/scripts/linux/build.py install
-
-COPY ./scripts/linux/build_tools.py /game-engine/scripts/linux/build_tools.py
-# RUN python3 /game-engine/scripts/linux/build_tools.py build_compressor
-
-# COPY ./scripts/linux/compress_assets.py /game-engine/scripts/linux/compress_assets.py
-# RUN python3 /game-engine/scripts/linux/compress_assets.py
-
 RUN python3 /game-engine/scripts/linux/build.py build
 RUN python3 /game-engine/scripts/linux/build.py release
