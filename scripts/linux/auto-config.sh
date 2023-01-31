@@ -70,6 +70,7 @@ if [[ "$answer" == "y" || "$answer" == "" ]]; then
         chmod +x build.py
     else
         echo "build.py not found (possible path test-game/scripts/linux/build.py)"
+        exit 0
     fi
     ./build.py install &&
     ./build.py build &&
