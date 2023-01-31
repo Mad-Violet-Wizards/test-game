@@ -17,8 +17,6 @@ class Build:
             os.path.abspath(os.path.dirname(__file__)), os.pardir, os.pardir))
         self.cwd = os.getcwd()
 
-
-
     def check(self):
         if (self.detect_compiler and self.detect_cmake and self.detect_conan):
             return True
@@ -53,7 +51,7 @@ class Build:
 
         os.chdir('./build')
         os.system('conan install .. --build=missing')
-        os.system(f'cmake -G "{self.detect_compiler}" ..')
+        os.system(f'cmake -G "Ninja" ..')
         os.system('cmake --build . --config Release')
         os.system('conan imports ..')
 

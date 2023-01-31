@@ -32,7 +32,8 @@ if [[ "$answer" == "y" || "$answer" == "" ]]; then
     xcb-util-wm-devel xcb-util-image-devel\
     xcb-util-keysyms-devel xcb-util-renderutil-devel\
     libXdamage-devel libXxf86vm-devel \
-    libXv-devel xcb-util-devel libuuid-devel -y
+    libXv-devel xcb-util-devel libuuid-devel  \
+    boost-devel glibc-devel -y
     if [[ "$packet_manager" == "dnf" ]]; then
         sudo dnf groupinstall "Development Tools" "Development Libraries" -y
         elif [[ "$packet_manager" == "apt" ]]; then
@@ -51,7 +52,7 @@ if [[ "$answer" == "y" || "$answer" == "" ]]; then
     pip install --upgrade pip
     python3 -m venv venv
     source venv/bin/activate
-    if [[ -f "requirements.txt" ]]; then
+    if [[ -f "../requirements.txt" ]]; then
         pip install -r ../requirements.txt
     else
         echo "requirements.txt not found (possible path test-game/scripts/requirements.txt)"
