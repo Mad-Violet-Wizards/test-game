@@ -87,8 +87,7 @@ class Build:
         os.chdir(self.project_path)
         os.mkdir("test-game/bin/")
 
-        # copy = shutil.copytree("./assets_compressed", "test-game/assets")
-        copy = shutil.copytree("./assets_raw", "test-game/assets")
+        copy = shutil.copytree("./assets", "test-game/assets")
         shutil.copy("build/src/app/bin/app.exe", "test-game/bin/")
 
         for file in os.listdir("build/bin"):
