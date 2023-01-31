@@ -45,10 +45,10 @@ COPY ./scripts/linux/utility /game-engine/scripts/linux/utility
 RUN python3 /game-engine/scripts/linux/build.py install
 
 COPY ./scripts/linux/build_tools.py /game-engine/scripts/linux/build_tools.py
-RUN python3 /game-engine/scripts/linux/build_tools.py build_compressor
+# RUN python3 /game-engine/scripts/linux/build_tools.py build_compressor
 
-COPY ./scripts/linux/compress_assets.py /game-engine/scripts/linux/compress_assets.py
-RUN python3 /game-engine/scripts/linux/compress_assets.py
+# COPY ./scripts/linux/compress_assets.py /game-engine/scripts/linux/compress_assets.py
+# RUN python3 /game-engine/scripts/linux/compress_assets.py
 
 RUN python3 /game-engine/scripts/linux/build.py build
 RUN python3 /game-engine/scripts/linux/build.py release
