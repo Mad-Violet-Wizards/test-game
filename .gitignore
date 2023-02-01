@@ -38,3 +38,4 @@ scripts/windows/config.json
 __pycache__
 
 CMakeCache.txt
+Dockerfile
