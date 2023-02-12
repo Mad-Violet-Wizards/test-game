@@ -1,23 +1,25 @@
 #pragma once
 
+#include <SFML/System.hpp>
+
 #include <fstream>
-#include <mutex>
 
 #include "LogFileManager.hpp"
 #include "ConsoleLog.hpp"
 
-static std::mutex fileLogMutex;
+static sf::Mutex fileLogMutex;
 
 template <typename T>
 constexpr static void FILE_LOG(const std::string &filename, const T &msg)
 {
   {
-    std::unique_lock lock(fileLogMutex);
+    sf::Lock lock(fileLogMutex);
+
     if (!LogFileManager::GetInstance().DoesLogFileExists(filename))
     {
-      CONSOLE_LOG("Creatg log file: " + filename);
+      CONSOLE_LOG_INFO("Create log file: ", filename);
       LogFileManager::GetInstance().CreateLogFile(filename);
-      CONSOLE_LOG("Filepath: ", LogFileManager::GetInstance().GetLogFilePath(filename));
+      CONSOLE_LOG_INFO("Filepath: ", LogFileManager::GetInstance().GetLogFilePath(filename));
     }
 
     std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(filename), std::ios_base::app);
@@ -40,13 +42,13 @@ template <typename ...Args>
 constexpr static void FILE_LOG(const std::string &filename, const std::string &prefix, Args &&... args)
 {
   {
-    std::unique_lock lock(fileLogMutex);
+    sf::Lock lock(fileLogMutex);
 
     if (!LogFileManager::GetInstance().DoesLogFileExists(filename))
     {
-      CONSOLE_LOG("Creatg log file: " + filename);
+      CONSOLE_LOG_INFO("Create log file: " + filename);
       LogFileManager::GetInstance().CreateLogFile(filename);
-      CONSOLE_LOG("Filepath: ", LogFileManager::GetInstance().GetLogFilePath(filename));
+      CONSOLE_LOG_INFO("Filepath: ", LogFileManager::GetInstance().GetLogFilePath(filename));
     }
     
     std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(filename), std::ios_base::app);

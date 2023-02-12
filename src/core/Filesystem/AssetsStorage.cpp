@@ -40,15 +40,21 @@ void AssetsStorage::LoadTexture(const std::string &path)
 {
   namespace fs = std::filesystem;
 
+  const std::string &filename = fs::path(path).filename().string();
+
+  if (m_textures.find(filename) != m_textures.end())
+  {
+    FILE_LOG_WARNING("debug.txt", "AssetsStorage::LoadTexture", "Texture already loaded: ", path);
+    return;
+  }
+
   const std::string &extension = fs::path(path).filename().extension().string();
 
   if (std::find(m_textureExtensions.begin(), m_textureExtensions.end(), extension) == m_textureExtensions.end())
   {
-    FILE_LOG_ERROR("AssetsStorage::LoadTexture", "Unknown texture extension: ", path);
+    FILE_LOG_ERROR("debug.txt", "AssetsStorage::LoadTexture", "Unknown texture extension: ", path);
     return;
   }
-
-  const std::string &filename = fs::path(path).filename().string();
     
   m_textures[filename] = std::make_shared<sf::Texture>();
   m_textures[filename] -> loadFromFile(path);
@@ -58,15 +64,21 @@ void AssetsStorage::LoadFont(const std::string &path)
 {
   namespace fs = std::filesystem;
 
+  const std::string &filename = fs::path(path).filename().string();
+
+  if (m_fonts.find(filename) != m_fonts.end())
+  {
+    FILE_LOG_WARNING("debug.txt", "AssetsStorage::LoadFont", "Font already loaded: ", path);
+    return;
+  }
+
   const std::string &extension = fs::path(path).filename().extension().string();
 
   if (std::find(m_fontExtensions.begin(), m_fontExtensions.end(), extension) == m_fontExtensions.end())
   {
-    FILE_LOG_ERROR("AssetsStorage::LoadFont", "Unknown font extension: ", path);
+    FILE_LOG_ERROR("debug.txt", "AssetsStorage::LoadFont", "Unknown font extension: ", path);
     return;
   }
-
-  const std::string &filename = fs::path(path).filename().string();
 
   m_fonts[filename] = std::make_shared<sf::Font>();
   m_fonts[filename] -> loadFromFile(path);
@@ -76,15 +88,21 @@ void AssetsStorage::LoadImage(const std::string &path)
 {
   namespace fs = std::filesystem;
 
+  const std::string &filename = fs::path(path).filename().string();
+
+  if (m_images.find(filename) != m_images.end())
+  {
+    FILE_LOG_WARNING("debug.txt", "AssetsStorage::LoadImage", "Image already loaded: ", path);
+    return;
+  }
+
   const std::string &extension = fs::path(path).filename().extension().string();
 
   if (std::find(m_imageExtensions.begin(), m_imageExtensions.end(), extension) == m_imageExtensions.end())
   {
-    FILE_LOG_ERROR("AssetsStorage::LoadImage", "Unknown image extension: ", path);
+    FILE_LOG_ERROR("debug.txt", "AssetsStorage::LoadImage", "Unknown image extension: ", path);
     return;
   }
-
-  const std::string &filename = fs::path(path).filename().string();
 
   m_images[filename] = std::make_shared<sf::Image>();
   m_images[filename] -> loadFromFile(path);
@@ -164,7 +182,7 @@ void AssetsStorage::LoadAssets(const std::string &path)
       }
       else
       {
-        FILE_LOG_ERROR("Unknown asset type: ", entry.path().string());
+        FILE_LOG_ERROR("debug.txt", "Unknown asset type: ", entry.path().string());
       }
     }
   }
