@@ -1,17 +1,9 @@
 #include "ThreadPool.hpp"
 
-#include "ThreadWorker.hpp"
-#include "ConsoleLog.hpp"
-
 ThreadPool::ThreadPool(unsigned int threadsNumber)
-  : m_jobsPending(0)
-  , m_threads(std::vector<std::thread>(threadsNumber))
-  , m_shutdown(false)
 {
-  for (auto& thread : m_threads)
-  {
-    m_threads.emplace_back(std::thread(ThreadWorker(this)));
-  }
+  m_threads.reserve(threadsNumber);
+  m_tasks.reserve(threadsNumber);
 }
 
 ThreadPool::~ThreadPool()
@@ -19,23 +11,35 @@ ThreadPool::~ThreadPool()
   Shutdown();
 }
 
-void ThreadPool::Shutdown()
+void ThreadPool::Submit(std::unique_ptr<ThreadTask> &&task)
 {
-  m_shutdown = true;
+  std::unique_ptr<sf::Thread> thread(new sf::Thread(&ThreadTask::Run, task.get()));
 
-  m_condition.notify_all();
+  m_tasks.push_back(std::move(task));
 
-  for (std::thread &t : m_threads)
+  m_threads.push_back(std::move(thread));
+}
+
+void ThreadPool::Start()
+{
+  for (auto &thread : m_threads)
   {
-    if (t.joinable())
-    {
-      t.join();
-    }
+    thread -> launch();
   }
 }
 
-void ThreadPool::WaitForFinish()
+void ThreadPool::Shutdown()
 {
-  std::unique_lock<std::mutex> lock(m_mutex);
-  m_condition.wait(lock);
+  for (auto &thread : m_threads)
+  {
+    thread -> wait();
+  }
+
+  m_threads.clear();
+  m_tasks.clear();
+}
+
+bool ThreadPool::IsRunning() const
+{
+  return std::any_of(m_tasks.begin(), m_tasks.end(), [](auto &task) { return task -> IsFinished() == false; });
 }
