@@ -1,10 +1,6 @@
 #pragma once
 
-#include "Component.hpp"
-#include "Object.hpp"
-#include "ObjectCollection.hpp"
-#include "AssetsStorage.hpp"
-#include "C_Direction.hpp"
+class C_Direction;
 
 class C_ProjectileGenerator : public Component
 {

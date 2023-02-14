@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "SceneGame.hpp"
-#include "AssetsStorage.hpp"
 #include "AssetsStructure.hpp"
 
 #include "C_Sprite.hpp"

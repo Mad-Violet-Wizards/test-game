@@ -1,16 +1,10 @@
 #pragma once
 
-#include <thread>
-#include <future>
-
-#include "Window.hpp"
-#include "SceneStateMachine.hpp"
-
 #include "GuiManager.hpp"
 #include "GuiLayoutVertical.hpp"
 #include "GuiTextWidget.hpp"
 
-class Game;
+#include "SceneStateMachine.hpp"
 
 class SceneLoading : public Scene
 {

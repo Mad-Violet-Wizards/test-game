@@ -1,10 +1,7 @@
 #pragma once
 
-#include <filesystem>
-#include <map>
 
 #include "tileson.hpp"
-#include "Window.hpp"
 #include "TiledMapParser.hpp"
 
 class MapRenderer

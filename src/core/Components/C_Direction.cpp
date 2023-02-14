@@ -1,7 +1,6 @@
 #include "C_Direction.hpp"
 
-#include "Object.hpp"
-#include "ConsoleLog.hpp"
+#include "C_Velocity.hpp"
 
 C_Direction::C_Direction(Object *owner) 
   : Component(owner) {}

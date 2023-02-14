@@ -1,9 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "GuiAlign.hpp"
-#include "Window.hpp"
 #include "GuiMargin.hpp"
 
 class GuiObject : public sf::Drawable, public sf::Transformable

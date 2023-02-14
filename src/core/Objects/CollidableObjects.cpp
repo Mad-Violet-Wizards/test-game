@@ -2,13 +2,11 @@
 
 #include "C_InstanceID.hpp"
 #include "C_ColliderBox.hpp"
+#include "Quadtree.hpp"
 
 #ifdef DEBUG
 #include "Debug.hpp"
-#include "ConsoleLog.hpp"
 #endif
-
-#include "FileLog.hpp"
 
 void CollidableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {

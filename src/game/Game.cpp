@@ -1,12 +1,6 @@
 #include "Game.hpp"
 #include "FpsCounter.hpp"
-#include "AssetsStorage.hpp"
 #include "ProjectileStorage.hpp"
-#include "ConsoleLog.hpp"
-
-#include <future>
-#include <thread>
-#include <chrono>
 
 Game::Game() : m_window("Test-Game 1.0.0")
 {

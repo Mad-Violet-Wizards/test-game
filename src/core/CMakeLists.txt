@@ -3,6 +3,19 @@ project (core) # Specify the name of project
 # Set the C++ "version"
 set(CMAKE_CXX_STANDARD 20)
 
+if (DEBUG)
+  set(COMPILE_OPTIONS
+    /FI${CMAKE_CURRENT_SOURCE_DIR}/engine_pch.hpp
+    /DEBUG:FULL
+    /ZI
+    /Od
+    /Ob0
+    /std:c++20
+    -D_CRT_SECURE_NO_WARNINGS
+    -D__asm=__wrapped_asm
+  )
+endif()
+
 # List the source files for all folders.
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Animation/ Animation)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Components/ Components)
@@ -43,4 +56,7 @@ target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/Threads
 )
 
+target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
+
 target_link_libraries(${PROJECT_NAME} external)
+target_precompile_headers(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/engine_pch.hpp)

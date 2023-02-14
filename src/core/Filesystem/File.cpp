@@ -1,7 +1,5 @@
 #include "File.hpp"
 
-#include <sstream>
-
 void File::LoadFile(const std::string &path, std::ios_base::openmode mode)
 {
     std::ifstream input(path, mode);

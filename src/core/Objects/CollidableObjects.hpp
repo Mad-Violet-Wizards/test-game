@@ -1,14 +1,11 @@
 #pragma once
 
-#include <variant>
-#include <map>
-#include <unordered_set>
 
 #include "tileson.hpp"
-#include "Object.hpp"
-#include "Quadtree.hpp"
-#include "C_ColliderBox.hpp"
 #include "Hashes.hpp"
+#include "Quadtree.hpp"
+
+class C_ColliderBox;
 
 class CollidableObjects
 {

@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "GuiManager.hpp"
-#include "FileLog.hpp"
 
 GuiManager::GuiManager()
 {

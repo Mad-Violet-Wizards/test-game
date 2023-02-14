@@ -1,8 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <boost/signals2.hpp>
-
 #include "WindowResolution.hpp"
 #include "EventHandler.hpp"
 

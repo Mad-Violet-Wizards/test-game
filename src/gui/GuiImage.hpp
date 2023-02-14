@@ -1,9 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "GuiObject.hpp"
-#include "Window.hpp"
 
 class GuiImage : public GuiObject
 {

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <SFML/System.hpp>
 
 class ThreadTask
 {

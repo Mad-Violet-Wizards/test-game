@@ -1,10 +1,7 @@
 #pragma once
 
-#include <variant>
-#include <map>
 
 #include "tileson.hpp"
-#include "Object.hpp"
 #include "MapRenderer.hpp"
 
 class DrawableObjects

@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Window.hpp"
-
 class Object;
+class Window;
 
 class Component
 {

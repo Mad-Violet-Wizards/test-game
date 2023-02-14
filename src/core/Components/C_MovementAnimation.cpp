@@ -1,5 +1,8 @@
 #include "C_MovementAnimation.hpp"
 
+#include "C_Velocity.hpp"
+#include "C_Animation.hpp"
+
 C_MovementAnimation::C_MovementAnimation(Object* owner) 
   : Component(owner), 
   m_velocity(nullptr), 

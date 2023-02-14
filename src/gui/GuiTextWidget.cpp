@@ -1,9 +1,4 @@
-#include <iostream>
-
 #include "GuiTextWidget.hpp"
-#include "Window.hpp"
-#include "EventHandler.hpp"
-#include "AssetsStorage.hpp"
 
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)

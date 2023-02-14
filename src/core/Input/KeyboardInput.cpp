@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "KeyboardInput.hpp"
+
+#include "Bitmask.hpp"
 
 KeyboardInput::KeyboardInput()
 {

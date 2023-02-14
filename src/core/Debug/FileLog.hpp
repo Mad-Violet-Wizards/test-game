@@ -1,11 +1,8 @@
 #pragma once
 
-#include <SFML/System.hpp>
-
-#include <fstream>
+#include "ConsoleLog.hpp"
 
 #include "LogFileManager.hpp"
-#include "ConsoleLog.hpp"
 
 static sf::Mutex fileLogMutex;
 

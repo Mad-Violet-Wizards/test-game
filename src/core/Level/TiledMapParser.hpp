@@ -1,9 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <filesystem>
-#include <memory>
-#include <map>
 
 #include "tileson.hpp"
 

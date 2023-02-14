@@ -1,6 +1,3 @@
-#include <string>
-#include <boost/format.hpp>
-
 #include "WindowResolution.hpp"
 
 WindowResolution::WindowResolution()

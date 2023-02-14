@@ -1,8 +1,5 @@
-#include <iostream>
-
-#include "FileLog.hpp"
-#include "ConsoleLog.hpp"
 #include "EventHandler.hpp"
+
 
 std::unique_ptr<EventHandler> EventHandler::s_instance = nullptr;
 

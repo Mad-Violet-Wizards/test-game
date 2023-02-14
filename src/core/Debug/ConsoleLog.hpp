@@ -1,11 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <chrono>
-#include <format>
-#include <string>
-#include <syncstream>
-
 template <typename T>
 constexpr static inline void CONSOLE_LOG(const T &msg)
 {

@@ -1,9 +1,6 @@
-#include <iostream>
-
 #include "C_KeyboardMovement.hpp"
+#include "C_Velocity.hpp"
 #include "C_Transform.hpp"
-#include "Object.hpp"
-#include "EventHandler.hpp"
 
 C_KeyboardMovement::C_KeyboardMovement(Object *owner)
   : Component(owner),

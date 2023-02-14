@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "FileLog.hpp"
 #include "GuiLayout.hpp"
 
 GuiLayout::GuiLayout(Window *window)

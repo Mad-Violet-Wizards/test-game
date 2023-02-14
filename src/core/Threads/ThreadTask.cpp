@@ -1,5 +1,4 @@
 #include "ThreadTask.hpp"
-#include "ConsoleLog.hpp"
 
 ThreadTask::ThreadTask()
 {

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <math.h>
-
-#include "Component.hpp"
 #include "C_Collider.hpp"
 
 class C_ColliderBox : public C_Collider

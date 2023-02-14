@@ -1,6 +1,4 @@
 #include "C_RemoveObjectOnCollisionEnter.hpp"
-#include "Object.hpp"
-#include "ConsoleLog.hpp"
 
 C_RemoveObjectOnCollisionEnter::C_RemoveObjectOnCollisionEnter(Object *owner)
   : Component(owner)

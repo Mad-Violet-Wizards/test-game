@@ -1,7 +1,4 @@
-#include <memory>
-
 #include "MapRenderer.hpp"
-#include "AssetsStorage.hpp"
 
 void MapRenderer::Update(float deltaTime)
 {

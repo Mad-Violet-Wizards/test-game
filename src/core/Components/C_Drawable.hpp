@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Component.hpp"
-#include "Object.hpp"
 
 class C_Drawable : public Component
 {

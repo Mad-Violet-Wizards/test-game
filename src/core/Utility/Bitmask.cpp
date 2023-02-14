@@ -1,7 +1,3 @@
-#include <iostream>
-
-#include <utility>
-
 #include "Bitmask.hpp"
 
 Bitmask::Bitmask() : m_bits(0) {}

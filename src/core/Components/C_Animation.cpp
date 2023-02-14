@@ -1,12 +1,10 @@
-#include <iostream>
-
 #include "rapidjson/document.h"
 
-#include "AssetsStorage.hpp"
-#include "File.hpp"
+#include "Component.hpp"
+#include "C_Sprite.hpp"
+#include "C_Direction.hpp"
 #include "C_Animation.hpp"
-
-#include "ConsoleLog.hpp"
+#include "File.hpp"
 
 //
 // FIXME: Use std::tie so the code becomes more readable.
