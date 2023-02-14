@@ -1,8 +1,5 @@
 #pragma once
 
-#include <chrono>
-#include <concepts>
-#include <cstddef>
 
 template<typename T>
 concept Chrono = requires(T a)

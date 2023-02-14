@@ -1,10 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
-#include "Window.hpp"
-
 class Debug
 {
 

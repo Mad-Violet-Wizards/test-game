@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Component.hpp"
-#include "C_Velocity.hpp"
-#include "C_Animation.hpp"
+
+class C_Velocity;
+class C_Animation;
 
 class C_MovementAnimation : public Component
 {

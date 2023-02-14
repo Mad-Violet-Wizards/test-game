@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Window.hpp"
-
 class Scene
 {
 

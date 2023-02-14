@@ -1,7 +1,6 @@
 #include "DrawableObjects.hpp"
 
 #include "C_Drawable.hpp"
-#include "FileLog.hpp"
 
 void DrawableObjects::Add(std::variant<std::shared_ptr<Object>, std::shared_ptr<tson::Map>> variant)
 {

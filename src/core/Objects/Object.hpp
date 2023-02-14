@@ -1,13 +1,7 @@
 #pragma once
 
-#include <vector>
-#include <memory>
-
-#include "Window.hpp"
-#include "Component.hpp"
 #include "FileLog.hpp"
 
-#include "Component.hpp"
 #include "C_InstanceID.hpp"
 #include "C_Transform.hpp"
 #include "C_Collidable.hpp"

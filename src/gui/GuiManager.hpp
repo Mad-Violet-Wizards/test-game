@@ -5,7 +5,6 @@
 #include <memory>
 
 #include "GuiLayout.hpp"
-#include "Window.hpp"
 
 class GuiManager
 {

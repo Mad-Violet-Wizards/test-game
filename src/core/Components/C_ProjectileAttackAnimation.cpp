@@ -1,9 +1,9 @@
 #include "C_ProjectileAttackAnimation.hpp"
 
-#include "EventHandler.hpp"
+#include "C_Animation.hpp"
+#include "C_Direction.hpp"
+#include "C_ProjectileGenerator.hpp"
 #include "KeyboardInput.hpp"
-
-#include "ConsoleLog.hpp"
 
 C_ProjectileAttackAnimation::C_ProjectileAttackAnimation(Object *owner)
   : Component(owner)

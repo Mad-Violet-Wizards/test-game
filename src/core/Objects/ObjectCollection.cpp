@@ -3,13 +3,6 @@
 #include "C_ColliderBox.hpp"
 #include "C_Drawable.hpp"
 
-#include <execution>
-#include <chrono>
-#include <future>
-#include <thread>
-
-#include "ConsoleLog.hpp"
-
 ObjectCollection::ObjectCollection()
 {
 

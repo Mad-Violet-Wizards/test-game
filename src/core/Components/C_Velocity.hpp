@@ -1,9 +1,6 @@
 #pragma once
 
-#include <cmath>
-
 #include "Component.hpp"
-#include "Object.hpp"
 
 class C_Velocity : public Component
 {

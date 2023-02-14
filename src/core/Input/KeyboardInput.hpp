@@ -1,9 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <map>
-
-#include "Bitmask.hpp"
+class Bitmask;
 
 class KeyboardInput
 {

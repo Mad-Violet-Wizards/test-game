@@ -1,6 +1,6 @@
 #pragma once
 
-#include "C_ColliderBox.hpp"
+class C_ColliderBox;
 
 class C_Collidable
 {

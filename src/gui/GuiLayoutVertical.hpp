@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GuiLayout.hpp"
-#include "Window.hpp"
 
 class GuiLayoutVertical : public GuiLayout
 {

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Window.hpp"
-#include "SceneStateMachine.hpp"
 #include "SceneGame.hpp"
 #include "SceneMenu.hpp"
 #include "SceneLoading.hpp"
+
+#include "SceneStateMachine.hpp"
 
 class Game
 {

@@ -1,10 +1,6 @@
 #pragma once
 
-#include <map>
-
 #include "GuiLayout.hpp"
-
-#include "Window.hpp"
 
 class GuiLayoutTable : public GuiLayout
 {

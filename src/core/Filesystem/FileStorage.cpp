@@ -1,7 +1,5 @@
 #include "FileStorage.hpp"
 
-#include <iostream>
-
 std::unique_ptr<FileStorage> FileStorage::s_instance = nullptr;
 
 FileStorage::FileStorage()

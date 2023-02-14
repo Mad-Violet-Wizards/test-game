@@ -1,9 +1,7 @@
 #pragma once
 
-#include <memory>
-#include <SFML/Graphics.hpp>
 
-#include "Component.hpp"
+class Component;
 
 struct CollisionManifold
 {

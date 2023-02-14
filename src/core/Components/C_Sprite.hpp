@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Object.hpp"
 #include "Component.hpp"
-#include "C_Transform.hpp"
 
 class C_Sprite : public Component
 {

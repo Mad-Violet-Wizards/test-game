@@ -1,11 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <memory>
-#include <list>
-
 #include "GuiObject.hpp"
-#include "Window.hpp"
 
 class GuiLayout
 {

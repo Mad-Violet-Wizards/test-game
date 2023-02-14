@@ -1,9 +1,5 @@
 #pragma once
 
-#include <string>
-#include <map>
-
-#include "Animation.hpp"
 #include "Projectile.hpp"
 
 class ProjectileStorage

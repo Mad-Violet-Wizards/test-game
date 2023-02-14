@@ -2,13 +2,13 @@
 
 #include "ProjectileStorage.hpp"
 #include "Projectile.hpp"
-#include "ConsoleLog.hpp"
 
 #include "C_Sprite.hpp"
 #include "C_Drawable.hpp"
 #include "C_Velocity.hpp"
 #include "C_ColliderBox.hpp"
 #include "C_RemoveObjectOnCollisionEnter.hpp"
+#include "C_Direction.hpp"
 
 C_ProjectileGenerator::C_ProjectileGenerator(Object *owner, ObjectCollection *objectCollection)
   : Component(owner),

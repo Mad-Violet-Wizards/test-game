@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "FileLog.hpp"
 #include "GuiAlign.hpp"
 #include "GuiLayoutVertical.hpp"
 

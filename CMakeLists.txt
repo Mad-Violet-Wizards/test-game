@@ -4,10 +4,16 @@ cmake_minimum_required (VERSION 3.15)
 # Specify the project name
 project(onyx_engine)
 
+# Use this options exclusively.
+option(DEBUG "Enable debug mode" ON)
+option(RELEASE "Enable release mode" OFF)
+
 # Set the C++ "version"
 set(CMAKE_CXX_STANDARD 20)
 
-add_compile_definitions(DEBUG) # Enable to use DEBUG mode.
+if (DEBUG)
+  add_compile_definitions(DEBUG) # Enable to use DEBUG mode.
+endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/core)

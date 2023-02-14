@@ -1,13 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include <memory>
-#include <map>
-#include <vector>
-#include <string>
-#include <functional>
-
 #include "Bitmask.hpp"
 
 #include "rapidjson/document.h"

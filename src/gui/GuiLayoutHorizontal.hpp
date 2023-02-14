@@ -2,8 +2,6 @@
 
 #include "GuiLayout.hpp"
 
-#include "Window.hpp"
-
 class GuiLayoutHorizontal : public GuiLayout
 {
 

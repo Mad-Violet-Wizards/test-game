@@ -1,9 +1,7 @@
 #include "TiledMapParser.hpp"
 
-#include "AssetsStorage.hpp"
 #include "AssetsStructure.hpp"
 #include "FileOperations.hpp"
-#include "FileLog.hpp"
 
 TiledMapParser::TiledMapParser() : m_basePath("../assets/maps/") { }
 

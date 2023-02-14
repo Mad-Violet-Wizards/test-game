@@ -2,10 +2,7 @@
 #include <memory>
 
 #include "Game.hpp"
-#include "AssetsStorage.hpp"
 #include "ProjectileStorage.hpp"
-#include "ConsoleLog.hpp"
-#include "Timer.hpp"
 #include "ThreadTask.hpp"
 #include "ThreadPool.hpp"
 

@@ -1,7 +1,5 @@
 #include "GuiImage.hpp"
 
-#include "FileLog.hpp"
-#include "AssetsStorage.hpp"
 
 GuiImage::GuiImage(Window *window)
   : GuiObject(window) { }

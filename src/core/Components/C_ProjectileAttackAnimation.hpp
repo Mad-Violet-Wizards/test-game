@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Component.hpp"
-#include "C_Animation.hpp"
-#include "C_Direction.hpp"
-#include "C_ProjectileGenerator.hpp"
+
+class C_Animation;
+class C_Direction;
+class C_ProjectileGenerator;
 
 class C_ProjectileAttackAnimation : public Component
 {

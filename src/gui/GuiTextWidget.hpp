@@ -1,9 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <boost/signals2.hpp>
-
-#include "Window.hpp"
 #include "GuiObject.hpp"
 #include "GuiMargin.hpp"
 

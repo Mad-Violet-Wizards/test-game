@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "MouseInput.hpp"
+
+#include "Bitmask.hpp"
 
 MouseInput::MouseInput()
 {

@@ -1,7 +1,3 @@
-#include <iostream>
-#include <fstream>
-
-#include "FileLog.hpp"
 #include "Animation.hpp"
 
 Animation::Animation() 

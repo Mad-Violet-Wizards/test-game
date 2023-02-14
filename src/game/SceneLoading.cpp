@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "SceneLoading.hpp"
-#include "AssetsStorage.hpp"
 #include "Game.hpp"
 #include "File.hpp"
 

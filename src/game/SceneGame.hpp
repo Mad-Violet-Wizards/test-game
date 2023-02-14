@@ -1,12 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include "Scene.hpp"
 #include "KeyboardInput.hpp"
-#include "Object.hpp"
-#include "ObjectCollection.hpp"
 #include "TiledMapParser.hpp"
+
+class ObjectCollection;
+class Scene;
+class Object;
 
 class SceneGame : public Scene
 {

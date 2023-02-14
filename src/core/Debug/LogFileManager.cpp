@@ -1,9 +1,4 @@
-#include <fstream>
-#include <format>
-#include <chrono>
-
 #include "LogFileManager.hpp"
-#include "ConsoleLog.hpp"
 
 std::unique_ptr<LogFileManager> LogFileManager::s_instance = nullptr;
 

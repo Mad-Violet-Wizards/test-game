@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Component.hpp"
-#include "C_Velocity.hpp"
+
+class C_Velocity;
 
 class C_KeyboardMovement : public Component
 {

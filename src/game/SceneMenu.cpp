@@ -1,11 +1,6 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <boost/bind/bind.hpp>
-
 #include "GuiLayout.hpp"
 #include "GuiAlign.hpp"
 #include "SceneMenu.hpp"
-#include "EventHandler.hpp"
 #include "GuiImage.hpp"
 
 SceneMenu::SceneMenu(Window *window, SceneStateMachine *sceneManager)

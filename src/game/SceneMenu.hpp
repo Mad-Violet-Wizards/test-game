@@ -1,10 +1,5 @@
 #pragma once
 
-#include <memory>
-
-#include "Scene.hpp"
-#include "Window.hpp"
-#include "SceneStateMachine.hpp"
 #include "GuiManager.hpp"
 #include "GuiLayout.hpp"
 #include "GuiLayoutVertical.hpp"
@@ -12,6 +7,7 @@
 #include "GuiImage.hpp"
 #include "GuiTextWidget.hpp"
 #include "WindowResolution.hpp"
+#include "SceneStateMachine.hpp"
 
 class SceneMenu : public Scene
 {

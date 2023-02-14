@@ -1,16 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include <map>
-#include <memory>
-
-#include "Component.hpp"
-#include "Animation.hpp"
-#include "C_Sprite.hpp"
-#include "C_Direction.hpp"
 
 using AnimationList = std::map<FacingDirection, std::shared_ptr<Animation>>;
+
+class Component;
+class C_Sprite;
+class C_Direction;
 
 class C_Animation : public Component
 {

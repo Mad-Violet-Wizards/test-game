@@ -1,10 +1,5 @@
 #pragma once
 
-#include <thread>
-#include <vector>
-#include <memory>
-
-#include <SFML/System.hpp>
 
 #include "ThreadTask.hpp"
 

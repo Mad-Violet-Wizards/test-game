@@ -1,11 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <unordered_map>
-
-#include "Scene.hpp"
-#include "Window.hpp"
-
 class SceneStateMachine
 {
 
