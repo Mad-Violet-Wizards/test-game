@@ -1,52 +1,33 @@
 #include "File.hpp"
 
-void File::LoadFile(const std::string &path, std::ios_base::openmode mode)
+File::File(const FileInfo &fileInfo)
+  : m_FileInfo(fileInfo)
+  , m_isOpen(false)
+  , m_isReadOnly(false)
 {
-    std::ifstream input(path, mode);
-    std::ostringstream ss;
-    ss << input.rdbuf();
-    m_data = ss.str();
-    m_path = path;
-    m_filename = path.substr(path.find_last_of("/") + 1, path.length() - path.find_last_of("/")); 
-
-    input.close();
 }
 
-void File::SetData(const std::string &data)
+const FileInfo &File::GetFileInfo() const
 {
-    m_data = data;
+  return m_FileInfo;
 }
 
-const std::string &File::GetData() const
+bool File::IsOpen() const
 {
-  return m_data;
+  return m_isOpen;
 }
 
-void File::SetType(const std::string &type)
+bool File::IsReadOnly() const
 {
-  if (type == "textures" || type == "maps")
-  {
-    m_type = Type::Texture;
-  }
-  else if (type == "images")
-  {
-    m_type = Type::Image;
-  }
-  else if (type == "fonts")
-  {
-    m_type = Type::Font;
-  }
-  else if (type == "json")
-  {
-    m_type = Type::Json;
-  }
-  else
-  {
-    m_type = Type::Unknown;
-  }
+  return m_isReadOnly;
 }
 
-const std::string &File::GetFilename() const
+void File::SetIsOpen(bool isOpen)
 {
-  return m_filename;
+  m_isOpen = isOpen;
+}
+
+void File::SetIsReadOnly(bool isReadOnly)
+{
+  m_isReadOnly = isReadOnly;
 }
