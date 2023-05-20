@@ -44,7 +44,7 @@ void Game::CalculateDeltaTime()
 
   if (FpsCounter::GetInstance().GetFps() < 60)
   {
-    CONSOLE_LOG_WARNING("[Game] Reporting that fps have dropped below 60.");
+    // CONSOLE_LOG_WARNING("[Game] Reporting that fps have dropped below 60.");
   }
 }
 

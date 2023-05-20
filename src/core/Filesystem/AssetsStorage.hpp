@@ -2,6 +2,7 @@
 
 
 #include "File.hpp"
+#include "Objects/Asset.hpp"
 
 enum class Type
 {
@@ -21,14 +22,16 @@ public:
   static AssetsStorage &GetInstance();
 
   void LoadAssets(const std::string &path);
+  void LoadDefaultAssets();
+
+  void SetRelativePaths(bool state);
+  bool IsRelativePaths() const;
 
   sf::Texture &GetTexture(const std::string &texturePath) const;
   sf::Font    &GetFont(const std::string &fontPath) const;
-  sf::Image   &GetImage(const std::string &imagePath) const;
 
   void LoadTexture(const std::string &path);
   void LoadFont(const std::string &path);
-  void LoadImage(const std::string &path);
 
 private:
 
@@ -40,9 +43,12 @@ private:
 
   std::vector<std::string> m_textureExtensions;
   std::vector<std::string> m_fontExtensions;
-  std::vector<std::string> m_imageExtensions;
 
-  std::map< std::string, std::shared_ptr<sf::Texture> > m_textures;
-  std::map< std::string, std::shared_ptr<sf::Font> >    m_fonts;
-  std::map< std::string, std::shared_ptr<sf::Image> >   m_images;
+  std::unique_ptr<Asset<sf::Texture>> m_defaultTexture;
+  std::unique_ptr<Asset<sf::Font>> m_defaultFont;
+
+  std::map< std::string, std::unique_ptr<Asset<sf::Texture>>> m_textures;
+  std::map< std::string, std::unique_ptr<Asset<sf::Font>>>    m_fonts;
+
+  bool m_relativePaths;
 };

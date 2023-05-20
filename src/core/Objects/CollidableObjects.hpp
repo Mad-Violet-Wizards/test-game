@@ -2,8 +2,8 @@
 
 
 #include "tileson.hpp"
-#include "Hashes.hpp"
-#include "Quadtree.hpp"
+#include "Containers/Hashes.hpp"
+#include "Level/Quadtree.hpp"
 
 class C_ColliderBox;
 

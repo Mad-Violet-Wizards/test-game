@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bitmask.hpp"
+#include "Utility/Bitmask.hpp"
 
 #include "rapidjson/document.h"
 

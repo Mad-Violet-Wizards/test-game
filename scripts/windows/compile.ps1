@@ -38,5 +38,6 @@ Write-Host $workdir
 Invoke-Expression "python $workdir\build.py install"
 Invoke-Expression "python $workdir\build.py build"
 Invoke-Expression "python $workdir\build.py release"
+Invoke-Expression "python $workdir\build.py release_tools"
 
 Set-Location -Path $workdir

@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "SceneGame.hpp"
-#include "AssetsStructure.hpp"
 
 #include "C_Sprite.hpp"
 #include "C_KeyboardMovement.hpp"
@@ -45,7 +44,7 @@ void SceneGame::OnCreate()
 
   auto animation = m_player -> AddComponent<C_Animation>();
   animation -> Awake();
-  animation -> SetAnimationFile(AssetsStructure::ANIMATIONS_DIRECTORY + "AnimationPlayerTest.json");
+  animation -> SetAnimationFile("../assets/default/default-animation-scheme.json");
 
   auto projectileAttackAnimation = m_player -> AddComponent<C_ProjectileAttackAnimation>();
   projectileAttackAnimation -> Awake();
@@ -85,7 +84,7 @@ void SceneGame::OnCreate()
   collider -> SetLayer(0);
   collider -> SetSize(32.f, 32.f);
 
-  m_objects.Add(m_mapParser.ParseMap(AssetsStructure::MAPS_DIRECTORY + "TestMap.json"));
+  m_objects.Add(m_mapParser.ParseMap("../assets/maps/TestMap.json"));
   m_objects.Add(m_player);
 }
 

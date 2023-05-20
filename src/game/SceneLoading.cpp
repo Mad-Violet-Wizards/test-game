@@ -2,7 +2,6 @@
 
 #include "SceneLoading.hpp"
 #include "Game.hpp"
-#include "File.hpp"
 
 SceneLoading::SceneLoading(Window *window)
   : m_window(window)
@@ -15,7 +14,6 @@ SceneLoading::~SceneLoading()
 
 void SceneLoading::OnCreate()
 {
-  AssetsStorage::GetInstance().LoadFont("../assets/fonts/GoudyBookletter.ttf");
   CreateGUI();
 }
 

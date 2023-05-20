@@ -1,41 +1,71 @@
 #pragma once
 
+#include "FileInfo.hpp"
 
 class File
 {
   public:
 
-    enum class Type
-    {
-      Texture,
-      Font,
-      Image,
-      Json,
-      Unknown
-    };
+  enum class EFileMode
+  {
+    In,
+    Out,
+    ReadWrite,
+    Append,
+    Truncate
+  };
+
+  enum class Origin
+  {
+    Begin,
+    End,
+    Current
+  };
+
+  public:
 
     File() = default;
-    ~File() = default;
+    File(const FileInfo &fileInfo);
 
-    void LoadFile(const std::string &path, std::ios_base::openmode mode = std::ios_base::in);
+    virtual ~File() { };
 
-    void SetData(const std::string &data);
-    const std::string &GetData() const;
+    virtual const FileInfo &GetFileInfo() const;
 
-    void SetType(const std::string &type);
-    void SetType(Type type) { m_type = type; };
-    const Type GetType() const { return m_type; };
+    virtual bool Open(EFileMode mode) = 0;
+    virtual void Close() = 0;
 
-    void SetPath(const std::string &path) { m_path = path; };
-    const std::string &GetPath() const { return m_path; };
+    virtual uint64_t Read(void *buffer, size_t size) = 0;
+    virtual uint64_t Write(const uint8_t *buffer, uint64_t size) = 0;
 
-    const std::string &GetFilename() const;
+    virtual uint64_t Seek(uint64_t offset, Origin origin) = 0;
+    virtual uint64_t Tell() = 0;
+    virtual uint64_t Size() = 0;
+    virtual bool IsEOF() const = 0;
+
+    virtual bool IsOpen() const;
+    virtual bool IsReadOnly() const = 0;
+
+    template<typename T>
+    bool Read(T &value)
+    {
+      return (Read(reinterpret_cast<uint8_t*>(&value), sizeof(T)) == sizeof(value));
+    }
+
+    template<typename T>
+    uint64_t Write(const T &value)
+    {
+      return Write(reinterpret_cast<const uint8_t*>(&value), sizeof(T));
+    }
+
+  protected:
+
+    void SetIsOpen(bool isOpen);
+    void SetIsReadOnly(bool isReadOnly);
 
   private:
 
-    Type m_type;
-
-    std::string m_path;
-    std::string m_data;
-    std::string m_filename;
+    FileInfo m_FileInfo;
+    bool m_isOpen = false;
+    bool m_isReadOnly = false;
+    EFileMode m_FileMode;
 };

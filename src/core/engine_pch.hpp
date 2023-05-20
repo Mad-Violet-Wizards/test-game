@@ -10,6 +10,7 @@
 #include <unordered_set>
 #include <vector>
 #include <list>
+#include <array>
 #include <string>
 #include <memory>
 #include <functional>
@@ -31,6 +32,7 @@
 #include <stdint.h>
 #include <concepts>
 #include <cstddef>
+#include <regex>
 
 
 //
@@ -57,13 +59,13 @@
 // Engine headers.
 //
 
-#include "Animation.hpp"
-#include "Object.hpp"
-#include "ObjectCollection.hpp"
-#include "Window.hpp"
-#include "ConsoleLog.hpp"
-#include "FileLog.hpp"
-#include "Timer.hpp"
-#include "Scene.hpp"
-#include "EventHandler.hpp"
-#include "AssetsStorage.hpp"
+#include "Animation/Animation.hpp"
+#include "Objects/Object.hpp"
+#include "Objects/ObjectCollection.hpp"
+#include "Window/Window.hpp"
+#include "Debug/ConsoleLog.hpp"
+#include "Debug/FileLog.hpp"
+#include "Utility/Timer.hpp"
+#include "Scene/Scene.hpp"
+#include "Events/EventHandler.hpp"
+#include "FileSystem/AssetsStorage.hpp"
