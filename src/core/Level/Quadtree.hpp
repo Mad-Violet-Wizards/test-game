@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "C_ColliderBox.hpp"
-#include "Debug.hpp"
+#include "Components/C_ColliderBox.hpp"
+#include "Debug/Debug.hpp"
 
 enum class QuadtreeNodePosition
 {

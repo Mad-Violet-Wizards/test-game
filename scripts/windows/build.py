@@ -60,7 +60,7 @@ class Build:
 
   def release(self):
 
-    print("[Build] Preparing release")
+    print("[Build] Preparing release for game.")
     os.chdir('..')
 
     if (not os.path.exists("test-game")):
@@ -88,6 +88,19 @@ class Build:
       shutil.copy(f"build/bin/{file}", f"test-game/bin/{file}")
 
     print("[Build] Release prepared")
+
+  def release_tools(self):
+
+      print("[Build] Preparing release for tools.")
+      
+      os.chdir("..")
+
+      if (not os.path.exists("tools")):
+        os.mkdir('tools')
+
+      shutil.copy("build/src/pak-compiler/Release/pak-compiler.exe", "tools")
+
+      print("[Build] Tools release prepared")
 
 if __name__ == "__main__":
   fire.Fire(Build)

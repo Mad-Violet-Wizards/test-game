@@ -34,7 +34,7 @@ class File
     virtual bool Open(EFileMode mode) = 0;
     virtual void Close() = 0;
 
-    virtual uint64_t Read(uint8_t *buffer, uint64_t size) = 0;
+    virtual uint64_t Read(void *buffer, size_t size) = 0;
     virtual uint64_t Write(const uint8_t *buffer, uint64_t size) = 0;
 
     virtual uint64_t Seek(uint64_t offset, Origin origin) = 0;

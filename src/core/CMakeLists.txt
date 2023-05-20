@@ -21,7 +21,6 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Animation/ Animation)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Components/ Components)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Debug/ Debug)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Events/ Events)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem/ Filesystem)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Input/ Input)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Level/ Level)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Objects/ Objects)
@@ -32,7 +31,7 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Projectiles/ Projectiles)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Threads/ Threads)
 
 # Specify the whole framework as a library and add source files. (cpp)
-add_library(${PROJECT_NAME} ${Animation} ${Components} ${Debug} ${Events} ${Filesystem} ${Input} ${Level} ${Objects} ${Scene} ${Utility} ${Window} ${Projectiles} ${Threads})
+add_library(${PROJECT_NAME} ${Animation} ${Components} ${Debug} ${Events} ${Input} ${Level} ${Objects} ${Scene} ${Utility} ${Window} ${Projectiles} ${Threads})
 
 # Include Conan.
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
@@ -44,7 +43,6 @@ target_include_directories( ${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/Components
   PUBLIC ${PROJECT_SOURCE_DIR}/Debug
   PUBLIC ${PROJECT_SOURCE_DIR}/Events
-  PUBLIC ${PROJECT_SOURCE_DIR}/Filesystem
   PUBLIC ${PROJECT_SOURCE_DIR}/Input
   PUBLIC ${PROJECT_SOURCE_DIR}/Level
   PUBLIC ${PROJECT_SOURCE_DIR}/Objects
@@ -58,5 +56,5 @@ target_include_directories( ${PROJECT_NAME}
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
 
-target_link_libraries(${PROJECT_NAME} external)
-target_precompile_headers(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/engine_pch.hpp)
+target_link_libraries(${PROJECT_NAME} PUBLIC external)
+target_precompile_headers(${PROJECT_NAME} PUBLIC ${CORE_PRECOMPILED_HEADERS})

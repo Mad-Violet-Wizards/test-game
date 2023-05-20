@@ -1,10 +1,12 @@
-#include "rapidjson/document.h"
+#include <cstdio>
 
+#include "rapidjson/document.h"
+#include "rapidjson/filereadstream.h"
+
+#include "C_Animation.hpp"
 #include "Component.hpp"
 #include "C_Sprite.hpp"
 #include "C_Direction.hpp"
-#include "C_Animation.hpp"
-#include "File.hpp"
 
 //
 // FIXME: Use std::tie so the code becomes more readable.
@@ -44,11 +46,12 @@ void C_Animation::Update(float deltaTime)
 
 void C_Animation::SetAnimationFile(const std::string &filePath)
 {
-  File file;
-  file.LoadFile(filePath);
+  FILE* fp = fopen(filePath.c_str(), "rb");
+  char readBuffer[65536];
+  rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
 
   rapidjson::Document animationDocument;
-  animationDocument.Parse(file.GetData().c_str());
+  animationDocument.ParseStream(is);
 
   LoadMovementAnimationFromFile(animationDocument);
 }

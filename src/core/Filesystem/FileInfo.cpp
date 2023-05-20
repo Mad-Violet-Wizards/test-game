@@ -2,67 +2,24 @@
 
 FileInfo::FileInfo(const std::string &filePath)
 {
+  auto found = filePath.find_last_of("/\\");
 
+  if (found != std::string::npos)
+  {
+    const std::string basePath = filePath.substr(0, found);
+
+    const std::string fileName = filePath.substr(found + 1);
+
+    Init(basePath, fileName, false);
+  }
 }
 
 FileInfo::FileInfo(const std::string &basePath, const std::string& fileName, bool isDir)
 {
-
+  Init(basePath, fileName, isDir);
 }
 
-FileInfo::FileInfo(const FileInfo &other)
-  : m_fileName(other.m_fileName)
-  , m_baseName(other.m_baseName)
-  , m_extension(other.m_extension)
-  , m_absolutePath(other.m_absolutePath)
-  , m_basePath(other.m_basePath)
-  , m_isDir(other.m_isDir)
-{
-
-}
-
-FileInfo::FileInfo(FileInfo &&other) noexcept
-  : m_fileName(std::move(other.m_fileName))
-  , m_baseName(std::move(other.m_baseName))
-  , m_extension(std::move(other.m_extension))
-  , m_absolutePath(std::move(other.m_absolutePath))
-  , m_basePath(std::move(other.m_basePath))
-  , m_isDir(other.m_isDir)
-{
-
-}
-
-FileInfo &FileInfo::operator=(const FileInfo &other)
-{
-  if (this != &other)
-  {
-    m_fileName = other.m_fileName;
-    m_baseName = other.m_baseName;
-    m_extension = other.m_extension;
-    m_absolutePath = other.m_absolutePath;
-    m_basePath = other.m_basePath;
-    m_isDir = other.m_isDir;
-  }
-
-  return *this;
-}
-
-FileInfo &FileInfo::operator=(FileInfo &&other) noexcept
-{
-  if (this != &other)
-  {
-    m_fileName = std::move(other.m_fileName);
-    m_baseName = std::move(other.m_baseName);
-    m_extension = std::move(other.m_extension);
-    m_absolutePath = std::move(other.m_absolutePath);
-    m_basePath = std::move(other.m_basePath);
-    m_isDir = other.m_isDir;
-  }
-
-  return *this;
-}
-
-const std::string &FileInfo::GetName() const
+const std::string &FileInfo::Filename() const
 {
   return m_fileName;
 }
@@ -94,5 +51,29 @@ bool FileInfo::IsDir() const
 
 void FileInfo::Init(const std::string& basePath, const std::string& fileName, bool isDir)
 {
+  m_basePath = basePath;
+  m_fileName = fileName;
+  m_isDir = isDir;
 
+  if (m_basePath.back() != '/')
+  {
+    m_basePath += "/";
+  }
+
+  if (m_isDir && m_fileName.back() != '/')
+  {
+    m_fileName += "/";
+  }
+
+  if (m_fileName.front() == '/')
+  {
+    m_fileName = m_fileName.substr(1);
+  }
+
+  m_absolutePath = m_basePath + m_fileName;
+
+  if (m_fileName.find_last_of(".") != std::string::npos)
+  {
+    m_extension = m_fileName.substr(m_fileName.find_last_of(".") + 1);
+  }
 }

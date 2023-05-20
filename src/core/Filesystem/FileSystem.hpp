@@ -15,7 +15,7 @@ class FileSystem
     virtual void Shutdown() = 0;
 
     virtual bool IsInitialized() const = 0;
-    virtual bool IsReadyOnly() const = 0;
+    virtual bool IsReadOnly() const = 0;
 
     virtual std::shared_ptr<File> OpenFile(const FileInfo  &fileInfo, File::EFileMode mode) = 0;
     virtual bool CloseFile(std::shared_ptr<File> file) = 0;
@@ -28,11 +28,10 @@ class FileSystem
     virtual bool IsFile(const FileInfo &fileInfo) const = 0;
     virtual bool IsDirectory(const FileInfo &fileInfo) const = 0;
 
-    virtual const std::set<std::shared_ptr<File>> &GetFileSet() const
-
-    virtual const std::string& GetBasePath() const = 0;
+    virtual const std::set<std::shared_ptr<File>> &GetFileSet() const = 0;
 
   public:
 
     std::set<std::shared_ptr<File>> m_FileSet;
+
 };

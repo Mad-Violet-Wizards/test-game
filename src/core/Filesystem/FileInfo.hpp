@@ -10,13 +10,13 @@ class FileInfo
     FileInfo(const std::string& filePath);
     FileInfo(const std::string& basePath, const std::string& fileName, bool isDir);
 
-    FileInfo(const FileInfo& other);
-    FileInfo(FileInfo&& other) noexcept;
+    FileInfo(const FileInfo& other) = default;
+    FileInfo(FileInfo&& other) noexcept = default;
 
-    FileInfo& operator=(const FileInfo& other);
-    FileInfo& operator=(FileInfo&& other) noexcept;
+    FileInfo& operator=(const FileInfo& other) = default;
+    FileInfo& operator=(FileInfo&& other) noexcept = default;
 
-    [[nodiscard]] const std::string &GetName() const;
+    [[nodiscard]] const std::string& Filename() const;
     [[nodiscard]] const std::string& BaseName() const;
     [[nodiscard]] const std::string& Extension() const;
     [[nodiscard]] const std::string& AbsolutePath() const;
@@ -38,3 +38,20 @@ class FileInfo
 
     bool m_isDir;
 };
+
+inline bool operator==(const FileInfo& lhs, const FileInfo& rhs)
+{
+  return lhs.AbsolutePath() == rhs.AbsolutePath();
+}
+
+inline std::ostream& operator<<(std::ostream& os, const FileInfo& fileInfo)
+{
+  os << "\n=== FileInfo === \n"
+     << "Filename: "     << fileInfo.Filename() << "\n"
+     << "BaseName: "     << fileInfo.BaseName() << "\n"
+     << "Extension: "    << fileInfo.Extension() << "\n"
+     << "AbsolutePath: " << fileInfo.AbsolutePath() << "\n"
+     << "BasePath: "     << fileInfo.BasePath() << "\n";
+
+  return os;
+}

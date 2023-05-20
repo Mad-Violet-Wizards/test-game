@@ -13,10 +13,10 @@ int main()
 
   ThreadPool *loadingPool = new ThreadPool { 2 };
 
-  auto loadAssets = []() { AssetsStorage::GetInstance().LoadAssets("../assets/"); };
+  auto loadAssets = []() { AssetsStorage::GetInstance().LoadAssets("../../tools/assets.pak"); };
 
-  loadingPool -> Submit(ProjectileStorage::Initialize);
   loadingPool -> Submit(loadAssets);
+  loadingPool -> Submit(ProjectileStorage::Initialize);
 
   loadingPool -> Start();
 

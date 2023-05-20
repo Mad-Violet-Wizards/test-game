@@ -1,7 +1,7 @@
 #pragma once
 
-#include "KeyboardInput.hpp"
-#include "MouseInput.hpp"
+#include "Input/KeyboardInput.hpp"
+#include "Input/MouseInput.hpp"
 
 class EventHandler
 {

@@ -13,7 +13,7 @@ void GuiImage::Update(float deltaTime)
 
 void GuiImage::LoadImage(const std::string &name)
 {
-  m_image = AssetsStorage::GetInstance().GetImage(name);
+  // TODO: LoadImage from AssetsStorage.
 
   sf::IntRect area(0, 0, m_image.getSize().x, m_image.getSize().y);
 

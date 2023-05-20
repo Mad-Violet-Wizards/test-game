@@ -1,7 +1,7 @@
 #pragma once
 
 #include "WindowResolution.hpp"
-#include "EventHandler.hpp"
+#include "Events/EventHandler.hpp"
 
 class Window
 {

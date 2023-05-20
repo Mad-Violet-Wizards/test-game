@@ -1,10 +1,10 @@
 #pragma once
 
-#include "FileLog.hpp"
+#include "Debug/FileLog.hpp"
 
-#include "C_InstanceID.hpp"
-#include "C_Transform.hpp"
-#include "C_Collidable.hpp"
+#include "Components/C_InstanceID.hpp"
+#include "Components/C_Transform.hpp"
+#include "Components/C_Collidable.hpp"
 
 class Object
 {

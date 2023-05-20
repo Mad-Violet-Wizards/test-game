@@ -1,7 +1,8 @@
 #include "AssetsStorage.hpp"
 
-#include "FileStorage.hpp"
-#include "MapOperations.hpp"
+#include "FileSystemManager.hpp"
+#include "PakFileSystem.hpp"
+#include "PakFile.hpp"
 
 #include "rapidjson/document.h"
 
@@ -11,7 +12,10 @@ AssetsStorage::AssetsStorage()
 {
   m_textureExtensions = { ".png", ".jpg", ".jpeg", ".bmp", ".tga", ".psd", ".hdr", ".pic" };
   m_fontExtensions    = { ".ttf" };
-  m_imageExtensions   = { ".png", ".jpg", ".jpeg", ".bmp", ".tga", ".psd", ".hdr", ".pic" };
+
+  m_relativePaths = false;
+
+  LoadDefaultAssets();
 }
 
 AssetsStorage::~AssetsStorage()
@@ -20,89 +24,32 @@ AssetsStorage::~AssetsStorage()
 
 sf::Texture &AssetsStorage::GetTexture(const std::string &textureName) const
 {
-  return OnyxCore::Containers::MapGetItem< sf::Texture >(textureName, m_textures);
+  if (m_textures.find(textureName) == m_textures.end())
+  {
+    return *m_defaultTexture->GetAsset();
+  }
+
+  return *(m_textures.at(textureName))->GetAsset();
 }
 
 sf::Font &AssetsStorage::GetFont(const std::string &fontName) const
 {
-  return OnyxCore::Containers::MapGetItem< sf::Font >(fontName, m_fonts);
-}
+  if (m_fonts.find(fontName) == m_fonts.end())
+  {
+    return *m_defaultFont->GetAsset();
+  }
 
-sf::Image &AssetsStorage::GetImage(const std::string &imageName) const
-{
-  return OnyxCore::Containers::MapGetItem< sf::Image >(imageName, m_images);
+  return *(m_fonts.at(fontName))->GetAsset();
 }
 
 void AssetsStorage::LoadTexture(const std::string &path)
 {
-  namespace fs = std::filesystem;
 
-  const std::string &filename = fs::path(path).filename().string();
-
-  if (m_textures.find(filename) != m_textures.end())
-  {
-    FILE_LOG_WARNING("debug.txt", "AssetsStorage::LoadTexture", "Texture already loaded: ", path);
-    return;
-  }
-
-  const std::string &extension = fs::path(path).filename().extension().string();
-
-  if (std::find(m_textureExtensions.begin(), m_textureExtensions.end(), extension) == m_textureExtensions.end())
-  {
-    FILE_LOG_ERROR("debug.txt", "AssetsStorage::LoadTexture", "Unknown texture extension: ", path);
-    return;
-  }
-    
-  m_textures[filename] = std::make_shared<sf::Texture>();
-  m_textures[filename] -> loadFromFile(path);
 }
 
 void AssetsStorage::LoadFont(const std::string &path)
 {
-  namespace fs = std::filesystem;
 
-  const std::string &filename = fs::path(path).filename().string();
-
-  if (m_fonts.find(filename) != m_fonts.end())
-  {
-    FILE_LOG_WARNING("debug.txt", "AssetsStorage::LoadFont", "Font already loaded: ", path);
-    return;
-  }
-
-  const std::string &extension = fs::path(path).filename().extension().string();
-
-  if (std::find(m_fontExtensions.begin(), m_fontExtensions.end(), extension) == m_fontExtensions.end())
-  {
-    FILE_LOG_ERROR("debug.txt", "AssetsStorage::LoadFont", "Unknown font extension: ", path);
-    return;
-  }
-
-  m_fonts[filename] = std::make_shared<sf::Font>();
-  m_fonts[filename] -> loadFromFile(path);
-}
-
-void AssetsStorage::LoadImage(const std::string &path)
-{
-  namespace fs = std::filesystem;
-
-  const std::string &filename = fs::path(path).filename().string();
-
-  if (m_images.find(filename) != m_images.end())
-  {
-    FILE_LOG_WARNING("debug.txt", "AssetsStorage::LoadImage", "Image already loaded: ", path);
-    return;
-  }
-
-  const std::string &extension = fs::path(path).filename().extension().string();
-
-  if (std::find(m_imageExtensions.begin(), m_imageExtensions.end(), extension) == m_imageExtensions.end())
-  {
-    FILE_LOG_ERROR("debug.txt", "AssetsStorage::LoadImage", "Unknown image extension: ", path);
-    return;
-  }
-
-  m_images[filename] = std::make_shared<sf::Image>();
-  m_images[filename] -> loadFromFile(path);
 }
 
 AssetsStorage &AssetsStorage::GetInstance()
@@ -117,70 +64,92 @@ AssetsStorage &AssetsStorage::GetInstance()
 
 void AssetsStorage::LoadAssets(const std::string &path)
 {
-  namespace fs = std::filesystem;
+  std::shared_ptr<PakFileSystem> pakFileSystem = std::make_shared<PakFileSystem>();
+  FileSystemManager &fileSystemManager = FileSystemManager::GetInstance();
+  fileSystemManager.AddFilesystem("assets/", pakFileSystem);
 
-  auto GetType = [this](const std::string &extension)
+  std::shared_ptr<File> assets = pakFileSystem->OpenFile(path, File::EFileMode::In);
+
+  Timer assets_profile;
+
+  assets_profile.Start();
+
+  if (!assets)
   {
-    if (std::find(m_textureExtensions.begin(), m_textureExtensions.end(), extension) != m_textureExtensions.end())
-    {
-      return Type::Texture;
-    }
-    if (std::find(m_fontExtensions.begin(), m_fontExtensions.end(), extension) != m_fontExtensions.end())
-    {
-      return Type::Font;
-    }
-    if (std::find(m_imageExtensions.begin(), m_imageExtensions.end(), extension) != m_imageExtensions.end())
-    {
-      return Type::Image;
-    }
-
-    return Type::Unknown;
-  };
-
-  for (const auto &entry : fs::directory_iterator(path))
-  {
-    if (entry.is_directory())
-    {
-      LoadAssets(entry.path().string());
-    }
-
-    if (entry.is_regular_file())
-    {
-      const std::string &extension = entry.path().extension().string();
-
-      const std::string& filename = entry.path().filename().string();
-
-      if (GetType(extension) == Type::Texture)
-      {
-        m_textures[filename] = std::make_shared<sf::Texture>();
-
-        if (!m_textures[filename] -> loadFromFile(entry.path().string()))
-        {
-          CONSOLE_LOG_ERROR("Failed to load texture: ", entry.path().string());
-        }
-      }
-      else if (GetType(extension) == Type::Font)
-      {
-        m_fonts[filename] = std::make_shared<sf::Font>();
-
-        if (!m_fonts[filename] -> loadFromFile(entry.path().string()))
-        {
-          CONSOLE_LOG_ERROR("Failed to load font: ", entry.path().string());
-        }
-      }
-      else if (GetType(extension) == Type::Image)
-      {
-        m_images[filename] = std::make_shared<sf::Image>();
-        
-        if (!m_images[filename] -> loadFromFile(entry.path().string()))
-        {
-          CONSOLE_LOG_ERROR("Failed to load image: ", entry.path().string());
-        }
-      }
-      else
-      {
-        FILE_LOG_ERROR("debug.txt", "Unknown asset type: ", entry.path().string());
-      }
-    }
+    FILE_LOG_ERROR("errors.txt", "[AssetsStorage][LoadAssets]: Failed to open pak file.");
+    return;
   }
+
+  if (!assets->IsOpen())
+  {
+    FILE_LOG_ERROR("errors.txt", "[AssetsStorage][LoadAssets]: Pak file is not open.");
+    return;
+  }
+
+  PakFile_HeaderMetadata headerMetadata;
+
+  assets->Read(reinterpret_cast<char*>(&headerMetadata), sizeof(PakFile_HeaderMetadata));
+
+  for (auto i = 0; i < headerMetadata.m_filesCount; ++i)
+  {
+      PakFile_EntryMetadata entryMetadata;
+
+      assets->Read(reinterpret_cast<char*>(&entryMetadata), sizeof(PakFile_EntryMetadata));
+
+      const std::string entryFilepath { entryMetadata.m_filePath.data() };
+      const std::string entryExtension = entryFilepath.substr(entryFilepath.find_last_of('.'));
+
+      auto doesContaintExtension = [&entryExtension](const std::string& rhs) -> bool
+      {
+        return entryExtension == rhs;
+      };
+
+      auto is_texture = std::any_of(m_textureExtensions.cbegin(), m_textureExtensions.cend(), doesContaintExtension);
+      auto is_font    = std::any_of(m_fontExtensions.cbegin(), m_fontExtensions.cend(), doesContaintExtension);
+
+      const std::string baseFileName = entryFilepath.substr(entryFilepath.find_last_of("/\\") + 1);
+
+      std::vector<uint8_t> fileData(entryMetadata.m_size);
+      assets->Read(reinterpret_cast<char*>(fileData.data()), entryMetadata.m_size);
+
+      if (is_texture)
+      {
+        std::unique_ptr<Asset<sf::Texture>> asset_texture = std::make_unique<Asset<sf::Texture>>(fileData);
+        asset_texture->InitializeFromInternalData();
+
+        m_textures.insert({ baseFileName, std::move(asset_texture) });
+      }
+
+      else if (is_font)
+      {
+        std::unique_ptr<Asset<sf::Font>> asset_font = std::make_unique<Asset<sf::Font>>(fileData);
+        asset_font->InitializeFromInternalData();
+
+        m_fonts.insert({ baseFileName, std::move(asset_font) });
+      }
+  }
+
+  assets_profile.Stop();
+
+  CONSOLE_LOG_INFO("[AssetsStorage][LoadAssets] ", assets_profile.GetElapsedTime<std::chrono::milliseconds>(), " ms.");
+}
+
+void AssetsStorage::LoadDefaultAssets()
+{
+  m_defaultTexture = std::make_unique<Asset<sf::Texture>>();
+  m_defaultFont = std::make_unique<Asset<sf::Font>>();
+
+  m_defaultTexture->InitializeFromExternalData("../assets/default/default-texture.png");
+  m_defaultFont->InitializeFromExternalData("../assets/default/default-font.ttf");
+}
+
+
+void AssetsStorage::SetRelativePaths(bool state)
+{
+  m_relativePaths = state;
+}
+
+bool AssetsStorage::IsRelativePaths() const
+{
+  return m_relativePaths;
 }
