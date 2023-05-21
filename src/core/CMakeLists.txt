@@ -16,6 +16,10 @@ if (DEBUG)
   )
 endif()
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem/PakFilesystemHeaders)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Design-Patterns)
+
 # List the source files for all folders.
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Animation/ Animation)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/Components/ Components)
