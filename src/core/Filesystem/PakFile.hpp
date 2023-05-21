@@ -2,40 +2,6 @@
 
 #include "File.hpp"
 
-struct PakFile_HeaderMetadata
-{
-  PakFile_HeaderMetadata()
-  : m_filesCount { 0 }
-  , m_version { 0 }
-  {
-    
-  }
-
-  ~PakFile_HeaderMetadata() = default;
-
-  uint32_t m_filesCount;
-  uint32_t m_version;
-};
-
-struct PakFile_EntryMetadata
-{
-  PakFile_EntryMetadata() = default;
-
-  PakFile_EntryMetadata(const std::array<char, 256> &filePath, uint32_t offset, uint32_t size)
-  : m_filePath { filePath }
-  , m_offset { offset }
-  , m_size { size }
-  {
-    
-  }
-
-  ~PakFile_EntryMetadata() = default;
-
-  std::array<char, 256> m_filePath;
-  uint32_t m_offset;
-  uint32_t m_size;
-};
-
 class PakFile : public File
 {
 

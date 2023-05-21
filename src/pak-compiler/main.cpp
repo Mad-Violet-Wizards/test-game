@@ -6,40 +6,7 @@
 #include <array>
 #include <algorithm>
 #include <iterator>
-
-struct PakFile_HeaderMetadata
-{
-  PakFile_HeaderMetadata(uint32_t filesCount, uint32_t version)
-  : m_filesCount { filesCount }
-  , m_version { version }
-  {
-    
-  }
-
-  ~PakFile_HeaderMetadata() = default;
-
-  uint32_t m_filesCount;
-  uint32_t m_version;
-};
-
-struct PakFile_EntryMetadata
-{
-  PakFile_EntryMetadata() = default;
-
-  PakFile_EntryMetadata(const std::array<char, 256> &filePath, uint32_t offset, uint32_t size)
-  : m_filePath { filePath }
-  , m_offset { offset }
-  , m_size { size }
-  {
-    
-  }
-
-  ~PakFile_EntryMetadata() = default;
-
-  std::array<char, 256> m_filePath;
-  uint32_t m_offset;
-  uint32_t m_size;
-};
+#include "PakFilesystemHeaders.hpp"
 
 void FillFilePathes(const std::string &input, std::vector<std::string> &filePathes)
 {

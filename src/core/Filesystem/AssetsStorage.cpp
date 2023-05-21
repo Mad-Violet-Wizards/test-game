@@ -3,6 +3,7 @@
 #include "FileSystemManager.hpp"
 #include "PakFileSystem.hpp"
 #include "PakFile.hpp"
+#include "PakFilesystemHeaders.hpp"
 
 #include "rapidjson/document.h"
 

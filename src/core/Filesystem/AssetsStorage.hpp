@@ -45,10 +45,10 @@ private:
   std::vector<std::string> m_fontExtensions;
 
   std::unique_ptr<Asset<sf::Texture>> m_defaultTexture;
-  std::unique_ptr<Asset<sf::Font>> m_defaultFont;
+  std::unique_ptr<Asset<sf::Font>>    m_defaultFont;
 
-  std::map< std::string, std::unique_ptr<Asset<sf::Texture>>> m_textures;
-  std::map< std::string, std::unique_ptr<Asset<sf::Font>>>    m_fonts;
+  std::map<std::string, std::unique_ptr<Asset<sf::Texture>>> m_textures;
+  std::map<std::string, std::unique_ptr<Asset<sf::Font>>>    m_fonts;
 
   bool m_relativePaths;
 };
