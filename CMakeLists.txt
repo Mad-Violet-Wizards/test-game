@@ -19,6 +19,7 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/core)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/core/Filesystem/PakFilesystemHeaders)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/core/Filesystem)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/gui) 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/game)

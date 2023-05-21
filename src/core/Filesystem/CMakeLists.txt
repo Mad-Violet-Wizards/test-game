@@ -13,5 +13,5 @@ conan_basic_setup()
 add_library(Filesystem ${SRC})
 target_include_directories(Filesystem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(Filesystem PUBLIC external)
+target_link_libraries(Filesystem PUBLIC external PakFilesystemHeaders)
 target_precompile_headers(${PROJECT_NAME} PUBLIC ${CORE_PRECOMPILED_HEADERS})
