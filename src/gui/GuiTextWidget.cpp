@@ -3,7 +3,7 @@
 GuiTextWidget::GuiTextWidget(Window* window)
   : GuiObject(window)
 {
-  m_text.setFont(AssetsStorage::GetInstance().GetFont("GoudyBookletter.ttf"));
+  m_text.setFont(AssetsStorageSingleton::Instance().GetFont("GoudyBookletter.ttf"));
 
   m_margins.SetMargins(12.f, 12.f, 12.f, 12.f);
 
@@ -33,7 +33,7 @@ void GuiTextWidget::Update(float deltaTime)
       m_text.setFillColor(m_hoverColor);
     }
 
-    if (EventHandler::GetInstance().GetMouseInput().IsMouseKeyReleased(MouseInput::MouseKey::Left))
+    if (EventHandlerSingleton::Instance().GetMouseInput().IsMouseKeyReleased(MouseInput::MouseKey::Left))
     {
       Clicked();
     }

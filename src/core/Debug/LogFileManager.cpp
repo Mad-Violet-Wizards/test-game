@@ -1,22 +1,8 @@
 #include "LogFileManager.hpp"
 
-std::unique_ptr<LogFileManager> LogFileManager::s_instance = nullptr;
-
 LogFileManager::LogFileManager()
 {
   CreateLogDirectory();
-}
-
-LogFileManager::~LogFileManager() { }
-
-LogFileManager &LogFileManager::GetInstance()
-{
-  if (LogFileManager::s_instance == nullptr)
-  {
-    LogFileManager::s_instance = std::unique_ptr<LogFileManager>(new LogFileManager);
-  }
-
-  return *s_instance;
 }
 
 void LogFileManager::CreateLogDirectory()

@@ -5,6 +5,7 @@
 #include "ProjectileStorage.hpp"
 #include "ThreadTask.hpp"
 #include "ThreadPool.hpp"
+#include "EventHandler.hpp"
 
 int main()
 {
@@ -13,7 +14,7 @@ int main()
 
   ThreadPool *loadingPool = new ThreadPool { 2 };
 
-  auto loadAssets = []() { AssetsStorage::GetInstance().LoadAssets("../../tools/assets.pak"); };
+  auto loadAssets = []() { AssetsStorageSingleton::Instance().LoadAssets("../../tools/assets.pak"); };
 
   loadingPool -> Submit(loadAssets);
   loadingPool -> Submit(ProjectileStorage::Initialize);

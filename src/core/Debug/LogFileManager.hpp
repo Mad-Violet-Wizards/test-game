@@ -1,13 +1,14 @@
 #pragma once
 
+#include "Design-Patterns/Singleton.hpp"
+
 class LogFileManager
 {
 
 public:
 
-  ~LogFileManager();
-
-  static LogFileManager &GetInstance();
+  LogFileManager();
+  ~LogFileManager() = default;
 
   void CreateLogDirectory();
 
@@ -18,11 +19,8 @@ public:
 
 private:
 
-  LogFileManager();
-
-private:
-
-  static std::unique_ptr<LogFileManager> s_instance;
   std::unordered_map<std::string, std::string> m_logFiles;
 
 };
+
+using LogFileManagerSingleton = Singleton<LogFileManager>;

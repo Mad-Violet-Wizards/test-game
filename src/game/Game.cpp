@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "FpsCounter.hpp"
 #include "ProjectileStorage.hpp"
 
 Game::Game() : m_window("Test-Game 1.0.0")
@@ -39,13 +38,6 @@ void Game::Draw()
 void Game::CalculateDeltaTime()
 {
   m_deltaTime = m_clock.restart().asSeconds();
-
-  FpsCounter::GetInstance().CalculateFramesPerSecond(m_deltaTime);
-
-  if (FpsCounter::GetInstance().GetFps() < 60)
-  {
-    // CONSOLE_LOG_WARNING("[Game] Reporting that fps have dropped below 60.");
-  }
 }
 
 bool Game::IsRunning() const

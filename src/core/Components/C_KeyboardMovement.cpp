@@ -11,24 +11,26 @@ void C_KeyboardMovement::Awake()
   m_velocity = owner -> GetComponent<C_Velocity>();
 }
 
+EventHandler& eventHandler = EventHandlerSingleton::Instance();
+
 void C_KeyboardMovement::Update(float deltaTime)
 {
   float xMove = 0.f;
-  if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Left))
+  if (eventHandler.GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Left))
   {
     xMove = -m_moveSpeed;
   }
-  else if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Right))
+  else if (eventHandler.GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Right))
   {
     xMove = m_moveSpeed;
   }
 
   float yMove = 0.f;
-  if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Up))
+  if (eventHandler.GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Up))
   {
     yMove = -m_moveSpeed;
   }
-  else if (EventHandler::GetInstance().GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Down))
+  else if (eventHandler.GetKeyboardInput().IsKeyPressed(KeyboardInput::Key::Down))
   {
     yMove = m_moveSpeed;
   }

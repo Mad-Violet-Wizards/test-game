@@ -3,23 +3,15 @@
 
 #include "File.hpp"
 #include "Objects/Asset.hpp"
-
-enum class Type
-{
-  Texture = 0,
-  Font = 1,
-  Image = 2,
-  Unknown = 3
-};
+#include "Design-Patterns/Singleton.hpp"
 
 class AssetsStorage
 {
 
 public:
 
-  ~AssetsStorage();
-
-  static AssetsStorage &GetInstance();
+  AssetsStorage();
+  ~AssetsStorage() = default;
 
   void LoadAssets(const std::string &path);
   void LoadDefaultAssets();
@@ -35,12 +27,6 @@ public:
 
 private:
 
-  AssetsStorage();
-
-private:
-
-  static std::unique_ptr<AssetsStorage> s_instance;
-
   std::vector<std::string> m_textureExtensions;
   std::vector<std::string> m_fontExtensions;
 
@@ -52,3 +38,5 @@ private:
 
   bool m_relativePaths;
 };
+
+using AssetsStorageSingleton = Singleton<AssetsStorage>;

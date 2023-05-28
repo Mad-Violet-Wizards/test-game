@@ -38,7 +38,7 @@ void C_Animation::Update(float deltaTime)
     {
       const FrameData *frameData = m_currentAnimation.second -> GetCurrentFrame();
 
-      m_animationOwner -> Load(AssetsStorage::GetInstance().GetTexture(m_textureFileName));
+      m_animationOwner -> Load(AssetsStorageSingleton::Instance().GetTexture(m_textureFileName));
       m_animationOwner -> SetTextureRect(frameData -> x, frameData -> y, frameData -> width, frameData -> height);
     }
   }

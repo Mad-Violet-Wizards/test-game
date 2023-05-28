@@ -12,14 +12,18 @@ constexpr static void FILE_LOG(const std::string &filename, const T &msg)
   {
     sf::Lock lock(fileLogMutex);
 
-    if (!LogFileManager::GetInstance().DoesLogFileExists(filename))
+    LogFileManagerSingleton::Create();
+
+    LogFileManager& logFileManager = LogFileManagerSingleton::Instance();
+
+    if (!LogFileManagerSingleton::Instance().DoesLogFileExists(filename))
     {
       CONSOLE_LOG_INFO("Create log file: ", filename);
-      LogFileManager::GetInstance().CreateLogFile(filename);
-      CONSOLE_LOG_INFO("Filepath: ", LogFileManager::GetInstance().GetLogFilePath(filename));
+      logFileManager.CreateLogFile(filename);
+      CONSOLE_LOG_INFO("Filepath: ", logFileManager.GetLogFilePath(filename));
     }
 
-    std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(filename), std::ios_base::app);
+    std::ofstream logFile(logFileManager.GetLogFilePath(filename), std::ios_base::app);
 
     auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
 
@@ -41,14 +45,18 @@ constexpr static void FILE_LOG(const std::string &filename, const std::string &p
   {
     sf::Lock lock(fileLogMutex);
 
-    if (!LogFileManager::GetInstance().DoesLogFileExists(filename))
+    LogFileManagerSingleton::Create();
+
+    LogFileManager& logFileManager = LogFileManagerSingleton::Instance();
+
+    if (!logFileManager.DoesLogFileExists(filename))
     {
       CONSOLE_LOG_INFO("Create log file: " + filename);
-      LogFileManager::GetInstance().CreateLogFile(filename);
-      CONSOLE_LOG_INFO("Filepath: ", LogFileManager::GetInstance().GetLogFilePath(filename));
+      logFileManager.CreateLogFile(filename);
+      CONSOLE_LOG_INFO("Filepath: ", logFileManager.GetLogFilePath(filename));
     }
     
-    std::ofstream logFile(LogFileManager::GetInstance().GetLogFilePath(filename), std::ios_base::app);
+    std::ofstream logFile(logFileManager.GetLogFilePath(filename), std::ios_base::app);
     auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
 
     logFile << std::format("[{:%Y/%m/%d %H:%M:%S}]", std::chrono::floor<std::chrono::milliseconds>(time)) << prefix;
