@@ -60,5 +60,5 @@ target_include_directories( ${PROJECT_NAME}
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC external)
+target_link_libraries(${PROJECT_NAME} PRIVATE external Design-Patterns)
 target_precompile_headers(${PROJECT_NAME} PUBLIC ${CORE_PRECOMPILED_HEADERS})

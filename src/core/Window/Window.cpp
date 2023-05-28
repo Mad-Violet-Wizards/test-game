@@ -12,7 +12,7 @@ void Window::Update()
 
   if (m_renderWindow.pollEvent(event))
   {
-    EventHandler::GetInstance().ProcessEvent(event);
+    EventHandlerSingleton::Instance().ProcessEvent(event);
 
     if (event.type == sf::Event::Closed)
     {

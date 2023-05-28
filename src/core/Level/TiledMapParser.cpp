@@ -31,7 +31,7 @@ sf::Sprite *TiledMapParser::GetTilesetImage(const std::string  &imageFile,
   {
     std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>();
 
-    sprite -> setTexture(AssetsStorage::GetInstance().GetTexture(imageFile));
+    sprite -> setTexture(AssetsStorageSingleton::Instance().GetTexture(imageFile));
     sprite -> setPosition(position);
 
     m_sprites[imageFile] = std::move(sprite);

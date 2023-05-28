@@ -27,11 +27,13 @@ void C_ProjectileAttackAnimation::Start()
 
 void C_ProjectileAttackAnimation::Update(float deltaTime)
 {
-  if (EventHandler::GetInstance().GetKeyboardInput().IsKeyDown(KeyboardInput::Key::E))
+  EventHandler& eventHandler = EventHandlerSingleton::Instance();
+
+  if (eventHandler.GetKeyboardInput().IsKeyDown(KeyboardInput::Key::E))
   {
     m_animation -> SetAnimationState(AnimationState::Projectile);
   }
-  else if (EventHandler::GetInstance().GetKeyboardInput().IsKeyUp(KeyboardInput::Key::E))
+  else if (eventHandler.GetKeyboardInput().IsKeyUp(KeyboardInput::Key::E))
   {
     m_animation -> SetAnimationState(AnimationState::Idle);
   }

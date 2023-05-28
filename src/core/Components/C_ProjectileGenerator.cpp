@@ -32,7 +32,7 @@ void C_ProjectileGenerator::GenerateProjectile(const std::string &name)
   projectile -> transform -> SetPosition(owner -> transform -> GetPosition() + projectileData.GetOffset().at(direction));
 
   auto projectileSprite = projectile -> AddComponent<C_Sprite>();
-  projectileSprite -> Load(AssetsStorage::GetInstance().GetTexture(projectileData.m_textureName));
+  projectileSprite -> Load(AssetsStorageSingleton::Instance().GetTexture(projectileData.m_textureName));
   projectileSprite -> SetTextureRect(projectileData.GetTexture().at(direction));
 
   auto projectileVelocity = projectile -> AddComponent<C_Velocity>();

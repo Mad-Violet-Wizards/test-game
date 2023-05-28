@@ -7,8 +7,6 @@
 
 #include "rapidjson/document.h"
 
-std::unique_ptr<AssetsStorage> AssetsStorage::s_instance = nullptr;
-
 AssetsStorage::AssetsStorage()
 {
   m_textureExtensions = { ".png", ".jpg", ".jpeg", ".bmp", ".tga", ".psd", ".hdr", ".pic" };
@@ -17,10 +15,6 @@ AssetsStorage::AssetsStorage()
   m_relativePaths = false;
 
   LoadDefaultAssets();
-}
-
-AssetsStorage::~AssetsStorage()
-{
 }
 
 sf::Texture &AssetsStorage::GetTexture(const std::string &textureName) const
@@ -51,16 +45,6 @@ void AssetsStorage::LoadTexture(const std::string &path)
 void AssetsStorage::LoadFont(const std::string &path)
 {
 
-}
-
-AssetsStorage &AssetsStorage::GetInstance()
-{
-  if (AssetsStorage::s_instance == nullptr)
-  {
-    AssetsStorage::s_instance = std::unique_ptr<AssetsStorage>(new AssetsStorage);
-  }
-
-  return *s_instance;
 }
 
 void AssetsStorage::LoadAssets(const std::string &path)

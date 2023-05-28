@@ -1,6 +1,8 @@
 #pragma once
 
-template <typename C>
+#include <iostream>
+
+template <class C>
 class Singleton
 {
   public:
@@ -14,7 +16,7 @@ class Singleton
 
       if (!data.m_valid)
       {
-        data.m_instance = class_type(std::forward<Args>(args)...);
+        data.m_instance = std::make_unique<class_type>(std::forward<Args>(args)...);
         data.m_valid = true;
       }
     }
@@ -25,7 +27,7 @@ class Singleton
 
       if (data.m_valid)
       {
-        data.m_instance.~class_type();
+        data.m_instance->~class_type();
         data.m_valid = false;
       }
     }
@@ -36,10 +38,17 @@ class Singleton
 
       if (!data.m_valid)
       {
-        throw std::runtime_error("Singleton not created.");
+        try
+        {
+          Create();
+        }
+        catch(...)
+        {
+          throw std::runtime_error("Singleton not created because default constructor not provided.");
+        }
       }
 
-      return data.m_instance;
+      return *data.m_instance;
     }
 
     static bool IsValid()
@@ -61,7 +70,7 @@ class Singleton
       : m_valid(false)
       {}
 
-      class_type m_instance;
+      std::unique_ptr<class_type> m_instance;
       bool m_valid;
     };
 

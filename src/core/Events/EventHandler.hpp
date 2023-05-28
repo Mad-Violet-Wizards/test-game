@@ -3,14 +3,16 @@
 #include "Input/KeyboardInput.hpp"
 #include "Input/MouseInput.hpp"
 
+#include "Design-Patterns/Singleton.hpp"
+
 class EventHandler
 {
 
 public:
 
-  ~EventHandler();
+  EventHandler() = default;
+  ~EventHandler() = default;
 
-  static EventHandler &GetInstance();
   KeyboardInput &GetKeyboardInput();
   MouseInput &GetMouseInput();
 
@@ -18,13 +20,9 @@ public:
 
 private:
 
-  EventHandler();
-
-private:
-
   KeyboardInput m_keyboardInput;
   MouseInput m_mouseInput;
 
-  static std::unique_ptr<EventHandler> s_instance;
-
 };
+
+using EventHandlerSingleton = Singleton<EventHandler>;

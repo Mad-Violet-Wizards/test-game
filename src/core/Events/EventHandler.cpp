@@ -1,28 +1,5 @@
 #include "EventHandler.hpp"
 
-
-std::unique_ptr<EventHandler> EventHandler::s_instance = nullptr;
-
-EventHandler::EventHandler()
-{
-}
-
-EventHandler::~EventHandler()
-{
-}
-
-EventHandler &EventHandler::GetInstance()
-{
-  if (EventHandler::s_instance == nullptr)
-  {
-    EventHandler::s_instance = std::unique_ptr<EventHandler>(new EventHandler);
-  }
-
-  return *s_instance;
-}
-
-// FIXME: Fix C4715 warning.
-
 KeyboardInput &EventHandler::GetKeyboardInput()
 {
   return m_keyboardInput;
