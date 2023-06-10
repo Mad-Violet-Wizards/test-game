@@ -10,8 +10,6 @@ TEST(AsepriteTypesTests, AsepriteFileFormatTypesMatchDocumentation)
   using namespace aseprite;
 
   EXPECT_EQ(typeid(BYTE), typeid(uint8_t));
-
-  EXPECT_EQ(typeid(BYTE),   typeid(uint8_t));
   EXPECT_EQ(typeid(WORD),   typeid(uint16_t));
   EXPECT_EQ(typeid(SHORT),  typeid(int16_t));
   EXPECT_EQ(typeid(DWORD),  typeid(uint32_t));
@@ -20,7 +18,6 @@ TEST(AsepriteTypesTests, AsepriteFileFormatTypesMatchDocumentation)
   EXPECT_EQ(typeid(DOUBLE), typeid(double));
   EXPECT_EQ(typeid(QWORD),  typeid(uint64_t));
   EXPECT_EQ(typeid(LONG64), typeid(int64_t));
-  EXPECT_EQ(typeid(BYTE),   typeid(unsigned char));
 }
 
 TEST(AsepriteFileFormatTypesTests, AsepriteFileFormatTypesStructsMatchDocumentation)

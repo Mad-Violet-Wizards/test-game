@@ -216,5 +216,4 @@ void C_Animation::LoadMovementAnimationFromFile(rapidjson::Document &animationDo
   {
     SetAnimationState(AnimationState::Idle);
   }
-
 }

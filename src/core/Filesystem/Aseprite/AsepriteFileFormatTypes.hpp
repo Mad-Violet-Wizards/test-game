@@ -5,16 +5,20 @@
 
 namespace aseprite
 {
+/////////////////////////////////////////////////////////////
+
   using BYTE   = uint8_t;
   using WORD   = uint16_t;
   using SHORT  = int16_t;
   using DWORD  = uint32_t;
   using LONG   = int32_t;
+  using FIXED =  int32_t;
   using FLOAT  = float;
   using DOUBLE = double;
   using QWORD  = uint64_t;
   using LONG64 = int64_t;
-  using BYTE   = unsigned char;
+
+/////////////////////////////////////////////////////////////
 
   struct STRING_STRUCT
   {
@@ -24,16 +28,18 @@ namespace aseprite
       m_data.reserve(length);
     }
 
-    STRING_STRUCT(WORD length, const std::vector<char> &data)
+    STRING_STRUCT(WORD length, const std::vector<BYTE> &data)
       : m_length(length)
       , m_data(data)
     {}
 
     WORD              m_length;
-    std::vector<char> m_data;
+    std::vector<BYTE> m_data;
   };
 
   using STRING = STRING_STRUCT;
+
+/////////////////////////////////////////////////////////////
 
   struct POINT_STRUCT
   {
@@ -43,6 +49,8 @@ namespace aseprite
 
   using POINT = POINT_STRUCT;
 
+/////////////////////////////////////////////////////////////
+
   struct SIZE_STRUCT
   {
     LONG m_width;
@@ -51,6 +59,8 @@ namespace aseprite
 
   using SIZE = SIZE_STRUCT;
 
+/////////////////////////////////////////////////////////////
+
   struct RECT_STRUCT
   {
     POINT m_origin;
@@ -58,6 +68,8 @@ namespace aseprite
   };
 
   using RECT = RECT_STRUCT;
+
+/////////////////////////////////////////////////////////////
 
   struct PIXEL_STRUCT
   {
@@ -68,9 +80,15 @@ namespace aseprite
 
   using PIXEL = PIXEL_STRUCT;
 
+/////////////////////////////////////////////////////////////
+
   using TILE_BYTE = BYTE;
   using TILE_WORD = WORD;
   using TILE_DWORD = DWORD;
 
+/////////////////////////////////////////////////////////////
+
   using UUID = std::array<BYTE, 16>;
+
+/////////////////////////////////////////////////////////////
 };
