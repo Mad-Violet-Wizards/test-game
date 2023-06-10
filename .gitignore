@@ -29,6 +29,9 @@ changelog_local.md
 # Don't add config.json for compilation.
 scripts/windows/config.json
 
+# Don't add pak-compiler.exe to repo.
+pak-compiler.exe
+
 __pycache__
 
 CMakeCache.txt
