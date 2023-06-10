@@ -18,6 +18,7 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem/PakFilesystemHeaders)
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Filesystem/Aseprite)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Design-Patterns)
 
 # List the source files for all folders.
